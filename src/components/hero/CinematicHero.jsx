@@ -20,7 +20,7 @@ export const CinematicHero = () => {
   const textOpacityTransform = useTransform(scrollYProgress, [0, 0.45, 0.75], [1, 1, 0]);
   const overlayOpacityTransform = useTransform(scrollYProgress, [0, 0.5, 1], [0.25, 0.4, 0.7]);
 
-  // Apple-Style Image Sequence Scrubber (60FPS Ultra-Smooth Optimized Response)
+  // Apple-Style Image Sequence Scrubber (60FPS Ultra-Smooth iOS-Safe Memory Response)
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
@@ -28,7 +28,7 @@ export const CinematicHero = () => {
 
     const ctx = canvas.getContext('2d', { alpha: false });
     const TOTAL_FRAMES = 40;
-    const images = [];
+    const images = new Array(TOTAL_FRAMES);
     let lastDrawnIndex = -1;
 
     // Robust Mobile Detection
@@ -67,23 +67,42 @@ export const CinematicHero = () => {
     window.addEventListener('resize', resizeCanvas, { passive: true });
     resizeCanvas();
 
-    // Preload & Pre-decode Frame Sequence asynchronously for 0-lag playback
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    // Progressive Frame Loader (Prevents iOS Safari WebKit memory pressure crash!)
+    const getOrLoadFrame = (index) => {
+      const idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
+      if (images[idx]) return images[idx];
+
       const img = new Image();
-      img.decoding = 'async'; // Non-blocking async decoding!
-      const paddedIndex = String(i).padStart(3, '0');
-      
+      img.decoding = 'async';
+      const paddedIndex = String(idx + 1).padStart(3, '0');
+
       img.src = `${frameFolder}/frame-${paddedIndex}.jpg`;
       img.onerror = () => {
         img.src = `${fallbackFolder}/frame-${paddedIndex}.jpg`;
       };
-      
-      if (img.decode) {
-        img.decode().catch(() => {});
+
+      images[idx] = img;
+      return img;
+    };
+
+    // Load Frame 1 immediately
+    getOrLoadFrame(0);
+
+    // Batch load remaining frames in background to avoid memory spike on mobile Safari
+    let loadBatchIndex = 1;
+    let timerId = null;
+    const loadNextBatch = () => {
+      if (loadBatchIndex >= TOTAL_FRAMES) return;
+      const end = Math.min(TOTAL_FRAMES, loadBatchIndex + (isMobile ? 3 : 8));
+      for (let i = loadBatchIndex; i < end; i++) {
+        getOrLoadFrame(i);
       }
-      
-      images.push(img);
-    }
+      loadBatchIndex = end;
+      if (loadBatchIndex < TOTAL_FRAMES) {
+        timerId = setTimeout(loadNextBatch, isMobile ? 120 : 50);
+      }
+    };
+    timerId = setTimeout(loadNextBatch, 80);
 
     let animationFrameId = null;
     let currentFrameIndex = 0;
@@ -110,7 +129,7 @@ export const CinematicHero = () => {
         const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
         const cWidth = window.innerWidth;
         const cHeight = window.innerHeight;
-        const activeImg = images[frameIdx];
+        const activeImg = getOrLoadFrame(frameIdx);
 
         if (activeImg && activeImg.complete && activeImg.naturalWidth > 0) {
           ctx.save();
@@ -151,6 +170,7 @@ export const CinematicHero = () => {
 
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      if (timerId) clearTimeout(timerId);
       window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
