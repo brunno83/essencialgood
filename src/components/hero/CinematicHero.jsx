@@ -57,7 +57,7 @@ export const CinematicHero = () => {
       if (ctx) {
         ctx.scale(dpr, dpr);
         ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = isMobile ? 'medium' : 'high';
+        ctx.imageSmoothingQuality = isMobile ? 'low' : 'high';
       }
 
       // Force redraw on resize
@@ -85,24 +85,25 @@ export const CinematicHero = () => {
       return img;
     };
 
-    // Load Frame 1 immediately
+    // Load Frame 1 & Last Frame immediately for instant response
     getOrLoadFrame(0);
+    getOrLoadFrame(TOTAL_FRAMES - 1);
 
-    // Batch load remaining frames in background to avoid memory spike on mobile Safari
+    // Fast background preloader loop for smooth 60fps scrubbing
     let loadBatchIndex = 1;
     let timerId = null;
     const loadNextBatch = () => {
-      if (loadBatchIndex >= TOTAL_FRAMES) return;
-      const end = Math.min(TOTAL_FRAMES, loadBatchIndex + (isMobile ? 3 : 8));
+      if (loadBatchIndex >= TOTAL_FRAMES - 1) return;
+      const end = Math.min(TOTAL_FRAMES - 1, loadBatchIndex + (isMobile ? 4 : 10));
       for (let i = loadBatchIndex; i < end; i++) {
         getOrLoadFrame(i);
       }
       loadBatchIndex = end;
-      if (loadBatchIndex < TOTAL_FRAMES) {
-        timerId = setTimeout(loadNextBatch, isMobile ? 120 : 50);
+      if (loadBatchIndex < TOTAL_FRAMES - 1) {
+        timerId = setTimeout(loadNextBatch, isMobile ? 35 : 20);
       }
     };
-    timerId = setTimeout(loadNextBatch, 80);
+    timerId = setTimeout(loadNextBatch, 40);
 
     let animationFrameId = null;
     let currentFrameIndex = 0;
@@ -116,8 +117,8 @@ export const CinematicHero = () => {
           const progress = Math.max(0, Math.min(1, -rect.top / totalScrollableHeight));
           const targetIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES));
           
-          // LERP interpolação entre frames
-          const lerpFactor = isMobile ? 0.35 : 0.15;
+          // Smooth 60FPS Inertia LERP Interpolation (Eliminates mobile frame-skipping jitter!)
+          const lerpFactor = isMobile ? 0.18 : 0.15;
           currentFrameIndex += (targetIndex - currentFrameIndex) * lerpFactor;
         }
       }
@@ -135,7 +136,7 @@ export const CinematicHero = () => {
           ctx.save();
           ctx.scale(dpr, dpr);
           ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = isMobile ? 'medium' : 'high';
+          ctx.imageSmoothingQuality = isMobile ? 'low' : 'high';
           ctx.clearRect(0, 0, cWidth, cHeight);
 
           const iWidth = activeImg.naturalWidth;
