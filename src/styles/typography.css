@@ -1,0 +1,58 @@
+.font-brand-display {
+  font-family: var(--font-brand-display);
+  letter-spacing: 0.05em;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Editorial Typography System for Light Brand Theme */
+h1, h2, h3, .heading-editorial {
+  font-family: var(--font-brand-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-primary);
+  line-height: 1.15;
+}
+
+.text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-sage);
+}
+
+.text-body {
+  font-family: var(--font-sans);
+  font-size: 1.025rem;
+  line-height: 1.7;
+  color: var(--color-secondary);
+  font-weight: 400;
+}
+
+.text-lead {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-primary);
+  font-weight: 300;
+}
+
+.text-signature {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-sage);
+}

@@ -1,0 +1,84 @@
+SONNUS(R) - 3 LANDING PAGES (teste de headline) - versao 70% OFF
+================================================================
+Atualizado em 05/08/2026.
+
+AS TRES PAGINAS
+---------------
+lp1-GLP-1.html
+   "Get Your Sleep Back While You're On GLP-1 With Sonnus(R)"
+   Angulo GLP-1. Substitui a antiga lp-01 ("Recharge Your Own Deep Sleep"):
+   e o mesmo arquivo, com a headline, o subtitulo e os 4 bullets trocados.
+
+lp-02-silencing-the-3am-mind-70off.html
+   "Discover How People Who've Lain Awake For Years Are Finally Sleeping
+    Through The Night, Silencing The 3 AM Mind, And Waking Up Clear Again..."
+
+lp-03-menopause-70off.html
+   "The #1 Reason Menopause Feels This Brutal Is 'Cause Your Bad Sleep
+    - Fix It With Sonnus(R) in Just a Few Weeks"
+
+As tres sao a MESMA pagina; muda so a headline e a arte do hero.
+Os nomes de arquivo foram simplificados para hospedagem (o arquivo de origem
+da lp-03 tem "#" no nome, o que quebra a URL num servidor).
+
+O QUE MUDOU NESTA VERSAO
+------------------------
+A frase da secao de escassez (bloco roxo com a foto das duas caixas) passou de
+   "Due to high demand and shortage of key ingredients, August has a very
+    high risk of selling out"
+para
+   "Due to high demand and shortage of key ingredients, Sonnus has a very
+    high risk of selling out this week"
+Alterado nas tres paginas.
+
+A barra fixa do rodape ("Launch Offer: 70% OFF Today / Get Sonnus(R)"), que
+acompanhava o scroll grudada na base da tela, foi REMOVIDA. Ela so existia na
+lp-01; a lp-02 e a lp-03 ja estavam sem ela. Agora as tres terminam igual.
+O rodape navy (aviso do FDA, Privacy Policy, Terms of Service, Refund Policy,
+Support e copyright) continua nas tres - nao foi mexido.
+
+COMO ABRIR
+----------
+Descompacte a pasta inteira. As tres paginas e a pasta videos-lp PRECISAM
+ficar juntas, no mesmo nivel. Se separar, a pagina abre mas os videos nao
+tocam (os cards mostram so a foto de capa).
+
+A pasta videos-lp e COMPARTILHADA pelas tres paginas - por isso ela aparece
+uma vez so. Nao duplicar.
+
+VIDEOS DE DEPOIMENTO
+--------------------
+ad01, ad02, ad03 e ad05, todos com o frasco novo.
+O antigo ad04 ("No diet, no Ozempic") foi retirado das paginas.
+
+TODO O RESTO E AUTOCONTIDO
+--------------------------
+Imagens embutidas no proprio HTML. A unica outra dependencia sao as fontes
+do Google (Sora / Manrope / Bebas Neue); sem internet a pagina usa fontes
+do sistema e continua legivel.
+
+PENDENCIAS CONHECIDAS
+---------------------
+1. Os nomes e as frases dos cards de depoimento ainda sao provisorios e NAO
+   correspondem as pessoas dos videos. Precisam ser substituidos pelos dados
+   reais antes de qualquer veiculacao.
+
+2. Duas frases de escassez ficaram desalinhadas com a copy nova e nao foram
+   mexidas nesta rodada:
+   - barra do topo: "August inventory is selling out fast" (ainda fala em agosto)
+   - selo da secao de oferta: "High Risk of Selling Out This Month"
+     (conflita com o "this week" da secao de escassez)
+
+3. Em telas de 320px de largura o texto do botao "RECLAIM YOUR DEEP SLEEP NOW"
+   estoura a largura do botao. E anterior a esta versao, existe nas tres paginas.
+
+4. Na lp1-GLP-1, entre 861px e ~1100px de largura de janela (notebook pequeno ou
+   janela reduzida) a arte do hero aparece bem ampliada e cortada. A copy nova e
+   mais longa que a antiga e estica o hero para alem da proporcao da arte, que
+   entao e ampliada para preencher. Nao ha texto sobre o produto e nada fica
+   cortado - e so enquadramento. De 1280px para cima fica no enquadramento certo.
+
+5. O bullet "Naturally relax your mind and burn fat while you sleep" e uma
+   promessa de queima de gordura num produto de sono. Veio da variante GLP-1 do
+   cliente. Vale checar substanciacao antes de veicular: alegacao de emagrecimento
+   foi justamente o motivo de o AD04 ter sido tirado das paginas em 03/08.

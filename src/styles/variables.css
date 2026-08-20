@@ -1,0 +1,50 @@
+:root {
+  /* Brand Palette from Identity Guide */
+  --color-sand: #EEE9DE;       /* Page background ("cor da meia") */
+  --color-mint-light: #F6FFFC; /* Clean card & crisp container background */
+  --color-sage: #4B6833;       /* Botanical Sage Green primary accent */
+  
+  --bg-page: #EEE9DE;
+  --bg-card: #F6FFFC;
+  --bg-card-alt: #F0EAE0;
+  --bg-card-hover: #FFFFFF;
+  --bg-dark-hero: #050705;
+  --bg-footer: #1B2613;
+
+  /* Text & Border Colors for Light Sand Theme */
+  --color-primary: #1B2613;     /* Deep Botanical Forest Charcoal for crisp text readability */
+  --color-secondary: #3D4F31;   /* Medium Botanical Forest Green */
+  --color-muted: #6B7A60;       /* Soft Muted Sage */
+  --color-dim: #8E9A85;
+  --color-border: rgba(75, 104, 51, 0.16);
+  --color-border-hover: rgba(75, 104, 51, 0.35);
+
+  /* Product Brand Colors */
+  --color-slimsoda: #D96B32;
+  --color-linfaflow: #4B6833;
+  --color-sonnus: #2C4375;
+  --color-crowned: #A05E28;
+
+  /* Typography System */
+  --font-brand-display: 'Italiana', 'Cormorant Garamond', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --section-padding-y: 120px;
+  --section-padding-y-mobile: 75px;
+  --container-max-width: 1280px;
+  --container-narrow-width: 960px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
