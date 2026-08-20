@@ -16,7 +16,17 @@ export const ProductPlaceholderVisual = ({
 }) => {
   const [imageError, setImageError] = useState(false);
 
-  const { name, category, accentColor, image, selectorImage, highlightImage } = product;
+  const {
+    name,
+    category,
+    accentColor,
+    imageBottle,
+    imageHighlight,
+    imageSelector,
+    image,
+    selectorImage,
+    highlightImage,
+  } = product;
 
   // Height mappings based on size variant
   const heights = {
@@ -32,12 +42,12 @@ export const ProductPlaceholderVisual = ({
   const primary = accentColor || 'var(--color-sage)';
   const capColor = '#2D3B22';
 
-  // Determine target image source
+  // Determine target image source from products.js properties
   const targetImage = useHighlightImage
-    ? highlightImage
+    ? (imageHighlight || highlightImage)
     : useSelectorImage
-    ? selectorImage
-    : image;
+    ? (imageSelector || selectorImage)
+    : (imageBottle || image);
 
   // Render Real Image if available and not errored
   if (targetImage && !imageError) {
