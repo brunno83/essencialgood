@@ -23,7 +23,7 @@ export const Header = () => {
     { label: 'Routine Selector', href: '#find-essential' },
     { label: 'Reviews', href: '#customer-stories' },
     { label: 'Guarantee', href: '#guarantee' },
-    { label: 'Sanctuary Store', href: '#physical-store' },
+    { label: 'Flagship Store', href: '#physical-store' },
     { label: 'FAQ', href: '#faq' },
   ];
 

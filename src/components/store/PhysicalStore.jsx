@@ -100,7 +100,7 @@ export const PhysicalStore = () => {
               <source media="(max-width: 768px)" srcSet="/assets/store/store_flagship_sanctuary_mobile.jpg" />
               <img
                 src={customImage}
-                alt="Essencial Good Flagship Physical Sanctuary Store"
+                alt="Essencial Good Flagship Store"
                 onError={() => setImageError(true)}
                 style={{
                   width: '100%',
@@ -114,7 +114,7 @@ export const PhysicalStore = () => {
           ) : (
             <img
               src={fallbackImage}
-              alt="Essencial Good Flagship Physical Sanctuary Store"
+              alt="Essencial Good Flagship Store"
               style={{
                 width: '100%',
                 height: '100%',
@@ -162,7 +162,7 @@ export const PhysicalStore = () => {
                 margin: 0,
               }}
             >
-              Essencial Good Sanctuary & Store
+              Essencial Good Flagship Store
             </p>
           </div>
         </div>
