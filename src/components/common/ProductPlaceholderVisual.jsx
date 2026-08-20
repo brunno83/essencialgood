@@ -1,50 +1,52 @@
 import React, { useState } from 'react';
+import { PRODUCTS } from '../../config/products';
 
 /**
- * Product Visual Component: Renders PNG/JPG images with luxury editorial framing, or fallback 3D Rendered SVG.
- * Supports fullBleed mode for Section 06 glassmorphic background card stage.
+ * ESSENCIAL GOOD — Unified Product Visual Component
+ * Renders real high-res PNG/WEBP product imagery with responsive object-fit framing.
+ * Features centered luxury badge overlays with 100% single-line non-wrapping text!
  */
 export const ProductPlaceholderVisual = ({
-  product,
-  className = '',
+  product = PRODUCTS[0],
   size = 'medium',
-  useHighlightImage = false,
+  className = '',
   useSelectorImage = false,
   fullBleed = false,
+  useHighlightImage = false,
 }) => {
   const [imageError, setImageError] = useState(false);
-  const { name, category, accentColor, bottleStyle, imageBottle, imageHighlight, imageSelector } = product;
 
-  // Determine target image based on context flags
-  let targetImage = imageBottle;
-  if (useHighlightImage && imageHighlight) {
-    targetImage = imageHighlight;
-  } else if (useSelectorImage && (imageSelector || imageBottle)) {
-    targetImage = imageSelector || imageBottle;
-  }
+  const { name, category, accentColor, image, selectorImage, highlightImage } = product;
 
-  const primary = bottleStyle?.primaryColor || accentColor || '#4B6833';
-  const capColor = bottleStyle?.capColor || '#E6E6E6';
-  
-  const heightMap = {
+  // Height mappings based on size variant
+  const heights = {
     small: '140px',
     medium: '220px',
-    large: '500px',
-    hero: '540px',
+    large: '340px',
+    hero: '440px',
   };
 
-  const currentHeight = heightMap[size] || heightMap.medium;
+  const currentHeight = heights[size] || heights.medium;
 
-  // If custom campaign photo exists
+  // Primary color for fallback SVG
+  const primary = accentColor || 'var(--color-sage)';
+  const capColor = '#2D3B22';
+
+  // Determine target image source
+  const targetImage = useHighlightImage
+    ? highlightImage
+    : useSelectorImage
+    ? selectorImage
+    : image;
+
+  // Render Real Image if available and not errored
   if (targetImage && !imageError) {
     if (fullBleed) {
-      // Full-bleed edge-to-edge image filling the entire parent card stage
       return (
-        <div 
-          className={`product-visual-wrapper ${className}`} 
+        <div
+          className={`product-visual-wrapper ${className}`}
           style={{
-            position: 'absolute',
-            inset: 0,
+            position: 'relative',
             width: '100%',
             height: '100%',
             overflow: 'hidden',
@@ -60,7 +62,6 @@ export const ProductPlaceholderVisual = ({
               objectFit: 'cover',
               objectPosition: 'center top',
               display: 'block',
-              filter: 'contrast(1.03) brightness(1.01)',
             }}
           />
         </div>
@@ -68,45 +69,26 @@ export const ProductPlaceholderVisual = ({
     }
 
     if (useHighlightImage) {
-      // Luxury Editorial Full-Bleed 3:4 Campaign Frame (Section 05) with Zero-Crop Mobile Responsive Framing
       return (
-        <div 
-          className={`product-visual-wrapper ${className}`} 
+        <div
+          className={`product-visual-wrapper ${className}`}
           style={{
             position: 'relative',
+            width: '100%',
+            height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: currentHeight,
-            width: '100%',
-            maxWidth: '380px',
-            margin: '0 auto',
-            aspectRatio: '3 / 4',
           }}
         >
-          <div 
-            style={{
-              position: 'absolute',
-              width: '85%',
-              height: '85%',
-              borderRadius: '50%',
-              background: `radial-gradient(circle, ${primary}35 0%, transparent 70%)`,
-              filter: 'blur(40px)',
-              zIndex: 1,
-              pointerEvents: 'none',
-            }}
-          />
-
           <div
             style={{
               position: 'relative',
-              zIndex: 2,
               width: '100%',
-              height: '100%',
-              borderRadius: '24px',
+              aspectRatio: '3 / 4',
+              borderRadius: '20px',
               overflow: 'hidden',
-              boxShadow: '0 25px 55px rgba(27, 38, 19, 0.18), 0 10px 20px rgba(0, 0, 0, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.6)',
+              boxShadow: '0 15px 35px rgba(27, 38, 19, 0.12)',
               backgroundColor: '#F6FFFC',
               transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease',
             }}
@@ -125,22 +107,27 @@ export const ProductPlaceholderVisual = ({
               }}
             />
 
+            {/* 100% Centered Non-Wrapping Badge Overlay */}
             <div
               style={{
                 position: 'absolute',
-                bottom: '1rem',
-                left: '1rem',
-                padding: '0.4rem 0.85rem',
-                backgroundColor: 'rgba(246, 255, 252, 0.88)',
+                bottom: '0.85rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                padding: '0.35rem 0.75rem',
+                backgroundColor: 'rgba(246, 255, 252, 0.92)',
                 backdropFilter: 'blur(12px)',
                 borderRadius: '9999px',
                 border: '1px solid rgba(75, 104, 51, 0.2)',
-                fontSize: '0.675rem',
+                fontSize: '0.6rem',
                 fontWeight: 700,
-                letterSpacing: '0.15em',
+                letterSpacing: '0.12em',
                 color: 'var(--color-primary)',
                 textTransform: 'uppercase',
                 boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                whiteSpace: 'nowrap',
+                maxWidth: '92%',
+                textAlign: 'center',
               }}
             >
               ESSENCIAL GOOD — {category}
@@ -168,12 +155,13 @@ export const ProductPlaceholderVisual = ({
           style={{
             position: 'absolute',
             width: '60%',
-            height: '60%',
+            height: '15%',
+            bottom: '5%',
             borderRadius: '50%',
-            background: `radial-gradient(circle, ${primary}25 0%, transparent 70%)`,
-            filter: 'blur(25px)',
+            backgroundColor: 'rgba(27, 38, 19, 0.12)',
+            filter: 'blur(12px)',
+            transform: 'scaleY(0.4)',
             zIndex: 1,
-            pointerEvents: 'none',
           }}
         />
 
@@ -182,24 +170,24 @@ export const ProductPlaceholderVisual = ({
           alt={`Essencial Good — ${name}`}
           onError={() => setImageError(true)}
           style={{
-            maxHeight: '92%',
-            maxWidth: '92%',
+            maxHeight: '100%',
+            maxWidth: '100%',
             objectFit: 'contain',
+            mixBlendMode: 'multiply',
+            filter: 'contrast(1.05) brightness(0.98)',
             position: 'relative',
             zIndex: 2,
-            mixBlendMode: 'multiply',
-            filter: 'contrast(1.05) brightness(1.02)',
-            transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'transform 0.4s ease',
           }}
         />
       </div>
     );
   }
 
-  // Fallback 3D Rendered Vector Bottle Component
+  // Fallback High-Fidelity SVG Render
   return (
     <div 
-      className={`product-visual-wrapper ${className}`} 
+      className={`product-visual-wrapper fallback ${className}`}
       style={{
         position: 'relative',
         display: 'flex',
@@ -207,45 +195,31 @@ export const ProductPlaceholderVisual = ({
         justifyContent: 'center',
         height: currentHeight,
         width: '100%',
-        perspective: '1000px',
+        padding: '0.5rem',
       }}
     >
-      <div 
-        style={{
-          position: 'absolute',
-          width: '70%',
-          height: '70%',
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${primary}35 0%, transparent 70%)`,
-          filter: 'blur(35px)',
-          zIndex: 1,
-          pointerEvents: 'none',
-        }}
-      />
-
       <svg
-        viewBox="0 0 240 420"
+        viewBox="0 0 240 380"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{
-          height: '90%',
+          height: '100%',
           width: 'auto',
-          filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.12))',
-          zIndex: 2,
-          transition: 'transform 0.5s ease',
+          maxHeight: '100%',
+          filter: 'drop-shadow(0 15px 25px rgba(27, 38, 19, 0.12))',
         }}
       >
         <defs>
           <linearGradient id={`bg-grad-${product.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1E221E" />
-            <stop offset="40%" stopColor="#121512" />
-            <stop offset="100%" stopColor="#080A08" />
+            <stop offset="0%" stopColor="#1B2613" />
+            <stop offset="50%" stopColor="#25351A" />
+            <stop offset="100%" stopColor="#11180C" />
           </linearGradient>
 
           <linearGradient id={`cap-grad-${product.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={capColor} />
-            <stop offset="50%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor={capColor} stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#4B6833" />
+            <stop offset="50%" stopColor="#8E9A85" />
+            <stop offset="100%" stopColor="#2B3E1C" />
           </linearGradient>
 
           <linearGradient id={`highlight-grad-${product.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
@@ -283,11 +257,9 @@ export const ProductPlaceholderVisual = ({
         <text x="120" y="270" textAnchor="middle" fill="#757873" fontSize="6.5" letterSpacing="0.8" fontFamily="'Plus Jakarta Sans', sans-serif">
           EVERYDAY ESSENTIAL
         </text>
-        <text x="120" y="282" textAnchor="middle" fill="#A8AAA4" fontSize="6" letterSpacing="0.5" fontFamily="'Plus Jakarta Sans', sans-serif">
-          THOUGHTFUL FORMULA
-        </text>
 
-        <rect x="66" y="322" width="108" height="8" rx="0 0 6 6" fill={primary} />
+        <circle cx="120" cy="302" r="10" fill={primary} fillOpacity="0.15" />
+        <circle cx="120" cy="302" r="4" fill={primary} />
       </svg>
     </div>
   );
