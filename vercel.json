@@ -1,4 +1,46 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "sonnus.essencialgood.com"
+        }
+      ],
+      "destination": "/adv-sonnus/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "slimsoda.essencialgood.com"
+        }
+      ],
+      "destination": "/adv-slimsoda/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "crowned.essencialgood.com"
+        }
+      ],
+      "destination": "/adv-crowned/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "linfaflow.essencialgood.com"
+        }
+      ],
+      "destination": "/adv-linfaflow/:path*"
+    }
+  ]
 }

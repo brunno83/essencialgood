@@ -1,0 +1,55 @@
+SONNUS(R) - ADVERTORIAL DE MENOPAUSA
+=====================================
+Gerado em 04/08/2026.
+
+Conteudo do pacote:
+  index.html   -> o advertorial inteiro (origem: advertorial-sonnus-menopause.html)
+
+ARQUIVO UNICO, SEM DEPENDENCIA NENHUMA
+--------------------------------------
+Nao ha pasta de imagens, nao ha pasta de fontes, nao ha CDN.
+As 18 imagens estao embutidas em base64 e a fonte Montserrat (5 pesos)
+esta embutida como woff2. A pagina abre igual com ou sem internet.
+
+Pode enviar o HTML solto por e-mail ou WhatsApp que ele funciona.
+Para hospedar, basta subir o index.html.
+
+O QUE TEM NA PAGINA
+-------------------
+- 16 secoes, formato de materia editorial, coluna de 720px, Montserrat.
+- 17 imagens no corpo + o frasco no bloco de oferta.
+- Contador regressivo no fim (zera todo dia a meia-noite, via JavaScript).
+  Sem JavaScript a pagina continua legivel; so o contador fica em 00:00:00.
+- Bloco de oferta com selos, botao laranja e o frasco ao lado.
+
+PENDENCIAS - LER ANTES DE VEICULAR
+----------------------------------
+1. NUMERO DE CLIENTES EM CONFLITO
+   O card de oferta diz "Over 15,600+ Happy Customers".
+   A arte da secao "Real Women. Real Words." tem "Trusted by 120,000+
+   Happy Customers" queimado na imagem. Os dois aparecem na mesma pagina.
+
+2. DOIS DESCONTOS DIFERENTES
+   A foto da prateleira diz "70% OFF TODAY".
+   O texto logo abaixo oferece "additional 20% off your first order".
+
+3. SABOR
+   O texto diz "Raspberry flavored". O rotulo nas fotos diz WILD BERRY.
+
+4. CONTAGEM DE INGREDIENTES
+   O texto diz "9 clinically-backed sleep ingredients".
+
+5. DEPOIMENTOS
+   Os 4 depoimentos e os nomes sao provisorios. Precisam de pessoa real
+   e autorizacao por escrito antes de qualquer veiculacao.
+
+6. AUTORIA
+   "Dr. Elena Marsh" e uma persona. O rodape declara isso. Conferir o nome
+   contra os conselhos estaduais americanos antes de publicar.
+
+7. CLAIMS SEM LASTRO
+   "Recommended by Sleep Specialists", "80% das mulheres que eu avalio",
+   "absorve perto de 90%", "Sell-out Risk: High".
+
+8. LINK DO BOTAO
+   O botao aponta para "#checkout". Falta a URL real.
