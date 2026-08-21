@@ -2,43 +2,35 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "rewrites": [
+    { "source": "/ADV-sonnus/:path*", "destination": "/adv-sonnus/:path*" },
+    { "source": "/ADV-slimsoda/:path*", "destination": "/adv-slimsoda/:path*" },
+    { "source": "/ADV-crowned/:path*", "destination": "/adv-crowned/:path*" },
+    { "source": "/ADV-linfaflow/:path*", "destination": "/adv-linfaflow/:path*" },
     {
       "source": "/:path*",
       "has": [
-        {
-          "type": "host",
-          "value": "sonnus.essencialgood.com"
-        }
+        { "type": "host", "value": "sonnus.essencialgood.com" }
       ],
       "destination": "/adv-sonnus/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        {
-          "type": "host",
-          "value": "slimsoda.essencialgood.com"
-        }
+        { "type": "host", "value": "slimsoda.essencialgood.com" }
       ],
       "destination": "/adv-slimsoda/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        {
-          "type": "host",
-          "value": "crowned.essencialgood.com"
-        }
+        { "type": "host", "value": "crowned.essencialgood.com" }
       ],
       "destination": "/adv-crowned/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        {
-          "type": "host",
-          "value": "linfaflow.essencialgood.com"
-        }
+        { "type": "host", "value": "linfaflow.essencialgood.com" }
       ],
       "destination": "/adv-linfaflow/:path*"
     }
