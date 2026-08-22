@@ -17,20 +17,34 @@ import { ProductPage } from './components/pdp/ProductPage';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
-  const [activeProductId, setActiveProductId] = useState(() => {
-    const path = window.location.pathname.toLowerCase().replace(/^\//, '');
-    if (PDP_DATA[path]) return path;
+  const getProductFromLocation = () => {
+    // 1. Check query string: ?product=slimsoda
+    const params = new URLSearchParams(window.location.search);
+    const queryProduct = params.get('product') || params.get('p');
+    if (queryProduct && PDP_DATA[queryProduct.toLowerCase()]) {
+      return queryProduct.toLowerCase();
+    }
+
+    // 2. Check hash: #slimsoda or #/slimsoda
+    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+    if (hash && PDP_DATA[hash]) {
+      return hash;
+    }
+
+    // 3. Check pathname: /slimsoda
+    const path = window.location.pathname.toLowerCase().replace(/^\//, '').replace(/\/$/, '');
+    if (PDP_DATA[path]) {
+      return path;
+    }
+
     return null;
-  });
+  };
+
+  const [activeProductId, setActiveProductId] = useState(getProductFromLocation);
 
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname.toLowerCase().replace(/^\//, '');
-      if (PDP_DATA[path]) {
-        setActiveProductId(path);
-      } else {
-        setActiveProductId(null);
-      }
+      setActiveProductId(getProductFromLocation());
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -42,7 +56,6 @@ export function App() {
       setActiveProductId(id);
       window.history.pushState(null, '', `/${id}`);
     } else {
-      // Fallback
       setActiveProductId('slimsoda');
       window.history.pushState(null, '', '/slimsoda');
     }
