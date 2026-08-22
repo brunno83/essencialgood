@@ -33,6 +33,10 @@
         { "type": "host", "value": "linfaflow.essencialgood.com" }
       ],
       "destination": "/adv-linfaflow/:path*"
-    }
+    },
+    { "source": "/slimsoda", "destination": "/index.html" },
+    { "source": "/linfaflow", "destination": "/index.html" },
+    { "source": "/sonnus", "destination": "/index.html" },
+    { "source": "/crowned", "destination": "/index.html" }
   ]
 }
