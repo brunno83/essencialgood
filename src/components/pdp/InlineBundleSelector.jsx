@@ -57,8 +57,8 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
                 </div>
               )}
 
-              {/* Radio + Info Main Row */}
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+              {/* Radio + Info + Bottle Image Row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 {/* Radio Custom Circle */}
                 <div
                   style={{
@@ -70,7 +70,6 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginTop: '2px',
                     flexShrink: 0,
                     transition: 'all 0.2s ease'
                   }}
@@ -80,37 +79,52 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
                   )}
                 </div>
 
+                {/* Bottle Thumbnail Image */}
+                {bundle.image && (
+                  <img
+                    src={bundle.image}
+                    alt={bundle.name}
+                    style={{
+                      width: '56px',
+                      height: '56px',
+                      objectFit: 'contain',
+                      flexShrink: 0,
+                      filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))'
+                    }}
+                  />
+                )}
+
                 {/* Content */}
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '6px' }}>
-                    <div style={{ fontSize: '16px', fontWeight: 900, color: '#141210' }}>
+                    <div style={{ fontSize: '15.5px', fontWeight: 900, color: '#141210' }}>
                       {bundle.deal}
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '18px', fontWeight: 900, color: '#141210' }}>
+                      <span style={{ fontSize: '17px', fontWeight: 900, color: '#141210' }}>
                         {bundle.pricePerBottle}
                       </span>
-                      <span style={{ fontSize: '12px', color: '#666', fontWeight: 600 }}>/bot.</span>
+                      <span style={{ fontSize: '11.5px', color: '#666', fontWeight: 600 }}>/bot.</span>
                       {bundle.originalTotal && (
-                        <span style={{ fontSize: '13px', color: '#999', textDecoration: 'line-through', marginLeft: '6px' }}>
+                        <span style={{ fontSize: '12px', color: '#999', textDecoration: 'line-through', marginLeft: '5px' }}>
                           {bundle.originalTotal}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div style={{ fontSize: '13px', color: '#555', fontWeight: 600, marginTop: '2px' }}>
+                  <div style={{ fontSize: '12.5px', color: '#555', fontWeight: 600, marginTop: '2px' }}>
                     {bundle.bottles} • <strong style={{ color: '#141210' }}>{bundle.totalPrice} total</strong>
                   </div>
 
                   {/* Extra bonuses when selected */}
                   {isSelected && (
-                    <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid rgba(217, 107, 50, 0.15)' }}>
-                      <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid rgba(217, 107, 50, 0.15)' }}>
+                      <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#27AE60', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         ✓ {bundle.savings} Applied
                       </div>
                       {bundle.bonusText && (
-                        <div style={{ fontSize: '11.5px', color: '#444', fontWeight: 600, marginTop: '4px' }}>
+                        <div style={{ fontSize: '11px', color: '#444', fontWeight: 600, marginTop: '2px' }}>
                           {bundle.bonusText}
                         </div>
                       )}

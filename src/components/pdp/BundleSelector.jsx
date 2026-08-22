@@ -100,7 +100,33 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
               )}
 
               <div>
-                <div style={{ textAlign: 'center', marginTop: bundle.badge ? '8px' : '0' }}>
+                {/* Bundle Bottle Image */}
+                {bundle.image && (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '140px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '12px',
+                      marginTop: bundle.badge ? '8px' : '0'
+                    }}
+                  >
+                    <img
+                      src={bundle.image}
+                      alt={bundle.name}
+                      style={{
+                        maxHeight: '100%',
+                        maxWidth: '90%',
+                        objectFit: 'contain',
+                        filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.1))'
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div style={{ textAlign: 'center', marginTop: !bundle.image && bundle.badge ? '8px' : '0' }}>
                   <span style={{ fontSize: '12px', fontWeight: 800, color: '#888', letterSpacing: '0.1em' }}>
                     {bundle.name}
                   </span>
@@ -115,8 +141,8 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                 <div 
                   style={{ 
                     textAlign: 'center', 
-                    margin: '20px 0', 
-                    padding: '16px 0', 
+                    margin: '16px 0', 
+                    padding: '14px 0', 
                     borderTop: '1px solid #F0ECE6', 
                     borderBottom: '1px solid #F0ECE6' 
                   }}
