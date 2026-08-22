@@ -1,0 +1,107 @@
+import React from 'react';
+
+export function GuaranteeSection({ guaranteeSection, accentColor }) {
+  if (!guaranteeSection) return null;
+  const { tag, title, subtitle, lead, body, highlight, ctaText } = guaranteeSection;
+
+  const scrollToBundles = () => {
+    const el = document.getElementById('bundles-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section style={{ backgroundColor: '#FAF7F2', padding: '60px 20px', borderTop: '1px solid #EFEAE1', borderBottom: '1px solid #EFEAE1' }}>
+      <div 
+        style={{ 
+          maxWidth: '850px', 
+          margin: '0 auto', 
+          backgroundColor: '#FFFFFF',
+          borderRadius: '20px',
+          padding: '40px 32px',
+          border: '1.5px solid rgba(0, 0, 0, 0.08)',
+          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.04)',
+          textAlign: 'center'
+        }}
+      >
+        {tag && (
+          <span 
+            style={{ 
+              fontSize: '12px', 
+              fontWeight: 800, 
+              letterSpacing: '0.14em', 
+              color: accentColor || '#D96B32',
+              textTransform: 'uppercase',
+              display: 'block',
+              marginBottom: '8px'
+            }}
+          >
+            {tag}
+          </span>
+        )}
+
+        <div 
+          style={{ 
+            width: '64px', 
+            height: '64px', 
+            borderRadius: '50%', 
+            backgroundColor: `${accentColor}18`, 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            fontSize: '28px',
+            margin: '0 auto 20px'
+          }}
+        >
+          🛡️
+        </div>
+
+        <h2 style={{ fontSize: 'clamp(22px, 3.8vw, 32px)', fontWeight: 900, color: '#141210', margin: '0 0 6px' }}>
+          {title}
+        </h2>
+        {subtitle && (
+          <div style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.1em', color: accentColor || '#D96B32', marginBottom: '20px' }}>
+            {subtitle}
+          </div>
+        )}
+
+        {lead && (
+          <p style={{ fontSize: '16px', fontWeight: 600, color: '#222', marginBottom: '12px', lineHeight: 1.5 }}>
+            {lead}
+          </p>
+        )}
+
+        {body && (
+          <p style={{ fontSize: '14.5px', color: '#555', lineHeight: 1.6, marginBottom: '20px', maxWidth: '680px', margin: '0 auto 20px' }}>
+            {body}
+          </p>
+        )}
+
+        {highlight && (
+          <div style={{ fontSize: '15px', fontWeight: 900, letterSpacing: '0.08em', color: '#141210', marginBottom: '28px' }}>
+            {highlight}
+          </div>
+        )}
+
+        {ctaText && (
+          <button
+            onClick={scrollToBundles}
+            style={{
+              backgroundColor: accentColor || '#D96B32',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '10px',
+              padding: '14px 28px',
+              fontSize: '14px',
+              fontWeight: 800,
+              letterSpacing: '0.04em',
+              cursor: 'pointer',
+              boxShadow: `0 6px 20px ${accentColor}35`
+            }}
+          >
+            {ctaText}
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}

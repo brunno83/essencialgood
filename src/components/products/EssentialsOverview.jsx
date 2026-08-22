@@ -6,9 +6,16 @@ import { SectionHeading } from '../common/SectionHeading';
 import { ProductPlaceholderVisual } from '../common/ProductPlaceholderVisual';
 import { CTAButton } from '../common/CTAButton';
 
-export const EssentialsOverview = () => {
+export const EssentialsOverview = ({ onSelectProduct }) => {
   const { meetEssentials } = BRAND_CONTENT;
   const [hoveredId, setHoveredId] = useState(null);
+
+  const handleProductClick = (productId, e) => {
+    if (e) e.preventDefault();
+    if (onSelectProduct) {
+      onSelectProduct(productId);
+    }
+  };
 
   return (
     <section
@@ -47,6 +54,7 @@ export const EssentialsOverview = () => {
                 transition={{ duration: 0.7, delay: index * 0.1 }}
                 onMouseEnter={() => setHoveredId(product.id)}
                 onMouseLeave={() => setHoveredId(null)}
+                onClick={(e) => handleProductClick(product.id, e)}
                 style={{
                   position: 'relative',
                   padding: '1.5rem',
@@ -63,6 +71,7 @@ export const EssentialsOverview = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
+                  cursor: 'pointer'
                 }}
               >
                 <div>
@@ -103,7 +112,7 @@ export const EssentialsOverview = () => {
                     </span>
                   </div>
 
-                  {/* Product Image Stage (Seamless E-Commerce Stage with Multiply Blend) */}
+                  {/* Product Image Stage */}
                   <div
                     style={{
                       backgroundColor: '#FFFFFF',
@@ -162,7 +171,7 @@ export const EssentialsOverview = () => {
                 {/* Bottom CTA Button */}
                 <div>
                   <CTAButton
-                    href={product.link}
+                    onClick={(e) => handleProductClick(product.id, e)}
                     variant={isHovered ? 'primary' : 'outline'}
                     size="small"
                     style={{
