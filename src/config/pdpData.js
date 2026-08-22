@@ -68,71 +68,76 @@ export const PDP_DATA = {
       bundles: [
         {
           id: 'starter',
-          name: 'STARTER',
-          badge: null,
+          name: 'STARTER BUNDLE',
+          badge: 'SAVE 50%',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
-          deal: 'BUY 1 + GET 1 FREE',
+          deal: 'Buy 1, Get 1 FREE!',
           pricePerBottle: '$34.75',
           totalPrice: '$69.50',
+          originalTotal: '$139.00',
           savings: 'Save $69.50',
-          perks: ['FREE U.S. SHIPPING', '90-Day Money-Back Guarantee'],
-          ctaText: 'START MY ROUTINE →',
+          perks: ['FREE U.S. SHIPPING', '90-Day Guarantee', 'One-Time Purchase'],
+          ctaText: 'CLAIM MY 2 BOTTLES →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         },
         {
           id: 'most-popular',
           name: 'MOST POPULAR',
-          badge: '⭐ MOST POPULAR',
+          badge: 'Most Popular Today',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
-          deal: 'BUY 2 + GET 2 FREE',
+          deal: 'Buy 2, Get 2 FREE!',
           pricePerBottle: '$27.49',
           totalPrice: '$109.96',
-          savings: 'Save $168.04',
-          perks: ['BETTER VALUE', 'FREE U.S. SHIPPING', '90-Day Money-Back Guarantee'],
-          ctaText: 'CHOOSE MOST POPULAR →',
+          originalTotal: '$219.92',
+          savings: 'Save $109.96',
+          bonusText: '✓ Bonus Discount Applied + Priority Processing',
+          perks: ['BETTER VALUE', 'FREE U.S. SHIPPING', '90-Day Guarantee', 'Priority Shipping'],
+          ctaText: 'CLAIM MY 4 BOTTLES (70% OFF) →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         },
         {
           id: 'best-value',
           name: 'BEST VALUE',
-          badge: '★ BEST VALUE',
+          badge: 'OUR BEST OFFER EVER',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
-          deal: 'BUY 3 + GET 3 FREE',
+          deal: 'Buy 3, Get 3 FREE!',
           pricePerBottle: '$19.99',
           totalPrice: '$119.94',
-          savings: 'Save $296.06',
-          perks: ['LOWEST PRICE PER BOTTLE', 'FREE U.S. SHIPPING', '90-Day Money-Back Guarantee'],
-          ctaText: 'GET THE BEST VALUE →',
+          originalTotal: '$329.80',
+          savings: 'Save $209.86',
+          bonusText: '✓ Maximum Savings + Free Expedited Shipping & Insurance',
+          perks: ['LOWEST PRICE PER BOTTLE', 'FREE U.S. SHIPPING', '90-Day Guarantee', 'Expedited Handling'],
+          ctaText: 'GET THE BEST VALUE (6 BOTTLES) →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         }
       ]
     },
 
     trustStrip: {
-      tag: '02 — TRUST STRIP',
-      title: 'SIMPLE WELLNESS. BUILT FOR REAL LIFE.',
+      tag: '02 — TRUST & QUALITY',
+      title: 'CLEAN FORMULA. PROVEN QUALITY.',
       items: [
         {
-          title: 'EASY DAILY ROUTINE',
-          desc: 'Designed to fit naturally into your day.'
+          title: '100% NATURAL FORMULA',
+          desc: 'Pure plant-derived ingredients with zero synthetic fillers or stimulants.'
         },
         {
-          title: 'SELECTED INGREDIENTS',
-          desc: 'A focused wellness formula.'
+          title: 'LAB-TESTED & U.S. MADE',
+          desc: 'Manufactured in an FDA-registered facility & 3rd-party tested for purity.'
         },
         {
-          title: 'FREE U.S. SHIPPING',
-          desc: 'Included with every bundle.'
+          title: 'FREE 24-HOUR SHIPPING',
+          desc: 'Dispatched from U.S. warehouses with real-time tracking.'
         },
         {
-          title: '90-DAY GUARANTEE',
-          desc: 'Try SlimSoda with confidence.'
+          title: '90-DAY RISK-FREE TRIAL',
+          desc: 'Try SlimSoda for 90 days with 100% money-back guarantee.'
         }
       ]
     },

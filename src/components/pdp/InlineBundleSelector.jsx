@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+
+export function InlineBundleSelector({ bundles = [], accentColor }) {
+  // Default selected bundle: most-popular (index 1) or first
+  const [selectedId, setSelectedId] = useState(() => {
+    const popular = bundles.find(b => b.isPopular);
+    return popular ? popular.id : (bundles[0]?.id || 'most-popular');
+  });
+
+  if (!bundles || bundles.length === 0) return null;
+
+  const selectedBundle = bundles.find(b => b.id === selectedId) || bundles[0];
+
+  return (
+    <div className="inline-bundle-selector" style={{ marginTop: '20px', width: '100%' }}>
+      <div style={{ fontSize: '13px', fontWeight: 800, color: '#141210', letterSpacing: '0.04em', marginBottom: '12px' }}>
+        SELECT YOUR BUNDLE:
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        {bundles.map((bundle) => {
+          const isSelected = bundle.id === selectedId;
+
+          return (
+            <div
+              key={bundle.id}
+              onClick={() => setSelectedId(bundle.id)}
+              style={{
+                position: 'relative',
+                backgroundColor: isSelected ? '#FAF5EF' : '#FFFFFF',
+                border: isSelected ? `2.5px solid ${accentColor || '#D96B32'}` : '1.5px solid rgba(0, 0, 0, 0.12)',
+                borderRadius: '14px',
+                padding: '16px 18px',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: isSelected ? '0 6px 20px rgba(217, 107, 50, 0.12)' : '0 2px 8px rgba(0,0,0,0.03)'
+              }}
+            >
+              {/* Badge Top Right */}
+              {bundle.badge && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '-11px',
+                    right: '18px',
+                    backgroundColor: isSelected ? (accentColor || '#D96B32') : '#141210',
+                    color: '#FFFFFF',
+                    fontSize: '10.5px',
+                    fontWeight: 800,
+                    letterSpacing: '0.06em',
+                    padding: '3px 12px',
+                    borderRadius: '12px',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.15)'
+                  }}
+                >
+                  {bundle.badge}
+                </div>
+              )}
+
+              {/* Radio + Info Main Row */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                {/* Radio Custom Circle */}
+                <div
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    border: `2px solid ${isSelected ? (accentColor || '#D96B32') : '#AAA'}`,
+                    backgroundColor: isSelected ? (accentColor || '#D96B32') : '#FFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '2px',
+                    flexShrink: 0,
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {isSelected && (
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#FFFFFF' }} />
+                  )}
+                </div>
+
+                {/* Content */}
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '6px' }}>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: '#141210' }}>
+                      {bundle.deal}
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ fontSize: '18px', fontWeight: 900, color: '#141210' }}>
+                        {bundle.pricePerBottle}
+                      </span>
+                      <span style={{ fontSize: '12px', color: '#666', fontWeight: 600 }}>/bot.</span>
+                      {bundle.originalTotal && (
+                        <span style={{ fontSize: '13px', color: '#999', textDecoration: 'line-through', marginLeft: '6px' }}>
+                          {bundle.originalTotal}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div style={{ fontSize: '13px', color: '#555', fontWeight: 600, marginTop: '2px' }}>
+                    {bundle.bottles} • <strong style={{ color: '#141210' }}>{bundle.totalPrice} total</strong>
+                  </div>
+
+                  {/* Extra bonuses when selected */}
+                  {isSelected && (
+                    <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid rgba(217, 107, 50, 0.15)' }}>
+                      <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        ✓ {bundle.savings} Applied
+                      </div>
+                      {bundle.bonusText && (
+                        <div style={{ fontSize: '11.5px', color: '#444', fontWeight: 600, marginTop: '4px' }}>
+                          {bundle.bonusText}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Main Hero CTA Button */}
+      <a
+        href={selectedBundle.checkoutUrl}
+        target="_top"
+        rel="noopener"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          backgroundColor: accentColor || '#D96B32',
+          color: '#FFFFFF',
+          fontSize: '15px',
+          fontWeight: 900,
+          letterSpacing: '0.04em',
+          padding: '18px',
+          borderRadius: '12px',
+          textDecoration: 'none',
+          textAlign: 'center',
+          marginTop: '16px',
+          boxShadow: `0 10px 25px ${accentColor}40`,
+          transition: 'transform 0.2s ease',
+          cursor: 'pointer'
+        }}
+      >
+        CLAIM MY SLIMSODA (90-DAY RISK FREE) →
+      </a>
+
+      <div style={{ textAlign: 'center', marginTop: '10px', fontSize: '11.5px', color: '#777', fontWeight: 700, letterSpacing: '0.04em' }}>
+        🔒 SECURE CHECKOUT • FREE U.S. SHIPPING • 90-DAY GUARANTEE
+      </div>
+    </div>
+  );
+}
