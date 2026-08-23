@@ -57,6 +57,15 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
     localStorage.setItem('slimsoda_reviews', JSON.stringify(reviewsList));
   }, [reviewsList]);
 
+  const getInitials = (name) => {
+    if (!name) return 'U';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().replace(/[^A-Z]/g, '');
+    }
+    return name.substring(0, 2).toUpperCase().replace(/[^A-Z]/g, '');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formName || !formTitle || !formBody) return;
@@ -137,7 +146,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
         </div>
       </div>
 
-      {/* List-style Reviews Layout (Shopify / DTC style) */}
+      {/* List-style Reviews Layout (Shopify DTC Gold Stars + Initials Avatar) */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {reviewsList.map((rev) => (
           <div
@@ -151,33 +160,36 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
               textAlign: 'left'
             }}
           >
-            {/* Top Stars & Author Row */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <div style={{ color: '#8E44AD', fontSize: '16px', letterSpacing: '2px' }}>
+            {/* Top Stars & Date Row (Gold / Yellow Stars) */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <div style={{ color: '#F5A623', fontSize: '16px', letterSpacing: '2px' }}>
                 {'★'.repeat(rev.rating)}
               </div>
               <span style={{ fontSize: '12px', color: '#999', fontWeight: 500 }}>{rev.date}</span>
             </div>
 
-            {/* Author Avatar & Name */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            {/* Author Avatar (Initials) & Name */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
               <div 
                 style={{
-                  width: '32px',
-                  height: '32px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
-                  backgroundColor: '#F0ECE6',
-                  color: '#444',
+                  backgroundColor: `${accentColor || '#D96B32'}15`,
+                  color: accentColor || '#D96B32',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '14px',
-                  fontWeight: 800
+                  fontSize: '13px',
+                  fontWeight: 900,
+                  letterSpacing: '0.04em',
+                  flexShrink: 0
                 }}
               >
-                👤
+                {getInitials(rev.author)}
               </div>
-              <span style={{ fontSize: '14px', fontWeight: 800, color: '#141210' }}>
+
+              <span style={{ fontSize: '14.5px', fontWeight: 800, color: '#141210' }}>
                 {rev.author}
               </span>
               {rev.verified && (

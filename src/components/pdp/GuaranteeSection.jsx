@@ -10,16 +10,16 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
   };
 
   return (
-    <section style={{ backgroundColor: '#FAF7F2', padding: '60px 20px', borderTop: '1px solid #EFEAE1', borderBottom: '1px solid #EFEAE1' }}>
+    <section style={{ backgroundColor: '#FAF7F2', padding: '70px 20px', borderTop: '1px solid #EFEAE1', borderBottom: '1px solid #EFEAE1' }}>
       <div 
         style={{ 
           maxWidth: '850px', 
           margin: '0 auto', 
           backgroundColor: '#FFFFFF',
-          borderRadius: '20px',
-          padding: '40px 32px',
+          borderRadius: '24px',
+          padding: '44px 36px',
           border: '1.5px solid rgba(0, 0, 0, 0.08)',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.04)',
+          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.04)',
           textAlign: 'center'
         }}
       >
@@ -27,7 +27,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
           <span 
             style={{ 
               fontSize: '12px', 
-              fontWeight: 800, 
+              fontWeight: 900, 
               letterSpacing: '0.14em', 
               color: accentColor || '#D96B32',
               textTransform: 'uppercase',
@@ -39,20 +39,18 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
           </span>
         )}
 
-        <div 
-          style={{ 
-            width: '64px', 
-            height: '64px', 
-            borderRadius: '50%', 
-            backgroundColor: `${accentColor}18`, 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            fontSize: '28px',
-            margin: '0 auto 20px'
-          }}
-        >
-          🛡️
+        {/* Guarantee Badge Image from Brand Assets */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          <img
+            src="/assets/brand/guarantee_badge.png"
+            alt="EssencialGood 90-Day Guarantee Badge"
+            style={{
+              maxHeight: '160px',
+              maxWidth: '160px',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
+            }}
+          />
         </div>
 
         <h2 style={{ fontSize: 'clamp(22px, 3.8vw, 32px)', fontWeight: 900, color: '#141210', margin: '0 0 6px' }}>
