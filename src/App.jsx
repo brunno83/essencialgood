@@ -14,6 +14,7 @@ import { FinalCTA } from './components/cta/FinalCTA';
 import { FAQ } from './components/faq/FAQ';
 import { Footer } from './components/layout/Footer';
 import { ProductPage } from './components/pdp/ProductPage';
+import { ProductMarquee } from './components/pdp/ProductMarquee';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
@@ -66,12 +67,22 @@ export function App() {
     window.history.pushState(null, '', '/');
   };
 
+  const isProductPage = Boolean(activeProductId && PDP_DATA[activeProductId]);
+
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
-      {/* Fixed Luxury Navigation Bar */}
-      <Header onNavHome={backToHome} onSelectProduct={openProductPDP} />
+      {/* Top Marquee Announcement Banner - Only on Product Pages */}
+      {isProductPage && <ProductMarquee />}
 
-      {activeProductId && PDP_DATA[activeProductId] ? (
+      {/* Fixed Luxury Navigation Bar */}
+      <Header 
+        onNavHome={backToHome} 
+        onSelectProduct={openProductPDP} 
+        isProductPage={isProductPage}
+        activeProductId={activeProductId}
+      />
+
+      {isProductPage ? (
         <ProductPage productData={PDP_DATA[activeProductId]} onBackToHome={backToHome} />
       ) : (
         /* Main Home Page Layout */

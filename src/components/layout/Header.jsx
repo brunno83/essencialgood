@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { CTAButton } from '../common/CTAButton';
+import { PRODUCTS } from '../../config/products';
 
-export const Header = () => {
+export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProductId }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const logoSrc = scrolled ? "/assets/logo/logo_brand_dark.png" : "/assets/logo/logo_brand_white.png";
+  const isSolidHeader = isProductPage || scrolled;
+  const logoSrc = isSolidHeader ? "/assets/logo/logo_brand_dark.png" : "/assets/logo/logo_brand_white.png";
 
-  const navLinks = [
+  const pdpNavLinks = [
+    { label: 'Bundles & Pricing', href: '#bundles-section' },
+    { label: 'Benefits', href: '#benefits-section' },
+    { label: 'Ingredients', href: '#ingredients-section' },
+    { label: 'Reviews', href: '#reviews-section' },
+    { label: 'FAQ', href: '#faq-section' }
+  ];
+
+  const homeNavLinks = [
     { label: 'Collection', href: '#meet-essentials' },
     { label: 'Highlights', href: '#product-highlights' },
     { label: 'Routine Selector', href: '#find-essential' },
@@ -27,26 +38,58 @@ export const Header = () => {
     { label: 'FAQ', href: '#faq' },
   ];
 
+  const currentNavLinks = isProductPage ? pdpNavLinks : homeNavLinks;
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (onNavHome) {
+      onNavHome();
+    } else {
+      window.location.href = '/';
+    }
+  };
+
+  const handleProductSelect = (id, e) => {
+    e.preventDefault();
+    setProductsDropdownOpen(false);
+    setMobileMenuOpen(false);
+    if (onSelectProduct) {
+      onSelectProduct(id);
+    }
+  };
+
+  const scrollToBundles = (e) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const el = document.getElementById('bundles-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else if (onSelectProduct) {
+      onSelectProduct('slimsoda');
+    }
+  };
+
   return (
     <header
       style={{
         position: 'fixed',
-        top: 0,
+        top: isProductPage ? '34px' : 0,
         left: 0,
         right: 0,
         zIndex: 100,
         transition: 'all 0.4s ease',
-        backgroundColor: scrolled ? 'rgba(238, 233, 222, 0.94)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(75, 104, 51, 0.15)' : '1px solid transparent',
-        padding: scrolled ? '0.75rem 0' : '1.25rem 0',
-        boxShadow: scrolled ? '0 10px 30px rgba(0, 0, 0, 0.06)' : 'none',
+        backgroundColor: isSolidHeader ? 'rgba(238, 233, 222, 0.96)' : 'transparent',
+        backdropFilter: isSolidHeader ? 'blur(20px)' : 'none',
+        borderBottom: isSolidHeader ? '1px solid rgba(75, 104, 51, 0.15)' : '1px solid transparent',
+        padding: isSolidHeader ? '0.7rem 0' : '1.25rem 0',
+        boxShadow: isSolidHeader ? '0 10px 30px rgba(0, 0, 0, 0.06)' : 'none',
       }}
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        {/* Brand Logo Image with Text Fallback */}
+        {/* Brand Logo Image */}
         <a
-          href="#"
+          href="/"
+          onClick={handleLogoClick}
           style={{
             textDecoration: 'none',
             display: 'flex',
@@ -60,7 +103,7 @@ export const Header = () => {
               alt="Essencial Good Logo"
               onError={() => setLogoError(true)}
               style={{
-                height: scrolled ? '46px' : '56px',
+                height: isSolidHeader ? '44px' : '54px',
                 width: 'auto',
                 transition: 'height 0.3s ease',
                 display: 'block',
@@ -69,7 +112,7 @@ export const Header = () => {
           ) : (
             <span
               style={{
-                color: scrolled ? 'var(--color-primary)' : '#FFFFFF',
+                color: isSolidHeader ? 'var(--color-primary)' : '#FFFFFF',
                 fontFamily: 'var(--font-brand-display)',
                 fontSize: '1.4rem',
                 fontWeight: 400,
@@ -88,15 +131,83 @@ export const Header = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.75rem',
+            gap: '1.5rem',
           }}
           className="desktop-nav"
         >
-          {navLinks.map((link) => (
+          {/* Products Dropdown Selector */}
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
+              className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                padding: '4px 0'
+              }}
+            >
+              OUR ESSENTIALS <ChevronDown size={14} />
+            </button>
+
+            {productsDropdownOpen && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  marginTop: '8px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
+                  boxShadow: '0 12px 30px rgba(0, 0, 0, 0.12)',
+                  padding: '8px',
+                  minWidth: '200px',
+                  zIndex: 200
+                }}
+              >
+                {PRODUCTS.map((p) => (
+                  <a
+                    key={p.id}
+                    href={`/${p.id}`}
+                    onClick={(e) => handleProductSelect(p.id, e)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '10px 12px',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      color: activeProductId === p.id ? p.accentColor : '#141210',
+                      fontWeight: activeProductId === p.id ? 800 : 600,
+                      fontSize: '13px',
+                      backgroundColor: activeProductId === p.id ? `${p.accentColor}12` : 'transparent',
+                      transition: 'background 0.2s ease'
+                    }}
+                  >
+                    <span 
+                      style={{ 
+                        width: '8px', 
+                        height: '8px', 
+                        borderRadius: '50%', 
+                        backgroundColor: p.accentColor 
+                      }} 
+                    />
+                    {p.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {currentNavLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`}
+              className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
             >
               {link.label}
             </a>
@@ -105,20 +216,37 @@ export const Header = () => {
 
         {/* Desktop Header Action Button */}
         <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <CTAButton
-            href="#meet-essentials"
-            size="small"
-            style={{
-              backgroundColor: scrolled ? 'var(--color-primary)' : '#F6FFFC',
-              color: scrolled ? '#FFFFFF' : 'var(--color-primary)',
-              borderColor: scrolled ? 'var(--color-primary)' : '#F6FFFC',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              boxShadow: scrolled ? '0 6px 20px rgba(27, 38, 19, 0.15)' : '0 6px 20px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            SHOP ESSENTIALS
-          </CTAButton>
+          {isProductPage ? (
+            <CTAButton
+              onClick={scrollToBundles}
+              size="small"
+              style={{
+                backgroundColor: '#D96B32',
+                color: '#FFFFFF',
+                borderColor: '#D96B32',
+                fontWeight: 800,
+                letterSpacing: '0.08em',
+                boxShadow: '0 6px 20px rgba(217, 107, 50, 0.25)'
+              }}
+            >
+              CHOOSE BUNDLE
+            </CTAButton>
+          ) : (
+            <CTAButton
+              href="#meet-essentials"
+              size="small"
+              style={{
+                backgroundColor: isSolidHeader ? 'var(--color-primary)' : '#F6FFFC',
+                color: isSolidHeader ? '#FFFFFF' : 'var(--color-primary)',
+                borderColor: isSolidHeader ? 'var(--color-primary)' : '#F6FFFC',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                boxShadow: isSolidHeader ? '0 6px 20px rgba(27, 38, 19, 0.15)' : '0 6px 20px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              SHOP ESSENTIALS
+            </CTAButton>
+          )}
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -129,7 +257,7 @@ export const Header = () => {
           style={{
             background: 'none',
             border: 'none',
-            color: scrolled ? 'var(--color-primary)' : '#FFFFFF',
+            color: isSolidHeader ? 'var(--color-primary)' : '#FFFFFF',
             cursor: 'pointer',
             padding: '0.5rem',
             display: 'none',
@@ -150,14 +278,38 @@ export const Header = () => {
             right: 0,
             backgroundColor: '#EEE9DE',
             borderBottom: '1px solid var(--color-border)',
-            padding: '2rem 1.5rem',
+            padding: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem',
+            gap: '1rem',
             boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
           }}
         >
-          {navLinks.map((link) => (
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#888', letterSpacing: '0.1em' }}>
+            PRODUCTS
+          </div>
+          {PRODUCTS.map((p) => (
+            <a
+              key={p.id}
+              href={`/${p.id}`}
+              onClick={(e) => handleProductSelect(p.id, e)}
+              style={{
+                color: p.accentColor,
+                textDecoration: 'none',
+                fontSize: '1rem',
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              ● {p.name}
+            </a>
+          ))}
+
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', margin: '8px 0' }} />
+
+          {currentNavLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
@@ -165,7 +317,7 @@ export const Header = () => {
               style={{
                 color: 'var(--color-primary)',
                 textDecoration: 'none',
-                fontSize: '1.05rem',
+                fontSize: '0.95rem',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
@@ -175,9 +327,9 @@ export const Header = () => {
             </a>
           ))}
 
-          <div style={{ paddingTop: '1rem' }}>
-            <CTAButton href="#meet-essentials" onClick={() => setMobileMenuOpen(false)} style={{ width: '100%' }}>
-              SHOP ESSENTIALS
+          <div style={{ paddingTop: '0.5rem' }}>
+            <CTAButton onClick={scrollToBundles} style={{ width: '100%' }}>
+              CHOOSE BUNDLE
             </CTAButton>
           </div>
         </div>
