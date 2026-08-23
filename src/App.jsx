@@ -15,6 +15,7 @@ import { FAQ } from './components/faq/FAQ';
 import { Footer } from './components/layout/Footer';
 import { ProductPage } from './components/pdp/ProductPage';
 import { ProductMarquee } from './components/pdp/ProductMarquee';
+import { SalesNotificationPopups } from './components/common/SalesNotificationPopups';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
@@ -127,6 +128,9 @@ export function App() {
 
       {/* 12 — FOOTER */}
       <Footer onNavHome={backToHome} onSelectProduct={openProductPDP} />
+
+      {/* RECENT SALES POPUP TOASTS (WORKS ACROSS HOME AND PRODUCT PAGES) */}
+      <SalesNotificationPopups onSelectProduct={openProductPDP} />
     </div>
   );
 }

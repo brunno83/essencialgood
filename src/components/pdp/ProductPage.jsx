@@ -12,6 +12,7 @@ import { CustomerReviews } from './CustomerReviews';
 import { GuaranteeSection } from './GuaranteeSection';
 import { ProductFAQ } from './ProductFAQ';
 import { StickyMobileCTA } from './StickyMobileCTA';
+import { LiveViewerCounter } from '../common/LiveViewerCounter';
 
 export function ProductPage({ productData, onBackToHome }) {
   useEffect(() => {
@@ -113,13 +114,16 @@ export function ProductPage({ productData, onBackToHome }) {
             </div>
 
             {/* Bullet USPs */}
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px 0' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px 0' }}>
               {usps.map((usp, idx) => (
                 <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: '#333', fontWeight: 600, marginBottom: '6px' }}>
                   <span style={{ color: '#27AE60', fontWeight: 800 }}>✓</span> {usp}
                 </li>
               ))}
             </ul>
+
+            {/* Live Viewer Counter Widget */}
+            <LiveViewerCounter accentColor={accentColor} />
 
             {/* Radio Bundle Selector right inside Hero */}
             <InlineBundleSelector bundles={bundlesSection.bundles} accentColor={accentColor} />
