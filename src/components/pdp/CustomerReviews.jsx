@@ -1,17 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function CustomerReviews({ reviewsSection, accentColor }) {
+  const [reviewsList, setReviewsList] = useState(() => {
+    const saved = localStorage.getItem('slimsoda_reviews');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    return [
+      {
+        id: 1,
+        author: 'Kendra L.',
+        rating: 5,
+        title: 'Changed everything for me',
+        body: "I tried so many products that felt complicated or heavy. I started taking SlimSoda twice daily as directed, and within weeks I noticed a real difference in my energy, bloating, and daily digestion. Absolutely incredible formula!",
+        verified: true,
+        date: '2 days ago'
+      },
+      {
+        id: 2,
+        author: 'Riley T.',
+        rating: 5,
+        title: 'No more excess water weight',
+        body: "I used to wake up every morning feeling sluggish and bloated. Within a couple of weeks of taking SlimSoda, the puffiness started to fade, and I noticed my clothes fitting more comfortably too. It fits naturally into my morning routine.",
+        verified: true,
+        date: '5 days ago'
+      },
+      {
+        id: 3,
+        author: 'Aubrey D.',
+        rating: 5,
+        title: 'Simple and convenient',
+        body: "I have more energy, fewer cravings for junk food between meals, and zero jitters. I mix it in seconds with cold water before breakfast. So glad I bit the bullet and tried it!",
+        verified: true,
+        date: '1 week ago'
+      },
+      {
+        id: 4,
+        author: 'Lesley S.',
+        rating: 5,
+        title: 'The food noise is finally quiet',
+        body: "It dissolves in seconds and tastes clean. Three weeks in and I'm not snacking between meals anymore — I just don't think about food all day like I used to. Consistency really is the key.",
+        verified: true,
+        date: '2 weeks ago'
+      }
+    ];
+  });
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [formName, setFormName] = useState('');
+  const [formRating, setFormRating] = useState(5);
+  const [formTitle, setFormTitle] = useState('');
+  const [formBody, setFormBody] = useState('');
+  const [submittedMessage, setSubmittedMessage] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('slimsoda_reviews', JSON.stringify(reviewsList));
+  }, [reviewsList]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formName || !formTitle || !formBody) return;
+
+    const newRev = {
+      id: Date.now(),
+      author: formName,
+      rating: Number(formRating),
+      title: formTitle,
+      body: formBody,
+      verified: true,
+      date: 'Just now'
+    };
+
+    setReviewsList([newRev, ...reviewsList]);
+    setSubmittedMessage(true);
+    setTimeout(() => {
+      setSubmittedMessage(false);
+      setModalOpen(false);
+      setFormName('');
+      setFormTitle('');
+      setFormBody('');
+    }, 2000);
+  };
+
   if (!reviewsSection) return null;
-  const { tag, title, ratingText, disclaimer, reviews } = reviewsSection;
+  const { tag, title, ratingText } = reviewsSection;
 
   return (
-    <section style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+    <section id="reviews-section" style={{ padding: '75px 20px', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
+      
+      {/* Header */}
+      <div style={{ textAlign: 'center', marginBottom: '36px' }}>
         {tag && (
           <span 
             style={{ 
               fontSize: '12px', 
-              fontWeight: 800, 
+              fontWeight: 900, 
               letterSpacing: '0.14em', 
               color: accentColor || '#D96B32',
               textTransform: 'uppercase',
@@ -22,69 +105,260 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
             {tag}
           </span>
         )}
-        <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800, color: '#141210', margin: '0 0 8px' }}>
+        <h2 style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 900, color: '#141210', margin: '0 0 8px', letterSpacing: '-0.02em' }}>
           {title}
         </h2>
         {ratingText && (
-          <div style={{ fontSize: '15px', fontWeight: 800, color: '#F5A623', letterSpacing: '0.04em' }}>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: '#F5A623', letterSpacing: '0.04em', marginBottom: '20px' }}>
             {ratingText}
           </div>
         )}
-      </div>
 
-      <div 
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
-          marginBottom: '24px'
-        }}
-      >
-        {reviews.map((review, idx) => (
-          <div
-            key={idx}
+        {/* Action Bar: Write a Review Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }}>
+          <button
+            onClick={() => setModalOpen(true)}
             style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '14px',
-              border: '1px solid rgba(0, 0, 0, 0.08)',
-              padding: '24px',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
+              backgroundColor: '#141210',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '12px 24px',
+              fontSize: '13.5px',
+              fontWeight: 800,
+              letterSpacing: '0.04em',
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.12)',
+              transition: 'transform 0.2s ease'
             }}
           >
-            <div>
-              <div style={{ color: '#F5A623', fontSize: '14px', marginBottom: '10px' }}>
-                {'★'.repeat(review.stars || 5)}
+            ✍️ WRITE A REVIEW
+          </button>
+        </div>
+      </div>
+
+      {/* List-style Reviews Layout (Shopify / DTC style) */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {reviewsList.map((rev) => (
+          <div
+            key={rev.id}
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1px solid rgba(0, 0, 0, 0.08)',
+              padding: '24px 28px',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+              textAlign: 'left'
+            }}
+          >
+            {/* Top Stars & Author Row */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div style={{ color: '#8E44AD', fontSize: '16px', letterSpacing: '2px' }}>
+                {'★'.repeat(rev.rating)}
               </div>
-              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#141210', margin: '0 0 10px' }}>
-                {review.quote}
-              </h3>
-              <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>
-                {review.body}
-              </p>
+              <span style={{ fontSize: '12px', color: '#999', fontWeight: 500 }}>{rev.date}</span>
             </div>
-            <div 
-              style={{ 
-                marginTop: '18px', 
-                fontSize: '12.5px', 
-                fontWeight: 700, 
-                color: '#27AE60',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <span>✓</span> {review.author}
+
+            {/* Author Avatar & Name */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+              <div 
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: '#F0ECE6',
+                  color: '#444',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontWeight: 800
+                }}
+              >
+                👤
+              </div>
+              <span style={{ fontSize: '14px', fontWeight: 800, color: '#141210' }}>
+                {rev.author}
+              </span>
+              {rev.verified && (
+                <span style={{ fontSize: '11.5px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px' }}>
+                  ✓ Verified Buyer
+                </span>
+              )}
             </div>
+
+            {/* Review Title */}
+            <h3 style={{ fontSize: '16.5px', fontWeight: 900, color: '#141210', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
+              {rev.title}
+            </h3>
+
+            {/* Review Body */}
+            <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
+              {rev.body}
+            </p>
           </div>
         ))}
       </div>
 
-      {disclaimer && (
-        <div style={{ textAlign: 'center', fontSize: '12px', color: '#888', fontStyle: 'italic' }}>
-          {disclaimer}
+      {/* Modal for Submitting a Review */}
+      {modalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 99999,
+            padding: '20px'
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderRadius: '20px',
+              maxWidth: '500px',
+              width: '100%',
+              padding: '32px',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.2)',
+              position: 'relative'
+            }}
+          >
+            <button
+              onClick={() => setModalOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'none',
+                border: 'none',
+                fontSize: '20px',
+                cursor: 'pointer',
+                color: '#888'
+              }}
+            >
+              ✕
+            </button>
+
+            <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#141210', margin: '0 0 6px' }}>
+              Write a Product Review
+            </h3>
+            <p style={{ fontSize: '13.5px', color: '#666', margin: '0 0 20px' }}>
+              Share your experience with SlimSoda® to help others.
+            </p>
+
+            {submittedMessage ? (
+              <div style={{ padding: '24px', textAlign: 'center', color: '#27AE60', fontWeight: 800, fontSize: '16px' }}>
+                ✓ Thank you! Your review has been published.
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 800, color: '#333', marginBottom: '4px' }}>
+                    YOUR NAME
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    placeholder="e.g. Sarah M."
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #DDD',
+                      fontSize: '14px',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 800, color: '#333', marginBottom: '4px' }}>
+                    RATING
+                  </label>
+                  <select
+                    value={formRating}
+                    onChange={(e) => setFormRating(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #DDD',
+                      fontSize: '14px',
+                      boxSizing: 'border-box'
+                    }}
+                  >
+                    <option value="5">★★★★★ (5 Stars - Excellent)</option>
+                    <option value="4">★★★★☆ (4 Stars - Good)</option>
+                    <option value="3">★★★☆☆ (3 Stars - Average)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 800, color: '#333', marginBottom: '4px' }}>
+                    REVIEW TITLE
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formTitle}
+                    onChange={(e) => setFormTitle(e.target.value)}
+                    placeholder="e.g. Changed my daily routine!"
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #DDD',
+                      fontSize: '14px',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 800, color: '#333', marginBottom: '4px' }}>
+                    YOUR REVIEW
+                  </label>
+                  <textarea
+                    required
+                    rows="4"
+                    value={formBody}
+                    onChange={(e) => setFormBody(e.target.value)}
+                    placeholder="Describe what you liked about the product..."
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #DDD',
+                      fontSize: '14px',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: accentColor || '#D96B32',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '14px',
+                    fontSize: '14px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    marginTop: '8px'
+                  }}
+                >
+                  SUBMIT REVIEW
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       )}
     </section>

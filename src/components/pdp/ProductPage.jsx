@@ -43,9 +43,9 @@ export function ProductPage({ productData, onBackToHome }) {
   } = productData;
 
   return (
-    <div className="product-page" style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '80px' }}>
+    <div className="product-page" style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '125px' }}>
       {/* Breadcrumb / Back button */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 20px 0 20px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 10px 20px' }}>
         <button
           onClick={onBackToHome}
           style={{
@@ -66,7 +66,7 @@ export function ProductPage({ productData, onBackToHome }) {
       </div>
 
       {/* Hero Section */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 60px 20px' }}>
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '10px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'start' }}>
           
           {/* Gallery Column */}
