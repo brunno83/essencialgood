@@ -68,7 +68,7 @@ export const PDP_DATA = {
     ],
 
     bundlesSection: {
-      tag: '01 — CHOOSE YOUR BUNDLE',
+      tag: 'CHOOSE YOUR BUNDLE',
       title: 'SAVE MORE WHEN YOU STOCK UP.',
       subtitle: 'Choose the option that works best for your routine.',
       finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
@@ -130,7 +130,7 @@ export const PDP_DATA = {
     },
 
     trustStrip: {
-      tag: '02 — TRUST & QUALITY',
+      tag: 'TRUST & QUALITY',
       title: 'CLEAN FORMULA. PROVEN QUALITY.',
       items: [
         {
@@ -153,7 +153,7 @@ export const PDP_DATA = {
     },
 
     benefitsSection: {
-      tag: '03 — BENEFITS',
+      tag: 'BENEFITS',
       title: 'SIMPLE SUPPORT FOR YOUR EVERYDAY WELLNESS ROUTINE.',
       subtitle: 'SlimSoda was designed for people who want to support healthier habits without adding another complicated protocol to their day.',
       benefits: [
@@ -181,7 +181,7 @@ export const PDP_DATA = {
     },
 
     howItWorks: {
-      tag: '04 — HOW IT WORKS',
+      tag: 'HOW IT WORKS',
       title: 'ONE SIMPLE ADDITION TO YOUR DAY.',
       subtitle: 'No complicated preparation. No elaborate wellness ritual.',
       steps: [
@@ -206,7 +206,7 @@ export const PDP_DATA = {
     },
 
     ingredientsSection: {
-      tag: "05 — WHAT'S INSIDE",
+      tag: "WHAT'S INSIDE",
       title: 'A FOCUSED FORMULA.',
       subtitle: 'SELECTED INGREDIENTS. SIMPLE ROUTINE.',
       description: 'SlimSoda combines selected ingredients in one convenient powdered formula.',
@@ -231,7 +231,7 @@ export const PDP_DATA = {
     },
 
     comparisonSection: {
-      tag: '06 — WHY SLIMSODA?',
+      tag: 'WHY SLIMSODA?',
       title: 'WELLNESS DOESN\'T NEED TO BE COMPLICATED.',
       tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
       headers: ['FEATURES', 'SLIMSODA®', 'COMPLEX ROUTINES'],
@@ -246,7 +246,7 @@ export const PDP_DATA = {
     },
 
     reviewsSection: {
-      tag: '07 — CUSTOMER REVIEWS',
+      tag: 'CUSTOMER REVIEWS',
       title: 'MADE FOR REAL-LIFE ROUTINES.',
       ratingText: '★★★★★ 4.7/5 CUSTOMER RATING',
       disclaimer: 'Individual experiences may vary.',
@@ -273,7 +273,7 @@ export const PDP_DATA = {
     },
 
     guaranteeSection: {
-      tag: '08 — 90-DAY GUARANTEE',
+      tag: '90-DAY GUARANTEE',
       title: 'TRY SLIMSODA FOR 90 DAYS.',
       subtitle: 'YOUR ORDER IS PROTECTED.',
       lead: 'We want you to feel confident trying SlimSoda as part of your wellness routine.',
@@ -283,38 +283,38 @@ export const PDP_DATA = {
     },
 
     faqSection: {
-      tag: '09 — FAQ',
+      tag: 'FAQ',
       title: 'QUESTIONS? WE\'VE GOT ANSWERS.',
       faqs: [
         {
-          q: '01. WHAT IS SLIMSODA?',
+          q: 'WHAT IS SLIMSODA?',
           a: 'SlimSoda is a powdered dietary supplement featuring selected ingredients designed to complement metabolic and everyday wellness as part of a healthy lifestyle.'
         },
         {
-          q: '02. HOW DO I USE IT?',
+          q: 'HOW DO I USE IT?',
           a: 'Simply follow the serving instructions provided on the product label and mix SlimSoda with water as directed.'
         },
         {
-          q: '03. DOES SLIMSODA REPLACE DIET AND EXERCISE?',
+          q: 'DOES SLIMSODA REPLACE DIET AND EXERCISE?',
           a: 'No. SlimSoda is designed to complement — not replace — balanced nutrition, regular physical activity, hydration, adequate sleep and other healthy lifestyle habits.'
         },
         {
-          q: '04. HOW QUICKLY SHOULD I EXPECT RESULTS?',
+          q: 'HOW QUICKLY SHOULD I EXPECT RESULTS?',
           a: 'Individual experiences vary. SlimSoda should be viewed as part of a consistent wellness routine rather than a quick-fix solution. Nutrition, activity, sleep and other individual factors can influence your experience.'
         },
         {
-          q: '05. CAN I USE SLIMSODA WITH MEDICATION?',
+          q: 'CAN I USE SLIMSODA WITH MEDICATION?',
           a: 'If you take prescription medication, have a medical condition, are pregnant or nursing, consult a qualified healthcare professional before adding any new dietary supplement to your routine.'
         },
         {
-          q: '06. WHAT IF SLIMSODA ISN\'T RIGHT FOR ME?',
+          q: 'WHAT IF SLIMSODA ISN\'T RIGHT FOR ME?',
           a: 'Eligible purchases are covered by our 90-Day Money-Back Guarantee, subject to the terms of our refund policy.'
         }
       ]
     },
 
     finalOffer: {
-      tag: '10 — FINAL OFFER',
+      tag: 'FINAL OFFER',
       title: 'READY TO MAKE YOUR ROUTINE SIMPLER?',
       subtitle: 'Choose the SlimSoda bundle that fits your lifestyle — and save more with larger bundles.'
     },

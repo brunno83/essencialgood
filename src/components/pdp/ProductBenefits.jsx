@@ -14,24 +14,7 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
           alignItems: 'center'
         }}
       >
-        {/* Left Column: Lifestyle Image */}
-        <div style={{ width: '100%' }}>
-          <img
-            src="/assets/products/slimsoda-section-benefits.jpg"
-            alt="SlimSoda Daily Routine Benefits"
-            style={{
-              width: '100%',
-              height: 'auto',
-              borderRadius: '20px',
-              objectFit: 'cover',
-              boxShadow: '0 16px 40px rgba(0,0,0,0.08)',
-              border: '1px solid rgba(0,0,0,0.06)',
-              display: 'block'
-            }}
-          />
-        </div>
-
-        {/* Right Column: Title & Benefits List */}
+        {/* Left Column: Title & Benefits List */}
         <div>
           {tag && (
             <span 
@@ -101,6 +84,23 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Right Column: Lifestyle Image */}
+        <div style={{ width: '100%' }}>
+          <img
+            src="/assets/products/slimsoda-section-benefits.jpg"
+            alt="SlimSoda Daily Routine Benefits"
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '20px',
+              objectFit: 'cover',
+              boxShadow: '0 16px 40px rgba(0,0,0,0.08)',
+              border: '1px solid rgba(0,0,0,0.06)',
+              display: 'block'
+            }}
+          />
         </div>
       </div>
     </section>
