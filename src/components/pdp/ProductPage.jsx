@@ -12,7 +12,6 @@ import { ComparisonTable } from './ComparisonTable';
 import { CustomerReviews } from './CustomerReviews';
 import { GuaranteeSection } from './GuaranteeSection';
 import { ProductFAQ } from './ProductFAQ';
-import { StickyMobileCTA } from './StickyMobileCTA';
 import { LiveViewerCounter } from '../common/LiveViewerCounter';
 
 export function ProductPage({ productData, onBackToHome }) {
@@ -190,9 +189,6 @@ export function ProductPage({ productData, onBackToHome }) {
           </div>
         </section>
       )}
-
-      {/* Sticky Mobile CTA */}
-      <StickyMobileCTA product={productData} accentColor={accentColor} />
     </div>
   );
 }

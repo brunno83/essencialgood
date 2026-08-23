@@ -15,10 +15,10 @@ export function ProductMarquee({ customText }) {
     <div 
       className="product-top-marquee"
       style={{
-        backgroundColor: '#141210',
-        color: '#FAF7F2',
+        backgroundColor: '#D96B32',
+        color: '#141210',
         fontSize: '11.5px',
-        fontWeight: 800,
+        fontWeight: 900,
         letterSpacing: '0.1em',
         textTransform: 'uppercase',
         height: '34px',
@@ -30,7 +30,7 @@ export function ProductMarquee({ customText }) {
         left: 0,
         right: 0,
         zIndex: 101,
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+        borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
       }}
     >
       <div 
