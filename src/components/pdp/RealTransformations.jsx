@@ -10,8 +10,10 @@ export function RealTransformations({ accentColor }) {
       src: '/assets/transformations/transformation-5.jpg', 
       alt: 'Before and After Transformation', 
       hasOverlayBadges: true,
-      beforeText: 'BEFORE 185 lbs',
-      afterText: 'AFTER 138 lbs'
+      beforeLabel: 'BEFORE',
+      beforeWeight: '185 lbs',
+      afterLabel: 'AFTER',
+      afterWeight: '138 lbs'
     },
     { id: 5, src: '/assets/transformations/transformation-2.png', alt: 'Before and After Transformation', hasOverlayBadges: false }
   ];
@@ -106,7 +108,7 @@ export function RealTransformations({ accentColor }) {
                 }}
               />
 
-              {/* Overlay Badges with weight values for images that don't have burned-in labels */}
+              {/* Overlay Badges styled exactly like the reference image (2 lines) */}
               {item.hasOverlayBadges && (
                 <>
                   {/* BEFORE Badge */}
@@ -117,16 +119,19 @@ export function RealTransformations({ accentColor }) {
                       left: '12px',
                       backgroundColor: '#141210',
                       color: '#FFFFFF',
-                      fontSize: '11px',
-                      fontWeight: 900,
-                      letterSpacing: '0.04em',
                       padding: '6px 12px',
                       borderRadius: '8px',
-                      textTransform: 'uppercase',
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                      textAlign: 'left',
+                      lineHeight: 1.15
                     }}
                   >
-                    {item.beforeText || 'BEFORE'}
+                    <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', opacity: 0.9 }}>
+                      {item.beforeLabel}
+                    </div>
+                    <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '-0.01em' }}>
+                      {item.beforeWeight}
+                    </div>
                   </div>
 
                   {/* AFTER Badge */}
@@ -137,16 +142,19 @@ export function RealTransformations({ accentColor }) {
                       left: '52%',
                       backgroundColor: accentColor || '#D96B32',
                       color: '#FFFFFF',
-                      fontSize: '11px',
-                      fontWeight: 900,
-                      letterSpacing: '0.04em',
                       padding: '6px 12px',
                       borderRadius: '8px',
-                      textTransform: 'uppercase',
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                      textAlign: 'left',
+                      lineHeight: 1.15
                     }}
                   >
-                    {item.afterText || 'AFTER'}
+                    <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', opacity: 0.9 }}>
+                      {item.afterLabel}
+                    </div>
+                    <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '-0.01em' }}>
+                      {item.afterWeight}
+                    </div>
                   </div>
                 </>
               )}
