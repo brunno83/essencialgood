@@ -11,7 +11,7 @@ export function ProductFAQ({ faqSection, accentColor }) {
   };
 
   return (
-    <section style={{ padding: '60px 20px', maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+    <section id="faq-section" style={{ padding: '60px 20px', maxWidth: '900px', margin: '0 auto', width: '100%' }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         {tag && (
           <span 
