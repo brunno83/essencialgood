@@ -2,11 +2,11 @@ import React from 'react';
 
 export function RealTransformations({ accentColor }) {
   const transformationImages = [
-    { id: 1, src: '/assets/transformations/transformation-3.png', alt: 'Before and After Transformation' },
-    { id: 2, src: '/assets/transformations/transformation-4.png', alt: 'Before and After Transformation' },
-    { id: 3, src: '/assets/transformations/transformation-1.png', alt: 'Before and After Transformation' },
-    { id: 4, src: '/assets/transformations/transformation-5.jpg', alt: 'Before and After Transformation' },
-    { id: 5, src: '/assets/transformations/transformation-2.png', alt: 'Before and After Transformation' }
+    { id: 1, src: '/assets/transformations/transformation-3.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
+    { id: 2, src: '/assets/transformations/transformation-4.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
+    { id: 3, src: '/assets/transformations/transformation-1.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
+    { id: 4, src: '/assets/transformations/transformation-5.jpg', alt: 'Before and After Transformation', hasOverlayBadges: true },
+    { id: 5, src: '/assets/transformations/transformation-2.png', alt: 'Before and After Transformation', hasOverlayBadges: false }
   ];
 
   // Duplicate list to achieve a seamless 100% infinite CSS marquee scroll
@@ -84,7 +84,8 @@ export function RealTransformations({ accentColor }) {
                 overflow: 'hidden',
                 boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
                 border: '1px solid rgba(0, 0, 0, 0.08)',
-                backgroundColor: '#FAF7F2'
+                backgroundColor: '#FAF7F2',
+                position: 'relative'
               }}
             >
               <img
@@ -97,6 +98,51 @@ export function RealTransformations({ accentColor }) {
                   display: 'block'
                 }}
               />
+
+              {/* Overlay Badges for images that don't have burned-in labels */}
+              {item.hasOverlayBadges && (
+                <>
+                  {/* BEFORE Badge */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '12px',
+                      left: '12px',
+                      backgroundColor: '#141210',
+                      color: '#FFFFFF',
+                      fontSize: '11px',
+                      fontWeight: 900,
+                      letterSpacing: '0.08em',
+                      padding: '5px 12px',
+                      borderRadius: '8px',
+                      textTransform: 'uppercase',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                    }}
+                  >
+                    BEFORE
+                  </div>
+
+                  {/* AFTER Badge */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '12px',
+                      left: '52%',
+                      backgroundColor: accentColor || '#D96B32',
+                      color: '#FFFFFF',
+                      fontSize: '11px',
+                      fontWeight: 900,
+                      letterSpacing: '0.08em',
+                      padding: '5px 12px',
+                      borderRadius: '8px',
+                      textTransform: 'uppercase',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                    }}
+                  >
+                    AFTER
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>
