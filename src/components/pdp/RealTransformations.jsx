@@ -5,7 +5,14 @@ export function RealTransformations({ accentColor }) {
     { id: 1, src: '/assets/transformations/transformation-3.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
     { id: 2, src: '/assets/transformations/transformation-4.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
     { id: 3, src: '/assets/transformations/transformation-1.png', alt: 'Before and After Transformation', hasOverlayBadges: false },
-    { id: 4, src: '/assets/transformations/transformation-5.jpg', alt: 'Before and After Transformation', hasOverlayBadges: true },
+    { 
+      id: 4, 
+      src: '/assets/transformations/transformation-5.jpg', 
+      alt: 'Before and After Transformation', 
+      hasOverlayBadges: true,
+      beforeText: 'BEFORE 185 lbs',
+      afterText: 'AFTER 138 lbs'
+    },
     { id: 5, src: '/assets/transformations/transformation-2.png', alt: 'Before and After Transformation', hasOverlayBadges: false }
   ];
 
@@ -99,7 +106,7 @@ export function RealTransformations({ accentColor }) {
                 }}
               />
 
-              {/* Overlay Badges for images that don't have burned-in labels */}
+              {/* Overlay Badges with weight values for images that don't have burned-in labels */}
               {item.hasOverlayBadges && (
                 <>
                   {/* BEFORE Badge */}
@@ -112,14 +119,14 @@ export function RealTransformations({ accentColor }) {
                       color: '#FFFFFF',
                       fontSize: '11px',
                       fontWeight: 900,
-                      letterSpacing: '0.08em',
-                      padding: '5px 12px',
+                      letterSpacing: '0.04em',
+                      padding: '6px 12px',
                       borderRadius: '8px',
                       textTransform: 'uppercase',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
                     }}
                   >
-                    BEFORE
+                    {item.beforeText || 'BEFORE'}
                   </div>
 
                   {/* AFTER Badge */}
@@ -132,14 +139,14 @@ export function RealTransformations({ accentColor }) {
                       color: '#FFFFFF',
                       fontSize: '11px',
                       fontWeight: 900,
-                      letterSpacing: '0.08em',
-                      padding: '5px 12px',
+                      letterSpacing: '0.04em',
+                      padding: '6px 12px',
                       borderRadius: '8px',
                       textTransform: 'uppercase',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
                     }}
                   >
-                    AFTER
+                    {item.afterText || 'AFTER'}
                   </div>
                 </>
               )}
