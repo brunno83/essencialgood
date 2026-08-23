@@ -65,7 +65,7 @@ export function ProductPage({ productData, onBackToHome }) {
         </button>
       </div>
 
-      {/* 01 — HERO SECTION */}
+      {/* 01 — HERO SECTION & HERO BUNDLE SELECTOR */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '10px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'start' }}>
           
@@ -130,43 +130,34 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 02 — TRUST & QUALITY STRIP */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
 
-      {/* 03 — REAL TRANSFORMATIONS CAROUSEL (BEFORE & AFTER) */}
+      {/* 03 — ANTES E DEPOIS (MANTIDO NO TOPO PARA IMPACTO VISUAL IMEDIATO) */}
       <RealTransformations accentColor={accentColor} />
 
-      {/* 04 — BENEFITS */}
+      {/* 04 — BENEFÍCIOS PRINCIPAIS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
 
-      {/* 05 — INGREDIENTS & FORMULA */}
+      {/* 05 — INGREDIENTES E FÓRMULA */}
       <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
 
-      {/* 06 — HOW IT WORKS */}
+      {/* 06 — COMO FUNCIONA / MODO DE USO */}
       <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
 
-      {/* 07 — COMPARISON TABLE */}
+      {/* 07 — TABELA COMPARATIVA */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* 08 — 90-DAY GUARANTEE SPOTLIGHT */}
-      <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
-
-      {/* 09 — REVIEWS & FEEDBACK */}
-      <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
-
-      {/* 10 — FAQ */}
-      <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
-
-      {/* 11 — FINAL OFFER (RE-RENDER BUNDLES GRID) */}
-      <section style={{ backgroundColor: '#FAF7F2', padding: '60px 20px 40px 20px', borderTop: '1px solid #EFEAE1' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '24px' }}>
+      {/* 08 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
+      <section id="bundles-section" style={{ backgroundColor: '#FAF7F2', padding: '70px 20px 50px 20px', borderTop: '1px solid #EFEAE1' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '32px' }}>
           {finalOffer && (
             <>
               <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', color: accentColor || '#D96B32', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                {finalOffer.tag}
+                {finalOffer.tag || 'CHOOSE YOUR BUNDLE'}
               </span>
-              <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 800, color: '#141210', margin: '0 0 8px' }}>
-                {finalOffer.title}
+              <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 900, color: '#141210', margin: '0 0 8px' }}>
+                {finalOffer.title || 'SELECT YOUR SLIMSODA® PACKAGE'}
               </h2>
               <p style={{ fontSize: '15px', color: '#666', fontWeight: 500 }}>
-                {finalOffer.subtitle}
+                {finalOffer.subtitle || 'Every order is backed by our 90-Day Money-Back Guarantee.'}
               </p>
             </>
           )}
@@ -174,9 +165,18 @@ export function ProductPage({ productData, onBackToHome }) {
         <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
       </section>
 
+      {/* 09 — SELO & GARANTIA DE 90 DIAS (LOGO APÓS VER OS PREÇOS) */}
+      <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
+
+      {/* 10 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
+      <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
+
+      {/* 11 — FAQ (PERGUNTAS FREQUENTES ANTES DO RODAPÉ) */}
+      <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
+
       {/* 12 — DISCLAIMER */}
       {disclaimer && (
-        <section style={{ backgroundColor: '#FAF7F2', padding: '0 20px 60px 20px' }}>
+        <section style={{ backgroundColor: '#FAF7F2', padding: '30px 20px 60px 20px', borderTop: '1px solid #EFEAE1' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '11px', color: '#888', lineHeight: 1.6, textAlign: 'center' }}>
             {disclaimer}
           </div>
