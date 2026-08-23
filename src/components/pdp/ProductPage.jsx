@@ -7,6 +7,7 @@ import { RealTransformations } from './RealTransformations';
 import { ProductBenefits } from './ProductBenefits';
 import { HowItWorks } from './HowItWorks';
 import { IngredientsSection } from './IngredientsSection';
+import { StatsCounterSection } from './StatsCounterSection';
 import { ComparisonTable } from './ComparisonTable';
 import { CustomerReviews } from './CustomerReviews';
 import { GuaranteeSection } from './GuaranteeSection';
@@ -143,13 +144,16 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 05 — INGREDIENTES E FÓRMULA */}
       <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
 
-      {/* 06 — COMO FUNCIONA / MODO DE USO */}
+      {/* 06 — STATS COUNTER STRIP (PROVEN BY ROUTINES, BACKED BY RESULTS) */}
+      <StatsCounterSection accentColor={accentColor} />
+
+      {/* 07 — COMO FUNCIONA / MODO DE USO */}
       <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
 
-      {/* 07 — TABELA COMPARATIVA */}
+      {/* 08 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* 08 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
+      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
       <section id="bundles-section" style={{ backgroundColor: '#FAF7F2', padding: '70px 20px 50px 20px', borderTop: '1px solid #EFEAE1' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '32px' }}>
           {finalOffer && (
@@ -169,16 +173,16 @@ export function ProductPage({ productData, onBackToHome }) {
         <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
       </section>
 
-      {/* 09 — SELO & GARANTIA DE 90 DIAS (LOGO APÓS VER OS PREÇOS) */}
+      {/* 10 — SELO & GARANTIA DE 90 DIAS (LOGO APÓS VER OS PREÇOS) */}
       <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
 
-      {/* 10 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
+      {/* 11 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
       <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
 
-      {/* 11 — FAQ (PERGUNTAS FREQUENTES ANTES DO RODAPÉ) */}
+      {/* 12 — FAQ (PERGUNTAS FREQUENTES ANTES DO RODAPÉ) */}
       <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
 
-      {/* 12 — DISCLAIMER */}
+      {/* 13 — DISCLAIMER */}
       {disclaimer && (
         <section style={{ backgroundColor: '#FAF7F2', padding: '30px 20px 60px 20px', borderTop: '1px solid #EFEAE1' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '11px', color: '#888', lineHeight: 1.6, textAlign: 'center' }}>
