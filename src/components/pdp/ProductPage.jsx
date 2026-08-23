@@ -3,6 +3,7 @@ import { ProductGallery } from './ProductGallery';
 import { InlineBundleSelector } from './InlineBundleSelector';
 import { BundleSelector } from './BundleSelector';
 import { TrustStrip } from './TrustStrip';
+import { RealTransformations } from './RealTransformations';
 import { ProductBenefits } from './ProductBenefits';
 import { HowItWorks } from './HowItWorks';
 import { IngredientsSection } from './IngredientsSection';
@@ -128,6 +129,9 @@ export function ProductPage({ productData, onBackToHome }) {
 
       {/* Trust & Quality Strip */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
+
+      {/* REAL TRANSFORMATIONS CAROUSEL (BEFORE & AFTER) */}
+      <RealTransformations accentColor={accentColor} />
 
       {/* Benefits */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
