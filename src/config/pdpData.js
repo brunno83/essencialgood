@@ -12,7 +12,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#D96B32',
     accentLight: 'rgba(217, 107, 50, 0.12)',
-    heroImage: '/assets/products/product_slimsoda_bottle.png',
+    heroImage: '/assets/products/slimsoda-gallery-1.png',
     
     usps: [
       'Metabolic wellness support',
@@ -24,39 +24,46 @@ export const PDP_DATA = {
 
     gallery: [
       {
-        id: 'hero',
+        id: 'gallery-1',
         label: 'PRODUCT HERO',
         caption: 'Clean premium packaging',
         subtitle: 'DAILY METABOLIC WELLNESS SUPPORT',
-        src: '/assets/products/product_slimsoda_bottle.png'
+        src: '/assets/products/slimsoda-gallery-1.png'
       },
       {
-        id: 'experience',
+        id: 'gallery-2',
         label: 'EXPERIENCE',
-        caption: 'SlimSoda being mixed with water',
+        caption: 'SlimSoda daily routine',
         subtitle: 'MIX. SIP. KEEP MOVING.',
-        src: '/assets/products/highlight_slimsoda.png'
+        src: '/assets/products/slimsoda-gallery-2.png'
       },
       {
-        id: 'benefits',
+        id: 'gallery-3',
         label: 'BENEFITS',
         caption: 'Metabolic & appetite support',
         subtitle: 'EASY-TO-MIX DAILY ROUTINE',
-        src: '/assets/products/selector_slimsoda.png'
+        src: '/assets/products/slimsoda-gallery-3.png'
       },
       {
-        id: 'ingredients',
+        id: 'gallery-4',
         label: 'INGREDIENTS',
         caption: 'Focused wellness formula',
         subtitle: 'GINGER, BERBERINE, BAKING SODA & NAD+',
-        src: '/assets/products/product_slimsoda_bottle.png'
+        src: '/assets/products/slimsoda-gallery-4.png'
       },
       {
-        id: 'trust',
-        label: 'TRUST',
-        caption: 'Risk-free guarantee',
+        id: 'gallery-5',
+        label: 'TRUST & GUARANTEE',
+        caption: 'Risk-free 90-day trial',
         subtitle: '90-DAY MONEY-BACK GUARANTEE',
-        src: '/assets/products/highlight_slimsoda.png'
+        src: '/assets/products/slimsoda-gallery-5.png'
+      },
+      {
+        id: 'gallery-6',
+        label: 'QUALITY FORMULA',
+        caption: 'Pure plant-based formula',
+        subtitle: 'LAB TESTED & MADE IN USA',
+        src: '/assets/products/slimsoda-gallery-6.png'
       }
     ],
 
