@@ -123,7 +123,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
           </div>
         )}
 
-        {/* Action Bar: Write a Review Button */}
+        {/* Action Bar: Write a Review Button (Clean text without hand emoji) */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }}>
           <button
             onClick={() => setModalOpen(true)}
@@ -132,21 +132,22 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
               color: '#FFFFFF',
               border: 'none',
               borderRadius: '8px',
-              padding: '12px 24px',
-              fontSize: '13.5px',
+              padding: '12px 26px',
+              fontSize: '13px',
               fontWeight: 800,
-              letterSpacing: '0.04em',
+              letterSpacing: '0.08em',
               cursor: 'pointer',
               boxShadow: '0 4px 14px rgba(0,0,0,0.12)',
-              transition: 'transform 0.2s ease'
+              transition: 'transform 0.2s ease',
+              textTransform: 'uppercase'
             }}
           >
-            ✍️ WRITE A REVIEW
+            WRITE A REVIEW
           </button>
         </div>
       </div>
 
-      {/* List-style Reviews Layout (Shopify DTC Gold Stars + Initials Avatar) */}
+      {/* List-style Reviews Layout */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {reviewsList.map((rev) => (
           <div
@@ -160,7 +161,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
               textAlign: 'left'
             }}
           >
-            {/* Top Stars & Date Row (Gold / Yellow Stars) */}
+            {/* Top Stars & Date Row */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
               <div style={{ color: '#F5A623', fontSize: '16px', letterSpacing: '2px' }}>
                 {'★'.repeat(rev.rating)}

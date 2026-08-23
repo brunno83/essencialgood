@@ -10,14 +10,14 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
   };
 
   return (
-    <section style={{ backgroundColor: '#FAF7F2', padding: '70px 20px', borderTop: '1px solid #EFEAE1', borderBottom: '1px solid #EFEAE1' }}>
+    <section style={{ backgroundColor: '#FAF7F2', padding: '75px 20px', borderTop: '1px solid #EFEAE1', borderBottom: '1px solid #EFEAE1' }}>
       <div 
         style={{ 
-          maxWidth: '850px', 
+          maxWidth: '900px', 
           margin: '0 auto', 
           backgroundColor: '#FFFFFF',
           borderRadius: '24px',
-          padding: '44px 36px',
+          padding: '48px 36px',
           border: '1.5px solid rgba(0, 0, 0, 0.08)',
           boxShadow: '0 16px 40px rgba(0, 0, 0, 0.04)',
           textAlign: 'center'
@@ -39,21 +39,24 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
           </span>
         )}
 
-        {/* Guarantee Badge Image from Brand Assets */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        {/* Guarantee Badge Image from Brand Assets - Prominent & Enlarged */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
           <img
             src="/assets/brand/guarantee_badge.png"
             alt="EssencialGood 90-Day Guarantee Badge"
             style={{
-              maxHeight: '160px',
-              maxWidth: '160px',
+              maxHeight: '280px',
+              maxWidth: '280px',
+              width: '100%',
+              height: 'auto',
               objectFit: 'contain',
-              filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
+              filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.12))',
+              transition: 'transform 0.3s ease'
             }}
           />
         </div>
 
-        <h2 style={{ fontSize: 'clamp(22px, 3.8vw, 32px)', fontWeight: 900, color: '#141210', margin: '0 0 6px' }}>
+        <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 900, color: '#141210', margin: '0 0 8px' }}>
           {title}
         </h2>
         {subtitle && (
@@ -63,7 +66,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
         )}
 
         {lead && (
-          <p style={{ fontSize: '16px', fontWeight: 600, color: '#222', marginBottom: '12px', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '16.5px', fontWeight: 600, color: '#222', marginBottom: '12px', lineHeight: 1.5 }}>
             {lead}
           </p>
         )}
@@ -75,7 +78,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
         )}
 
         {highlight && (
-          <div style={{ fontSize: '15px', fontWeight: 900, letterSpacing: '0.08em', color: '#141210', marginBottom: '28px' }}>
+          <div style={{ fontSize: '15.5px', fontWeight: 900, letterSpacing: '0.08em', color: '#141210', marginBottom: '28px' }}>
             {highlight}
           </div>
         )}
@@ -88,8 +91,8 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
               color: '#FFFFFF',
               border: 'none',
               borderRadius: '10px',
-              padding: '14px 28px',
-              fontSize: '14px',
+              padding: '15px 32px',
+              fontSize: '14.5px',
               fontWeight: 800,
               letterSpacing: '0.04em',
               cursor: 'pointer',

@@ -65,7 +65,7 @@ export function ProductPage({ productData, onBackToHome }) {
         </button>
       </div>
 
-      {/* Hero Section */}
+      {/* 01 — HERO SECTION */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '10px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'start' }}>
           
@@ -127,34 +127,34 @@ export function ProductPage({ productData, onBackToHome }) {
         </div>
       </section>
 
-      {/* Trust & Quality Strip */}
+      {/* 02 — TRUST & QUALITY STRIP */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
 
-      {/* REAL TRANSFORMATIONS CAROUSEL (BEFORE & AFTER) */}
+      {/* 03 — REAL TRANSFORMATIONS CAROUSEL (BEFORE & AFTER) */}
       <RealTransformations accentColor={accentColor} />
 
-      {/* Benefits */}
+      {/* 04 — BENEFITS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
 
-      {/* How It Works */}
-      <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
-
-      {/* Ingredients */}
+      {/* 05 — INGREDIENTS & FORMULA */}
       <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
 
-      {/* Comparison Table */}
+      {/* 06 — HOW IT WORKS */}
+      <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
+
+      {/* 07 — COMPARISON TABLE */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* Reviews */}
-      <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
-
-      {/* 90-Day Guarantee */}
+      {/* 08 — 90-DAY GUARANTEE SPOTLIGHT */}
       <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
 
-      {/* FAQ */}
+      {/* 09 — REVIEWS & FEEDBACK */}
+      <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
+
+      {/* 10 — FAQ */}
       <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
 
-      {/* Final Offer (Re-render Bundles Grid) */}
+      {/* 11 — FINAL OFFER (RE-RENDER BUNDLES GRID) */}
       <section style={{ backgroundColor: '#FAF7F2', padding: '60px 20px 40px 20px', borderTop: '1px solid #EFEAE1' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '24px' }}>
           {finalOffer && (
@@ -174,7 +174,7 @@ export function ProductPage({ productData, onBackToHome }) {
         <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
       </section>
 
-      {/* Disclaimer */}
+      {/* 12 — DISCLAIMER */}
       {disclaimer && (
         <section style={{ backgroundColor: '#FAF7F2', padding: '0 20px 60px 20px' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '11px', color: '#888', lineHeight: 1.6, textAlign: 'center' }}>
