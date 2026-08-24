@@ -3,15 +3,17 @@ import { ProductGallery } from './ProductGallery';
 import { InlineBundleSelector } from './InlineBundleSelector';
 import { BundleSelector } from './BundleSelector';
 import { TrustStrip } from './TrustStrip';
+import { WhySlimSodaBlock } from './WhySlimSodaBlock';
 import { RealTransformations } from './RealTransformations';
 import { ProductBenefits } from './ProductBenefits';
-import { HowItWorks } from './HowItWorks';
 import { IngredientsSection } from './IngredientsSection';
-import { StatsCounterSection } from './StatsCounterSection';
+import { WhyPeopleChooseSection } from './WhyPeopleChooseSection';
+import { HowItWorks } from './HowItWorks';
 import { ComparisonTable } from './ComparisonTable';
-import { CustomerReviews } from './CustomerReviews';
 import { GuaranteeSection } from './GuaranteeSection';
+import { CustomerReviews } from './CustomerReviews';
 import { ProductFAQ } from './ProductFAQ';
+import { FinalCTABlock } from './FinalCTABlock';
 import { LiveViewerCounter } from '../common/LiveViewerCounter';
 
 export function ProductPage({ productData, onBackToHome }) {
@@ -65,7 +67,7 @@ export function ProductPage({ productData, onBackToHome }) {
         </button>
       </div>
 
-      {/* 01 — HERO SECTION & HERO BUNDLE SELECTOR */}
+      {/* 02 — HERO SECTION & HERO BUNDLE SELECTOR */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '10px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'start' }}>
           
@@ -130,28 +132,31 @@ export function ProductPage({ productData, onBackToHome }) {
         </div>
       </section>
 
-      {/* 02 — TRUST & QUALITY STRIP */}
+      {/* 03 — TRUST / CREDIBILITY BAR */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
 
-      {/* 03 — ANTES E DEPOIS (MANTIDO NO TOPO PARA IMPACTO VISUAL IMEDIATO) */}
+      {/* 04 — NOVO BLOCO EDITORIAL ("WHY SLIMSODA?") */}
+      <WhySlimSodaBlock accentColor={accentColor} />
+
+      {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES (ANTES E DEPOIS SEM NÚMEROS DE PESO) */}
       <RealTransformations accentColor={accentColor} />
 
-      {/* 04 — BENEFÍCIOS PRINCIPAIS */}
+      {/* 06 — BENEFÍCIOS PRINCIPAIS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
 
-      {/* 05 — INGREDIENTES E FÓRMULA */}
+      {/* 07 — INGREDIENTES E FÓRMULA */}
       <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
 
-      {/* 06 — STATS COUNTER STRIP (PROVEN BY ROUTINES, BACKED BY RESULTS) */}
-      <StatsCounterSection accentColor={accentColor} />
+      {/* 08 — SUBSTITUIÇÃO DO BLOCO 94%/91%/96% -> WHY PEOPLE CHOOSE SLIMSODA */}
+      <WhyPeopleChooseSection accentColor={accentColor} />
 
-      {/* 07 — COMO FUNCIONA / MODO DE USO */}
+      {/* 09 — COMO FUNCIONA / MODO DE USO */}
       <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
 
-      {/* 08 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
+      {/* 10 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA (FUNDO VERDE FLORESTA LUXO #1B2613 SEM LINHA DIVISÓRIA) */}
+      {/* 11 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
       <section 
         id="bundles-section" 
         style={{ 
@@ -166,16 +171,19 @@ export function ProductPage({ productData, onBackToHome }) {
         </div>
       </section>
 
-      {/* 10 — SELO & GARANTIA DE 90 DIAS (LOGO APÓS VER OS PREÇOS) */}
+      {/* 12 — SELO & GARANTIA DE 90 DIAS */}
       <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
 
-      {/* 11 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
+      {/* 13 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
       <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
 
-      {/* 12 — FAQ (PERGUNTAS FREQUENTES ANTES DO RODAPÉ) */}
+      {/* 14 — FAQ (PERGUNTAS FREQUENTES) */}
       <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
 
-      {/* 13 — DISCLAIMER */}
+      {/* 15 — NOVO BLOCO FINAL CTA ("MAKE WELLNESS EASIER TO KEEP UP WITH") */}
+      <FinalCTABlock accentColor={accentColor} />
+
+      {/* 16 — DISCLAIMER OFICIAL */}
       {disclaimer && (
         <section style={{ backgroundColor: '#FAF7F2', padding: '30px 20px 60px 20px', borderTop: '1px solid #EFEAE1' }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '11px', color: '#888', lineHeight: 1.6, textAlign: 'center' }}>

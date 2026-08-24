@@ -2,7 +2,12 @@ import React from 'react';
 
 export function ProductBenefits({ benefitsSection, accentColor }) {
   if (!benefitsSection) return null;
-  const { tag, title, subtitle, benefits } = benefitsSection;
+  const { tag, title, subtitle, benefits, highlightText, ctaText } = benefitsSection;
+
+  const scrollToBundles = () => {
+    const el = document.getElementById('bundles-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section id="benefits-section" style={{ padding: '70px 20px', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
@@ -84,6 +89,29 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
               </div>
             ))}
           </div>
+
+          {highlightText && (
+            <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #EFEAE1', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+              <div style={{ fontSize: '12px', fontWeight: 900, letterSpacing: '0.06em', color: '#141210', maxWidth: '340px' }}>
+                {highlightText}
+              </div>
+              <button
+                onClick={scrollToBundles}
+                style={{
+                  backgroundColor: accentColor || '#D96B32',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '12px 24px',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  cursor: 'pointer'
+                }}
+              >
+                {ctaText || 'MAKE SLIMSODA PART OF MY DAY →'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Right Column: Lifestyle Image */}

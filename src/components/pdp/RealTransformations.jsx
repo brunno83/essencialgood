@@ -4,56 +4,47 @@ export function RealTransformations({ accentColor }) {
   const transformationImages = [
     { 
       id: 1, 
-      src: '/assets/transformations/transformation-3.png', 
-      alt: 'Sarah H. Before and After Transformation',
-      name: 'Sarah H.',
+      src: '/assets/transformations/transformation-4.png', 
+      alt: 'Emily R. Daily Routine Transformation',
+      name: 'Emily R.',
       badgeText: 'Verified Buyer',
-      feedback: '“SlimSoda fits naturally into my morning routine. I feel so much lighter every day!”',
+      headline: '“It became one of the easiest parts of my morning routine.”',
+      feedback: 'I love how simple it is to mix and how naturally it fits into my day.',
       hasOverlayBadges: false 
     },
     { 
       id: 2, 
-      src: '/assets/transformations/transformation-4.png', 
-      alt: 'Emily R. Before and After Transformation',
-      name: 'Emily R.',
+      src: '/assets/transformations/transformation-5.jpg', 
+      alt: 'Jessica T. Daily Routine Transformation',
+      name: 'Jessica T.',
       badgeText: 'Verified Buyer',
-      feedback: '“Zero prep, great taste. Stopped my late-night snacking cravings completely.”',
+      headline: '“Finally, something I can actually stay consistent with.”',
+      feedback: 'I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.',
       hasOverlayBadges: false 
     },
     { 
       id: 3, 
       src: '/assets/transformations/transformation-1.png', 
-      alt: 'Karen M. Before and After Transformation',
+      alt: 'Karen M. Daily Routine Transformation',
       name: 'Karen M.',
       badgeText: 'Verified Buyer',
-      feedback: '“Having a simple daily habit made all the difference in my energy levels.”',
+      headline: '“Simple, convenient and easy to remember.”',
+      feedback: 'Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.',
       hasOverlayBadges: false 
     },
     { 
       id: 4, 
-      src: '/assets/transformations/transformation-5.jpg', 
-      alt: 'Jessica T. Before and After Transformation',
-      name: 'Jessica T.',
+      src: '/assets/transformations/transformation-3.png', 
+      alt: 'Sarah H. Daily Routine Transformation',
+      name: 'Sarah H.',
       badgeText: 'Verified Buyer',
-      feedback: '“Simple two scoops with water. My daily digestion and routine feel amazing.”',
-      hasOverlayBadges: true,
-      beforeLabel: 'BEFORE',
-      beforeWeight: '185 lbs',
-      afterLabel: 'AFTER',
-      afterWeight: '138 lbs'
-    },
-    { 
-      id: 5, 
-      src: '/assets/transformations/transformation-2.png', 
-      alt: 'Lesley S. Before and After Transformation',
-      name: 'Lesley S.',
-      badgeText: 'Verified Buyer',
-      feedback: '“I don\'t reach for junk food between meals anymore. Super convenient format.”',
+      headline: '“It fits naturally into my routine.”',
+      feedback: 'No complicated preparation. I mix it with water and get on with my day.',
       hasOverlayBadges: false 
     }
   ];
 
-  // Duplicate list to achieve a seamless 100% infinite CSS marquee scroll
+  // Duplicate list for infinite smooth marquee track
   const doubleList = [...transformationImages, ...transformationImages];
 
   return (
@@ -79,7 +70,7 @@ export function RealTransformations({ accentColor }) {
             marginBottom: '8px'
           }}
         >
-          REAL LIFE ROUTINES
+          REAL PEOPLE. REAL ROUTINES.
         </span>
         <h2 
           style={{ 
@@ -90,10 +81,10 @@ export function RealTransformations({ accentColor }) {
             letterSpacing: '-0.02em'
           }}
         >
-          EVERYDAY <span style={{ color: accentColor || '#D96B32' }}>TRANSFORMATIONS</span>
+          MADE TO FIT <span style={{ color: accentColor || '#D96B32' }}>REAL LIFE.</span>
         </h2>
         <p style={{ fontSize: '15px', color: '#666', fontWeight: 500, margin: 0 }}>
-          Individual experiences as part of a consistent healthy routine.
+          See how customers are making SlimSoda part of their everyday wellness routines.
         </p>
       </div>
 
@@ -132,7 +123,7 @@ export function RealTransformations({ accentColor }) {
                 flexShrink: 0
               }}
             >
-              {/* Photo Box */}
+              {/* Photo Box without any weight badges */}
               <div 
                 style={{ 
                   width: '100%', 
@@ -151,64 +142,18 @@ export function RealTransformations({ accentColor }) {
                     display: 'block'
                   }}
                 />
-
-                {/* Overlay Badges for images that don't have burned-in labels */}
-                {item.hasOverlayBadges && (
-                  <>
-                    {/* BEFORE Badge */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        bottom: '12px',
-                        left: '12px',
-                        backgroundColor: '#141210',
-                        color: '#FFFFFF',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                        textAlign: 'left',
-                        lineHeight: 1.15
-                      }}
-                    >
-                      <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', opacity: 0.9 }}>
-                        {item.beforeLabel}
-                      </div>
-                      <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '-0.01em' }}>
-                        {item.beforeWeight}
-                      </div>
-                    </div>
-
-                    {/* AFTER Badge */}
-                    <div
-                      style={{
-                        position: 'absolute',
-                        bottom: '12px',
-                        left: '52%',
-                        backgroundColor: accentColor || '#D96B32',
-                        color: '#FFFFFF',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                        textAlign: 'left',
-                        lineHeight: 1.15
-                      }}
-                    >
-                      <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', opacity: 0.9 }}>
-                        {item.afterLabel}
-                      </div>
-                      <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '-0.01em' }}>
-                        {item.afterWeight}
-                      </div>
-                    </div>
-                  </>
-                )}
               </div>
 
               {/* Feedback & Customer Name Footer Box */}
-              <div style={{ padding: '16px 18px', backgroundColor: '#FFFFFF', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <p style={{ fontSize: '13px', color: '#444', fontStyle: 'italic', margin: '0 0 12px', lineHeight: 1.45, fontWeight: 500 }}>
-                  {item.feedback}
-                </p>
+              <div style={{ padding: '18px', backgroundColor: '#FFFFFF', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#141210', marginBottom: '6px', lineHeight: 1.3 }}>
+                    {item.headline}
+                  </div>
+                  <p style={{ fontSize: '12.5px', color: '#555', margin: '0 0 14px', lineHeight: 1.45, fontWeight: 400 }}>
+                    {item.feedback}
+                  </p>
+                </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #F4F0EA', paddingTop: '10px' }}>
                   <span style={{ fontSize: '13px', fontWeight: 800, color: '#141210' }}>

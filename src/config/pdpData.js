@@ -5,8 +5,8 @@ export const PDP_DATA = {
   slimsoda: {
     id: 'slimsoda',
     brand: 'SLIMSODA®',
-    title: 'MAKE WELLNESS A SIMPLE PART OF YOUR DAY.',
-    subtitle: 'A convenient powdered wellness formula with carefully selected ingredients designed to complement your metabolic wellness and everyday healthy habits.',
+    title: 'A SIMPLE DAILY RITUAL FOR METABOLIC WELLNESS.',
+    subtitle: 'SlimSoda is an easy-to-mix powdered supplement made with carefully selected ingredients to support metabolic wellness, appetite-management habits and digestive wellness — all in one simple daily routine.',
     rating: 4.7,
     reviewCount: '17,012+',
     startingPrice: '$19.99',
@@ -15,11 +15,11 @@ export const PDP_DATA = {
     heroImage: '/assets/products/slimsoda-gallery-1.png',
     
     usps: [
-      'Metabolic wellness support',
+      'Supports metabolic wellness',
       'Complements healthy appetite-management habits',
+      'Supports digestive wellness',
       'Easy-to-mix powdered formula',
-      'Simple morning + evening routine',
-      'No complicated preparation'
+      'Simple morning + evening routine'
     ],
 
     gallery: [
@@ -68,9 +68,9 @@ export const PDP_DATA = {
     ],
 
     bundlesSection: {
-      tag: 'CHOOSE YOUR BUNDLE',
+      tag: 'READY TO GET STARTED?',
       title: 'SAVE MORE WHEN YOU STOCK UP.',
-      subtitle: 'Choose the option that works best for your routine.',
+      subtitle: 'Choose the SlimSoda bundle that works best for your routine.',
       finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
       bundles: [
         {
@@ -81,49 +81,49 @@ export const PDP_DATA = {
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
-          deal: 'Buy 1, Get 1 FREE!',
+          deal: 'BUY 1, GET 1 FREE',
           pricePerBottle: '$34.75',
           totalPrice: '$69.50',
           originalTotal: '$139.00',
           savings: 'Save $69.50',
-          perks: ['FREE U.S. SHIPPING', '90-Day Guarantee', 'One-Time Purchase'],
-          ctaText: 'CLAIM MY 2 BOTTLES →',
+          perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
+          ctaText: 'GET MY 2 BOTTLES →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         },
         {
           id: 'most-popular',
           name: 'MOST POPULAR',
-          badge: 'Most Popular Today',
+          badge: 'MOST POPULAR',
           image: '/assets/products/slimsoda-2.png',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
-          deal: 'Buy 2, Get 2 FREE!',
+          deal: 'BUY 2, GET 2 FREE',
           pricePerBottle: '$27.49',
           totalPrice: '$109.96',
           originalTotal: '$219.92',
           savings: 'Save $109.96',
-          bonusText: '✓ Bonus Discount Applied + Priority Processing',
-          perks: ['BETTER VALUE', 'FREE U.S. SHIPPING', '90-Day Guarantee', 'Priority Shipping'],
-          ctaText: 'CLAIM MY 4 BOTTLES (70% OFF) →',
+          bonusText: '✓ Better Value + Priority Processing',
+          perks: ['Better Value', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Processing'],
+          ctaText: 'GET MY 4 BOTTLES →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         },
         {
           id: 'best-value',
           name: 'BEST VALUE',
-          badge: 'OUR BEST OFFER EVER',
+          badge: 'BEST VALUE',
           image: '/assets/products/slimsoda-3.png',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
-          deal: 'Buy 3, Get 3 FREE!',
+          deal: 'BUY 3, GET 3 FREE',
           pricePerBottle: '$19.99',
           totalPrice: '$119.94',
           originalTotal: '$329.80',
           savings: 'Save $209.86',
-          bonusText: '✓ Maximum Savings + Free Expedited Shipping & Insurance',
-          perks: ['LOWEST PRICE PER BOTTLE', 'FREE U.S. SHIPPING', '90-Day Guarantee', 'Expedited Handling'],
-          ctaText: 'GET THE BEST VALUE (6 BOTTLES) →',
+          bonusText: '✓ Lowest Price Per Bottle + Expedited Handling',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Expedited Handling'],
+          ctaText: 'GET THE BEST VALUE →',
           checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
         }
       ]
@@ -134,32 +134,38 @@ export const PDP_DATA = {
       title: 'CLEAN FORMULA. PROVEN QUALITY.',
       items: [
         {
-          title: '100% NATURAL FORMULA',
-          desc: 'Pure plant-derived ingredients with zero synthetic fillers or stimulants.'
+          title: 'THOUGHTFULLY FORMULATED',
+          desc: 'Carefully selected ingredients combined in one convenient powdered formula.'
         },
         {
-          title: 'LAB-TESTED & U.S. MADE',
-          desc: 'Manufactured in an FDA-registered facility & 3rd-party tested for purity.'
+          title: 'THIRD-PARTY TESTED',
+          desc: 'Quality tested by an independent third-party laboratory.'
         },
         {
-          title: 'FREE 24-HOUR SHIPPING',
-          desc: 'Dispatched from U.S. warehouses with real-time tracking.'
+          title: 'U.S. MADE',
+          desc: 'Manufactured in the United States in a registered facility.'
         },
         {
-          title: '90-DAY RISK-FREE TRIAL',
-          desc: 'Try SlimSoda for 90 days with 100% money-back guarantee.'
+          title: 'FREE U.S. SHIPPING',
+          desc: 'Fast shipping from our U.S. fulfillment network.'
+        },
+        {
+          title: '90-DAY GUARANTEE',
+          desc: 'Try SlimSoda for 90 days and decide if it fits your routine.'
         }
       ]
     },
 
     benefitsSection: {
       tag: 'BENEFITS',
-      title: 'SIMPLE SUPPORT FOR YOUR EVERYDAY WELLNESS ROUTINE.',
-      subtitle: 'SlimSoda was designed for people who want to support healthier habits without adding another complicated protocol to their day.',
+      title: 'SIMPLE SUPPORT FOR THE HEALTHY HABITS THAT MATTER.',
+      subtitle: 'SlimSoda brings selected wellness ingredients together in one convenient powdered formula designed to complement a balanced lifestyle.',
+      highlightText: 'ONE FORMULA. MULTIPLE WELLNESS GOALS. ONE SIMPLE ROUTINE.',
+      ctaText: 'MAKE SLIMSODA PART OF MY DAY →',
       benefits: [
         {
           title: 'METABOLIC WELLNESS',
-          desc: 'Selected ingredients designed to complement everyday metabolic health as part of a balanced lifestyle.'
+          desc: 'Selected ingredients designed to support everyday metabolic wellness as part of a balanced lifestyle.'
         },
         {
           title: 'APPETITE-MANAGEMENT SUPPORT',
@@ -167,15 +173,15 @@ export const PDP_DATA = {
         },
         {
           title: 'DIGESTIVE WELLNESS',
-          desc: 'Features ingredients commonly associated with digestive and nutritional wellness.'
+          desc: 'Features selected ingredients commonly used as part of digestive and nutritional wellness routines.'
         },
         {
-          title: 'EASY DAILY CONSISTENCY',
-          desc: 'A convenient powdered format that is simple to incorporate into your routine.'
+          title: 'SIMPLE DAILY CONSISTENCY',
+          desc: 'An easy-to-mix powdered format designed to make daily supplementation simpler.'
         },
         {
           title: 'ACTIVE LIFESTYLE SUPPORT',
-          desc: 'Designed to work alongside the fundamentals that matter: balanced nutrition, hydration, movement and rest.'
+          desc: 'Made to work alongside the fundamentals that matter: balanced nutrition, hydration, movement and rest.'
         }
       ]
     },
@@ -198,7 +204,7 @@ export const PDP_DATA = {
         {
           step: '03',
           title: 'KEEP MOVING',
-          desc: 'Continue focusing on balanced nutrition, hydration, movement and healthy everyday habits.'
+          desc: 'Keep focusing on balanced nutrition, hydration, movement, rest and healthy everyday habits.'
         }
       ],
       tagline: 'MIX. SIP. KEEP MOVING.',
@@ -207,25 +213,31 @@ export const PDP_DATA = {
 
     ingredientsSection: {
       tag: "WHAT'S INSIDE",
-      title: 'A FOCUSED FORMULA.',
-      subtitle: 'SELECTED INGREDIENTS. SIMPLE ROUTINE.',
-      description: 'SlimSoda combines selected ingredients in one convenient powdered formula.',
+      title: 'A FOCUSED FORMULA. NO COMPLICATED ROUTINE.',
+      subtitle: 'SlimSoda brings selected ingredients together in one convenient powdered formula.',
+      description: 'SlimSoda brings selected ingredients together in one convenient powdered formula.',
+      highlightText: 'SELECTED INGREDIENTS. PURPOSEFUL FORMULATION. SIMPLE DAILY USE.',
+      ctaText: 'TRY SLIMSODA →',
       ingredients: [
         {
           name: 'GINGER EXTRACT',
-          desc: 'A familiar botanical with a long history of culinary and traditional wellness use, commonly found in digestive-wellness formulas.'
+          desc: 'A familiar botanical traditionally used in food and wellness routines and commonly included in digestive-support formulations.',
+          whyItsHere: 'To complement SlimSoda\'s digestive wellness approach.'
         },
         {
           name: 'BERBERINE',
-          desc: 'A plant-derived compound widely researched in the field of metabolic wellness and commonly included in nutritional supplements.'
+          desc: 'A plant-derived compound that has been widely studied in nutritional and metabolic wellness research.',
+          whyItsHere: 'Included as part of SlimSoda\'s broader metabolic wellness formulation.'
         },
         {
           name: 'BAKING SODA',
-          desc: "A familiar compound included as part of SlimSoda's powdered formulation."
+          desc: 'A familiar compound included as part of SlimSoda\'s powdered formulation.',
+          whyItsHere: 'Part of the formula designed around a simple, mix-with-water format.'
         },
         {
           name: 'NAD+ SUPPORT',
-          desc: "Included as part of the formula's broader approach to cellular and metabolic wellness."
+          desc: 'Included as part of SlimSoda\'s broader approach to cellular and metabolic wellness.',
+          whyItsHere: 'To complement the formula\'s overall wellness positioning.'
         }
       ]
     },
@@ -239,7 +251,7 @@ export const PDP_DATA = {
         { feature: 'Easy-to-mix format', product: true, opponent: 'Varies' },
         { feature: 'Selected wellness ingredients', product: true, opponent: 'Varies' },
         { feature: 'Simple daily use', product: true, opponent: false },
-        { feature: 'No elaborate preparation', product: true, opponent: false },
+        { feature: 'No multiple supplement bottles', product: true, opponent: 'Varies' },
         { feature: 'Easy to incorporate into your day', product: true, opponent: 'Varies' },
         { feature: '90-Day Guarantee', product: true, opponent: 'Varies' }
       ]
@@ -248,38 +260,46 @@ export const PDP_DATA = {
     reviewsSection: {
       tag: 'CUSTOMER REVIEWS',
       title: 'MADE FOR REAL-LIFE ROUTINES.',
-      ratingText: '★★★★★ 4.7/5 CUSTOMER RATING',
-      disclaimer: 'Individual experiences may vary.',
+      ratingText: '★★★★★ 4.7/5 Customer Rating',
+      headline: 'WHAT CUSTOMERS ARE SAYING',
+      disclaimer: 'Prioritize authentic reviews around ease of use, taste, convenience, mixing, daily routine, consistency and overall product experience.',
       reviews: [
         {
-          quote: '“IT ACTUALLY FITS INTO MY DAY.”',
-          body: '“I wanted something simple that wouldn\'t turn my routine upside down. I like that I can mix it quickly and move on with my morning.”',
-          author: 'Verified Customer',
+          quote: '“IT BECOME ONE OF THE EASIEST PARTS OF MY MORNING.”',
+          body: '“I love how simple it is to mix and how naturally it fits into my day.”',
+          author: 'Emily R. — Verified Buyer',
           stars: 5
         },
         {
-          quote: '“SIMPLE AND CONVENIENT.”',
-          body: '“I\'ve been focusing more on my nutrition and daily habits, and SlimSoda fits naturally into that routine.”',
-          author: 'Verified Customer',
+          quote: '“FINALLY, SOMETHING I CAN STAY CONSISTENT WITH.”',
+          body: '“I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.”',
+          author: 'Jessica T. — Verified Buyer',
           stars: 5
         },
         {
-          quote: '“EASY TO STAY CONSISTENT WITH.”',
-          body: '“The biggest thing for me is convenience. It doesn\'t feel like another complicated program I have to follow.”',
-          author: 'Verified Customer',
+          quote: '“SIMPLE, CONVENIENT AND EASY TO REMEMBER.”',
+          body: '“Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.”',
+          author: 'Karen M. — Verified Buyer',
+          stars: 5
+        },
+        {
+          quote: '“IT FITS NATURALLY INTO MY ROUTINE.”',
+          body: '“No complicated preparation. I mix it with water and get on with my day.”',
+          author: 'Sarah H. — Verified Buyer',
           stars: 5
         }
       ]
     },
 
     guaranteeSection: {
-      tag: '90-DAY GUARANTEE',
+      tag: '90-DAY MONEY-BACK GUARANTEE',
       title: 'TRY SLIMSODA FOR 90 DAYS.',
       subtitle: 'YOUR ORDER IS PROTECTED.',
-      lead: 'We want you to feel confident trying SlimSoda as part of your wellness routine.',
-      body: 'Use SlimSoda according to the directions and decide whether it\'s right for you. If you\'re not satisfied, contact our customer support team within the guarantee period according to our refund policy.',
+      lead: 'Trying a new wellness routine shouldn\'t feel like a big commitment.',
+      body: 'Use SlimSoda according to the directions and give yourself time to decide whether it fits your routine. If you\'re not satisfied, contact our customer support team within the guarantee period according to our refund policy.',
       highlight: '90 DAYS TO DECIDE.',
-      ctaText: 'TRY SLIMSODA WITH CONFIDENCE →'
+      ctaText: 'TRY SLIMSODA WITH CONFIDENCE →',
+      microcopy: '90-Day Guarantee • Secure Checkout • Free U.S. Shipping'
     },
 
     faqSection: {
@@ -288,37 +308,41 @@ export const PDP_DATA = {
       faqs: [
         {
           q: 'WHAT IS SLIMSODA?',
-          a: 'SlimSoda is a powdered dietary supplement featuring selected ingredients designed to complement metabolic and everyday wellness as part of a healthy lifestyle.'
+          a: 'SlimSoda is an easy-to-mix powdered dietary supplement featuring selected ingredients designed to complement metabolic, digestive and everyday wellness as part of a healthy lifestyle.'
         },
         {
-          q: 'HOW DO I USE IT?',
-          a: 'Simply follow the serving instructions provided on the product label and mix SlimSoda with water as directed.'
+          q: 'HOW DO I USE SLIMSODA?',
+          a: 'Mix SlimSoda with water according to the directions on the product label. It\'s designed to fit easily into your daily routine without complicated preparation.'
+        },
+        {
+          q: 'WHAT MAKES SLIMSODA DIFFERENT?',
+          a: 'SlimSoda was created around simplicity. Instead of building another complicated supplement routine, it brings selected ingredients together in one convenient powdered format that\'s easy to incorporate into your day.'
         },
         {
           q: 'DOES SLIMSODA REPLACE DIET AND EXERCISE?',
-          a: 'No. SlimSoda is designed to complement — not replace — balanced nutrition, regular physical activity, hydration, adequate sleep and other healthy lifestyle habits.'
+          a: 'No. SlimSoda is designed to complement — not replace — healthy lifestyle fundamentals such as balanced nutrition, hydration, regular movement and adequate rest.'
         },
         {
           q: 'HOW QUICKLY SHOULD I EXPECT RESULTS?',
-          a: 'Individual experiences vary. SlimSoda should be viewed as part of a consistent wellness routine rather than a quick-fix solution. Nutrition, activity, sleep and other individual factors can influence your experience.'
+          a: 'Individual experiences vary. SlimSoda is designed for consistent use as part of an overall healthy lifestyle rather than as a quick-fix solution.'
         },
         {
           q: 'CAN I USE SLIMSODA WITH MEDICATION?',
-          a: 'If you take prescription medication, have a medical condition, are pregnant or nursing, consult a qualified healthcare professional before adding any new dietary supplement to your routine.'
+          a: 'If you take prescription medication, have a medical condition, are pregnant or nursing, consult a qualified healthcare professional before using SlimSoda or any dietary supplement.'
         },
         {
           q: 'WHAT IF SLIMSODA ISN\'T RIGHT FOR ME?',
-          a: 'Eligible purchases are covered by our 90-Day Money-Back Guarantee, subject to the terms of our refund policy.'
+          a: 'Your purchase is protected by our 90-Day Money-Back Guarantee. If you\'re not satisfied, contact our customer support team within the guarantee period according to our refund policy.'
         }
       ]
     },
 
     finalOffer: {
-      tag: 'FINAL OFFER',
-      title: 'READY TO MAKE YOUR ROUTINE SIMPLER?',
-      subtitle: 'Choose the SlimSoda bundle that fits your lifestyle — and save more with larger bundles.'
+      tag: 'READY TO GET STARTED?',
+      title: 'SAVE MORE WHEN YOU STOCK UP.',
+      subtitle: 'Choose the SlimSoda bundle that works best for your routine.'
     },
 
-    disclaimer: `SlimSoda® is a dietary supplement. Individual experiences may vary. SlimSoda is intended to complement a balanced diet and healthy lifestyle and is not a substitute for professional medical advice, diagnosis or treatment. Consult a qualified healthcare professional before using dietary supplements if you are pregnant, nursing, have a medical condition or take prescription medication. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.`
+    disclaimer: `SlimSoda® is a dietary supplement intended to complement a balanced diet and healthy lifestyle. Individual experiences may vary. Consult a qualified healthcare professional before using dietary supplements if you are pregnant, nursing, taking medication or have a medical condition. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.`
   }
 };
