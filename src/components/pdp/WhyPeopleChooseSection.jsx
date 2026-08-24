@@ -1,24 +1,25 @@
 import React from 'react';
+import { Droplets, Leaf, Sun, ShieldCheck } from 'lucide-react';
 
 export function WhyPeopleChooseSection({ accentColor }) {
   const features = [
     {
-      icon: '💧',
+      icon: Droplets,
       title: 'EASY TO MIX',
       desc: 'Simply add SlimSoda to water according to the product directions.'
     },
     {
-      icon: '🌿',
+      icon: Leaf,
       title: 'ONE POWDERED FORMULA',
       desc: 'A convenient alternative to managing multiple supplement bottles.'
     },
     {
-      icon: '☀️',
+      icon: Sun,
       title: 'EASY TO BUILD INTO YOUR DAY',
       desc: 'Designed to fit naturally into a morning and evening routine.'
     },
     {
-      icon: '🛡️',
+      icon: ShieldCheck,
       title: '90-DAY GUARANTEE',
       desc: 'Plenty of time to decide whether SlimSoda is right for your routine.'
     }
@@ -132,30 +133,46 @@ export function WhyPeopleChooseSection({ accentColor }) {
                 marginBottom: '24px'
               }}
             >
-              {features.map((item, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '16px',
-                    padding: '20px 18px',
-                    textAlign: 'left',
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: '0 10px 24px rgba(0, 0, 0, 0.18)'
-                  }}
-                >
-                  <div style={{ fontSize: '20px', marginBottom: '8px' }}>
-                    {item.icon}
+              {features.map((item, idx) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '16px',
+                      padding: '20px 18px',
+                      textAlign: 'left',
+                      backdropFilter: 'blur(10px)',
+                      boxShadow: '0 10px 24px rgba(0, 0, 0, 0.18)'
+                    }}
+                  >
+                    <div 
+                      style={{ 
+                        width: '36px', 
+                        height: '36px', 
+                        borderRadius: '10px', 
+                        backgroundColor: `${accentColor || '#D96B32'}20`, 
+                        border: `1px solid ${accentColor || '#D96B32'}40`,
+                        color: accentColor || '#D96B32',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: '12px'
+                      }}
+                    >
+                      <IconComponent size={18} />
+                    </div>
+                    <h3 style={{ fontSize: '13.5px', fontWeight: 900, color: '#FFFFFF', margin: '0 0 6px', letterSpacing: '0.04em' }}>
+                      {item.title}
+                    </h3>
+                    <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.45, fontWeight: 400 }}>
+                      {item.desc}
+                    </p>
                   </div>
-                  <h3 style={{ fontSize: '13.5px', fontWeight: 900, color: '#FFFFFF', margin: '0 0 6px', letterSpacing: '0.04em' }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.45, fontWeight: 400 }}>
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
