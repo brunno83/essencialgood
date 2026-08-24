@@ -39,7 +39,6 @@ export function ProductPage({ productData, onBackToHome }) {
     reviewsSection,
     guaranteeSection,
     faqSection,
-    finalOffer,
     disclaimer
   } = productData;
 
@@ -162,22 +161,9 @@ export function ProductPage({ productData, onBackToHome }) {
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
         }}
       >
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '32px' }}>
-          {finalOffer && (
-            <>
-              <span style={{ fontSize: '12px', fontWeight: 900, letterSpacing: '0.14em', color: accentColor || '#D96B32', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                {finalOffer.tag || 'CHOOSE YOUR BUNDLE'}
-              </span>
-              <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 900, color: '#FFFFFF', margin: '0 0 8px' }}>
-                {finalOffer.title || 'SELECT YOUR SLIMSODA® PACKAGE'}
-              </h2>
-              <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.75)', fontWeight: 500 }}>
-                {finalOffer.subtitle || 'Every order is backed by our 90-Day Money-Back Guarantee.'}
-              </p>
-            </>
-          )}
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
         </div>
-        <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
       </section>
 
       {/* 10 — SELO & GARANTIA DE 90 DIAS (LOGO APÓS VER OS PREÇOS) */}
