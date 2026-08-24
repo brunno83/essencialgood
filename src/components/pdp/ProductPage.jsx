@@ -40,8 +40,7 @@ export function ProductPage({ productData, onBackToHome }) {
     comparisonSection,
     reviewsSection,
     guaranteeSection,
-    faqSection,
-    disclaimer
+    faqSection
   } = productData;
 
   return (
@@ -182,15 +181,6 @@ export function ProductPage({ productData, onBackToHome }) {
 
       {/* 15 — NOVO BLOCO FINAL CTA ("MAKE WELLNESS EASIER TO KEEP UP WITH") */}
       <FinalCTABlock accentColor={accentColor} />
-
-      {/* 16 — DISCLAIMER OFICIAL (FUNDO VERDE FLORESTA LUXO #1B2613) */}
-      {disclaimer && (
-        <section style={{ backgroundColor: '#1B2613', padding: '30px 20px 45px 20px', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
-          <div style={{ maxWidth: '900px', margin: '0 auto', fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: 1.65, textAlign: 'center' }}>
-            {disclaimer}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

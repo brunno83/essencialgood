@@ -3,7 +3,7 @@ import { PRODUCTS } from '../../config/products';
 import { BRAND_CONTENT } from '../../config/content';
 import { PolicyModal } from '../common/PolicyModal';
 
-export const Footer = () => {
+export const Footer = ({ disclaimer }) => {
   const { footer } = BRAND_CONTENT;
   const [activePolicy, setActivePolicy] = useState(null);
   const [logoError, setLogoError] = useState(false);
@@ -16,8 +16,8 @@ export const Footer = () => {
       style={{
         backgroundColor: '#1B2613',
         color: '#EEE9DE',
-        borderTop: '1px solid rgba(246, 255, 252, 0.1)',
-        paddingTop: '5rem',
+        borderTop: 'none',
+        paddingTop: '4rem',
         paddingBottom: '3rem',
         position: 'relative',
       }}
@@ -34,7 +34,7 @@ export const Footer = () => {
           }}
           className="footer-main-grid"
         >
-          {/* Column 1: Brand Logo (Clean, no text below) */}
+          {/* Column 1: Brand Logo */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div style={{ margin: 0, padding: 0 }}>
               {!logoError ? (
@@ -175,6 +175,25 @@ export const Footer = () => {
             . CNPJ: 61.814.267/0001-07 & 💚 Grupo BUCA MARKETING PERFORMANCE LTDA. CNPJ: 51.479.162/0001-95
           </span>
         </div>
+
+        {/* FDA Legal Disclaimer at the Absolute Bottom Below Footer */}
+        {disclaimer && (
+          <div
+            style={{
+              marginTop: '2rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              maxWidth: '900px',
+              margin: '2rem auto 0 auto',
+              fontSize: '11px',
+              color: 'rgba(255, 255, 255, 0.55)',
+              lineHeight: 1.65,
+              textAlign: 'center'
+            }}
+          >
+            {disclaimer}
+          </div>
+        )}
       </div>
 
       {/* Integrated Interactive Policy Modal */}

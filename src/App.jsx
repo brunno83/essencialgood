@@ -69,6 +69,7 @@ export function App() {
   };
 
   const isProductPage = Boolean(activeProductId && PDP_DATA[activeProductId]);
+  const activeDisclaimer = isProductPage ? PDP_DATA[activeProductId]?.disclaimer : null;
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
@@ -126,8 +127,8 @@ export function App() {
         </main>
       )}
 
-      {/* 12 — FOOTER */}
-      <Footer onNavHome={backToHome} onSelectProduct={openProductPDP} />
+      {/* 12 — FOOTER WITH ABSOLUTE BOTTOM DISCLAIMER */}
+      <Footer onNavHome={backToHome} onSelectProduct={openProductPDP} disclaimer={activeDisclaimer} />
 
       {/* RECENT SALES POPUP TOASTS (WORKS ACROSS HOME AND PRODUCT PAGES) */}
       <SalesNotificationPopups onSelectProduct={openProductPDP} />
