@@ -14,15 +14,23 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
   if (!bundlesSection) return null;
   const { tag, title, subtitle, finePrint, bundles } = bundlesSection;
 
-  const borderColor = activePalette?.borderColor || accentColor || '#D96B32';
-  const featuredCardBg = activePalette?.featuredCardBg || '#FFFFFF';
-  const cardBg = activePalette?.cardBg || '#FFFFFF';
-  const ctaBg = activePalette?.ctaBg || accentColor || '#D96B32';
-  const starterCtaBg = activePalette?.starterCtaBg || '#141210';
-  const badgeBg = activePalette?.badgeBg || accentColor || '#D96B32';
-  const bestValueBadgeBg = activePalette?.bestValueBadgeBg || '#141210';
-  const savingsTextColor = activePalette?.savingsTextColor || '#27AE60';
-  const savingsBg = activePalette?.savingsBg || 'rgba(39, 174, 96, 0.08)';
+  const popularBorder = activePalette?.popularBorder || accentColor || '#D96B32';
+  const popularCta = activePalette?.popularCta || accentColor || '#D96B32';
+  const popularBadge = activePalette?.popularBadge || accentColor || '#D96B32';
+  const popularCardBg = activePalette?.popularCardBg || '#FAF5EF';
+  const popularTextWhite = Boolean(activePalette?.popularTextWhite);
+
+  const bestValueBorder = activePalette?.bestValueBorder || '#4B6833';
+  const bestValueCta = activePalette?.bestValueCta || '#4B6833';
+  const bestValueBadge = activePalette?.bestValueBadge || '#4B6833';
+  const bestValueCardBg = activePalette?.bestValueCardBg || '#FFFFFF';
+  const bestValueTextWhite = Boolean(activePalette?.bestValueTextWhite);
+
+  const starterCta = activePalette?.starterCta || '#4B6833';
+  const starterBorder = activePalette?.starterBorder || 'rgba(0, 0, 0, 0.12)';
+
+  const savingsTextColor = activePalette?.savingsTextColor || '#4B6833';
+  const savingsBg = activePalette?.savingsBg || 'rgba(75, 104, 51, 0.1)';
 
   return (
     <section 
@@ -41,7 +49,7 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
               fontSize: '12px', 
               fontWeight: 800, 
               letterSpacing: '0.14em', 
-              color: borderColor,
+              color: popularBorder,
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: '8px'
@@ -78,24 +86,43 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
         }}
       >
         {bundles.map((bundle) => {
-          const isFeatured = bundle.isPopular || bundle.isBestValue;
-          const currentCardBg = isFeatured ? featuredCardBg : cardBg;
-          const currentCtaBg = bundle.id === 'starter' ? starterCtaBg : ctaBg;
-          const currentBadgeBg = bundle.isBestValue ? bestValueBadgeBg : badgeBg;
+          const isPopular = bundle.isPopular;
+          const isBestValue = bundle.isBestValue;
+          const isFeatured = isPopular || isBestValue;
+
+          let cardBg = '#FFFFFF';
+          let borderColor = starterBorder;
+          let ctaBg = starterCta;
+          let badgeBg = '#4B6833';
+          let isWhiteText = false;
+
+          if (isPopular) {
+            cardBg = popularCardBg;
+            borderColor = popularBorder;
+            ctaBg = popularCta;
+            badgeBg = popularBadge;
+            isWhiteText = popularTextWhite;
+          } else if (isBestValue) {
+            cardBg = bestValueCardBg;
+            borderColor = bestValueBorder;
+            ctaBg = bestValueCta;
+            badgeBg = bestValueBadge;
+            isWhiteText = bestValueTextWhite;
+          }
 
           return (
             <div
               key={bundle.id}
               style={{
-                backgroundColor: currentCardBg,
+                backgroundColor: cardBg,
                 borderRadius: '16px',
-                border: isFeatured ? `2.5px solid ${borderColor}` : '1px solid rgba(0, 0, 0, 0.08)',
+                border: isFeatured ? `2.5px solid ${borderColor}` : `1.5px solid ${borderColor}`,
                 padding: '28px 24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 position: 'relative',
-                boxShadow: isFeatured ? `0 16px 40px ${borderColor}30` : '0 4px 20px rgba(0, 0, 0, 0.04)',
+                boxShadow: isFeatured ? `0 16px 40px ${borderColor}25` : '0 4px 20px rgba(0, 0, 0, 0.04)',
                 transform: isFeatured ? 'translateY(-6px)' : 'none',
                 transition: 'all 0.3s ease'
               }}
@@ -108,7 +135,7 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                     top: '-14px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    backgroundColor: currentBadgeBg,
+                    backgroundColor: badgeBg,
                     color: '#FFFFFF',
                     fontSize: '11px',
                     fontWeight: 800,
@@ -151,13 +178,13 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                 )}
 
                 <div style={{ textAlign: 'center', marginTop: !bundle.image && bundle.badge ? '8px' : '0' }}>
-                  <span style={{ fontSize: '12px', fontWeight: 800, color: '#888', letterSpacing: '0.1em' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 800, color: isWhiteText ? 'rgba(255,255,255,0.8)' : '#888', letterSpacing: '0.1em' }}>
                     {bundle.name}
                   </span>
-                  <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#141210', margin: '4px 0 2px' }}>
+                  <h3 style={{ fontSize: '20px', fontWeight: 900, color: isWhiteText ? '#FFFFFF' : '#141210', margin: '4px 0 2px' }}>
                     {bundle.deal}
                   </h3>
-                  <span style={{ fontSize: '13px', color: '#666', fontWeight: 600 }}>
+                  <span style={{ fontSize: '13px', color: isWhiteText ? 'rgba(255,255,255,0.85)' : '#666', fontWeight: 600 }}>
                     {bundle.bottles}
                   </span>
                 </div>
@@ -167,15 +194,15 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                     textAlign: 'center', 
                     margin: '16px 0', 
                     padding: '14px 0', 
-                    borderTop: '1px solid #F0ECE6', 
-                    borderBottom: '1px solid #F0ECE6' 
+                    borderTop: isWhiteText ? '1px solid rgba(255,255,255,0.2)' : '1px solid #F0ECE6', 
+                    borderBottom: isWhiteText ? '1px solid rgba(255,255,255,0.2)' : '1px solid #F0ECE6' 
                   }}
                 >
-                  <div style={{ fontSize: '32px', fontWeight: 900, color: '#141210', lineHeight: 1 }}>
+                  <div style={{ fontSize: '32px', fontWeight: 900, color: isWhiteText ? '#FFFFFF' : '#141210', lineHeight: 1 }}>
                     {bundle.pricePerBottle}
-                    <span style={{ fontSize: '14px', fontWeight: 600, color: '#666' }}> / bottle</span>
+                    <span style={{ fontSize: '14px', fontWeight: 600, color: isWhiteText ? 'rgba(255,255,255,0.8)' : '#666' }}> / bottle</span>
                   </div>
-                  <div style={{ fontSize: '14px', color: '#777', marginTop: '6px', fontWeight: 600 }}>
+                  <div style={{ fontSize: '14px', color: isWhiteText ? 'rgba(255,255,255,0.85)' : '#777', marginTop: '6px', fontWeight: 600 }}>
                     {bundle.totalPrice} total
                   </div>
                   {bundle.savings && (
@@ -185,8 +212,8 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                         marginTop: '8px', 
                         fontSize: '12px', 
                         fontWeight: 700, 
-                        color: savingsTextColor, 
-                        backgroundColor: savingsBg,
+                        color: isWhiteText ? savingsTextColor : savingsTextColor, 
+                        backgroundColor: isWhiteText ? '#FFFFFF' : savingsBg,
                         padding: '4px 10px',
                         borderRadius: '12px'
                       }}
@@ -206,12 +233,12 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                         alignItems: 'center', 
                         gap: '8px', 
                         fontSize: '13.5px', 
-                        color: '#444', 
+                        color: isWhiteText ? '#FFFFFF' : '#444', 
                         fontWeight: 600,
                         marginBottom: '8px'
                       }}
                     >
-                      <span style={{ color: savingsTextColor, fontWeight: 800 }}>✓</span>
+                      <span style={{ color: isWhiteText ? '#FFFFFF' : savingsTextColor, fontWeight: 800 }}>✓</span>
                       {perk}
                     </li>
                   ))}
@@ -229,7 +256,7 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: '100%',
-                  backgroundColor: currentCtaBg,
+                  backgroundColor: ctaBg,
                   color: '#FFFFFF',
                   fontSize: '14px',
                   fontWeight: 800,
@@ -238,7 +265,7 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
                   borderRadius: '10px',
                   textDecoration: 'none',
                   textAlign: 'center',
-                  boxShadow: `0 8px 24px ${currentCtaBg}40`,
+                  boxShadow: `0 8px 24px ${ctaBg}40`,
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}
@@ -252,7 +279,7 @@ export function BundleSelector({ bundlesSection, accentColor, customPalette, onS
 
       {/* Low Stock Warning Bar Widget */}
       <div style={{ maxWidth: '600px', margin: '20px auto 0 auto' }}>
-        <LowStockProgressBar percentage={88} accentColor={borderColor} />
+        <LowStockProgressBar percentage={88} accentColor={popularBorder} />
       </div>
 
       {finePrint && (

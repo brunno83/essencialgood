@@ -4,73 +4,94 @@ import { PDP_DATA } from '../../config/pdpData';
 export function BundleColorLab({ onBackToSite, onApplyToSite }) {
   const defaultBundles = PDP_DATA.slimsoda.bundlesSection.bundles;
 
-  // Preset Color Palettes
+  // 100% Brand Palette Presets (Laranja #D96B32, Verde Floresta #4B6833, Sálvia #7A9A60, Bege #FAF5EF)
   const presets = [
     {
-      id: 'current',
-      name: '01 — Current Terracotta',
+      id: 'brand-orange-green',
+      name: '01 — Laranja no Most Popular + Verde no Best Value',
       cardBg: '#FFFFFF',
-      featuredCardBg: '#FFFFFF',
-      borderColor: '#D96B32',
-      badgeBg: '#D96B32',
-      bestValueBadgeBg: '#141210',
-      ctaBg: '#D96B32',
-      starterCtaBg: '#141210',
-      savingsBg: 'rgba(39, 174, 96, 0.08)',
-      savingsTextColor: '#27AE60'
+      popularCardBg: '#FAF5EF',
+      popularBorder: '#D96B32',
+      popularCta: '#D96B32',
+      popularBadge: '#D96B32',
+      bestValueCardBg: '#F6FFFC',
+      bestValueBorder: '#4B6833',
+      bestValueCta: '#4B6833',
+      bestValueBadge: '#4B6833',
+      starterBorder: 'rgba(0,0,0,0.12)',
+      starterCta: '#4B6833',
+      savingsTextColor: '#4B6833',
+      savingsBg: 'rgba(75, 104, 51, 0.1)'
     },
     {
-      id: 'forest-gold',
-      name: '02 — Brand Forest Green & Gold',
+      id: 'brand-all-orange',
+      name: '02 — Laranja Terracotta em Todos os Botões (Harmônico)',
       cardBg: '#FFFFFF',
-      featuredCardBg: '#F6FFFC',
-      borderColor: '#4B6833',
-      badgeBg: '#4B6833',
-      bestValueBadgeBg: '#D4AF37',
-      ctaBg: '#4B6833',
-      starterCtaBg: '#141210',
-      savingsBg: 'rgba(75, 104, 51, 0.12)',
-      savingsTextColor: '#4B6833'
+      popularCardBg: '#FAF5EF',
+      popularBorder: '#D96B32',
+      popularCta: '#D96B32',
+      popularBadge: '#D96B32',
+      bestValueCardBg: '#FFFFFF',
+      bestValueBorder: '#D96B32',
+      bestValueCta: '#D96B32',
+      bestValueBadge: '#4B6833',
+      starterBorder: 'rgba(0,0,0,0.12)',
+      starterCta: '#D96B32',
+      savingsTextColor: '#27AE60',
+      savingsBg: 'rgba(39, 174, 96, 0.08)'
     },
     {
-      id: 'midnight-gold',
-      name: '03 — Midnight Dark Luxury',
-      cardBg: '#141210',
-      featuredCardBg: '#1B2613',
-      borderColor: '#D4AF37',
-      badgeBg: '#D96B32',
-      bestValueBadgeBg: '#D4AF37',
-      ctaBg: '#D96B32',
-      starterCtaBg: '#D4AF37',
-      savingsBg: 'rgba(212, 175, 55, 0.15)',
-      savingsTextColor: '#D4AF37',
-      isDark: true
-    },
-    {
-      id: 'vibrant-emerald',
-      name: '04 — Vibrant High-Vis Orange & Emerald',
+      id: 'brand-solid-cards',
+      name: '03 — Cards Sólidos (Card Laranja + Card Verde)',
       cardBg: '#FFFFFF',
-      featuredCardBg: '#FFF8F4',
-      borderColor: '#F36F21',
-      badgeBg: '#F36F21',
-      bestValueBadgeBg: '#27AE60',
-      ctaBg: '#F36F21',
-      starterCtaBg: '#141210',
-      savingsBg: 'rgba(39, 174, 96, 0.12)',
-      savingsTextColor: '#27AE60'
+      popularCardBg: '#D96B32',
+      popularBorder: '#D96B32',
+      popularCta: '#4B6833',
+      popularBadge: '#4B6833',
+      popularTextWhite: true,
+      bestValueCardBg: '#4B6833',
+      bestValueBorder: '#4B6833',
+      bestValueCta: '#D96B32',
+      bestValueBadge: '#D96B32',
+      bestValueTextWhite: true,
+      starterBorder: 'rgba(0,0,0,0.12)',
+      starterCta: '#D96B32',
+      savingsTextColor: '#D96B32',
+      savingsBg: '#FFFFFF'
     },
     {
-      id: 'soft-sage',
-      name: '05 — Soft Sage & Warm Cream',
-      cardBg: '#FAF7F2',
-      featuredCardBg: '#FFFFFF',
-      borderColor: '#3A5311',
-      badgeBg: '#3A5311',
-      bestValueBadgeBg: '#D96B32',
-      ctaBg: '#3A5311',
-      starterCtaBg: '#141210',
-      savingsBg: 'rgba(58, 83, 17, 0.1)',
-      savingsTextColor: '#3A5311'
+      id: 'brand-beige-cream',
+      name: '04 — Fundo Bege Suave (#FAF5EF) + Botões Laranja e Verde',
+      cardBg: '#FAF5EF',
+      popularCardBg: '#FFFFFF',
+      popularBorder: '#D96B32',
+      popularCta: '#D96B32',
+      popularBadge: '#D96B32',
+      bestValueCardBg: '#FFFFFF',
+      bestValueBorder: '#4B6833',
+      bestValueCta: '#4B6833',
+      bestValueBadge: '#4B6833',
+      starterBorder: 'rgba(0,0,0,0.12)',
+      starterCta: '#7A9A60',
+      savingsTextColor: '#4B6833',
+      savingsBg: 'rgba(75, 104, 51, 0.12)'
+    },
+    {
+      id: 'brand-sage-luxury',
+      name: '05 — Verde Sálvia (#7A9A60) & Laranja Terracotta',
+      cardBg: '#FFFFFF',
+      popularCardBg: '#FAF7F2',
+      popularBorder: '#7A9A60',
+      popularCta: '#7A9A60',
+      popularBadge: '#7A9A60',
+      bestValueCardBg: '#FFF8F4',
+      bestValueBorder: '#D96B32',
+      bestValueCta: '#D96B32',
+      bestValueBadge: '#7A9A60',
+      starterBorder: 'rgba(0,0,0,0.12)',
+      starterCta: '#D96B32',
+      savingsTextColor: '#7A9A60',
+      savingsBg: 'rgba(122, 154, 96, 0.12)'
     }
   ];
 
@@ -87,9 +108,9 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
   };
 
   return (
-    <div style={{ backgroundColor: customStyle.isDark ? '#0A0908' : '#FAF7F2', minHeight: '100vh', padding: '40px 20px 100px 20px' }}>
+    <div style={{ backgroundColor: '#FAF7F2', minHeight: '100vh', padding: '40px 20px 100px 20px' }}>
       
-      {/* Top Control Header */}
+      {/* Control Panel Header */}
       <div 
         style={{ 
           maxWidth: '1200px', 
@@ -104,10 +125,10 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
           <div>
             <span style={{ fontSize: '11px', fontWeight: 900, color: '#D96B32', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-              🔬 LOCALHOST COLOR LABORATORY
+              🔬 TESTES DE PALETA DA MARCA (SEM PRETO)
             </span>
             <h1 style={{ fontSize: '24px', fontWeight: 900, color: '#141210', margin: '4px 0 0 0' }}>
-              Laboratório de Cores dos Tabela de Ofertas (3 Pacotes)
+              Teste de Cores dos Cards: Laranja (#D96B32), Verde (#4B6833) e Bege (#FAF5EF)
             </h1>
           </div>
 
@@ -149,22 +170,23 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
 
         {/* Preset Selector Buttons */}
         <div style={{ fontSize: '12px', fontWeight: 800, color: '#666', marginBottom: '10px' }}>
-          ESCOLHA UM PRESET PRONTO OU PERSONALIZE ABAIXO:
+          CLIQUE NOS PRESETS DA MARCA PARA TESTAR CADA COMBINAÇÃO:
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
           {presets.map((p) => (
             <button
               key={p.id}
               onClick={() => selectPreset(p)}
               style={{
-                backgroundColor: activePreset.id === p.id ? '#141210' : '#F5F2EC',
+                backgroundColor: activePreset.id === p.id ? '#D96B32' : '#F5F2EC',
                 color: activePreset.id === p.id ? '#FFFFFF' : '#333',
-                border: activePreset.id === p.id ? '2px solid #141210' : '1px solid #DDD',
+                border: activePreset.id === p.id ? '2px solid #D96B32' : '1px solid #DDD',
                 borderRadius: '12px',
-                padding: '8px 16px',
-                fontSize: '12.5px',
+                padding: '12px 18px',
+                fontSize: '13px',
                 fontWeight: 800,
+                textAlign: 'left',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
@@ -174,7 +196,7 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
           ))}
         </div>
 
-        {/* Color Pickers Bar */}
+        {/* Custom Color Adjustment Row */}
         <div 
           style={{ 
             display: 'grid', 
@@ -188,60 +210,60 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
         >
           <div>
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#555', marginBottom: '4px' }}>
-              BORDA DESTACADA
+              BORDA MOST POPULAR
             </label>
             <input 
               type="color" 
-              value={customStyle.borderColor} 
-              onChange={(e) => handleColorChange('borderColor', e.target.value)} 
+              value={customStyle.popularBorder} 
+              onChange={(e) => handleColorChange('popularBorder', e.target.value)} 
               style={{ width: '100%', height: '36px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
             />
           </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#555', marginBottom: '4px' }}>
-              BOTÃO DE COMPRA (PRINCIPAL)
+              BOTÃO MOST POPULAR
             </label>
             <input 
               type="color" 
-              value={customStyle.ctaBg} 
-              onChange={(e) => handleColorChange('ctaBg', e.target.value)} 
+              value={customStyle.popularCta} 
+              onChange={(e) => handleColorChange('popularCta', e.target.value)} 
               style={{ width: '100%', height: '36px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
             />
           </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#555', marginBottom: '4px' }}>
-              BOTÃO DE COMPRA (STARTER)
+              BORDA BEST VALUE
             </label>
             <input 
               type="color" 
-              value={customStyle.starterCtaBg} 
-              onChange={(e) => handleColorChange('starterCtaBg', e.target.value)} 
+              value={customStyle.bestValueBorder} 
+              onChange={(e) => handleColorChange('bestValueBorder', e.target.value)} 
               style={{ width: '100%', height: '36px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
             />
           </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#555', marginBottom: '4px' }}>
-              BADGE POPULAR / MOST POPULAR
+              BOTÃO BEST VALUE
             </label>
             <input 
               type="color" 
-              value={customStyle.badgeBg} 
-              onChange={(e) => handleColorChange('badgeBg', e.target.value)} 
+              value={customStyle.bestValueCta} 
+              onChange={(e) => handleColorChange('bestValueCta', e.target.value)} 
               style={{ width: '100%', height: '36px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
             />
           </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#555', marginBottom: '4px' }}>
-              BADGE BEST VALUE
+              BOTÃO STARTER
             </label>
             <input 
               type="color" 
-              value={customStyle.bestValueBadgeBg} 
-              onChange={(e) => handleColorChange('bestValueBadgeBg', e.target.value)} 
+              value={customStyle.starterCta} 
+              onChange={(e) => handleColorChange('starterCta', e.target.value)} 
               style={{ width: '100%', height: '36px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
             />
           </div>
@@ -251,13 +273,13 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
       {/* Live Preview Area */}
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', color: customStyle.borderColor, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+          <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', color: customStyle.popularBorder, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
             CHOOSE YOUR BUNDLE
           </span>
-          <h2 style={{ fontSize: '32px', fontWeight: 900, color: customStyle.isDark ? '#FFFFFF' : '#141210', margin: '0 0 8px' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 900, color: '#141210', margin: '0 0 8px' }}>
             SAVE MORE WHEN YOU STOCK UP.
           </h2>
-          <p style={{ fontSize: '15px', color: customStyle.isDark ? 'rgba(255,255,255,0.7)' : '#666', fontWeight: 500 }}>
+          <p style={{ fontSize: '15px', color: '#666', fontWeight: 500 }}>
             Choose the option that works best for your routine.
           </p>
         </div>
@@ -272,24 +294,43 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
           }}
         >
           {defaultBundles.map((bundle) => {
-            const isFeatured = bundle.isPopular || bundle.isBestValue;
-            const currentCardBg = isFeatured ? customStyle.featuredCardBg : customStyle.cardBg;
-            const currentCtaBg = bundle.id === 'starter' ? customStyle.starterCtaBg : customStyle.ctaBg;
-            const currentBadgeBg = bundle.isBestValue ? customStyle.bestValueBadgeBg : customStyle.badgeBg;
+            const isPopular = bundle.isPopular;
+            const isBestValue = bundle.isBestValue;
+            const isFeatured = isPopular || isBestValue;
+
+            let cardBg = customStyle.cardBg;
+            let borderColor = customStyle.starterBorder || 'rgba(0,0,0,0.12)';
+            let ctaBg = customStyle.starterCta;
+            let badgeBg = '#4B6833';
+            let isWhiteText = false;
+
+            if (isPopular) {
+              cardBg = customStyle.popularCardBg;
+              borderColor = customStyle.popularBorder;
+              ctaBg = customStyle.popularCta;
+              badgeBg = customStyle.popularBadge;
+              isWhiteText = Boolean(customStyle.popularTextWhite);
+            } else if (isBestValue) {
+              cardBg = customStyle.bestValueCardBg;
+              borderColor = customStyle.bestValueBorder;
+              ctaBg = customStyle.bestValueCta;
+              badgeBg = customStyle.bestValueBadge;
+              isWhiteText = Boolean(customStyle.bestValueTextWhite);
+            }
 
             return (
               <div
                 key={bundle.id}
                 style={{
-                  backgroundColor: currentCardBg,
+                  backgroundColor: cardBg,
                   borderRadius: '16px',
-                  border: isFeatured ? `2.5px solid ${customStyle.borderColor}` : '1px solid rgba(0, 0, 0, 0.12)',
+                  border: isFeatured ? `2.5px solid ${borderColor}` : `1.5px solid ${borderColor}`,
                   padding: '28px 24px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   position: 'relative',
-                  boxShadow: isFeatured ? `0 16px 40px ${customStyle.borderColor}30` : '0 4px 20px rgba(0, 0, 0, 0.04)',
+                  boxShadow: isFeatured ? `0 16px 40px ${borderColor}25` : '0 4px 20px rgba(0, 0, 0, 0.04)',
                   transform: isFeatured ? 'translateY(-6px)' : 'none',
                   transition: 'all 0.3s ease'
                 }}
@@ -302,7 +343,7 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                       top: '-14px',
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      backgroundColor: currentBadgeBg,
+                      backgroundColor: badgeBg,
                       color: '#FFFFFF',
                       fontSize: '11px',
                       fontWeight: 800,
@@ -345,13 +386,13 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                   )}
 
                   <div style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: '12px', fontWeight: 800, color: customStyle.isDark ? '#AAA' : '#888', letterSpacing: '0.1em' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 800, color: isWhiteText ? 'rgba(255,255,255,0.8)' : '#888', letterSpacing: '0.1em' }}>
                       {bundle.name}
                     </span>
-                    <h3 style={{ fontSize: '20px', fontWeight: 900, color: customStyle.isDark ? '#FFF' : '#141210', margin: '4px 0 2px' }}>
+                    <h3 style={{ fontSize: '20px', fontWeight: 900, color: isWhiteText ? '#FFFFFF' : '#141210', margin: '4px 0 2px' }}>
                       {bundle.deal}
                     </h3>
-                    <span style={{ fontSize: '13px', color: customStyle.isDark ? '#BBB' : '#666', fontWeight: 600 }}>
+                    <span style={{ fontSize: '13px', color: isWhiteText ? 'rgba(255,255,255,0.85)' : '#666', fontWeight: 600 }}>
                       {bundle.bottles}
                     </span>
                   </div>
@@ -361,15 +402,15 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                       textAlign: 'center', 
                       margin: '16px 0', 
                       padding: '14px 0', 
-                      borderTop: customStyle.isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid #F0ECE6', 
-                      borderBottom: customStyle.isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid #F0ECE6' 
+                      borderTop: isWhiteText ? '1px solid rgba(255,255,255,0.2)' : '1px solid #F0ECE6', 
+                      borderBottom: isWhiteText ? '1px solid rgba(255,255,255,0.2)' : '1px solid #F0ECE6' 
                     }}
                   >
-                    <div style={{ fontSize: '32px', fontWeight: 900, color: customStyle.isDark ? '#FFF' : '#141210', lineHeight: 1 }}>
+                    <div style={{ fontSize: '32px', fontWeight: 900, color: isWhiteText ? '#FFFFFF' : '#141210', lineHeight: 1 }}>
                       {bundle.pricePerBottle}
-                      <span style={{ fontSize: '14px', fontWeight: 600, color: customStyle.isDark ? '#AAA' : '#666' }}> / bottle</span>
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: isWhiteText ? 'rgba(255,255,255,0.8)' : '#666' }}> / bottle</span>
                     </div>
-                    <div style={{ fontSize: '14px', color: customStyle.isDark ? '#AAA' : '#777', marginTop: '6px', fontWeight: 600 }}>
+                    <div style={{ fontSize: '14px', color: isWhiteText ? 'rgba(255,255,255,0.85)' : '#777', marginTop: '6px', fontWeight: 600 }}>
                       {bundle.totalPrice} total
                     </div>
                     {bundle.savings && (
@@ -379,8 +420,8 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                           marginTop: '8px', 
                           fontSize: '12px', 
                           fontWeight: 700, 
-                          color: customStyle.savingsTextColor, 
-                          backgroundColor: customStyle.savingsBg,
+                          color: isWhiteText ? customStyle.savingsTextColor : customStyle.savingsTextColor, 
+                          backgroundColor: isWhiteText ? '#FFFFFF' : customStyle.savingsBg,
                           padding: '4px 10px',
                           borderRadius: '12px'
                         }}
@@ -400,12 +441,12 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                           alignItems: 'center', 
                           gap: '8px', 
                           fontSize: '13.5px', 
-                          color: customStyle.isDark ? '#DDD' : '#444', 
+                          color: isWhiteText ? '#FFFFFF' : '#444', 
                           fontWeight: 600,
                           marginBottom: '8px'
                         }}
                       >
-                        <span style={{ color: customStyle.savingsTextColor, fontWeight: 800 }}>✓</span>
+                        <span style={{ color: isWhiteText ? '#FFFFFF' : customStyle.savingsTextColor, fontWeight: 800 }}>✓</span>
                         {perk}
                       </li>
                     ))}
@@ -419,7 +460,7 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
-                    backgroundColor: currentCtaBg,
+                    backgroundColor: ctaBg,
                     color: '#FFFFFF',
                     fontSize: '14px',
                     fontWeight: 900,
@@ -428,7 +469,7 @@ export function BundleColorLab({ onBackToSite, onApplyToSite }) {
                     borderRadius: '10px',
                     border: 'none',
                     textAlign: 'center',
-                    boxShadow: `0 8px 24px ${currentCtaBg}40`,
+                    boxShadow: `0 8px 24px ${ctaBg}40`,
                     cursor: 'pointer'
                   }}
                 >
