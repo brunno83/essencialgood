@@ -1,4 +1,5 @@
 import React from 'react';
+import { LowStockProgressBar } from '../common/LowStockProgressBar';
 
 export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) {
   if (!bundlesSection) return null;
@@ -226,8 +227,13 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
         })}
       </div>
 
+      {/* Low Stock Warning Bar Widget */}
+      <div style={{ maxWidth: '600px', margin: '20px auto 0 auto' }}>
+        <LowStockProgressBar percentage={88} accentColor={accentColor} />
+      </div>
+
       {finePrint && (
-        <div style={{ textAlign: 'center', marginTop: '28px', fontSize: '12px', fontWeight: 700, color: '#888', letterSpacing: '0.06em' }}>
+        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '12px', fontWeight: 700, color: '#888', letterSpacing: '0.06em' }}>
           {finePrint}
         </div>
       )}

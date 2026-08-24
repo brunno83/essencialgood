@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LowStockProgressBar } from '../common/LowStockProgressBar';
 
 export function InlineBundleSelector({ bundles = [], accentColor }) {
   // Default selected bundle: most-popular (index 1) or first
@@ -165,7 +166,10 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
         CLAIM MY SLIMSODA (90-DAY RISK FREE) →
       </a>
 
-      <div style={{ textAlign: 'center', marginTop: '10px', fontSize: '11.5px', color: '#777', fontWeight: 700, letterSpacing: '0.04em' }}>
+      {/* Low Stock Warning Progress Bar Widget right below CTA button */}
+      <LowStockProgressBar percentage={88} accentColor={accentColor} />
+
+      <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '11.5px', color: '#777', fontWeight: 700, letterSpacing: '0.04em' }}>
         🔒 SECURE CHECKOUT • FREE U.S. SHIPPING • 90-DAY GUARANTEE
       </div>
     </div>
