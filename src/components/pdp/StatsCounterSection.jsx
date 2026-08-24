@@ -103,80 +103,117 @@ export function StatsCounterSection({ accentColor }) {
       />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <span 
-            style={{ 
-              fontSize: '12px', 
-              fontWeight: 900, 
-              letterSpacing: '0.16em', 
-              color: accentColor || '#D96B32',
-              textTransform: 'uppercase',
-              display: 'block',
-              marginBottom: '8px'
-            }}
-          >
-            PROVEN BY ROUTINES • BACKED BY RESULTS
-          </span>
-          <h2 
-            style={{ 
-              fontSize: 'clamp(24px, 4vw, 36px)', 
-              fontWeight: 900, 
-              color: '#FFFFFF', 
-              margin: '0 0 10px',
-              letterSpacing: '-0.02em'
-            }}
-          >
-            REAL RESULTS FROM <span style={{ color: accentColor || '#D96B32' }}>REAL CUSTOMERS</span>
-          </h2>
-          <p style={{ fontSize: '15.5px', color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, maxWidth: '600px', margin: '0 auto' }}>
-            Based on voluntary customer survey responses after 30 days of consistent daily SlimSoda® use.
-          </p>
-        </div>
-
-        {/* 4 Counter Grid Cards */}
         <div 
           style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-            gap: '24px' 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '44px',
+            alignItems: 'center' 
           }}
         >
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
+          {/* Left Column: 1:1 Product Image on Stone Pedestal */}
+          <div style={{ width: '100%', position: 'relative' }}>
+            <div 
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '20px',
-                padding: '32px 24px',
-                textAlign: 'center',
-                backdropFilter: 'blur(10px)',
-                boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
-                transition: 'transform 0.3s ease, border-color 0.3s ease'
+                width: '100%',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                backgroundColor: '#141210'
               }}
             >
-              <div 
+              <img
+                src="/assets/products/slimsoda-stone-pedestal.jpg"
+                alt="SlimSoda tub on natural stone pedestal"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '1 / 1',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Header & 2x2 Grid of Animated Counter Cards */}
+          <div>
+            <div style={{ marginBottom: '32px' }}>
+              <span 
                 style={{ 
-                  fontSize: 'clamp(36px, 5vw, 48px)', 
+                  fontSize: '12px', 
                   fontWeight: 900, 
-                  color: accentColor || '#D96B32', 
-                  lineHeight: 1, 
-                  marginBottom: '12px',
-                  letterSpacing: '-0.03em'
+                  letterSpacing: '0.16em', 
+                  color: accentColor || '#D96B32',
+                  textTransform: 'uppercase',
+                  display: 'block',
+                  marginBottom: '8px'
                 }}
               >
-                <Counter end={stat.value} suffix={stat.suffix} />
-              </div>
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 8px', letterSpacing: '0.02em' }}>
-                {stat.title}
-              </h3>
-              <p style={{ fontSize: '13.5px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.5, fontWeight: 400 }}>
-                {stat.desc}
+                PROVEN BY ROUTINES • BACKED BY RESULTS
+              </span>
+              <h2 
+                style={{ 
+                  fontSize: 'clamp(24px, 3.8vw, 36px)', 
+                  fontWeight: 900, 
+                  color: '#FFFFFF', 
+                  margin: '0 0 10px',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2
+                }}
+              >
+                REAL RESULTS FROM <span style={{ color: accentColor || '#D96B32' }}>REAL CUSTOMERS</span>
+              </h2>
+              <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, lineHeight: 1.5 }}>
+                Based on voluntary customer survey responses after 30 days of consistent daily SlimSoda® use.
               </p>
             </div>
-          ))}
+
+            {/* 2x2 Counter Grid Cards */}
+            <div 
+              style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+                gap: '16px' 
+              }}
+            >
+              {stats.map((stat, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '16px',
+                    padding: '24px 18px',
+                    textAlign: 'left',
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: '0 10px 24px rgba(0, 0, 0, 0.18)',
+                    transition: 'transform 0.3s ease, border-color 0.3s ease'
+                  }}
+                >
+                  <div 
+                    style={{ 
+                      fontSize: 'clamp(32px, 4vw, 42px)', 
+                      fontWeight: 900, 
+                      color: accentColor || '#D96B32', 
+                      lineHeight: 1, 
+                      marginBottom: '8px',
+                      letterSpacing: '-0.03em'
+                    }}
+                  >
+                    <Counter end={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', margin: '0 0 6px', letterSpacing: '0.01em' }}>
+                    {stat.title}
+                  </h3>
+                  <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.45, fontWeight: 400 }}>
+                    {stat.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
