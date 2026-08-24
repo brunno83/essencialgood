@@ -1,15 +1,29 @@
 import React from 'react';
+import { Truck, ShieldCheck, Leaf, Star, Lock } from 'lucide-react';
 
-export function ProductMarquee({ customText }) {
-  const marqueeItems = [
-    '⚡ FREE EXPEDITED U.S. SHIPPING ON ALL ORDERS TODAY',
-    '🛡️ 90-DAY MONEY-BACK GUARANTEE',
-    '🌿 100% PLANT-BASED & LAB-TESTED FORMULATION',
-    '⭐ OVER 17,000+ VERIFIED 5-STAR REVIEWS',
-    '🔒 100% SECURE CHECKOUT'
+export function ProductMarquee() {
+  const items = [
+    { icon: Truck, text: 'FREE EXPEDITED U.S. SHIPPING ON ALL ORDERS TODAY' },
+    { icon: ShieldCheck, text: '90-DAY MONEY-BACK GUARANTEE' },
+    { icon: Leaf, text: '100% PLANT-BASED & LAB-TESTED FORMULATION' },
+    { icon: Star, text: 'OVER 17,000+ VERIFIED 5-STAR REVIEWS' },
+    { icon: Lock, text: '100% SECURE CHECKOUT' }
   ];
 
-  const fullText = customText || marqueeItems.join('   •   ');
+  const renderContent = () => (
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '32px', paddingRight: '32px' }}>
+      {items.map((item, idx) => {
+        const IconComponent = item.icon;
+        return (
+          <div key={idx} style={{ display: 'inline-flex', alignItems: 'center', gap: '7px' }}>
+            <IconComponent size={13} style={{ flexShrink: 0 }} />
+            <span>{item.text}</span>
+            <span style={{ opacity: 0.5, marginLeft: '24px' }}>•</span>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   return (
     <div 
@@ -17,9 +31,9 @@ export function ProductMarquee({ customText }) {
       style={{
         backgroundColor: '#D96B32',
         color: '#141210',
-        fontSize: '11.5px',
+        fontSize: '11px',
         fontWeight: 900,
-        letterSpacing: '0.1em',
+        letterSpacing: '0.08em',
         textTransform: 'uppercase',
         height: '34px',
         display: 'flex',
@@ -39,11 +53,13 @@ export function ProductMarquee({ customText }) {
           display: 'flex',
           whiteSpace: 'nowrap',
           willChange: 'transform',
-          animation: 'marqueeLoop 30s linear infinite'
+          animation: 'marqueeLoop 32s linear infinite'
         }}
       >
-        <span style={{ paddingRight: '40px' }}>{fullText}   •   {fullText}</span>
-        <span style={{ paddingRight: '40px' }}>{fullText}   •   {fullText}</span>
+        {renderContent()}
+        {renderContent()}
+        {renderContent()}
+        {renderContent()}
       </div>
 
       <style>{`

@@ -139,12 +139,11 @@ export function WhyPeopleChooseSection({ accentColor }) {
                   <div
                     key={idx}
                     style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.07)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
                       borderRadius: '16px',
                       padding: '20px 18px',
                       textAlign: 'left',
-                      backdropFilter: 'blur(10px)',
                       boxShadow: '0 10px 24px rgba(0, 0, 0, 0.18)'
                     }}
                   >
@@ -153,8 +152,8 @@ export function WhyPeopleChooseSection({ accentColor }) {
                         width: '36px', 
                         height: '36px', 
                         borderRadius: '10px', 
-                        backgroundColor: `${accentColor || '#D96B32'}20`, 
-                        border: `1px solid ${accentColor || '#D96B32'}40`,
+                        backgroundColor: `${accentColor || '#D96B32'}25`, 
+                        border: `1px solid ${accentColor || '#D96B32'}50`,
                         color: accentColor || '#D96B32',
                         display: 'flex',
                         alignItems: 'center',
