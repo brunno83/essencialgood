@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LowStockProgressBar } from '../common/LowStockProgressBar';
 
-export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) {
+export function BundleSelector({ bundlesSection, accentColor, customPalette, onSelectBundle }) {
+  const [activePalette] = useState(() => {
+    if (customPalette) return customPalette;
+    const saved = localStorage.getItem('slimsoda_applied_bundle_palette');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    return null;
+  });
+
   if (!bundlesSection) return null;
   const { tag, title, subtitle, finePrint, bundles } = bundlesSection;
+
+  const borderColor = activePalette?.borderColor || accentColor || '#D96B32';
+  const featuredCardBg = activePalette?.featuredCardBg || '#FFFFFF';
+  const cardBg = activePalette?.cardBg || '#FFFFFF';
+  const ctaBg = activePalette?.ctaBg || accentColor || '#D96B32';
+  const starterCtaBg = activePalette?.starterCtaBg || '#141210';
+  const badgeBg = activePalette?.badgeBg || accentColor || '#D96B32';
+  const bestValueBadgeBg = activePalette?.bestValueBadgeBg || '#141210';
+  const savingsTextColor = activePalette?.savingsTextColor || '#27AE60';
+  const savingsBg = activePalette?.savingsBg || 'rgba(39, 174, 96, 0.08)';
 
   return (
     <section 
@@ -22,7 +41,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
               fontSize: '12px', 
               fontWeight: 800, 
               letterSpacing: '0.14em', 
-              color: accentColor || '#D96B32',
+              color: borderColor,
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: '8px'
@@ -60,19 +79,23 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
       >
         {bundles.map((bundle) => {
           const isFeatured = bundle.isPopular || bundle.isBestValue;
+          const currentCardBg = isFeatured ? featuredCardBg : cardBg;
+          const currentCtaBg = bundle.id === 'starter' ? starterCtaBg : ctaBg;
+          const currentBadgeBg = bundle.isBestValue ? bestValueBadgeBg : badgeBg;
+
           return (
             <div
               key={bundle.id}
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: currentCardBg,
                 borderRadius: '16px',
-                border: isFeatured ? `2.5px solid ${accentColor || '#D96B32'}` : '1px solid rgba(0, 0, 0, 0.08)',
+                border: isFeatured ? `2.5px solid ${borderColor}` : '1px solid rgba(0, 0, 0, 0.08)',
                 padding: '28px 24px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 position: 'relative',
-                boxShadow: isFeatured ? '0 16px 40px rgba(217, 107, 50, 0.15)' : '0 4px 20px rgba(0, 0, 0, 0.04)',
+                boxShadow: isFeatured ? `0 16px 40px ${borderColor}30` : '0 4px 20px rgba(0, 0, 0, 0.04)',
                 transform: isFeatured ? 'translateY(-6px)' : 'none',
                 transition: 'all 0.3s ease'
               }}
@@ -85,7 +108,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                     top: '-14px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    backgroundColor: bundle.isBestValue ? '#141210' : accentColor || '#D96B32',
+                    backgroundColor: currentBadgeBg,
                     color: '#FFFFFF',
                     fontSize: '11px',
                     fontWeight: 800,
@@ -162,8 +185,8 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                         marginTop: '8px', 
                         fontSize: '12px', 
                         fontWeight: 700, 
-                        color: '#27AE60', 
-                        backgroundColor: 'rgba(39, 174, 96, 0.08)',
+                        color: savingsTextColor, 
+                        backgroundColor: savingsBg,
                         padding: '4px 10px',
                         borderRadius: '12px'
                       }}
@@ -188,7 +211,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                         marginBottom: '8px'
                       }}
                     >
-                      <span style={{ color: '#27AE60', fontWeight: 800 }}>✓</span>
+                      <span style={{ color: savingsTextColor, fontWeight: 800 }}>✓</span>
                       {perk}
                     </li>
                   ))}
@@ -206,7 +229,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                   alignItems: 'center',
                   justifyContent: 'center',
                   width: '100%',
-                  backgroundColor: isFeatured ? (accentColor || '#D96B32') : '#141210',
+                  backgroundColor: currentCtaBg,
                   color: '#FFFFFF',
                   fontSize: '14px',
                   fontWeight: 800,
@@ -215,7 +238,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                   borderRadius: '10px',
                   textDecoration: 'none',
                   textAlign: 'center',
-                  boxShadow: isFeatured ? `0 8px 24px ${accentColor}40` : '0 4px 12px rgba(0,0,0,0.1)',
+                  boxShadow: `0 8px 24px ${currentCtaBg}40`,
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}
@@ -229,7 +252,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
 
       {/* Low Stock Warning Bar Widget */}
       <div style={{ maxWidth: '600px', margin: '20px auto 0 auto' }}>
-        <LowStockProgressBar percentage={88} accentColor={accentColor} />
+        <LowStockProgressBar percentage={88} accentColor={borderColor} />
       </div>
 
       {finePrint && (
