@@ -152,18 +152,26 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 08 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
-      <section id="bundles-section" style={{ backgroundColor: '#FAF7F2', padding: '70px 20px 50px 20px', borderTop: '1px solid #EFEAE1' }}>
+      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA (FUNDO VERDE FLORESTA LUXO #1B2613) */}
+      <section 
+        id="bundles-section" 
+        style={{ 
+          backgroundColor: '#1B2613', 
+          padding: '75px 20px 60px 20px', 
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+        }}
+      >
         <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '32px' }}>
           {finalOffer && (
             <>
-              <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', color: accentColor || '#D96B32', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 900, letterSpacing: '0.14em', color: accentColor || '#D96B32', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
                 {finalOffer.tag || 'CHOOSE YOUR BUNDLE'}
               </span>
-              <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 900, color: '#141210', margin: '0 0 8px' }}>
+              <h2 style={{ fontSize: 'clamp(24px, 4vw, 34px)', fontWeight: 900, color: '#FFFFFF', margin: '0 0 8px' }}>
                 {finalOffer.title || 'SELECT YOUR SLIMSODA® PACKAGE'}
               </h2>
-              <p style={{ fontSize: '15px', color: '#666', fontWeight: 500 }}>
+              <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.75)', fontWeight: 500 }}>
                 {finalOffer.subtitle || 'Every order is backed by our 90-Day Money-Back Guarantee.'}
               </p>
             </>
