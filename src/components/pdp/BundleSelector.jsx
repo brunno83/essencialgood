@@ -57,10 +57,10 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
           const isPopular = bundle.isPopular;
           const isBestValue = bundle.isBestValue;
 
-          // Original Card Backgrounds & Styles
+          // Card Backgrounds & Styles
           let cardBg = '#FFFFFF';
           let borderColor = isFeatured ? (accentColor || '#D96B32') : 'rgba(0, 0, 0, 0.08)';
-          let ctaBg = isFeatured ? (accentColor || '#D96B32') : '#141210';
+          let ctaBg = accentColor || '#D96B32'; // All buttons use vibrant terracotta orange
           let badgeBg = isBestValue ? '#4B6833' : accentColor || '#D96B32';
 
           if (isPopular) {
@@ -73,7 +73,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
               style={{
                 backgroundColor: cardBg,
                 borderRadius: '16px',
-                border: isFeatured ? `2.5px solid ${borderColor}` : `1px solid ${borderColor}`,
+                border: isFeatured ? `2.5px solid ${borderColor}` : `1.5px solid ${borderColor}`,
                 padding: '28px 24px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -216,7 +216,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                   backgroundColor: ctaBg,
                   color: '#FFFFFF',
                   fontSize: '14px',
-                  fontWeight: 800,
+                  fontWeight: 900,
                   letterSpacing: '0.04em',
                   padding: '16px',
                   borderRadius: '10px',
