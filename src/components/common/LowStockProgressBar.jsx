@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
-export function LowStockProgressBar({ percentage = 88, accentColor }) {
+export function LowStockProgressBar({ accentColor }) {
+  // Calculate dynamic realistic percentage based on current date
+  const getDynamicPercentage = () => {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+
+    // Range: 76% to 92%, changes dynamically each calendar day
+    const base = 76;
+    const dailyOffset = (dayOfYear * 3) % 17;
+    return Math.min(92, base + dailyOffset);
+  };
+
+  const targetPercentage = getDynamicPercentage();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate progress bar fill from 0 to 88%
+    // Animate progress bar fill from 0% to the dynamic daily percentage
     const timer = setTimeout(() => {
-      setProgress(percentage);
-    }, 200);
+      setProgress(targetPercentage);
+    }, 250);
 
     return () => clearTimeout(timer);
-  }, [percentage]);
+  }, [targetPercentage]);
 
   return (
     <div 
@@ -25,21 +40,24 @@ export function LowStockProgressBar({ percentage = 88, accentColor }) {
         boxSizing: 'border-box'
       }}
     >
+      {/* Header with proper flex spacing */}
       <div 
         style={{
           display: 'flex',
           justify: 'space-between',
           alignItems: 'center',
+          gap: '12px',
           marginBottom: '8px',
           fontSize: '12px',
           fontWeight: 900,
-          letterSpacing: '0.04em'
+          letterSpacing: '0.04em',
+          flexWrap: 'wrap'
         }}
       >
-        <span style={{ color: '#D96B32', display: 'flex', alignItems: 'center', gap: '5px' }}>
+        <span style={{ color: '#D96B32', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
           ⚡ LOW STOCK WARNING
         </span>
-        <span style={{ color: '#141210', fontWeight: 900 }}>
+        <span style={{ color: '#141210', fontWeight: 900, marginLeft: 'auto' }}>
           {progress}% Claimed
         </span>
       </div>
@@ -77,7 +95,7 @@ export function LowStockProgressBar({ percentage = 88, accentColor }) {
           lineHeight: 1.35
         }}
       >
-        88% of today's manufacturing batch is already claimed. Orders placed today ship within 24h.
+        {targetPercentage}% of today's manufacturing batch is already claimed. Orders placed today ship within 24h.
       </div>
     </div>
   );
