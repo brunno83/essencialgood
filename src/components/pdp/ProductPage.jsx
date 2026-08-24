@@ -151,13 +151,13 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 08 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
-      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA (FUNDO VERDE FLORESTA LUXO #1B2613) */}
+      {/* 09 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA (FUNDO VERDE FLORESTA LUXO #1B2613 SEM LINHA DIVISÓRIA) */}
       <section 
         id="bundles-section" 
         style={{ 
           backgroundColor: '#1B2613', 
-          padding: '75px 20px 60px 20px', 
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '40px 20px 60px 20px', 
+          borderTop: 'none',
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
         }}
       >

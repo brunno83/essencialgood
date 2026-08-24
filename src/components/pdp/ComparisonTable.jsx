@@ -13,9 +13,9 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
     <section 
       style={{ 
         backgroundColor: '#1B2613', 
-        padding: '75px 20px', 
+        padding: '75px 20px 40px 20px', 
         borderTop: '1px solid rgba(255, 255, 255, 0.1)', 
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        borderBottom: 'none',
         color: '#FFFFFF'
       }}
     >
