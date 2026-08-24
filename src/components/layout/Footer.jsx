@@ -29,7 +29,7 @@ export const Footer = ({ disclaimer }) => {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
             gap: '3rem',
-            marginBottom: '4rem',
+            marginBottom: '3.5rem',
             alignItems: 'start',
           }}
           className="footer-main-grid"
@@ -126,11 +126,29 @@ export const Footer = ({ disclaimer }) => {
           </div>
         </div>
 
-        {/* Bottom Signature Line */}
+        {/* FDA Legal Disclaimer (Placed ABOVE signature line) */}
+        {disclaimer && (
+          <div
+            style={{
+              borderTop: '1px solid rgba(246, 255, 252, 0.12)',
+              paddingTop: '2rem',
+              maxWidth: '900px',
+              margin: '0 auto 1.75rem auto',
+              fontSize: '11px',
+              color: 'rgba(255, 255, 255, 0.55)',
+              lineHeight: 1.65,
+              textAlign: 'center'
+            }}
+          >
+            {disclaimer}
+          </div>
+        )}
+
+        {/* Bottom Signature Line (Placed BELOW disclaimer at absolute bottom) */}
         <div
           style={{
-            borderTop: '1px solid rgba(246, 255, 252, 0.12)',
-            paddingTop: '2.25rem',
+            borderTop: disclaimer ? 'none' : '1px solid rgba(246, 255, 252, 0.12)',
+            paddingTop: disclaimer ? '0' : '2rem',
             textAlign: 'center',
             fontSize: '0.85rem',
             color: '#B0A898',
@@ -175,25 +193,6 @@ export const Footer = ({ disclaimer }) => {
             . CNPJ: 61.814.267/0001-07 & 💚 Grupo BUCA MARKETING PERFORMANCE LTDA. CNPJ: 51.479.162/0001-95
           </span>
         </div>
-
-        {/* FDA Legal Disclaimer at the Absolute Bottom Below Footer */}
-        {disclaimer && (
-          <div
-            style={{
-              marginTop: '2rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-              maxWidth: '900px',
-              margin: '2rem auto 0 auto',
-              fontSize: '11px',
-              color: 'rgba(255, 255, 255, 0.55)',
-              lineHeight: 1.65,
-              textAlign: 'center'
-            }}
-          >
-            {disclaimer}
-          </div>
-        )}
       </div>
 
       {/* Integrated Interactive Policy Modal */}
