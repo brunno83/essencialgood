@@ -9,8 +9,7 @@ export function RealTransformations({ accentColor }) {
       name: 'Emily R.',
       badgeText: 'Verified Buyer',
       headline: '“It became one of the easiest parts of my morning routine.”',
-      feedback: 'I love how simple it is to mix and how naturally it fits into my day.',
-      hasOverlayBadges: false 
+      feedback: 'I love how simple it is to mix and how naturally it fits into my day.'
     },
     { 
       id: 2, 
@@ -19,8 +18,7 @@ export function RealTransformations({ accentColor }) {
       name: 'Jessica T.',
       badgeText: 'Verified Buyer',
       headline: '“Finally, something I can actually stay consistent with.”',
-      feedback: 'I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.',
-      hasOverlayBadges: false 
+      feedback: 'I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.'
     },
     { 
       id: 3, 
@@ -29,8 +27,7 @@ export function RealTransformations({ accentColor }) {
       name: 'Karen M.',
       badgeText: 'Verified Buyer',
       headline: '“Simple, convenient and easy to remember.”',
-      feedback: 'Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.',
-      hasOverlayBadges: false 
+      feedback: 'Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.'
     },
     { 
       id: 4, 
@@ -39,8 +36,7 @@ export function RealTransformations({ accentColor }) {
       name: 'Sarah H.',
       badgeText: 'Verified Buyer',
       headline: '“It fits naturally into my routine.”',
-      feedback: 'No complicated preparation. I mix it with water and get on with my day.',
-      hasOverlayBadges: false 
+      feedback: 'No complicated preparation. I mix it with water and get on with my day.'
     }
   ];
 
@@ -123,13 +119,14 @@ export function RealTransformations({ accentColor }) {
                 flexShrink: 0
               }}
             >
-              {/* Photo Box without any weight badges */}
+              {/* Photo Box with CSS Crop hiding bottom burned-in weight badges */}
               <div 
                 style={{ 
                   width: '100%', 
-                  height: '300px', 
+                  height: '255px', 
                   position: 'relative',
-                  backgroundColor: '#FAF7F2'
+                  backgroundColor: '#FAF7F2',
+                  overflow: 'hidden'
                 }}
               >
                 <img
@@ -137,8 +134,9 @@ export function RealTransformations({ accentColor }) {
                   alt={item.alt}
                   style={{
                     width: '100%',
-                    height: '100%',
+                    height: '118%',
                     objectFit: 'cover',
+                    objectPosition: 'top center',
                     display: 'block'
                   }}
                 />
