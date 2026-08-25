@@ -40,8 +40,13 @@ export function RealTransformations({ accentColor }) {
     }
   ];
 
-  // Duplicate list for infinite smooth marquee track
-  const doubleList = [...transformationImages, ...transformationImages];
+  // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
+  const repeatList = [
+    ...transformationImages, 
+    ...transformationImages, 
+    ...transformationImages, 
+    ...transformationImages
+  ];
 
   return (
     <section 
@@ -100,11 +105,11 @@ export function RealTransformations({ accentColor }) {
             display: 'flex',
             gap: '24px',
             width: 'max-content',
-            animation: 'infiniteScroll 34s linear infinite',
+            animation: 'infiniteScroll 48s linear infinite',
             willChange: 'transform'
           }}
         >
-          {doubleList.map((item, idx) => (
+          {repeatList.map((item, idx) => (
             <div
               key={`${item.id}-${idx}`}
               style={{
