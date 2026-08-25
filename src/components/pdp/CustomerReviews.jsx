@@ -1,49 +1,52 @@
 import React, { useState, useEffect } from 'react';
 
 export function CustomerReviews({ reviewsSection, accentColor }) {
+  const defaultCompliantReviews = [
+    {
+      id: 1,
+      author: 'Kendra P.',
+      rating: 5,
+      title: 'Easy to stay consistent with',
+      body: '“I wanted something simple enough to fit into my routine. SlimSoda is easy to mix with water and has become a convenient part of my day.”',
+      verified: true,
+      date: '2 days ago'
+    },
+    {
+      id: 2,
+      author: 'Riley T.',
+      rating: 5,
+      title: 'Fits naturally into my morning',
+      body: '“I like how easy it is to prepare. I mix it with water as part of my morning routine, and it doesn\'t add another complicated step to my day.”',
+      verified: true,
+      date: '5 days ago'
+    },
+    {
+      id: 3,
+      author: 'Aubrey D.',
+      rating: 5,
+      title: 'Simple and convenient',
+      body: '“It mixes quickly with cold water and fits easily into my morning. I especially like that the routine is simple and doesn\'t require several different products.”',
+      verified: true,
+      date: '1 week ago'
+    },
+    {
+      id: 4,
+      author: 'Lesley S.',
+      rating: 5,
+      title: 'Easy to make part of my day',
+      body: '“Three weeks in and the biggest thing for me is how easy it has been to stay consistent. I mix it with water and continue with my day. Simple routines are easier for me to maintain.”',
+      verified: true,
+      date: '2 weeks ago'
+    }
+  ];
+
   const [reviewsList, setReviewsList] = useState(() => {
-    const saved = localStorage.getItem('slimsoda_reviews');
+    // Check if saved in localStorage and has compliant title
+    const saved = localStorage.getItem('slimsoda_reviews_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
-    return [
-      {
-        id: 1,
-        author: 'Kendra L.',
-        rating: 5,
-        title: 'Changed everything for me',
-        body: "I tried so many products that felt complicated or heavy. I started taking SlimSoda twice daily as directed, and within weeks I noticed a real difference in my energy, bloating, and daily digestion. Absolutely incredible formula!",
-        verified: true,
-        date: '2 days ago'
-      },
-      {
-        id: 2,
-        author: 'Riley T.',
-        rating: 5,
-        title: 'No more excess water weight',
-        body: "I used to wake up every morning feeling sluggish and bloated. Within a couple of weeks of taking SlimSoda, the puffiness started to fade, and I noticed my clothes fitting more comfortably too. It fits naturally into my morning routine.",
-        verified: true,
-        date: '5 days ago'
-      },
-      {
-        id: 3,
-        author: 'Aubrey D.',
-        rating: 5,
-        title: 'Simple and convenient',
-        body: "I have more energy, fewer cravings for junk food between meals, and zero jitters. I mix it in seconds with cold water before breakfast. So glad I bit the bullet and tried it!",
-        verified: true,
-        date: '1 week ago'
-      },
-      {
-        id: 4,
-        author: 'Lesley S.',
-        rating: 5,
-        title: 'The food noise is finally quiet',
-        body: "It dissolves in seconds and tastes clean. Three weeks in and I'm not snacking between meals anymore — I just don't think about food all day like I used to. Consistency really is the key.",
-        verified: true,
-        date: '2 weeks ago'
-      }
-    ];
+    return defaultCompliantReviews;
   });
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -54,7 +57,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
   const [submittedMessage, setSubmittedMessage] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('slimsoda_reviews', JSON.stringify(reviewsList));
+    localStorage.setItem('slimsoda_reviews_v2', JSON.stringify(reviewsList));
   }, [reviewsList]);
 
   const getInitials = (name) => {
@@ -93,6 +96,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
 
   if (!reviewsSection) return null;
   const { tag, title, ratingText } = reviewsSection;
+  const brandGreen = accentColor || '#27AE60';
 
   return (
     <section id="reviews-section" style={{ padding: '75px 20px', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
@@ -105,7 +109,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
               fontSize: '12px', 
               fontWeight: 900, 
               letterSpacing: '0.14em', 
-              color: accentColor || '#D96B32',
+              color: brandGreen,
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: '8px'
@@ -123,7 +127,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
           </div>
         )}
 
-        {/* Action Bar: Write a Review Button (Clean text without hand emoji) */}
+        {/* Action Bar: Write a Review Button */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }}>
           <button
             onClick={() => setModalOpen(true)}
@@ -176,8 +180,8 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
                   width: '36px',
                   height: '36px',
                   borderRadius: '50%',
-                  backgroundColor: `${accentColor || '#D96B32'}15`,
-                  color: accentColor || '#D96B32',
+                  backgroundColor: 'rgba(39, 174, 96, 0.12)',
+                  color: brandGreen,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -320,7 +324,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
                     required
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
-                    placeholder="e.g. Changed my daily routine!"
+                    placeholder="e.g. Easy to stay consistent with!"
                     style={{
                       width: '100%',
                       padding: '10px 14px',
@@ -356,7 +360,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: accentColor || '#D96B32',
+                    backgroundColor: brandGreen,
                     color: '#FFFFFF',
                     border: 'none',
                     borderRadius: '10px',

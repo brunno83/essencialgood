@@ -265,27 +265,27 @@ export const PDP_DATA = {
       disclaimer: 'Prioritize authentic reviews around ease of use, taste, convenience, mixing, daily routine, consistency and overall product experience.',
       reviews: [
         {
-          quote: '“IT BECOME ONE OF THE EASIEST PARTS OF MY MORNING.”',
-          body: '“I love how simple it is to mix and how naturally it fits into my day.”',
-          author: 'Emily R. — Verified Buyer',
+          quote: '“EASY TO STAY CONSISTENT WITH”',
+          body: '“I wanted something simple enough to fit into my routine. SlimSoda is easy to mix with water and has become a convenient part of my day.”',
+          author: 'Kendra P. — Verified Buyer',
           stars: 5
         },
         {
-          quote: '“FINALLY, SOMETHING I CAN STAY CONSISTENT WITH.”',
-          body: '“I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.”',
-          author: 'Jessica T. — Verified Buyer',
+          quote: '“FITS NATURALLY INTO MY MORNING”',
+          body: '“I like how easy it is to prepare. I mix it with water as part of my morning routine, and it doesn\'t add another complicated step to my day.”',
+          author: 'Riley T. — Verified Buyer',
           stars: 5
         },
         {
-          quote: '“SIMPLE, CONVENIENT AND EASY TO REMEMBER.”',
-          body: '“Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.”',
-          author: 'Karen M. — Verified Buyer',
+          quote: '“SIMPLE AND CONVENIENT”',
+          body: '“It mixes quickly with cold water and fits easily into my morning. I especially like that the routine is simple and doesn\'t require several different products.”',
+          author: 'Aubrey D. — Verified Buyer',
           stars: 5
         },
         {
-          quote: '“IT FITS NATURALLY INTO MY ROUTINE.”',
-          body: '“No complicated preparation. I mix it with water and get on with my day.”',
-          author: 'Sarah H. — Verified Buyer',
+          quote: '“EASY TO MAKE PART OF MY DAY”',
+          body: '“Three weeks in and the biggest thing for me is how easy it has been to stay consistent. I mix it with water and continue with my day. Simple routines are easier for me to maintain.”',
+          author: 'Lesley S. — Verified Buyer',
           stars: 5
         }
       ]
