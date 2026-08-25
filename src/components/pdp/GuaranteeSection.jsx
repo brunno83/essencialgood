@@ -3,6 +3,7 @@ import React from 'react';
 export function GuaranteeSection({ guaranteeSection, accentColor }) {
   if (!guaranteeSection) return null;
   const { tag, title, subtitle, lead, body, highlight, ctaText } = guaranteeSection;
+  const brandGreen = accentColor || '#27AE60';
 
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
@@ -29,7 +30,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
               fontSize: '12px', 
               fontWeight: 900, 
               letterSpacing: '0.14em', 
-              color: accentColor || '#D96B32',
+              color: brandGreen,
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: '8px'
@@ -60,7 +61,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
           {title}
         </h2>
         {subtitle && (
-          <div style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.1em', color: accentColor || '#D96B32', marginBottom: '20px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.1em', color: brandGreen, marginBottom: '20px' }}>
             {subtitle}
           </div>
         )}
@@ -87,7 +88,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
           <button
             onClick={scrollToBundles}
             style={{
-              backgroundColor: accentColor || '#D96B32',
+              backgroundColor: brandGreen,
               color: '#FFFFFF',
               border: 'none',
               borderRadius: '10px',
@@ -96,7 +97,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
               fontWeight: 800,
               letterSpacing: '0.04em',
               cursor: 'pointer',
-              boxShadow: `0 6px 20px ${accentColor}35`
+              boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)'
             }}
           >
             {ctaText}

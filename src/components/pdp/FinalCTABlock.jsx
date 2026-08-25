@@ -1,6 +1,8 @@
 import React from 'react';
 
 export function FinalCTABlock({ accentColor }) {
+  const brandGreen = accentColor || '#27AE60';
+
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -34,14 +36,14 @@ export function FinalCTABlock({ accentColor }) {
           Selected ingredients. One powdered formula. One simple daily routine.
         </p>
 
-        <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.14em', color: accentColor || '#D96B32', marginBottom: '24px' }}>
+        <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.14em', color: brandGreen, marginBottom: '24px' }}>
           MIX. SIP. KEEP MOVING.
         </div>
 
         <button
           onClick={scrollToBundles}
           style={{
-            backgroundColor: accentColor || '#D96B32',
+            backgroundColor: brandGreen,
             color: '#FFFFFF',
             border: 'none',
             borderRadius: '12px',
@@ -50,7 +52,7 @@ export function FinalCTABlock({ accentColor }) {
             fontWeight: 900,
             letterSpacing: '0.04em',
             cursor: 'pointer',
-            boxShadow: `0 10px 28px ${accentColor}50`,
+            boxShadow: '0 10px 28px rgba(39, 174, 96, 0.4)',
             transition: 'transform 0.2s ease',
             marginBottom: '16px'
           }}

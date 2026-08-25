@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { LowStockProgressBar } from '../common/LowStockProgressBar';
 
 export function InlineBundleSelector({ bundles = [], accentColor }) {
+  const brandGreen = accentColor || '#27AE60';
+  
   // Default selected bundle: most-popular (index 1) or first
   const [selectedId, setSelectedId] = useState(() => {
     const popular = bundles.find(b => b.isPopular);
@@ -28,13 +30,13 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
               onClick={() => setSelectedId(bundle.id)}
               style={{
                 position: 'relative',
-                backgroundColor: isSelected ? '#FAF5EF' : '#FFFFFF',
-                border: isSelected ? `2.5px solid ${accentColor || '#D96B32'}` : '1.5px solid rgba(0, 0, 0, 0.12)',
+                backgroundColor: isSelected ? 'rgba(39, 174, 96, 0.04)' : '#FFFFFF',
+                border: isSelected ? `2.5px solid ${brandGreen}` : '1.5px solid rgba(0, 0, 0, 0.12)',
                 borderRadius: '14px',
                 padding: '16px 18px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: isSelected ? '0 6px 20px rgba(217, 107, 50, 0.12)' : '0 2px 8px rgba(0,0,0,0.03)'
+                boxShadow: isSelected ? '0 6px 20px rgba(39, 174, 96, 0.15)' : '0 2px 8px rgba(0,0,0,0.03)'
               }}
             >
               {/* Badge Top Right */}
@@ -44,7 +46,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
                     position: 'absolute',
                     top: '-11px',
                     right: '18px',
-                    backgroundColor: isSelected ? (accentColor || '#D96B32') : '#141210',
+                    backgroundColor: isSelected ? brandGreen : '#141210',
                     color: '#FFFFFF',
                     fontSize: '10.5px',
                     fontWeight: 800,
@@ -66,8 +68,8 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    border: `2px solid ${isSelected ? (accentColor || '#D96B32') : '#AAA'}`,
-                    backgroundColor: isSelected ? (accentColor || '#D96B32') : '#FFF',
+                    border: `2px solid ${isSelected ? brandGreen : '#AAA'}`,
+                    backgroundColor: isSelected ? brandGreen : '#FFF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -120,7 +122,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
 
                   {/* Extra bonuses when selected */}
                   {isSelected && (
-                    <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid rgba(217, 107, 50, 0.15)' }}>
+                    <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid rgba(39, 174, 96, 0.15)' }}>
                       <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#27AE60', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         ✓ {bundle.savings} Applied
                       </div>
@@ -138,7 +140,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
         })}
       </div>
 
-      {/* Main Hero CTA Button */}
+      {/* Main Hero CTA Button (Vibrant Green #27AE60) */}
       <a
         href={selectedBundle.checkoutUrl}
         target="_top"
@@ -148,7 +150,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
-          backgroundColor: accentColor || '#D96B32',
+          backgroundColor: brandGreen,
           color: '#FFFFFF',
           fontSize: '15px',
           fontWeight: 900,
@@ -158,7 +160,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
           textDecoration: 'none',
           textAlign: 'center',
           marginTop: '16px',
-          boxShadow: `0 10px 25px ${accentColor}40`,
+          boxShadow: '0 10px 25px rgba(39, 174, 96, 0.35)',
           transition: 'transform 0.2s ease',
           cursor: 'pointer'
         }}
@@ -167,7 +169,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
       </a>
 
       {/* Low Stock Warning Progress Bar Widget right below CTA button */}
-      <LowStockProgressBar percentage={88} accentColor={accentColor} />
+      <LowStockProgressBar percentage={88} accentColor={brandGreen} />
 
       <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '11.5px', color: '#777', fontWeight: 700, letterSpacing: '0.04em' }}>
         🔒 SECURE CHECKOUT • FREE U.S. SHIPPING • 90-DAY GUARANTEE

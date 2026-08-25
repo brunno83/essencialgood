@@ -10,8 +10,8 @@ export const PDP_DATA = {
     rating: 4.7,
     reviewCount: '17,012+',
     startingPrice: '$19.99',
-    accentColor: '#D96B32',
-    accentLight: 'rgba(217, 107, 50, 0.12)',
+    accentColor: '#27AE60',
+    accentLight: 'rgba(39, 174, 96, 0.12)',
     heroImage: '/assets/products/slimsoda-gallery-1.png',
     
     usps: [

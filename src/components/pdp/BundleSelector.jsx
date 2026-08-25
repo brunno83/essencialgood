@@ -4,6 +4,7 @@ import { LowStockProgressBar } from '../common/LowStockProgressBar';
 export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) {
   if (!bundlesSection) return null;
   const { tag, title, subtitle, finePrint, bundles } = bundlesSection;
+  const brandGreen = accentColor || '#27AE60';
 
   return (
     <div style={{ width: '100%' }}>
@@ -15,7 +16,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
               fontSize: '12px', 
               fontWeight: 900, 
               letterSpacing: '0.14em', 
-              color: accentColor || '#D96B32',
+              color: brandGreen,
               textTransform: 'uppercase',
               display: 'block',
               marginBottom: '8px'
@@ -59,12 +60,12 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
 
           // Card Backgrounds & Styles
           let cardBg = '#FFFFFF';
-          let borderColor = isFeatured ? (accentColor || '#D96B32') : 'rgba(0, 0, 0, 0.08)';
-          let ctaBg = accentColor || '#D96B32'; // All buttons use vibrant terracotta orange
-          let badgeBg = isBestValue ? '#4B6833' : accentColor || '#D96B32';
+          let borderColor = isFeatured ? brandGreen : 'rgba(0, 0, 0, 0.08)';
+          let ctaBg = brandGreen; // All CTA buttons use vibrant green
+          let badgeBg = isBestValue ? '#1E6F38' : brandGreen;
 
           if (isPopular) {
-            cardBg = '#FAF5EF';
+            cardBg = '#F6FCF8';
           }
 
           return (
@@ -79,7 +80,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 position: 'relative',
-                boxShadow: isFeatured ? `0 16px 40px rgba(217, 107, 50, 0.2)` : '0 4px 20px rgba(0, 0, 0, 0.04)',
+                boxShadow: isFeatured ? '0 16px 40px rgba(39, 174, 96, 0.25)' : '0 4px 20px rgba(0, 0, 0, 0.04)',
                 transform: isFeatured ? 'translateY(-6px)' : 'none',
                 transition: 'all 0.3s ease'
               }}
@@ -222,7 +223,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                   borderRadius: '10px',
                   textDecoration: 'none',
                   textAlign: 'center',
-                  boxShadow: `0 8px 24px ${ctaBg}40`,
+                  boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}
@@ -236,7 +237,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
 
       {/* Low Stock Warning Bar Widget */}
       <div style={{ maxWidth: '600px', margin: '24px auto 0 auto' }}>
-        <LowStockProgressBar percentage={88} accentColor={accentColor} />
+        <LowStockProgressBar percentage={88} accentColor={brandGreen} />
       </div>
 
       {finePrint && (

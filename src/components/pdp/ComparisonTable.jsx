@@ -3,6 +3,7 @@ import React from 'react';
 export function ComparisonTable({ comparisonSection, accentColor }) {
   if (!comparisonSection) return null;
   const { tag, title, tagline, headers, rows } = comparisonSection;
+  const brandGreen = accentColor || '#27AE60';
 
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
@@ -29,7 +30,7 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
                 fontSize: '12px', 
                 fontWeight: 900, 
                 letterSpacing: '0.16em', 
-                color: accentColor || '#D96B32',
+                color: brandGreen,
                 textTransform: 'uppercase',
                 display: 'block',
                 marginBottom: '8px'
@@ -95,7 +96,7 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
                 }}
               >
                 <div style={{ textAlign: 'left' }}>{headers[0]}</div>
-                <div style={{ color: accentColor || '#D96B32' }}>{headers[1]}</div>
+                <div style={{ color: brandGreen }}>{headers[1]}</div>
                 <div style={{ color: '#AAA' }}>{headers[2]}</div>
               </div>
 
@@ -135,7 +136,7 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
             <button
               onClick={scrollToBundles}
               style={{
-                backgroundColor: accentColor || '#D96B32',
+                backgroundColor: brandGreen,
                 color: '#FFFFFF',
                 border: 'none',
                 borderRadius: '10px',
@@ -144,7 +145,7 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
                 fontWeight: 800,
                 letterSpacing: '0.04em',
                 cursor: 'pointer',
-                boxShadow: `0 8px 24px ${accentColor}45`
+                boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)'
               }}
             >
               CHOOSE MY BUNDLE →

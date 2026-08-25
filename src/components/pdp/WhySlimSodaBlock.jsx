@@ -1,6 +1,8 @@
 import React from 'react';
 
 export function WhySlimSodaBlock({ accentColor }) {
+  const brandGreen = accentColor || '#27AE60';
+
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -58,7 +60,7 @@ export function WhySlimSodaBlock({ accentColor }) {
                 fontSize: '12px', 
                 fontWeight: 900, 
                 letterSpacing: '0.16em', 
-                color: accentColor || '#D96B32',
+                color: brandGreen,
                 textTransform: 'uppercase',
                 display: 'block',
                 marginBottom: '8px'
@@ -103,14 +105,14 @@ export function WhySlimSodaBlock({ accentColor }) {
 
               <div 
                 style={{ 
-                  backgroundColor: '#FAF5EF', 
-                  borderLeft: `4px solid ${accentColor || '#D96B32'}`, 
+                  backgroundColor: '#F6FCF8', 
+                  borderLeft: `4px solid ${brandGreen}`, 
                   padding: '14px 18px', 
                   borderRadius: '0 12px 12px 0',
                   marginBottom: '18px'
                 }}
               >
-                <div style={{ fontSize: '11px', fontWeight: 900, color: accentColor || '#D96B32', letterSpacing: '0.08em', marginBottom: '4px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 900, color: brandGreen, letterSpacing: '0.08em', marginBottom: '4px' }}>
                   SLIMSODA WAS CREATED AROUND A SIMPLER IDEA:
                 </div>
                 <div style={{ fontSize: '14px', fontWeight: 900, color: '#141210', letterSpacing: '0.01em' }}>
@@ -131,7 +133,7 @@ export function WhySlimSodaBlock({ accentColor }) {
               <button
                 onClick={scrollToBundles}
                 style={{
-                  backgroundColor: accentColor || '#D96B32',
+                  backgroundColor: brandGreen,
                   color: '#FFFFFF',
                   border: 'none',
                   borderRadius: '10px',
@@ -140,7 +142,7 @@ export function WhySlimSodaBlock({ accentColor }) {
                   fontWeight: 800,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: `0 8px 24px ${accentColor}40`,
+                  boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)',
                   transition: 'transform 0.2s ease'
                 }}
               >
