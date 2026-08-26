@@ -56,7 +56,7 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
       id: 2, 
       src: '/linfaflow/images/ugc-02.png', 
       alt: 'LinfaFlow Daily Routine Transformation',
-      name: 'Elena B.',
+      name: 'Marcus B.',
       badgeText: 'Verified Customer',
       headline: '“FINALLY, A FORMULA I CAN UNDERSTAND.”',
       feedback: 'I liked seeing four clearly named botanicals instead of a huge proprietary-looking ingredient list. It\'s straightforward and easy to use.'
