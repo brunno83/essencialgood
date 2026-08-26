@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
-  const isLinfaFlow = productName.toLowerCase().includes('linfaflow');
+  const isLinfaFlow = String(productName || '').toLowerCase().includes('linfaflow');
 
   const defaultImages = [
     { 

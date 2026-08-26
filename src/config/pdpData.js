@@ -156,6 +156,51 @@ export const PDP_DATA = {
       ]
     },
 
+    whyBlock: {
+      tag: 'WHY SLIMSODA?',
+      title: "YOUR WELLNESS ROUTINE SHOULDN'T FEEL LIKE A FULL-TIME JOB.",
+      lead: "Healthy habits work best when they're simple enough to maintain.",
+      p1: "But wellness routines can quickly become complicated — multiple bottles, different schedules and too many steps to remember.",
+      boxTag: 'SLIMSODA WAS CREATED AROUND A SIMPLER IDEA:',
+      boxTitle: 'SELECTED INGREDIENTS. ONE POWDERED FORMULA. ONE EASY ROUTINE.',
+      p2: 'Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.',
+      tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
+      ctaText: 'TRY SLIMSODA →',
+      image: '/assets/products/slimsoda-lifestyle-routine.jpg'
+    },
+
+    whyChoose: {
+      tag: 'WHY PEOPLE CHOOSE SLIMSODA',
+      title: 'BUILT AROUND WHAT MAKES A ROUTINE',
+      titleHighlight: 'EASIER TO KEEP.',
+      subtitle: 'Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.',
+      tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
+      ctaText: 'CHOOSE MY BUNDLE →',
+      image: '/assets/products/slimsoda-stone-pedestal.jpg',
+      features: [
+        {
+          icon: 'Droplets',
+          title: 'EASY TO MIX',
+          desc: 'Simply add SlimSoda to water according to product directions.'
+        },
+        {
+          icon: 'Leaf',
+          title: 'ONE POWDERED FORMULA',
+          desc: 'A convenient alternative to managing multiple supplement bottles.'
+        },
+        {
+          icon: 'Sun',
+          title: 'EASY TO BUILD INTO YOUR DAY',
+          desc: 'Designed to fit naturally into a morning and evening routine.'
+        },
+        {
+          icon: 'ShieldCheck',
+          title: '90-DAY GUARANTEE',
+          desc: 'Plenty of time to decide whether SlimSoda is right for your routine.'
+        }
+      ]
+    },
+
     benefitsSection: {
       tag: 'BENEFITS',
       title: 'SIMPLE SUPPORT FOR THE HEALTHY HABITS THAT MATTER.',
@@ -759,6 +804,458 @@ export const PDP_DATA = {
     },
 
     disclaimer: `LinfaFlow® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. Persistent, sudden, unexplained or one-sided swelling or fluid retention may have medical causes and should be evaluated by a qualified healthcare professional. Consult a healthcare professional before using dietary supplements if you are pregnant, nursing, taking medication or have a medical condition. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.`
+  },
+
+  sonnus: {
+    id: 'sonnus',
+    brand: 'SONNUS®',
+    title: 'A RESTORATIVE EVENING RITUAL FOR DEEP NIGHTTIME REST.',
+    subtitle: 'Sonnus is a soothing evening liquid formula formulated to complement your nighttime wind-down routine, natural relaxation habits and restful sleep support.',
+    rating: 4.9,
+    reviewCount: '9,480+',
+    startingPrice: '$19.99',
+    accentColor: '#3B4959',
+    accentLight: 'rgba(59, 73, 89, 0.12)',
+    heroImage: '/assets/products/highlight_sonnus.png',
+    
+    usps: [
+      'Supports natural evening relaxation',
+      'Complements healthy sleep routines',
+      'Non-habit forming botanical blend',
+      'Easy liquid dropper before bedtime',
+      'Wake up feeling refreshed'
+    ],
+
+    gallery: [
+      { id: 'g1', label: 'PRODUCT HERO', src: '/assets/products/highlight_sonnus.png' },
+      { id: 'g2', label: 'BOTTLE', src: '/assets/products/product_sonnus_bottle.png' },
+      { id: 'g3', label: 'SELECTOR', src: '/assets/products/selector_sonnus.png' }
+    ],
+
+    bundlesSection: {
+      tag: 'READY TO REST BETTER?',
+      title: 'SAVE MORE WHEN YOU STOCK UP ON SONNUS®',
+      subtitle: 'Select your Sonnus bundle to build a consistent evening routine.',
+      finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
+      bundles: [
+        {
+          id: 'starter',
+          name: 'STARTER BUNDLE',
+          badge: 'SAVE 50%',
+          image: '/assets/products/product_sonnus_bottle.png',
+          isPopular: false,
+          isBestValue: false,
+          bottles: '2 BOTTLES TOTAL',
+          deal: 'BUY 1, GET 1 FREE',
+          pricePerBottle: '$34.75',
+          totalPrice: '$69.50',
+          originalTotal: '$139.00',
+          savings: 'Save $69.50',
+          perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
+          ctaText: 'GET MY 2 BOTTLES →',
+          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+        },
+        {
+          id: 'most-popular',
+          name: 'MOST POPULAR',
+          badge: 'MOST POPULAR',
+          image: '/assets/products/selector_sonnus.png',
+          isPopular: true,
+          isBestValue: false,
+          bottles: '4 BOTTLES TOTAL',
+          deal: 'BUY 2, GET 2 FREE',
+          pricePerBottle: '$27.49',
+          totalPrice: '$109.96',
+          originalTotal: '$219.92',
+          savings: 'Save $109.96',
+          bonusText: '✓ Priority Handling + Free U.S. Shipping',
+          perks: ['Better Value', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Handling'],
+          ctaText: 'GET MY 4 BOTTLES →',
+          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+        },
+        {
+          id: 'best-value',
+          name: 'BEST VALUE',
+          badge: 'BEST VALUE',
+          image: '/assets/products/highlight_sonnus.png',
+          isPopular: false,
+          isBestValue: true,
+          bottles: '6 BOTTLES TOTAL',
+          deal: 'BUY 3, GET 3 FREE',
+          pricePerBottle: '$19.99',
+          totalPrice: '$119.94',
+          originalTotal: '$329.80',
+          savings: 'Save $209.86',
+          bonusText: '✓ Lowest Price Per Bottle + Expedited Processing',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Expedited Handling'],
+          ctaText: 'GET THE BEST VALUE →',
+          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+        }
+      ]
+    },
+
+    trustStrip: {
+      tag: 'TRUST & QUALITY',
+      title: 'RESTFUL WELLNESS SUPPORT',
+      items: [
+        { title: 'NON-HABIT FORMING', desc: 'Gentle botanical ingredients designed for daily evening rest.' },
+        { title: 'THIRD-PARTY TESTED', desc: 'Quality tested by an independent third-party laboratory.' },
+        { title: 'U.S. MADE', desc: 'Manufactured in the United States in a registered facility.' },
+        { title: 'FREE U.S. SHIPPING', desc: 'Fast shipping directly from our U.S. fulfillment centers.' },
+        { title: '90-DAY GUARANTEE', desc: 'Try Sonnus risk-free for 90 days.' }
+      ]
+    },
+
+    whyBlock: {
+      tag: 'WHY SONNUS?',
+      title: 'A CALM EVENING IS THE FOUNDATION OF A GREAT DAY.',
+      lead: 'Rest is not a luxury — it is an essential part of daily wellbeing.',
+      p1: 'Modern schedules can make winding down at night difficult. Sonnus brings relaxing botanicals together in one easy liquid formula.',
+      boxTag: 'THE SONNUS EVENING RITUAL:',
+      boxTitle: 'TAKE A DROPPER. WIND DOWN. REST DEEPLY.',
+      p2: 'Incorporate Sonnus into your evening routine alongside dimming lights and unplugging from screens.',
+      tagline: 'GENTLE REST. REFRESHED MORNINGS.',
+      ctaText: 'MAKE SONNUS PART OF MY NIGHT →',
+      image: '/assets/products/highlight_sonnus.png'
+    },
+
+    whyChoose: {
+      tag: 'WHY PEOPLE CHOOSE SONNUS',
+      title: 'AN EVENING ROUTINE YOU LOOK FORWARD TO',
+      titleHighlight: 'EVERY NIGHT.',
+      subtitle: 'Simple dropper format that fits seamlessly into your wind-down habits.',
+      tagline: 'RESTFUL NIGHTS. CLEAR MORNINGS.',
+      ctaText: 'CHOOSE MY BUNDLE →',
+      image: '/assets/products/selector_sonnus.png',
+      features: [
+        { icon: 'Droplets', title: 'CONVENIENT LIQUID DROPPER', desc: 'Easy to take right before bedtime.' },
+        { icon: 'Leaf', title: 'CALMING BOTANICALS', desc: 'Formulated with soothing natural plant extracts.' },
+        { icon: 'Sun', title: 'NON-DROWSY MORNINGS', desc: 'Wake up feeling refreshed without morning groggy feelings.' },
+        { icon: 'ShieldCheck', title: '90-DAY RISK FREE GUARANTEE', desc: 'Plenty of time to evaluate your sleep routine.' }
+      ]
+    },
+
+    benefitsSection: {
+      tag: 'BENEFITS',
+      title: 'SUPPORTING YOUR BODY\'S NATURAL EVENING WIND-DOWN.',
+      subtitle: 'Sonnus complements your evening routine to foster calm and restful sleep.',
+      highlightText: 'CALMING BOTANICALS. SOOTHING RITUAL. RESTFUL SLEEP.',
+      ctaText: 'TRY SONNUS TODAY →',
+      benefits: [
+        { title: 'EVENING RELAXATION', desc: 'Helps signal to your mind and body that it is time to unwind.' },
+        { title: 'RESTFUL SLEEP SUPPORT', desc: 'Complements healthy sleep cycles without heavy drugs.' },
+        { title: 'EASY LIQUID DROPPER', desc: 'Takes seconds to incorporate into your night.' }
+      ]
+    },
+
+    howItWorks: {
+      tag: 'HOW IT WORKS',
+      title: 'THIRTY SECONDS BEFORE BEDTIME.',
+      subtitle: 'The ultimate evening wind-down companion.',
+      image: '/assets/products/highlight_sonnus.png',
+      steps: [
+        { step: '01', title: 'TAKE', desc: 'Take one dropper of Sonnus 30 minutes before bed.' },
+        { step: '02', title: 'UNWIND', desc: 'Dim lights and disconnect from electronic screens.' },
+        { step: '03', title: 'REST', desc: 'Fall asleep naturally and wake up refreshed.' }
+      ],
+      tagline: 'TAKE. UNWIND. REST.',
+      ctaText: 'START MY SONNUS ROUTINE →'
+    },
+
+    ingredientsSection: {
+      tag: 'WHAT\'S INSIDE',
+      title: 'GENTLE, TIME-TESTED BOTANICAL INGREDIENTS.',
+      subtitle: 'Pure plant extracts chosen for relaxation.',
+      description: 'Sonnus features natural botanicals crafted for evening peace.',
+      highlightText: 'CLEAN BOTANICAL EXTRACTS. NO HARSH CHEMICALS.',
+      ctaText: 'VIEW SUPPLEMENT FACTS →',
+      image: '/assets/products/product_sonnus_bottle.png',
+      ingredients: [
+        { name: 'CHAMOMILE EXTRACT', desc: 'Traditionally used to soothe tension and promote evening calm.', whyItsHere: 'Calming foundation.' },
+        { name: 'VALERIAN ROOT', desc: 'Renowned botanical for restful sleep support.', whyItsHere: 'Sleep cycle support.' },
+        { name: 'PASSIONFLOWER', desc: 'Helps calm a busy mind before bed.', whyItsHere: 'Mind relaxation.' }
+      ]
+    },
+
+    comparisonSection: {
+      tag: 'WHY SONNUS?',
+      title: 'A NATURAL WIND-DOWN vs. HEAVY SLEEPING PILLS.',
+      tagline: 'GENTLE. NATURAL. REFRESHING.',
+      image: '/assets/products/selector_sonnus.png',
+      headers: ['FEATURES', 'SONNUS®', 'SLEEPING PILLS'],
+      rows: [
+        { feature: 'Natural plant extracts', product: true, opponent: 'False' },
+        { feature: 'Non-habit forming', product: true, opponent: 'False' },
+        { feature: 'No morning grogginess', product: true, opponent: 'False' },
+        { feature: '90-Day Guarantee', product: true, opponent: 'Varies' }
+      ]
+    },
+
+    reviewsSection: {
+      tag: 'CUSTOMER REVIEWS',
+      title: 'RESTFUL NIGHTS. HAPPY CUSTOMERS.',
+      ratingText: '★★★★★ 4.9/5 Customer Rating',
+      headline: 'VERIFIED CUSTOMER FEEDBACK',
+      disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
+      reviews: [
+        { quote: '“FINALLY SLEEPING THROUGH THE NIGHT.”', body: '“Sonnus has become my favourite evening habit. I feel calm within 20 minutes.”', author: 'David L. — 5 Stars', stars: 5 },
+        { quote: '“NO GROGGINESS IN THE MORNING!”', body: '“Unlike other products, I wake up completely clear-headed and ready for my morning walk.”', author: 'Rachel B. — 5 Stars', stars: 5 }
+      ]
+    },
+
+    guaranteeSection: {
+      tag: '90-DAY GUARANTEE',
+      title: 'TRY SONNUS FOR 90 NIGHTS RISK-FREE.',
+      subtitle: 'YOUR SATISFACTION IS GUARANTEED.',
+      lead: 'We stand behind our formulas with a full 90-day money-back guarantee.',
+      body: 'If Sonnus does not improve your evening wind-down routine, contact our customer support team for a hassle-free refund.',
+      highlight: '90 DAYS TO DECIDE.',
+      ctaText: 'TRY SONNUS RISK-FREE →'
+    },
+
+    faqSection: {
+      tag: 'FAQ',
+      title: 'FREQUENTLY ASKED QUESTIONS ABOUT SONNUS®',
+      faqs: [
+        { q: 'WHEN SHOULD I TAKE SONNUS?', a: 'Take Sonnus approximately 30 minutes before your intended bedtime.' },
+        { q: 'WILL I FEEL GROGGY IN THE MORNING?', a: 'Sonnus is formulated with natural botanicals to support refreshing sleep without morning grogginess.' }
+      ]
+    },
+
+    finalOffer: {
+      tag: 'READY TO REST BETTER?',
+      title: 'START YOUR RESTORATIVE EVENING RITUAL TODAY.',
+      subtitle: 'Enjoy deep relaxation and wake up feeling renewed.',
+      ctaText: 'CHOOSE MY SONNUS BUNDLE →'
+    },
+
+    disclaimer: 'Sonnus® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.'
+  },
+
+  crowned: {
+    id: 'crowned',
+    brand: 'CROWNED®',
+    title: 'ADVANCED BOTANICAL FORMULA FOR HAIR & SCALP VITALITY.',
+    subtitle: 'Crowned is a premium botanical formula designed to complement your daily hair care routine, scalp vitality and strand strength.',
+    rating: 4.8,
+    reviewCount: '12,340+',
+    startingPrice: '$19.99',
+    accentColor: '#7E57C2',
+    accentLight: 'rgba(126, 87, 194, 0.12)',
+    heroImage: '/assets/products/highlight_crowned.png',
+    
+    usps: [
+      'Supports scalp health & hair follicle vitality',
+      'Formulated with botanical nutrients & antioxidants',
+      'Supports strand strength & shine',
+      'Easy daily routine',
+      'Suitable for all hair types'
+    ],
+
+    gallery: [
+      { id: 'cg1', label: 'PRODUCT HERO', src: '/assets/products/highlight_crowned.png' },
+      { id: 'cg2', label: 'BOTTLE', src: '/assets/products/product_crowned_bottle.png' },
+      { id: 'cg3', label: 'SELECTOR', src: '/assets/products/selector_crowned.png' }
+    ],
+
+    bundlesSection: {
+      tag: 'READY FOR STRONGER HAIR?',
+      title: 'SAVE MORE WHEN YOU STOCK UP ON CROWNED®',
+      subtitle: 'Select your Crowned bundle to nourish your scalp consistently.',
+      finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
+      bundles: [
+        {
+          id: 'starter',
+          name: 'STARTER BUNDLE',
+          badge: 'SAVE 50%',
+          image: '/assets/products/product_crowned_bottle.png',
+          isPopular: false,
+          isBestValue: false,
+          bottles: '2 BOTTLES TOTAL',
+          deal: 'BUY 1, GET 1 FREE',
+          pricePerBottle: '$34.75',
+          totalPrice: '$69.50',
+          originalTotal: '$139.00',
+          savings: 'Save $69.50',
+          perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
+          ctaText: 'GET MY 2 BOTTLES →',
+          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+        },
+        {
+          id: 'most-popular',
+          name: 'MOST POPULAR',
+          badge: 'MOST POPULAR',
+          image: '/assets/products/selector_crowned.png',
+          isPopular: true,
+          isBestValue: false,
+          bottles: '4 BOTTLES TOTAL',
+          deal: 'BUY 2, GET 2 FREE',
+          pricePerBottle: '$27.49',
+          totalPrice: '$109.96',
+          originalTotal: '$219.92',
+          savings: 'Save $109.96',
+          bonusText: '✓ Priority Handling + Free U.S. Shipping',
+          perks: ['Better Value', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Handling'],
+          ctaText: 'GET MY 4 BOTTLES →',
+          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+        },
+        {
+          id: 'best-value',
+          name: 'BEST VALUE',
+          badge: 'BEST VALUE',
+          image: '/assets/products/highlight_crowned.png',
+          isPopular: false,
+          isBestValue: true,
+          bottles: '6 BOTTLES TOTAL',
+          deal: 'BUY 3, GET 3 FREE',
+          pricePerBottle: '$19.99',
+          totalPrice: '$119.94',
+          originalTotal: '$329.80',
+          savings: 'Save $209.86',
+          bonusText: '✓ Lowest Price Per Bottle + Expedited Processing',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Expedited Handling'],
+          ctaText: 'GET THE BEST VALUE →',
+          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+        }
+      ]
+    },
+
+    trustStrip: {
+      tag: 'TRUST & QUALITY',
+      title: 'NOURISHING HAIR VITALITY',
+      items: [
+        { title: 'BOTANICAL FORMULA', desc: 'Rich in antioxidants and essential plant nutrients.' },
+        { title: 'THIRD-PARTY TESTED', desc: 'Quality tested by an independent laboratory.' },
+        { title: 'U.S. MADE', desc: 'Manufactured in the United States in a registered facility.' },
+        { title: 'FREE U.S. SHIPPING', desc: 'Fast shipping directly to your doorstep.' },
+        { title: '90-DAY GUARANTEE', desc: 'Try Crowned risk-free for 90 days.' }
+      ]
+    },
+
+    whyBlock: {
+      tag: 'WHY CROWNED?',
+      title: 'HEALTHY HAIR STARTS AT THE ROOT.',
+      lead: 'True hair vitality comes from nurturing scalp health consistently.',
+      p1: 'Crowned combines essential botanicals and nutrients crafted to nourish hair from the inside out.',
+      boxTag: 'THE CROWNED ROUTINE:',
+      boxTitle: 'ONE SIMPLE DAILY HABIT FOR LUSTROUS HAIR.',
+      p2: 'Make Crowned part of your daily routine to support scalp nourishment and hair strength.',
+      tagline: 'STRENGTH. SHINE. VITALITY.',
+      ctaText: 'MAKE CROWNED PART OF MY DAY →',
+      image: '/assets/products/highlight_crowned.png'
+    },
+
+    whyChoose: {
+      tag: 'WHY PEOPLE CHOOSE CROWNED',
+      title: 'A FORMULA DESIGNED FOR REAL RESULTS',
+      titleHighlight: 'AND EASY CONSISTENCY.',
+      subtitle: 'Convenient daily supplementation for hair confidence.',
+      tagline: 'NOURISH. STRENGTHEN. SHINE.',
+      ctaText: 'CHOOSE MY BUNDLE →',
+      image: '/assets/products/selector_crowned.png',
+      features: [
+        { icon: 'Droplets', title: 'EASY DAILY ROUTINE', desc: 'Effortless to take alongside breakfast.' },
+        { icon: 'Leaf', title: 'PLANT-BASED NUTRIENTS', desc: 'Formulated with key antioxidants and botanical extracts.' },
+        { icon: 'Sun', title: 'HEALTHY SHINE & DENSITY', desc: 'Supports natural hair strand resilience.' },
+        { icon: 'ShieldCheck', title: '90-DAY RISK FREE GUARANTEE', desc: 'Full 90 days to test and love your results.' }
+      ]
+    },
+
+    benefitsSection: {
+      tag: 'BENEFITS',
+      title: 'NUTRIENT-RICH SUPPORT FOR SCALP & HAIR VITALITY.',
+      subtitle: 'Crowned brings together essential vitamins and botanical extracts to support hair confidence.',
+      highlightText: 'SCALP NOURISHMENT. HAIR STRENGTH. NATURAL SHINE.',
+      ctaText: 'TRY CROWNED TODAY →',
+      benefits: [
+        { title: 'SCALP VITALITY', desc: 'Nourishes the hair follicle environment.' },
+        { title: 'STRAND STRENGTH', desc: 'Supports hair resilience and reduces breakage.' },
+        { title: 'NATURAL SHINE', desc: 'Promotes healthy-looking luster and texture.' }
+      ]
+    },
+
+    howItWorks: {
+      tag: 'HOW IT WORKS',
+      title: 'SIMPLE DAILY NOURISHMENT.',
+      subtitle: 'Build consistency for lasting hair health.',
+      image: '/assets/products/highlight_crowned.png',
+      steps: [
+        { step: '01', title: 'TAKE', desc: 'Take Crowned daily with water or your favorite beverage.' },
+        { step: '02', title: 'NOURISH', desc: 'Essential botanical nutrients reach hair roots.' },
+        { step: '03', title: 'THRIZE', desc: 'Enjoy stronger, healthier-looking hair over time.' }
+      ],
+      tagline: 'TAKE. NOURISH. THRIVE.',
+      ctaText: 'START MY CROWNED ROUTINE →'
+    },
+
+    ingredientsSection: {
+      tag: 'WHAT\'S INSIDE',
+      title: 'TARGETED BOTANICAL & NUTRIENT COMPLEX.',
+      subtitle: 'Formulated with hair-essential botanicals.',
+      description: 'Crowned blends botanical extracts and nutrients.',
+      highlightText: 'TARGETED BOTANICAL EXTRACTS.',
+      ctaText: 'VIEW SUPPLEMENT FACTS →',
+      image: '/assets/products/product_crowned_bottle.png',
+      ingredients: [
+        { name: 'SAW PALMETTO EXTRACT', desc: 'Popular botanical for scalp and follicle vitality.', whyItsHere: 'Follicle health.' },
+        { name: 'BIOTIN & ZINC', desc: 'Essential micronutrients for hair keratin structure.', whyItsHere: 'Keratin support.' },
+        { name: 'HORSETAIL EXTRACT', desc: 'Rich in natural silica to support strand strength.', whyItsHere: 'Strand strength.' }
+      ]
+    },
+
+    comparisonSection: {
+      tag: 'WHY CROWNED?',
+      title: 'TARGETED BOTANICAL VITALITY vs. GIMMICKY TOPICAL SHAMPOOS.',
+      tagline: 'NOURISH FROM WITHIN.',
+      image: '/assets/products/selector_crowned.png',
+      headers: ['FEATURES', 'CROWNED®', 'SURFACE SHAMPOOS'],
+      rows: [
+        { feature: 'Nourishes hair roots from within', product: true, opponent: 'False' },
+        { feature: 'Targeted botanical extracts', product: true, opponent: 'Varies' },
+        { feature: 'Free U.S. Shipping', product: true, opponent: 'Varies' },
+        { feature: '90-Day Guarantee', product: true, opponent: 'False' }
+      ]
+    },
+
+    reviewsSection: {
+      tag: 'CUSTOMER REVIEWS',
+      title: 'LOVE IS IN THE HAIR.',
+      ratingText: '★★★★★ 4.8/5 Customer Rating',
+      headline: 'VERIFIED CUSTOMER REVIEWS',
+      disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
+      reviews: [
+        { quote: '“MY HAIR FEELS SO MUCH STRONGER!”', body: '“After 60 days of taking Crowned, my hair feels thicker and looks shinier than ever before.”', author: 'Amanda K. — 5 Stars', stars: 5 },
+        { quote: '“EASY AND EFFECTIVE.”', body: '“I love how simple it is to add to my daily routine. Highly recommend!”', author: 'Jessica W. — 5 Stars', stars: 5 }
+      ]
+    },
+
+    guaranteeSection: {
+      tag: '90-DAY GUARANTEE',
+      title: 'TRY CROWNED FOR 90 DAYS RISK-FREE.',
+      subtitle: 'YOUR SATISFACTION IS GUARANTEED.',
+      lead: 'Experience the Crowned difference backed by our 90-day money-back guarantee.',
+      body: 'If you are not delighted with your hair vitality routine, contact us within 90 days for a prompt refund.',
+      highlight: '90 DAYS TO DECIDE.',
+      ctaText: 'TRY CROWNED RISK-FREE →'
+    },
+
+    faqSection: {
+      tag: 'FAQ',
+      title: 'FREQUENTLY ASKED QUESTIONS ABOUT CROWNED®',
+      faqs: [
+        { q: 'HOW LONG UNTIL I NOTICE RESULTS?', a: 'Hair grows gradually. Most customers notice improvements in scalp hydration and shine within 30 to 60 days of consistent daily use.' },
+        { q: 'IS CROWNED SUITABLE FOR ALL HAIR TYPES?', a: 'Yes! Crowned is formulated for both men and women across all hair types and textures.' }
+      ]
+    },
+
+    finalOffer: {
+      tag: 'READY FOR HAIR VITALITY?',
+      title: 'NOURISH YOUR HAIR FROM THE ROOT UP.',
+      subtitle: 'Claim your Crowned bundle today.',
+      ctaText: 'CHOOSE MY CROWNED BUNDLE →'
+    },
+
+    disclaimer: 'Crowned® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.'
   }
 };
 
