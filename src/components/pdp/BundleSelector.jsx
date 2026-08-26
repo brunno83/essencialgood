@@ -2,7 +2,7 @@ import React from 'react';
 import { LowStockProgressBar } from '../common/LowStockProgressBar';
 
 export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) {
-  if (!bundlesSection) return null;
+  if (!bundlesSection || !Array.isArray(bundlesSection.bundles)) return null;
   const { tag, title, subtitle, finePrint, bundles } = bundlesSection;
   const brandGreen = accentColor || '#27AE60';
 

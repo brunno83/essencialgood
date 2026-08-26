@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function ComparisonTable({ comparisonSection, accentColor }) {
-  if (!comparisonSection) return null;
+  if (!comparisonSection || !Array.isArray(comparisonSection.headers) || !Array.isArray(comparisonSection.rows)) return null;
   const { tag, title, tagline, headers, rows } = comparisonSection;
   const brandGreen = accentColor || '#27AE60';
 

@@ -6,11 +6,12 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
   
   // Default selected bundle: most-popular (index 1) or first
   const [selectedId, setSelectedId] = useState(() => {
-    const popular = bundles.find(b => b.isPopular);
-    return popular ? popular.id : (bundles[0]?.id || 'most-popular');
+    const list = Array.isArray(bundles) ? bundles : [];
+    const popular = list.find(b => b?.isPopular);
+    return popular ? popular.id : (list[0]?.id || 'most-popular');
   });
 
-  if (!bundles || bundles.length === 0) return null;
+  if (!bundles || !Array.isArray(bundles) || bundles.length === 0) return null;
 
   const selectedBundle = bundles.find(b => b.id === selectedId) || bundles[0];
 

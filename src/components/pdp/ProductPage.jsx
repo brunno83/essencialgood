@@ -30,8 +30,8 @@ export function ProductPage({ productData, onBackToHome }) {
     rating,
     reviewCount,
     accentColor,
-    usps,
-    gallery,
+    usps = [],
+    gallery = [],
     bundlesSection,
     trustStrip,
     whyBlock,
@@ -44,7 +44,7 @@ export function ProductPage({ productData, onBackToHome }) {
     guaranteeSection,
     faqSection,
     finalOffer
-  } = productData;
+  } = productData || {};
 
   return (
     <div className="product-page" style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '125px' }}>
@@ -118,7 +118,7 @@ export function ProductPage({ productData, onBackToHome }) {
 
             {/* Bullet USPs */}
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px 0' }}>
-              {usps.map((usp, idx) => (
+              {(usps || []).map((usp, idx) => (
                 <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: '#333', fontWeight: 600, marginBottom: '6px' }}>
                   <span style={{ color: '#27AE60', fontWeight: 800 }}>✓</span> {usp}
                 </li>
