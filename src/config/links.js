@@ -3,10 +3,10 @@
  * Direct explicit URLs to static HTML landing pages in /public/[product]/index.html
  */
 export const PRODUCT_LINKS = {
-  SlimSODA: "/slimsoda/index.html",
-  LinfaFlow: "/linfaflow/index.html",
-  Sonnus: "/sonnus/index.html",
-  Crowned: "/crowned/index.html",
+  SlimSODA: "/?product=slimsoda",
+  LinfaFlow: "/?product=linfaflow",
+  Sonnus: "/?product=sonnus",
+  Crowned: "/?product=crowned",
 };
 
 export const BRAND_LINKS = {

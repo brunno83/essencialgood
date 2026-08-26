@@ -34,13 +34,16 @@ export function ProductPage({ productData, onBackToHome }) {
     gallery,
     bundlesSection,
     trustStrip,
+    whyBlock,
+    whyChoose,
     benefitsSection,
     howItWorks,
     ingredientsSection,
     comparisonSection,
     reviewsSection,
     guaranteeSection,
-    faqSection
+    faqSection,
+    finalOffer
   } = productData;
 
   return (
@@ -134,11 +137,11 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 03 — TRUST / CREDIBILITY BAR */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
 
-      {/* 04 — NOVO BLOCO EDITORIAL ("WHY SLIMSODA?") */}
-      <WhySlimSodaBlock accentColor={accentColor} />
+      {/* 04 — BLOCO EDITORIAL ("WHY LINFAFLOW / WHY SLIMSODA?") */}
+      <WhySlimSodaBlock whyBlock={whyBlock} accentColor={accentColor} />
 
-      {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES (ANTES E DEPOIS SEM NÚMEROS DE PESO) */}
-      <RealTransformations accentColor={accentColor} />
+      {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES */}
+      <RealTransformations productName={brand} accentColor={accentColor} />
 
       {/* 06 — BENEFÍCIOS PRINCIPAIS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
@@ -146,13 +149,13 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 07 — INGREDIENTES E FÓRMULA */}
       <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
 
-      {/* 08 — SUBSTITUIÇÃO DO BLOCO 94%/91%/96% -> WHY PEOPLE CHOOSE SLIMSODA */}
-      <WhyPeopleChooseSection accentColor={accentColor} />
+      {/* 08 — WHY PEOPLE CHOOSE (PRODUTO) */}
+      <WhyPeopleChooseSection whyChoose={whyChoose} accentColor={accentColor} />
 
       {/* 09 — COMO FUNCIONA / MODO DE USO */}
       <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
 
-      {/* 10 — TABELA COMPARATIVA (QUEBRA DE PADRÃO EM VERDE FLORESTA LUXO #1B2613) */}
+      {/* 10 — TABELA COMPARATIVA */}
       <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
 
       {/* 11 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
@@ -179,8 +182,8 @@ export function ProductPage({ productData, onBackToHome }) {
       {/* 14 — FAQ (PERGUNTAS FREQUENTES) */}
       <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
 
-      {/* 15 — NOVO BLOCO FINAL CTA ("MAKE WELLNESS EASIER TO KEEP UP WITH") */}
-      <FinalCTABlock accentColor={accentColor} />
+      {/* 15 — BLOCO FINAL CTA */}
+      <FinalCTABlock finalOffer={finalOffer} brand={brand} accentColor={accentColor} />
     </div>
   );
 }

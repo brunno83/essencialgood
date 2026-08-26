@@ -7,7 +7,7 @@ import { ProductPlaceholderVisual } from '../common/ProductPlaceholderVisual';
 import { CTAButton } from '../common/CTAButton';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 
-export const FindYourEssential = () => {
+export const FindYourEssential = ({ onSelectProduct }) => {
   const { findYourEssential } = BRAND_CONTENT;
   const [activeProduct, setActiveProduct] = useState(PRODUCTS[0]);
 
@@ -137,7 +137,11 @@ export const FindYourEssential = () => {
                   <a
                     href={prod.link}
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
+                      if (onSelectProduct) {
+                        onSelectProduct(prod.id);
+                      }
                     }}
                     style={{
                       width: '38px',
@@ -269,6 +273,12 @@ export const FindYourEssential = () => {
                 </div>
 
                 <CTAButton
+                  onClick={(e) => {
+                    if (e) e.preventDefault();
+                    if (onSelectProduct) {
+                      onSelectProduct(activeProduct.id);
+                    }
+                  }}
                   href={activeProduct.link}
                   size="medium"
                   style={{

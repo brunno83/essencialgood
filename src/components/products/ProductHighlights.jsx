@@ -4,7 +4,7 @@ import { PRODUCTS } from '../../config/products';
 import { ProductPlaceholderVisual } from '../common/ProductPlaceholderVisual';
 import { CTAButton } from '../common/CTAButton';
 
-export const ProductHighlights = () => {
+export const ProductHighlights = ({ onSelectProduct }) => {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -202,6 +202,12 @@ export const ProductHighlights = () => {
 
                   {/* CTA Button */}
                   <CTAButton
+                    onClick={(e) => {
+                      if (e) e.preventDefault();
+                      if (onSelectProduct) {
+                        onSelectProduct(activeProduct.id);
+                      }
+                    }}
                     href={activeProduct.link}
                     size="large"
                     style={{

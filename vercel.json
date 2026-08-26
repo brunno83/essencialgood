@@ -33,9 +33,13 @@
       ],
       "destination": "/adv-linfaflow/:path*"
     },
-    { "source": "/slimsoda:path*", "destination": "/index.html" },
-    { "source": "/linfaflow:path*", "destination": "/index.html" },
-    { "source": "/sonnus:path*", "destination": "/index.html" },
-    { "source": "/crowned:path*", "destination": "/index.html" }
+    { "source": "/slimsoda", "destination": "/index.html" },
+    { "source": "/slimsoda/:path*", "destination": "/index.html" },
+    { "source": "/linfaflow", "destination": "/index.html" },
+    { "source": "/linfaflow/:path*", "destination": "/index.html" },
+    { "source": "/sonnus", "destination": "/index.html" },
+    { "source": "/sonnus/:path*", "destination": "/index.html" },
+    { "source": "/crowned", "destination": "/index.html" },
+    { "source": "/crowned/:path*", "destination": "/index.html" }
   ]
 }

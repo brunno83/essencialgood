@@ -4,7 +4,7 @@ import { PRODUCTS } from '../../config/products';
 import { BRAND_CONTENT } from '../../config/content';
 import { CTAButton } from '../common/CTAButton';
 
-export const FinalCTA = () => {
+export const FinalCTA = ({ onSelectProduct }) => {
   const { finalCta } = BRAND_CONTENT;
   const [imageError, setImageError] = useState(false);
 
@@ -121,6 +121,7 @@ export const FinalCTA = () => {
               {PRODUCTS.map((product, idx) => (
                 <motion.div
                   key={product.id}
+                  onClick={() => (onSelectProduct ? onSelectProduct(product.id) : null)}
                   whileHover={{ scale: 1.08, y: -10 }}
                   transition={{ duration: 0.4 }}
                   style={{
@@ -131,6 +132,7 @@ export const FinalCTA = () => {
                     position: 'relative',
                     zIndex: 2,
                     transform: idx % 2 === 0 ? 'translateY(-12px)' : 'translateY(12px)',
+                    cursor: 'pointer',
                   }}
                 >
                   {/* Seamless Product Bottle with Multiply Blend */}

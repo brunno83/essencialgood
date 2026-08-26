@@ -1,7 +1,22 @@
 import React from 'react';
 
-export function WhySlimSodaBlock({ accentColor }) {
+export function WhySlimSodaBlock({ whyBlock, accentColor }) {
   const brandGreen = accentColor || '#27AE60';
+
+  const defaultWhy = {
+    tag: 'WHY SLIMSODA?',
+    title: "YOUR WELLNESS ROUTINE SHOULDN'T FEEL LIKE A FULL-TIME JOB.",
+    lead: "Healthy habits work best when they're simple enough to maintain.",
+    p1: "But wellness routines can quickly become complicated — multiple bottles, different schedules and too many steps to remember.",
+    boxTag: 'SLIMSODA WAS CREATED AROUND A SIMPLER IDEA:',
+    boxTitle: 'SELECTED INGREDIENTS. ONE POWDERED FORMULA. ONE EASY ROUTINE.',
+    p2: 'Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.',
+    tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
+    ctaText: 'TRY SLIMSODA →',
+    image: '/assets/products/slimsoda-lifestyle-routine.jpg'
+  };
+
+  const data = whyBlock || defaultWhy;
 
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
@@ -39,8 +54,8 @@ export function WhySlimSodaBlock({ accentColor }) {
               }}
             >
               <img
-                src="/assets/products/slimsoda-lifestyle-routine.jpg"
-                alt="Woman enjoying simple morning SlimSoda routine in kitchen"
+                src={data.image || "/assets/products/slimsoda-lifestyle-routine.jpg"}
+                alt={data.tag}
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -66,7 +81,7 @@ export function WhySlimSodaBlock({ accentColor }) {
                 marginBottom: '8px'
               }}
             >
-              WHY SLIMSODA?
+              {data.tag}
             </span>
 
             {/* Main Headline */}
@@ -80,7 +95,7 @@ export function WhySlimSodaBlock({ accentColor }) {
                 lineHeight: 1.2
               }}
             >
-              YOUR WELLNESS ROUTINE SHOULDN'T FEEL LIKE A FULL-TIME JOB.
+              {data.title}
             </h2>
 
             {/* Body Paragraphs Card */}
@@ -96,11 +111,11 @@ export function WhySlimSodaBlock({ accentColor }) {
               }}
             >
               <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.6, fontWeight: 500, margin: '0 0 14px 0' }}>
-                Healthy habits work best when they're simple enough to maintain.
+                {data.lead}
               </p>
 
               <p style={{ fontSize: '14.5px', color: '#555', lineHeight: 1.6, fontWeight: 500, margin: '0 0 18px 0' }}>
-                But wellness routines can quickly become complicated — multiple bottles, different schedules and too many steps to remember.
+                {data.p1}
               </p>
 
               <div 
@@ -113,21 +128,21 @@ export function WhySlimSodaBlock({ accentColor }) {
                 }}
               >
                 <div style={{ fontSize: '11px', fontWeight: 900, color: brandGreen, letterSpacing: '0.08em', marginBottom: '4px' }}>
-                  SLIMSODA WAS CREATED AROUND A SIMPLER IDEA:
+                  {data.boxTag}
                 </div>
                 <div style={{ fontSize: '14px', fontWeight: 900, color: '#141210', letterSpacing: '0.01em' }}>
-                  SELECTED INGREDIENTS. ONE POWDERED FORMULA. ONE EASY ROUTINE.
+                  {data.boxTitle}
                 </div>
               </div>
 
               <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
-                Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.
+                {data.p2}
               </p>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
               <div style={{ fontSize: '14px', fontWeight: 900, letterSpacing: '0.06em', color: '#141210' }}>
-                LESS COMPLEXITY. MORE CONSISTENCY.
+                {data.tagline}
               </div>
 
               <button
@@ -142,11 +157,11 @@ export function WhySlimSodaBlock({ accentColor }) {
                   fontWeight: 800,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)',
+                  boxShadow: `0 8px 24px ${brandGreen}55`,
                   transition: 'transform 0.2s ease'
                 }}
               >
-                TRY SLIMSODA →
+                {data.ctaText}
               </button>
             </div>
 

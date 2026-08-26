@@ -1,29 +1,48 @@
 import React from 'react';
 import { Droplets, Leaf, Sun, ShieldCheck } from 'lucide-react';
 
-export function WhyPeopleChooseSection({ accentColor }) {
-  const features = [
-    {
-      icon: Droplets,
-      title: 'EASY TO MIX',
-      desc: 'Simply add SlimSoda to water according to the product directions.'
-    },
-    {
-      icon: Leaf,
-      title: 'ONE POWDERED FORMULA',
-      desc: 'A convenient alternative to managing multiple supplement bottles.'
-    },
-    {
-      icon: Sun,
-      title: 'EASY TO BUILD INTO YOUR DAY',
-      desc: 'Designed to fit naturally into a morning and evening routine.'
-    },
-    {
-      icon: ShieldCheck,
-      title: '90-DAY GUARANTEE',
-      desc: 'Plenty of time to decide whether SlimSoda is right for your routine.'
-    }
-  ];
+export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
+  const iconMap = {
+    Droplets,
+    Leaf,
+    Sun,
+    ShieldCheck
+  };
+
+  const defaultData = {
+    tag: 'WHY PEOPLE CHOOSE SLIMSODA',
+    title: 'BUILT AROUND WHAT MAKES A ROUTINE',
+    titleHighlight: 'EASIER TO KEEP.',
+    subtitle: 'Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.',
+    tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
+    ctaText: 'CHOOSE MY BUNDLE →',
+    image: '/assets/products/slimsoda-stone-pedestal.jpg',
+    features: [
+      {
+        icon: 'Droplets',
+        title: 'EASY TO MIX',
+        desc: 'Simply add SlimSoda to water according to the product directions.'
+      },
+      {
+        icon: 'Leaf',
+        title: 'ONE POWDERED FORMULA',
+        desc: 'A convenient alternative to managing multiple supplement bottles.'
+      },
+      {
+        icon: 'Sun',
+        title: 'EASY TO BUILD INTO YOUR DAY',
+        desc: 'Designed to fit naturally into a morning and evening routine.'
+      },
+      {
+        icon: 'ShieldCheck',
+        title: '90-DAY GUARANTEE',
+        desc: 'Plenty of time to decide whether SlimSoda is right for your routine.'
+      }
+    ]
+  };
+
+  const data = whyChoose || defaultData;
+  const brandAccent = accentColor || '#D96B32';
 
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
@@ -50,7 +69,7 @@ export function WhyPeopleChooseSection({ accentColor }) {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(217, 107, 50, 0.12) 0%, transparent 70%)',
+          background: `radial-gradient(circle, ${brandAccent}20 0%, transparent 70%)`,
           filter: 'blur(60px)',
           pointerEvents: 'none'
         }}
@@ -78,8 +97,8 @@ export function WhyPeopleChooseSection({ accentColor }) {
               }}
             >
               <img
-                src="/assets/products/slimsoda-stone-pedestal.jpg"
-                alt="SlimSoda tub on natural stone pedestal"
+                src={data.image || "/assets/products/slimsoda-stone-pedestal.jpg"}
+                alt={data.tag}
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -99,13 +118,13 @@ export function WhyPeopleChooseSection({ accentColor }) {
                   fontSize: '12px', 
                   fontWeight: 900, 
                   letterSpacing: '0.16em', 
-                  color: accentColor || '#D96B32',
+                  color: brandAccent,
                   textTransform: 'uppercase',
                   display: 'block',
                   marginBottom: '8px'
                 }}
               >
-                WHY PEOPLE CHOOSE SLIMSODA
+                {data.tag}
               </span>
               <h2 
                 style={{ 
@@ -117,10 +136,10 @@ export function WhyPeopleChooseSection({ accentColor }) {
                   lineHeight: 1.2
                 }}
               >
-                BUILT AROUND WHAT MAKES A ROUTINE <span style={{ color: accentColor || '#D96B32' }}>EASIER TO KEEP.</span>
+                {data.title} <span style={{ color: brandAccent }}>{data.titleHighlight}</span>
               </h2>
               <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, lineHeight: 1.5 }}>
-                Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.
+                {data.subtitle}
               </p>
             </div>
 
@@ -133,8 +152,8 @@ export function WhyPeopleChooseSection({ accentColor }) {
                 marginBottom: '24px'
               }}
             >
-              {features.map((item, idx) => {
-                const IconComponent = item.icon;
+              {data.features.map((item, idx) => {
+                const IconComponent = typeof item.icon === 'string' ? (iconMap[item.icon] || Leaf) : item.icon;
                 return (
                   <div
                     key={idx}
@@ -152,9 +171,9 @@ export function WhyPeopleChooseSection({ accentColor }) {
                         width: '36px', 
                         height: '36px', 
                         borderRadius: '10px', 
-                        backgroundColor: `${accentColor || '#D96B32'}25`, 
-                        border: `1px solid ${accentColor || '#D96B32'}50`,
-                        color: accentColor || '#D96B32',
+                        backgroundColor: `${brandAccent}25`, 
+                        border: `1px solid ${brandAccent}50`,
+                        color: brandAccent,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -176,13 +195,13 @@ export function WhyPeopleChooseSection({ accentColor }) {
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
               <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.08em', color: '#FFFFFF' }}>
-                SIMPLE TO START. EASY TO KEEP GOING.
+                {data.tagline}
               </div>
 
               <button
                 onClick={scrollToBundles}
                 style={{
-                  backgroundColor: accentColor || '#D96B32',
+                  backgroundColor: brandAccent,
                   color: '#FFFFFF',
                   border: 'none',
                   borderRadius: '10px',
@@ -191,10 +210,10 @@ export function WhyPeopleChooseSection({ accentColor }) {
                   fontWeight: 800,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: `0 8px 24px ${accentColor}45`
+                  boxShadow: `0 8px 24px ${brandAccent}45`
                 }}
               >
-                CHOOSE MY BUNDLE →
+                {data.ctaText}
               </button>
             </div>
           </div>

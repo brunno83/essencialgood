@@ -344,5 +344,417 @@ export const PDP_DATA = {
     },
 
     disclaimer: `SlimSoda® is a dietary supplement intended to complement a balanced diet and healthy lifestyle. Individual experiences may vary. Consult a qualified healthcare professional before using dietary supplements if you are pregnant, nursing, taking medication or have a medical condition. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.`
+  },
+
+  linfaflow: {
+    id: 'linfaflow',
+    brand: 'LINFAFLOW®',
+    title: 'SUPPORT THE FLOW YOUR BODY ALREADY KNOWS.',
+    subtitle: 'A concentrated liquid botanical formula built around lymphatic wellness, normal fluid balance and healthy circulation — with four traditional botanicals in one simple daily dropper.',
+    rating: 4.8,
+    reviewCount: '14,890+',
+    startingPrice: '$19.99',
+    accentColor: '#4B6833',
+    accentLight: 'rgba(75, 104, 51, 0.15)',
+    heroImage: '/assets/products/linfaflow-gallery-1.png',
+    
+    usps: [
+      'Supports healthy lymphatic function',
+      'Complements the body\'s normal fluid-balance processes',
+      'Supports healthy circulation',
+      '4 traditional botanical extracts',
+      'No caffeine or stimulants',
+      'Convenient liquid dropper format'
+    ],
+
+    gallery: [
+      {
+        id: 'gallery-1',
+        label: 'PRODUCT HERO',
+        caption: 'Clean premium bottle & dropper packaging',
+        subtitle: 'DAILY BOTANICAL WELLNESS SUPPORT',
+        src: '/assets/products/linfaflow-gallery-1.png'
+      },
+      {
+        id: 'gallery-2',
+        label: 'EXPERIENCE',
+        caption: 'LinfaFlow daily routine',
+        subtitle: 'DROP. HYDRATE. MOVE. REPEAT.',
+        src: '/assets/products/linfaflow-gallery-2.png'
+      },
+      {
+        id: 'gallery-3',
+        label: 'BENEFITS',
+        caption: 'Lymphatic & circulation support',
+        subtitle: 'SIMPLE DAILY LIQUID DROPPER',
+        src: '/assets/products/linfaflow-gallery-3.png'
+      },
+      {
+        id: 'gallery-4',
+        label: 'INGREDIENTS',
+        caption: '4 traditional botanical extracts',
+        subtitle: 'CLEAVERS, STILLINGIA, RED CLOVER & PRICKLY ASH',
+        src: '/assets/products/linfaflow-gallery-4.png'
+      },
+      {
+        id: 'gallery-5',
+        label: 'TRUST & GUARANTEE',
+        caption: 'Risk-free 90-day trial',
+        subtitle: '90-DAY MONEY-BACK GUARANTEE',
+        src: '/assets/products/linfaflow-gallery-5.png'
+      },
+      {
+        id: 'gallery-6',
+        label: 'QUALITY FORMULA',
+        caption: 'Pure botanical liquid extract',
+        subtitle: 'LAB TESTED & MADE IN USA',
+        src: '/assets/products/linfaflow-gallery-6.png'
+      }
+    ],
+
+    bundlesSection: {
+      tag: 'READY TO MAKE IT SIMPLE?',
+      title: 'THE LONGER YOUR ROUTINE, THE BETTER YOUR VALUE.',
+      subtitle: 'LinfaFlow is designed for consistent daily use. Choose the bundle that gives you the right amount of time — while saving more per bottle.',
+      finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
+      bundles: [
+        {
+          id: 'starter',
+          name: 'STARTER ROUTINE',
+          badge: 'SAVE 50%',
+          image: '/assets/products/linfaflow-1.png',
+          isPopular: false,
+          isBestValue: false,
+          bottles: '2 BOTTLES TOTAL',
+          deal: 'BUY 1, GET 1 FREE',
+          pricePerBottle: '$34.75',
+          totalPrice: '$69.50',
+          originalTotal: '$139.00',
+          savings: 'Save $69.50',
+          perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
+          ctaText: 'GET MY 2 BOTTLES →',
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+        },
+        {
+          id: 'most-popular',
+          name: 'MOST POPULAR',
+          badge: 'MOST POPULAR',
+          image: '/assets/products/linfaflow-2.png',
+          isPopular: true,
+          isBestValue: false,
+          bottles: '4 BOTTLES TOTAL',
+          deal: 'BUY 2, GET 2 FREE',
+          pricePerBottle: '$27.49',
+          totalPrice: '$109.96',
+          originalTotal: '$219.92',
+          savings: 'Save $109.96',
+          bonusText: '✓ Better Price Per Bottle + Priority Processing',
+          perks: ['Better Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Processing'],
+          ctaText: 'GET MY 4 BOTTLES →',
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+        },
+        {
+          id: 'best-value',
+          name: 'BEST VALUE',
+          badge: 'BEST VALUE',
+          image: '/assets/products/linfaflow-3.png',
+          isPopular: false,
+          isBestValue: true,
+          bottles: '6 BOTTLES TOTAL',
+          deal: 'BUY 3, GET 3 FREE',
+          pricePerBottle: '$19.99',
+          totalPrice: '$119.94',
+          originalTotal: '$329.80',
+          savings: 'Save $209.86',
+          bonusText: '✓ Lowest Price Per Bottle + Best Long-Term Value',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Best Long-Term Value'],
+          ctaText: 'GET THE BEST VALUE →',
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+        }
+      ]
+    },
+
+    trustStrip: {
+      tag: 'TRUST & QUALITY',
+      title: 'FOUR BOTANICALS. PROVEN QUALITY.',
+      items: [
+        {
+          title: '4 TRADITIONAL BOTANICALS',
+          desc: 'Cleavers, Stillingia Root, Red Clover Blossom & Prickly Ash Bark.'
+        },
+        {
+          title: 'THIRD-PARTY TESTED',
+          desc: 'Quality tested by an independent third-party laboratory.'
+        },
+        {
+          title: 'U.S. MADE',
+          desc: 'Manufactured in the United States in a registered facility.'
+        },
+        {
+          title: 'FREE U.S. SHIPPING',
+          desc: 'Fast shipping from our U.S. fulfillment network.'
+        },
+        {
+          title: '90-DAY GUARANTEE',
+          desc: 'Try LinfaFlow for 90 days and decide if it fits your routine.'
+        }
+      ]
+    },
+
+    whyBlock: {
+      tag: 'WHY LINFAFLOW?',
+      title: 'YOUR BODY ALREADY HAS A FLOW SYSTEM.',
+      subtitle: 'LINFAFLOW WAS DESIGNED TO SUPPORT IT — NOT OVERRIDE IT.',
+      lead: 'The lymphatic system is part of the body\'s natural network for moving fluid through tissues and back toward circulation.',
+      p1: 'Unlike your cardiovascular system, it does not rely on one central pump. Normal lymphatic movement is influenced by everyday factors such as physical movement, muscle contraction and breathing.',
+      boxTag: 'LINFAFLOW WAS CREATED AROUND A SIMPLER IDEA:',
+      boxTitle: 'FOUR TRADITIONAL BOTANICALS. ONE LIQUID DROPPER. ONE EASY ROUTINE.',
+      p2: 'Instead of a harsh "flush" or dramatic overnight cleanse, LinfaFlow combines four traditional botanicals into a simple liquid formula designed to complement healthy everyday habits.',
+      tagline: 'SUPPORT THE PROCESS. KEEP THE ROUTINE SIMPLE.',
+      ctaText: 'MAKE LINFAFLOW PART OF MY DAY →',
+      image: '/assets/products/linfaflow-lifestyle-routine.jpg'
+    },
+
+    whyChoose: {
+      tag: 'WHY PEOPLE CHOOSE LINFAFLOW',
+      title: 'BUILT AROUND WHAT MAKES A ROUTINE',
+      titleHighlight: 'EASIER TO KEEP.',
+      subtitle: 'Instead of adding more complexity to your day, LinfaFlow brings four traditional botanicals together in one convenient liquid dropper format.',
+      tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
+      ctaText: 'CHOOSE MY BUNDLE →',
+      image: '/assets/products/linfaflow-stone-pedestal.jpg',
+      features: [
+        {
+          icon: 'Droplets',
+          title: 'EASY LIQUID DROPPER',
+          desc: 'Simply add LinfaFlow drops according to product directions.'
+        },
+        {
+          icon: 'Leaf',
+          title: '4 TRADITIONAL BOTANICALS',
+          desc: 'A focused alternative to managing multiple supplement bottles.'
+        },
+        {
+          icon: 'Sun',
+          title: 'EASY TO BUILD INTO YOUR DAY',
+          desc: 'Designed to fit naturally alongside daily hydration and movement.'
+        },
+        {
+          icon: 'ShieldCheck',
+          title: '90-DAY GUARANTEE',
+          desc: 'Plenty of time to decide whether LinfaFlow is right for your routine.'
+        }
+      ]
+    },
+
+    benefitsSection: {
+      tag: 'BENEFITS',
+      title: 'DAILY WELLNESS SUPPORT BUILT AROUND FLOW.',
+      subtitle: 'LinfaFlow brings together four traditional botanicals in one convenient formula designed around three complementary wellness goals.',
+      highlightText: 'FOUR BOTANICALS. THREE COMPLEMENTARY WELLNESS GOALS. ONE SIMPLE ROUTINE.',
+      ctaText: 'TRY LINFAFLOW →',
+      benefits: [
+        {
+          title: 'LYMPHATIC WELLNESS',
+          desc: 'A botanical formula designed to support healthy lymphatic function as part of an active, balanced lifestyle.'
+        },
+        {
+          title: 'NORMAL FLUID BALANCE',
+          desc: 'Designed to complement the body\'s natural processes involved in maintaining normal fluid balance.'
+        },
+        {
+          title: 'HEALTHY CIRCULATION',
+          desc: 'Features botanicals with a history of traditional use in formulations associated with circulatory wellness.'
+        },
+        {
+          title: 'BOTANICAL SUPPORT',
+          desc: 'Four plant extracts selected around one focused wellness concept instead of an unnecessarily complicated ingredient stack.'
+        },
+        {
+          title: 'EASY DAILY CONSISTENCY',
+          desc: 'A convenient liquid dropper that takes seconds to incorporate into your routine.'
+        }
+      ]
+    },
+
+    howItWorks: {
+      tag: 'HOW IT WORKS',
+      title: 'THIRTY SECONDS CAN BE ENOUGH TO START A BETTER ROUTINE.',
+      subtitle: 'The best wellness routine is usually the one you can actually maintain.',
+      steps: [
+        {
+          step: '01',
+          title: 'DROP',
+          desc: 'Take LinfaFlow according to the serving directions on the product label.'
+        },
+        {
+          step: '02',
+          title: 'HYDRATE',
+          desc: 'Make adequate hydration part of your everyday wellness routine.'
+        },
+        {
+          step: '03',
+          title: 'MOVE',
+          desc: 'Walking and regular movement naturally support circulation and normal lymphatic movement.'
+        },
+        {
+          step: '04',
+          title: 'REPEAT',
+          desc: 'Consistency matters more than creating an elaborate routine you will eventually abandon.'
+        }
+      ],
+      tagline: 'DROP. HYDRATE. MOVE. REPEAT.',
+      ctaText: 'START MY LINFAFLOW ROUTINE →'
+    },
+
+    ingredientsSection: {
+      tag: "WHAT'S INSIDE",
+      title: 'FOUR TRADITIONAL BOTANICALS. EACH WITH A REASON TO BE HERE.',
+      subtitle: 'LinfaFlow combines four botanicals with a long history of use in traditional Western herbal practices.',
+      description: 'LinfaFlow brings selected traditional plant extracts together in one concentrated liquid formula.',
+      highlightText: 'FOUR NAMED BOTANICALS. NOTHING MYSTERIOUS.',
+      ctaText: 'VIEW SUPPLEMENT FACTS →',
+      ingredients: [
+        {
+          name: 'CLEAVERS (Galium aparine)',
+          desc: 'Perhaps the botanical most closely associated with traditional lymphatic wellness in this formula. Cleavers has appeared for generations in Western herbal preparations and has traditionally been used in formulations centered around normal fluid movement.',
+          whyItsHere: 'To anchor LinfaFlow\'s lymphatic-wellness approach.'
+        },
+        {
+          name: 'STILLINGIA ROOT (Stillingia sylvatica)',
+          desc: 'Also known as Queen\'s Root, Stillingia has a documented history in traditional North American botanical practice, historically included in formulas built around fluid-balance and lymphatic wellness.',
+          whyItsHere: 'To complement the formula\'s traditional botanical profile.'
+        },
+        {
+          name: 'RED CLOVER BLOSSOM (Trifolium pratense)',
+          desc: 'One of the more familiar botanicals in Western herbal traditions. Its blossom contains naturally occurring plant compounds and has historically been included in general-wellness preparations.',
+          whyItsHere: 'To broaden the botanical profile of the formula while complementing its overall wellness focus.'
+        },
+        {
+          name: 'PRICKLY ASH BARK (Zanthoxylum)',
+          desc: 'A North American botanical traditionally described by herbalists as "warming", with a history of use in botanical practices associated with circulation and internal movement.',
+          whyItsHere: 'To complement LinfaFlow\'s healthy-circulation positioning.'
+        }
+      ]
+    },
+
+    comparisonSection: {
+      tag: 'WHY KEEP IT SIMPLE?',
+      title: 'ONE FOCUSED ROUTINE VS. ANOTHER CABINET FULL OF PRODUCTS.',
+      tagline: 'FEWER STEPS. MORE CONSISTENCY.',
+      headers: ['FEATURES', 'LINFAFLOW®', 'COMPLEX ROUTINES'],
+      rows: [
+        { feature: 'Four named botanicals', product: true, opponent: 'Varies' },
+        { feature: 'One liquid formula', product: true, opponent: 'Varies' },
+        { feature: 'No large pills', product: true, opponent: false },
+        { feature: 'No caffeine', product: true, opponent: 'Varies' },
+        { feature: 'No stimulants', product: true, opponent: 'Varies' },
+        { feature: 'Takes seconds to use', product: true, opponent: 'Varies' },
+        { feature: 'Easy to understand', product: true, opponent: 'Varies' },
+        { feature: '90-Day Guarantee', product: true, opponent: 'Varies' }
+      ]
+    },
+
+    reviewsSection: {
+      tag: 'CUSTOMER REVIEWS',
+      title: 'SIMPLE ENOUGH TO ACTUALLY USE.',
+      ratingText: '★★★★★ 4.8/5 Customer Rating',
+      headline: 'WHAT CUSTOMERS ARE SAYING',
+      disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
+      reviews: [
+        {
+          quote: '“IT\'S BECOME PART OF MY MORNING.”',
+          body: '“The dropper format is what I like most. It takes almost no time and I don\'t have another handful of pills to remember.”',
+          author: 'Verified Customer — 5 Stars',
+          stars: 5
+        },
+        {
+          quote: '“FINALLY, A FORMULA I CAN UNDERSTAND.”',
+          body: '“I liked seeing four clearly named botanicals instead of a huge proprietary-looking ingredient list. It\'s straightforward and easy to use.”',
+          author: 'Verified Customer — 5 Stars',
+          stars: 5
+        },
+        {
+          quote: '“IT FITS MY ROUTINE.”',
+          body: '“I\'ve been paying more attention to hydration, walking and my overall wellness routine, and LinfaFlow is easy to incorporate alongside those habits.”',
+          author: 'Verified Customer — 5 Stars',
+          stars: 5
+        },
+        {
+          quote: '“SIMPLE IS BETTER FOR ME.”',
+          body: '“I\'ve tried routines with several bottles before and never stayed consistent. The liquid format makes this much easier.”',
+          author: 'Verified Customer — 5 Stars',
+          stars: 5
+        }
+      ]
+    },
+
+    guaranteeSection: {
+      tag: '90-DAY MONEY-BACK GUARANTEE',
+      title: 'GIVE THE ROUTINE TIME.',
+      subtitle: 'KEEP THE DECISION IN YOUR HANDS.',
+      lead: 'Trying a new botanical supplement should not feel like a gamble.',
+      body: 'Use LinfaFlow according to the product directions. Make it part of your routine. Then decide whether it\'s right for you. If you\'re not satisfied, contact our customer support team within the guarantee period according to the terms of the refund policy.',
+      highlight: '90 DAYS TO DECIDE.',
+      ctaText: 'TRY LINFAFLOW WITH CONFIDENCE →',
+      microcopy: '90-Day Guarantee • Free U.S. Shipping • One-Time Purchase'
+    },
+
+    faqSection: {
+      tag: 'FAQ',
+      title: 'QUESTIONS? WE\'VE GOT ANSWERS.',
+      faqs: [
+        {
+          q: 'WHAT EXACTLY IS LINFAFLOW?',
+          a: 'LinfaFlow is a liquid dietary supplement containing four botanical extracts — Cleavers, Stillingia Root, Red Clover Blossom and Prickly Ash Bark — formulated to complement lymphatic wellness, normal fluid balance and healthy circulation as part of a balanced lifestyle.'
+        },
+        {
+          q: 'WHAT MAKES LINFAFLOW DIFFERENT?',
+          a: 'Simplicity. Instead of building an oversized botanical stack, LinfaFlow focuses on four clearly identified plant extracts in one convenient liquid formula. No caffeine, no stimulants, no giant handful of capsules.'
+        },
+        {
+          q: 'IS LINFAFLOW A CLEANSE?',
+          a: 'No. LinfaFlow is positioned as a daily botanical wellness supplement, not as a harsh cleanse or quick "flush".'
+        },
+        {
+          q: 'IS LINFAFLOW A DIURETIC?',
+          a: 'LinfaFlow is a dietary supplement, not a prescription or OTC diuretic drug. Persistent, sudden, unexplained or one-sided swelling can have medical causes and should be evaluated by a qualified healthcare professional.'
+        },
+        {
+          q: 'HOW DO I USE LINFAFLOW?',
+          a: 'Follow the serving directions printed on your LinfaFlow label. Its liquid dropper format is designed to make daily use simple and convenient.'
+        },
+        {
+          q: 'DO I NEED TO CHANGE MY ENTIRE ROUTINE?',
+          a: 'No. LinfaFlow is designed to complement basic healthy habits such as hydration, regular movement, balanced nutrition and adequate rest.'
+        },
+        {
+          q: 'HOW QUICKLY SHOULD I EXPECT TO NOTICE SOMETHING?',
+          a: 'Individual experiences vary. LinfaFlow is designed as a consistent botanical wellness routine rather than a quick-fix product.'
+        },
+        {
+          q: 'CAN I USE LINFAFLOW WITH MEDICATION?',
+          a: 'If you take prescription medications, have a medical condition, are pregnant or nursing, consult a qualified healthcare professional before using LinfaFlow.'
+        },
+        {
+          q: 'IS IT CAFFEINE-FREE?',
+          a: 'Yes. LinfaFlow contains no caffeine or stimulant-based ingredients.'
+        },
+        {
+          q: 'WHAT IF LINFAFLOW ISN\'T RIGHT FOR ME?',
+          a: 'Eligible purchases are protected by our 90-Day Money-Back Guarantee, subject to our refund policy terms.'
+        }
+      ]
+    },
+
+    finalOffer: {
+      tag: 'READY TO MAKE IT SIMPLE?',
+      title: 'SUPPORT YOUR NATURAL FLOW.',
+      subtitle: 'WITHOUT OVERCOMPLICATING YOUR ROUTINE.',
+      ctaText: 'CHOOSE MY LINFAFLOW BUNDLE →'
+    },
+
+    disclaimer: `LinfaFlow® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. Persistent, sudden, unexplained or one-sided swelling or fluid retention may have medical causes and should be evaluated by a qualified healthcare professional. Consult a healthcare professional before using dietary supplements if you are pregnant, nursing, taking medication or have a medical condition. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.`
   }
 };
+

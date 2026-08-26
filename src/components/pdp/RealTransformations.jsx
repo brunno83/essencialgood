@@ -1,11 +1,11 @@
 import React from 'react';
 
-export function RealTransformations({ accentColor }) {
+export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
   const transformationImages = [
     { 
       id: 1, 
       src: '/assets/transformations/transformation-4.png', 
-      alt: 'Emily R. Daily Routine Transformation',
+      alt: `${productName} Daily Routine Transformation`,
       name: 'Emily R.',
       badgeText: 'Verified Buyer',
       headline: '“It became one of the easiest parts of my morning routine.”',
@@ -14,29 +14,29 @@ export function RealTransformations({ accentColor }) {
     { 
       id: 2, 
       src: '/assets/transformations/transformation-5.jpg', 
-      alt: 'Jessica T. Daily Routine Transformation',
+      alt: `${productName} Daily Routine Transformation`,
       name: 'Jessica T.',
       badgeText: 'Verified Buyer',
       headline: '“Finally, something I can actually stay consistent with.”',
-      feedback: 'I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple.'
+      feedback: `I wanted a wellness routine that didn't involve several different bottles and schedules. ${productName} makes it simple.`
     },
     { 
       id: 3, 
       src: '/assets/transformations/transformation-1.png', 
-      alt: 'Karen M. Daily Routine Transformation',
+      alt: `${productName} Daily Routine Transformation`,
       name: 'Karen M.',
       badgeText: 'Verified Buyer',
       headline: '“Simple, convenient and easy to remember.”',
-      feedback: 'Two scoops with water and I\'m done. That\'s exactly what I wanted from a daily supplement.'
+      feedback: 'A quick daily routine and I\'m done. That\'s exactly what I wanted from a daily supplement.'
     },
     { 
       id: 4, 
       src: '/assets/transformations/transformation-3.png', 
-      alt: 'Sarah H. Daily Routine Transformation',
+      alt: `${productName} Daily Routine Transformation`,
       name: 'Sarah H.',
       badgeText: 'Verified Buyer',
       headline: '“It fits naturally into my routine.”',
-      feedback: 'No complicated preparation. I mix it with water and get on with my day.'
+      feedback: 'No complicated preparation. I take it and get on with my day.'
     }
   ];
 
@@ -85,7 +85,7 @@ export function RealTransformations({ accentColor }) {
           MADE TO FIT <span style={{ color: accentColor || '#D96B32' }}>REAL LIFE.</span>
         </h2>
         <p style={{ fontSize: '15px', color: '#666', fontWeight: 500, margin: 0 }}>
-          See how customers are making SlimSoda part of their everyday wellness routines.
+          See how customers are making {productName} part of their everyday wellness routines.
         </p>
       </div>
 

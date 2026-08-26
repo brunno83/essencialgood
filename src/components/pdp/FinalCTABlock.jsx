@@ -1,7 +1,16 @@
 import React from 'react';
 
-export function FinalCTABlock({ accentColor }) {
+export function FinalCTABlock({ finalOffer, brand = 'SLIMSODA', accentColor }) {
   const brandGreen = accentColor || '#27AE60';
+
+  const defaultOffer = {
+    tag: 'READY TO GET STARTED?',
+    title: 'MAKE WELLNESS EASIER TO KEEP UP WITH.',
+    subtitle: 'Selected ingredients. One formula. One simple daily routine.',
+    ctaText: `CHOOSE MY ${brand.toUpperCase()} BUNDLE →`
+  };
+
+  const data = finalOffer || defaultOffer;
 
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
@@ -19,6 +28,20 @@ export function FinalCTABlock({ accentColor }) {
       }}
     >
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <span 
+          style={{ 
+            fontSize: '12px', 
+            fontWeight: 900, 
+            letterSpacing: '0.16em', 
+            color: brandGreen,
+            textTransform: 'uppercase',
+            display: 'block',
+            marginBottom: '10px'
+          }}
+        >
+          {data.tag}
+        </span>
+
         <h2 
           style={{ 
             fontSize: 'clamp(24px, 4vw, 36px)', 
@@ -29,16 +52,12 @@ export function FinalCTABlock({ accentColor }) {
             lineHeight: 1.2
           }}
         >
-          MAKE WELLNESS EASIER TO KEEP UP WITH.
+          {data.title}
         </h2>
 
-        <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.8)', fontWeight: 500, margin: '0 0 20px 0', lineHeight: 1.5 }}>
-          Selected ingredients. One powdered formula. One simple daily routine.
+        <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.8)', fontWeight: 500, margin: '0 0 24px 0', lineHeight: 1.5 }}>
+          {data.subtitle}
         </p>
-
-        <div style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.14em', color: brandGreen, marginBottom: '24px' }}>
-          MIX. SIP. KEEP MOVING.
-        </div>
 
         <button
           onClick={scrollToBundles}
@@ -52,12 +71,12 @@ export function FinalCTABlock({ accentColor }) {
             fontWeight: 900,
             letterSpacing: '0.04em',
             cursor: 'pointer',
-            boxShadow: '0 10px 28px rgba(39, 174, 96, 0.4)',
+            boxShadow: `0 10px 28px ${brandGreen}66`,
             transition: 'transform 0.2s ease',
             marginBottom: '16px'
           }}
         >
-          CHOOSE MY SLIMSODA BUNDLE →
+          {data.ctaText || `CHOOSE MY ${brand.toUpperCase()} BUNDLE →`}
         </button>
 
         <div style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.65)', fontWeight: 700, letterSpacing: '0.04em' }}>
