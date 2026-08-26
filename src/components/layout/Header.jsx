@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { CTAButton } from '../common/CTAButton';
 import { PRODUCTS } from '../../config/products';
+import { PDP_DATA } from '../../config/pdpData';
 
 export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProductId }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -19,29 +20,16 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
 
   const isSolidHeader = isProductPage || scrolled;
   const logoSrc = isSolidHeader ? "/assets/logo/logo_brand_dark.png" : "/assets/logo/logo_brand_white.png";
+  
+  // Dynamic header accent color matching active product or brand green (#4B6833)
+  const activeAccentColor = (isProductPage && PDP_DATA[activeProductId]?.accentColor)
+    ? PDP_DATA[activeProductId].accentColor
+    : '#4B6833';
 
-  const pdpNavLinks = [
-    { label: 'Bundles & Pricing', href: '#bundles-section' },
-    { label: 'Benefits', href: '#benefits-section' },
-    { label: 'Ingredients', href: '#ingredients-section' },
-    { label: 'Reviews', href: '#reviews-section' },
-    { label: 'FAQ', href: '#faq-section' }
-  ];
-
-  const homeNavLinks = [
-    { label: 'Collection', href: '#meet-essentials' },
-    { label: 'Highlights', href: '#product-highlights' },
-    { label: 'Routine Selector', href: '#find-essential' },
-    { label: 'Reviews', href: '#customer-stories' },
-    { label: 'Guarantee', href: '#guarantee' },
-    { label: 'Flagship Store', href: '#physical-store' },
-    { label: 'FAQ', href: '#faq' },
-  ];
-
-  const currentNavLinks = isProductPage ? pdpNavLinks : homeNavLinks;
-
-  const handleLogoClick = (e) => {
+  const handleHomeClick = (e) => {
     e.preventDefault();
+    setProductsDropdownOpen(false);
+    setMobileMenuOpen(false);
     if (onNavHome) {
       onNavHome();
     } else {
@@ -65,9 +53,28 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     } else if (onSelectProduct) {
-      onSelectProduct('slimsoda');
+      onSelectProduct(activeProductId || 'linfaflow');
     }
   };
+
+  const pdpNavLinks = [
+    { label: 'Bundles & Pricing', href: '#bundles-section' },
+    { label: 'Benefits', href: '#benefits-section' },
+    { label: 'Ingredients', href: '#ingredients-section' },
+    { label: 'Reviews', href: '#reviews-section' },
+    { label: 'FAQ', href: '#faq-section' }
+  ];
+
+  const homeNavLinks = [
+    { label: 'Collection', href: '#meet-essentials' },
+    { label: 'Highlights', href: '#product-highlights' },
+    { label: 'Selector', href: '#find-essential' },
+    { label: 'Reviews', href: '#customer-stories' },
+    { label: 'Guarantee', href: '#guarantee' },
+    { label: 'FAQ', href: '#faq' },
+  ];
+
+  const currentNavLinks = isProductPage ? pdpNavLinks : homeNavLinks;
 
   return (
     <header
@@ -81,7 +88,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
         backgroundColor: isSolidHeader ? 'rgba(238, 233, 222, 0.96)' : 'transparent',
         backdropFilter: isSolidHeader ? 'blur(20px)' : 'none',
         borderBottom: isSolidHeader ? '1px solid rgba(75, 104, 51, 0.15)' : '1px solid transparent',
-        padding: isSolidHeader ? '0.7rem 0' : '1.25rem 0',
+        padding: isSolidHeader ? '0.75rem 0' : '1.25rem 0',
         boxShadow: isSolidHeader ? '0 10px 30px rgba(0, 0, 0, 0.06)' : 'none',
       }}
     >
@@ -89,7 +96,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
         {/* Brand Logo Image */}
         <a
           href="/"
-          onClick={handleLogoClick}
+          onClick={handleHomeClick}
           style={{
             textDecoration: 'none',
             display: 'flex',
@@ -126,16 +133,26 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
           )}
         </a>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop E-Commerce Navigation Links */}
         <nav
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.5rem',
+            gap: '1.25rem',
           }}
           className="desktop-nav"
         >
-          {/* Products Dropdown Selector */}
+          {/* Direct HOME Link */}
+          <a
+            href="/"
+            onClick={handleHomeClick}
+            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
+            style={{ fontWeight: 700 }}
+          >
+            HOME
+          </a>
+
+          {/* OUR ESSENTIALS Dropdown Selector */}
           <div style={{ position: 'relative' }}>
             <button
               onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
@@ -165,7 +182,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                   border: '1px solid rgba(0, 0, 0, 0.08)',
                   boxShadow: '0 12px 30px rgba(0, 0, 0, 0.12)',
                   padding: '8px',
-                  minWidth: '200px',
+                  minWidth: '210px',
                   zIndex: 200
                 }}
               >
@@ -203,6 +220,32 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
             )}
           </div>
 
+          {/* Quick Direct Product Links */}
+          <a
+            href="/slimsoda"
+            onClick={(e) => handleProductSelect('slimsoda', e)}
+            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
+            style={{
+              color: activeProductId === 'slimsoda' ? '#D96B32' : undefined,
+              fontWeight: activeProductId === 'slimsoda' ? 800 : 600
+            }}
+          >
+            SLIMSODA
+          </a>
+
+          <a
+            href="/linfaflow"
+            onClick={(e) => handleProductSelect('linfaflow', e)}
+            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
+            style={{
+              color: activeProductId === 'linfaflow' ? '#4B6833' : undefined,
+              fontWeight: activeProductId === 'linfaflow' ? 800 : 600
+            }}
+          >
+            LINFAFLOW
+          </a>
+
+          {/* Section Anchors */}
           {currentNavLinks.map((link) => (
             <a
               key={link.label}
@@ -214,37 +257,39 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
           ))}
         </nav>
 
-        {/* Desktop Header Action Button */}
+        {/* Desktop Header Action Button - Standardized Brand Style */}
         <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           {isProductPage ? (
             <CTAButton
               onClick={scrollToBundles}
               size="small"
               style={{
-                backgroundColor: '#D96B32',
+                backgroundColor: activeAccentColor,
                 color: '#FFFFFF',
-                borderColor: '#D96B32',
+                borderColor: activeAccentColor,
                 fontWeight: 800,
                 letterSpacing: '0.08em',
-                boxShadow: '0 6px 20px rgba(217, 107, 50, 0.25)'
+                boxShadow: `0 6px 20px ${activeAccentColor}44`,
+                borderRadius: '9999px'
               }}
             >
-              CHOOSE BUNDLE
+              CHOOSE BUNDLE →
             </CTAButton>
           ) : (
             <CTAButton
               href="#meet-essentials"
               size="small"
               style={{
-                backgroundColor: isSolidHeader ? 'var(--color-primary)' : '#F6FFFC',
-                color: isSolidHeader ? '#FFFFFF' : 'var(--color-primary)',
-                borderColor: isSolidHeader ? 'var(--color-primary)' : '#F6FFFC',
-                fontWeight: 700,
+                backgroundColor: activeAccentColor,
+                color: '#FFFFFF',
+                borderColor: activeAccentColor,
+                fontWeight: 800,
                 letterSpacing: '0.08em',
-                boxShadow: isSolidHeader ? '0 6px 20px rgba(27, 38, 19, 0.15)' : '0 6px 20px rgba(0, 0, 0, 0.1)',
+                boxShadow: `0 6px 20px ${activeAccentColor}44`,
+                borderRadius: '9999px'
               }}
             >
-              SHOP ESSENTIALS
+              SHOP ESSENTIALS →
             </CTAButton>
           )}
         </div>
@@ -285,9 +330,25 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
             boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: 800, color: '#888', letterSpacing: '0.1em' }}>
-            PRODUCTS
+          <a
+            href="/"
+            onClick={handleHomeClick}
+            style={{
+              color: 'var(--color-primary)',
+              textDecoration: 'none',
+              fontSize: '1rem',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            🏠 HOME
+          </a>
+
+          <div style={{ fontSize: '11px', fontWeight: 800, color: '#888', letterSpacing: '0.1em', marginTop: '4px' }}>
+            ALL PRODUCTS
           </div>
+
           {PRODUCTS.map((p) => (
             <a
               key={p.id}
@@ -328,8 +389,16 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
           ))}
 
           <div style={{ paddingTop: '0.5rem' }}>
-            <CTAButton onClick={scrollToBundles} style={{ width: '100%' }}>
-              CHOOSE BUNDLE
+            <CTAButton
+              onClick={scrollToBundles}
+              style={{
+                width: '100%',
+                backgroundColor: activeAccentColor,
+                color: '#FFFFFF',
+                borderColor: activeAccentColor
+              }}
+            >
+              CHOOSE BUNDLE →
             </CTAButton>
           </div>
         </div>
