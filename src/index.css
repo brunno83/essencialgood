@@ -109,3 +109,26 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* GLOBAL BUTTON SHADOW & NEON/GLOW REMOVAL ACROSS ALL PAGES */
+button,
+a.brand-luxury-button,
+a.cta-btn,
+.cta-button,
+button[class*="btn"],
+.button {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+button:hover,
+a.brand-luxury-button:hover,
+a.cta-btn:hover,
+.cta-button:hover,
+button[class*="btn"]:hover,
+.button:hover {
+  box-shadow: none !important;
+  filter: none !important;
+}
+

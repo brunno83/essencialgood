@@ -161,7 +161,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
           textDecoration: 'none',
           textAlign: 'center',
           marginTop: '16px',
-          boxShadow: '0 10px 25px rgba(39, 174, 96, 0.35)',
+          boxShadow: 'none',
           transition: 'transform 0.2s ease',
           cursor: 'pointer'
         }}

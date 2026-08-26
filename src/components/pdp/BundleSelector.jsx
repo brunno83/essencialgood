@@ -223,7 +223,7 @@ export function BundleSelector({ bundlesSection, accentColor, onSelectBundle }) 
                   borderRadius: '10px',
                   textDecoration: 'none',
                   textAlign: 'center',
-                  boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)',
+                  boxShadow: 'none',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer'
                 }}

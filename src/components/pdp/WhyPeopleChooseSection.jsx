@@ -218,7 +218,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
                   fontWeight: 900,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: `0 8px 24px ${buttonBg}60`
+                  boxShadow: 'none'
                 }}
               >
                 {data.ctaText}

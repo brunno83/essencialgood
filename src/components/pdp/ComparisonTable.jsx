@@ -145,7 +145,7 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
                 fontWeight: 800,
                 letterSpacing: '0.04em',
                 cursor: 'pointer',
-                boxShadow: '0 8px 24px rgba(39, 174, 96, 0.35)'
+                boxShadow: 'none'
               }}
             >
               CHOOSE MY BUNDLE →

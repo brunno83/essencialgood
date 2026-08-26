@@ -108,7 +108,7 @@ export function HowItWorks({ howItWorks, accentColor }) {
                   fontWeight: 800,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: '0 6px 20px rgba(39, 174, 96, 0.35)',
+                  boxShadow: 'none',
                   transition: 'transform 0.2s ease'
                 }}
               >

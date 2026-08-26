@@ -71,7 +71,7 @@ export function FinalCTABlock({ finalOffer, brand = 'SLIMSODA', accentColor }) {
             fontWeight: 900,
             letterSpacing: '0.04em',
             cursor: 'pointer',
-            boxShadow: `0 10px 28px ${brandGreen}66`,
+            boxShadow: 'none',
             transition: 'transform 0.2s ease',
             marginBottom: '16px'
           }}

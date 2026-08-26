@@ -259,7 +259,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 backgroundColor: activeAccentColor,
                 color: '#FFFFFF',
                 borderColor: activeAccentColor,
-                boxShadow: `0 6px 20px ${activeAccentColor}35`,
+                boxShadow: 'none',
                 borderRadius: '10px'
               }}
             >
@@ -273,7 +273,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 backgroundColor: activeAccentColor,
                 color: '#FFFFFF',
                 borderColor: activeAccentColor,
-                boxShadow: `0 6px 20px ${activeAccentColor}35`,
+                boxShadow: 'none',
                 borderRadius: '10px'
               }}
             >

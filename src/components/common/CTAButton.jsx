@@ -53,7 +53,7 @@ export const CTAButton = ({
         border: isSecondary ? '2px solid #4B6833' : 'none',
         backgroundColor: isSecondary ? 'transparent' : '#4B6833',
         color: isSecondary ? '#4B6833' : '#FFFFFF',
-        boxShadow: isSecondary ? 'none' : '0 8px 24px rgba(75, 104, 51, 0.25)',
+        boxShadow: 'none',
         whiteSpace: 'nowrap',
         ...style,
       }}
@@ -72,10 +72,11 @@ export const CTAButton = ({
         .brand-luxury-button {
           outline: none;
           white-space: nowrap !important;
+          box-shadow: none !important;
         }
         .brand-luxury-button:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2) !important;
+          box-shadow: none !important;
         }
         .brand-luxury-button:hover .brand-button-arrow {
           transform: translateX(3px);
