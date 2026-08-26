@@ -809,7 +809,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#3B4959',
     accentLight: 'rgba(59, 73, 89, 0.12)',
-    heroImage: '/sonnus/images/hero.png',
+    heroImage: '/sonnus/images/gallery-1.png',
     
     usps: [
       'Supports nighttime relaxation',
@@ -822,9 +822,11 @@ export const PDP_DATA = {
     ],
 
     gallery: [
-      { id: 'g1', label: 'PRODUCT HERO', src: '/sonnus/images/hero.png' },
-      { id: 'g2', label: 'BOTTLE', src: '/sonnus/images/bottle.png' },
-      { id: 'g3', label: 'SELECTOR', src: '/sonnus/images/selector.png' }
+      { id: 'g1', label: 'PRODUCT HERO', src: '/sonnus/images/gallery-1.png' },
+      { id: 'g2', label: 'RITUAL', src: '/sonnus/images/gallery-2.png' },
+      { id: 'g3', label: 'BENEFITS', src: '/sonnus/images/gallery-3.png' },
+      { id: 'g4', label: 'FORMULA', src: '/sonnus/images/gallery-4.png' },
+      { id: 'g5', label: 'GUARANTEE', src: '/sonnus/images/gallery-5.png' }
     ],
 
     bundlesSection: {
@@ -911,7 +913,7 @@ export const PDP_DATA = {
       p2: 'Instead of relying on melatonin as the entire nighttime strategy, Sonnus combines Magnesium, L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, Vitamins B2 + B6 with just 0.9 mg of melatonin per serving.',
       tagline: 'MELATONIN IS PART OF THE FORMULA. NOT THE ENTIRE FORMULA.',
       ctaText: 'SEE THE FULL SONNUS FORMULA →',
-      image: '/sonnus/images/why-sonnus.jpg'
+      image: '/sonnus/images/gallery-1.png'
     },
 
     whyChoose: {
@@ -921,7 +923,7 @@ export const PDP_DATA = {
       subtitle: 'Your day doesn\'t always stop when your head reaches the pillow. Emails, screens, deadlines and mental stimulation follow you straight into bed.',
       tagline: 'CHEW. UNWIND. REST.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/sonnus/images/why-choose.jpg',
+      image: '/sonnus/images/gallery-2.png',
       features: [
         { icon: 'Droplets', title: '2 WILD BERRY GUMMIES', desc: 'Convenient gummy format. No powder, no shaker, no mixing required.' },
         { icon: 'Leaf', title: '10 SLEEP-SUPPORT INGREDIENTS', desc: 'Formulated with botanicals, amino acids, minerals and vitamins.' },
@@ -936,7 +938,7 @@ export const PDP_DATA = {
       subtitle: 'Sonnus complements your evening routine to foster calm, relaxation and restful sleep.',
       highlightText: 'TEN INGREDIENTS. TWO GUMMIES. ONE EASY NIGHTLY RITUAL.',
       ctaText: 'TRY SONNUS TODAY →',
-      image: '/sonnus/images/benefits.jpg',
+      image: '/sonnus/images/gallery-3.png',
       benefits: [
         { title: 'NIGHTTIME RELAXATION', desc: 'Ingredients such as L-Theanine, GABA, magnesium and apigenin are included as part of a formula designed around nighttime calm and relaxation.' },
         { title: 'RESTFUL SLEEP SUPPORT', desc: 'A multi-ingredient formula designed to complement healthy sleep habits and support restful sleep.' },
@@ -950,7 +952,7 @@ export const PDP_DATA = {
       tag: 'HOW TO USE',
       title: 'GIVE YOUR DAY A CLEAR ENDING.',
       subtitle: 'Sonnus takes seconds to use. The rest of the routine is about giving your body and mind a consistent environment for sleep.',
-      image: '/sonnus/images/how-it-works.jpg',
+      image: '/sonnus/images/gallery-4.png',
       steps: [
         { step: '01', title: 'CHEW', desc: 'Take 2 gummies approximately 30 minutes before bedtime.' },
         { step: '02', title: 'DIM', desc: 'Lower the lights and begin reducing unnecessary stimulation.' },
@@ -968,7 +970,7 @@ export const PDP_DATA = {
       description: 'Sonnus features clean botanical extracts, calming amino acids, essential minerals, and vitamins.',
       highlightText: 'NOT A MELATONIN-ONLY PRODUCT. A MULTI-INGREDIENT NIGHTTIME FORMULA.',
       ctaText: 'VIEW SUPPLEMENT FACTS →',
-      image: '/sonnus/images/ingredients.jpg',
+      image: '/sonnus/images/gallery-4.png',
       ingredients: [
         { name: 'MAGNESIUM BISGLYCINATE + GLYCINATE', desc: 'Magnesium is an essential mineral involved in hundreds of physiological processes, including normal nervous-system and muscle function.', whyItsHere: 'To form part of Sonnus\' broader relaxation and nighttime-wellness approach.' },
         { name: 'L-THEANINE', desc: 'An amino acid found naturally in tea and frequently studied in relation to relaxation and stress response.', whyItsHere: 'To complement Sonnus\' nighttime-calming profile.' },
@@ -985,7 +987,7 @@ export const PDP_DATA = {
       tag: 'WHY SONNUS?',
       title: 'MELATONIN-ONLY VS. A MORE COMPLETE NIGHTTIME FORMULA.',
       tagline: 'TEN INGREDIENTS. TWO GUMMIES. ONE NIGHTLY HABIT.',
-      image: '/sonnus/images/comparison.jpg',
+      image: '/sonnus/images/gallery-5.png',
       headers: ['FEATURES', 'SONNUS®', 'BASIC MELATONIN-ONLY PRODUCTS'],
       rows: [
         { feature: 'Multi-ingredient approach', product: true, opponent: false },
