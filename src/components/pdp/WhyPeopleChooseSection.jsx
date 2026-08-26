@@ -44,6 +44,14 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
   const data = whyChoose || defaultData;
   const brandAccent = accentColor || '#D96B32';
 
+  // Helper to ensure high contrast on dark section backgrounds (#1B2613)
+  const isDarkAccent = brandAccent.toLowerCase() === '#3b4959' || brandAccent.toLowerCase().includes('3b4959');
+  const displayAccent = isDarkAccent ? '#A4B8CC' : brandAccent; 
+  const iconColor = isDarkAccent ? '#C5D8EA' : brandAccent;
+  const iconBg = isDarkAccent ? 'rgba(197, 216, 234, 0.18)' : `${brandAccent}25`;
+  const iconBorder = isDarkAccent ? 'rgba(197, 216, 234, 0.45)' : `${brandAccent}50`;
+  const buttonBg = isDarkAccent ? '#485869' : brandAccent;
+
   const scrollToBundles = () => {
     const el = document.getElementById('bundles-section');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -69,7 +77,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${brandAccent}20 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${displayAccent}25 0%, transparent 70%)`,
           filter: 'blur(60px)',
           pointerEvents: 'none'
         }}
@@ -92,7 +100,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
                 borderRadius: '24px',
                 overflow: 'hidden',
                 boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
                 backgroundColor: '#141210'
               }}
             >
@@ -118,7 +126,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
                   fontSize: '12px', 
                   fontWeight: 900, 
                   letterSpacing: '0.16em', 
-                  color: brandAccent,
+                  color: displayAccent,
                   textTransform: 'uppercase',
                   display: 'block',
                   marginBottom: '8px'
@@ -136,9 +144,9 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
                   lineHeight: 1.2
                 }}
               >
-                {data.title} <span style={{ color: brandAccent }}>{data.titleHighlight}</span>
+                {data.title} <span style={{ color: displayAccent }}>{data.titleHighlight}</span>
               </h2>
-              <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.75)', fontWeight: 500, margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: '14.5px', color: 'rgba(255,255,255,0.85)', fontWeight: 500, margin: 0, lineHeight: 1.5 }}>
                 {data.subtitle}
               </p>
             </div>
@@ -158,34 +166,34 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
                   <div
                     key={idx}
                     style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.07)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      border: '1px solid rgba(255, 255, 255, 0.16)',
                       borderRadius: '16px',
                       padding: '20px 18px',
                       textAlign: 'left',
-                      boxShadow: '0 10px 24px rgba(0, 0, 0, 0.18)'
+                      boxShadow: '0 10px 24px rgba(0, 0, 0, 0.2)'
                     }}
                   >
                     <div 
                       style={{ 
-                        width: '36px', 
-                        height: '36px', 
+                        width: '38px', 
+                        height: '38px', 
                         borderRadius: '10px', 
-                        backgroundColor: `${brandAccent}25`, 
-                        border: `1px solid ${brandAccent}50`,
-                        color: brandAccent,
+                        backgroundColor: iconBg, 
+                        border: `1px solid ${iconBorder}`,
+                        color: iconColor,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         marginBottom: '12px'
                       }}
                     >
-                      <IconComponent size={18} />
+                      <IconComponent size={20} />
                     </div>
                     <h3 style={{ fontSize: '13.5px', fontWeight: 900, color: '#FFFFFF', margin: '0 0 6px', letterSpacing: '0.04em' }}>
                       {item.title}
                     </h3>
-                    <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.45, fontWeight: 400 }}>
+                    <p style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.85)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -201,16 +209,16 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
               <button
                 onClick={scrollToBundles}
                 style={{
-                  backgroundColor: brandAccent,
+                  backgroundColor: buttonBg,
                   color: '#FFFFFF',
-                  border: 'none',
+                  border: '1px solid rgba(255,255,255,0.2)',
                   borderRadius: '10px',
                   padding: '14px 28px',
                   fontSize: '13.5px',
-                  fontWeight: 800,
+                  fontWeight: 900,
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
-                  boxShadow: `0 8px 24px ${brandAccent}45`
+                  boxShadow: `0 8px 24px ${buttonBg}60`
                 }}
               >
                 {data.ctaText}
