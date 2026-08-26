@@ -49,12 +49,12 @@ export function IngredientsSection({ ingredientsSection, accentColor }) {
             }}
           >
             <img
-              src={ingredientsSection.image || "/sonnus/images/gallery-4.png"}
+              src={ingredientsSection.image || "/sonnus/images/section-ingredients.png"}
               alt={title || "Ingredients Formula"}
               style={{
                 width: '100%',
                 height: 'auto',
-                aspectRatio: '1 / 1',
+                aspectRatio: '3 / 4',
                 objectFit: 'cover',
                 display: 'block'
               }}
