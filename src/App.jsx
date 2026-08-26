@@ -16,27 +16,37 @@ import { Footer } from './components/layout/Footer';
 import { ProductPage } from './components/pdp/ProductPage';
 import { ProductMarquee } from './components/pdp/ProductMarquee';
 import { SalesNotificationPopups } from './components/common/SalesNotificationPopups';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
   const getProductFromLocation = () => {
     // 1. Check query string: ?product=slimsoda
     const params = new URLSearchParams(window.location.search);
-    const queryProduct = params.get('product') || params.get('p');
-    if (queryProduct && PDP_DATA[queryProduct.toLowerCase()]) {
-      return queryProduct.toLowerCase();
+    const rawQuery = params.get('product') || params.get('p');
+    if (rawQuery) {
+      const cleanQuery = rawQuery.trim().toLowerCase().replace(/\/$/, '');
+      if (PDP_DATA[cleanQuery]) {
+        return cleanQuery;
+      }
     }
 
     // 2. Check hash: #slimsoda or #/slimsoda
-    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-    if (hash && PDP_DATA[hash]) {
-      return hash;
+    const rawHash = window.location.hash.replace(/^#\/?/, '');
+    if (rawHash) {
+      const cleanHash = rawHash.trim().toLowerCase().replace(/\/$/, '');
+      if (PDP_DATA[cleanHash]) {
+        return cleanHash;
+      }
     }
 
     // 3. Check pathname: /slimsoda
-    const path = window.location.pathname.toLowerCase().replace(/^\//, '').replace(/\/$/, '');
-    if (PDP_DATA[path]) {
-      return path;
+    const rawPath = window.location.pathname.replace(/^\//, '');
+    if (rawPath) {
+      const cleanPath = rawPath.trim().toLowerCase().replace(/\/$/, '');
+      if (PDP_DATA[cleanPath]) {
+        return cleanPath;
+      }
     }
 
     return null;
@@ -53,7 +63,7 @@ export function App() {
   }, []);
 
   const openProductPDP = (productId) => {
-    const id = productId.toLowerCase();
+    const id = (productId || '').trim().toLowerCase().replace(/\/$/, '');
     if (PDP_DATA[id]) {
       setActiveProductId(id);
       window.history.pushState(null, '', `/${id}`);
@@ -85,7 +95,9 @@ export function App() {
       />
 
       {isProductPage ? (
-        <ProductPage productData={PDP_DATA[activeProductId]} onBackToHome={backToHome} />
+        <ErrorBoundary>
+          <ProductPage productData={PDP_DATA[activeProductId]} onBackToHome={backToHome} />
+        </ErrorBoundary>
       ) : (
         /* Main Home Page Layout */
         <main>
