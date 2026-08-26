@@ -1,13 +1,21 @@
 import React from 'react';
 
-export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
-  const isLinfaFlow = String(productName || '').toLowerCase().includes('linfaflow');
+export function RealTransformations({ productName = '', productId = '', accentColor }) {
+  const pName = String(productName || '').toLowerCase();
+  const pId = String(productId || '').toLowerCase();
+  const href = typeof window !== 'undefined' ? window.location.href.toLowerCase() : '';
 
-  const defaultImages = [
+  const isLinfaFlow = pName.includes('linfa') || pId.includes('linfa') || href.includes('linfa');
+  const isSlimSoda = pName.includes('slim') || pId.includes('slim') || href.includes('slim');
+  const isCrowned = pName.includes('crown') || pId.includes('crown') || href.includes('crown');
+
+  const isSonnus = pName.includes('sonn') || pId.includes('sonn') || href.includes('sonn') || (!isLinfaFlow && !isSlimSoda && !isCrowned);
+
+  const slimSodaImages = [
     { 
       id: 1, 
       src: '/assets/transformations/transformation-4.png', 
-      alt: `${productName} Daily Routine Transformation`,
+      alt: `SlimSoda Daily Routine Transformation`,
       name: 'Emily R.',
       badgeText: 'Verified Buyer',
       headline: '“It became one of the easiest parts of my morning routine.”',
@@ -16,16 +24,16 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
     { 
       id: 2, 
       src: '/assets/transformations/transformation-5.jpg', 
-      alt: `${productName} Daily Routine Transformation`,
+      alt: `SlimSoda Daily Routine Transformation`,
       name: 'Jessica T.',
       badgeText: 'Verified Buyer',
       headline: '“Finally, something I can actually stay consistent with.”',
-      feedback: `I wanted a wellness routine that didn't involve several different bottles and schedules. ${productName} makes it simple.`
+      feedback: `I wanted a wellness routine that didn't involve several different bottles and schedules. SlimSoda makes it simple.`
     },
     { 
       id: 3, 
       src: '/assets/transformations/transformation-1.png', 
-      alt: `${productName} Daily Routine Transformation`,
+      alt: `SlimSoda Daily Routine Transformation`,
       name: 'Karen M.',
       badgeText: 'Verified Buyer',
       headline: '“Simple, convenient and easy to remember.”',
@@ -34,7 +42,7 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
     { 
       id: 4, 
       src: '/assets/transformations/transformation-3.png', 
-      alt: `${productName} Daily Routine Transformation`,
+      alt: `SlimSoda Daily Routine Transformation`,
       name: 'Sarah H.',
       badgeText: 'Verified Buyer',
       headline: '“It fits naturally into my routine.”',
@@ -81,15 +89,60 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
     }
   ];
 
-  const transformationImages = isLinfaFlow ? linfaFlowImages : defaultImages;
+  const sonnusVideos = [
+    { 
+      id: 1, 
+      videoSrc: '/sonnus/videos-lp/ad01.mp4', 
+      alt: 'Sonnus Video Testimonial 1',
+      name: 'Elena M.',
+      badgeText: 'Verified Buyer',
+      headline: '“IT\'S BECOME MY SIGNAL TO START WINDING DOWN.”',
+      feedback: 'The gummies are easy to take and I like having a consistent step that tells me it\'s time to start shutting things down for the night.'
+    },
+    { 
+      id: 2, 
+      videoSrc: '/sonnus/videos-lp/ad02.mp4', 
+      alt: 'Sonnus Video Testimonial 2',
+      name: 'David L.',
+      badgeText: 'Verified Buyer',
+      headline: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”',
+      feedback: 'I was looking for something with a broader formula, and the ingredient blend is what made me choose Sonnus.'
+    },
+    { 
+      id: 3, 
+      videoSrc: '/sonnus/videos-lp/ad03.mp4', 
+      alt: 'Sonnus Video Testimonial 3',
+      name: 'Rachel B.',
+      badgeText: 'Verified Buyer',
+      headline: '“THE WILD BERRY GUMMIES MAKE IT EASY.”',
+      feedback: 'No capsules or mixing anything. Two gummies before bed fits naturally into my evening routine.'
+    },
+    { 
+      id: 4, 
+      videoSrc: '/sonnus/videos-lp/ad05.mp4', 
+      alt: 'Sonnus Video Testimonial 4',
+      name: 'Marcus P.',
+      badgeText: 'Verified Buyer',
+      headline: '“SIMPLE ENOUGH TO STAY CONSISTENT.”',
+      feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with night after night.'
+    }
+  ];
+
+  const transformationItems = isSlimSoda 
+    ? slimSodaImages 
+    : isLinfaFlow 
+      ? linfaFlowImages 
+      : sonnusVideos;
 
   // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
   const repeatList = [
-    ...transformationImages, 
-    ...transformationImages, 
-    ...transformationImages, 
-    ...transformationImages
+    ...transformationItems, 
+    ...transformationItems, 
+    ...transformationItems, 
+    ...transformationItems
   ];
+
+  const isVideoMode = !isSlimSoda && !isLinfaFlow;
 
   return (
     <section 
@@ -108,13 +161,13 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
             fontSize: '12px', 
             fontWeight: 900, 
             letterSpacing: '0.14em', 
-            color: accentColor || '#D96B32',
+            color: accentColor || '#3B4959',
             textTransform: 'uppercase',
             display: 'block',
             marginBottom: '8px'
           }}
         >
-          REAL PEOPLE. REAL ROUTINES.
+          {isVideoMode ? 'VIDEO REVIEWS & TESTIMONIALS' : 'REAL PEOPLE. REAL ROUTINES.'}
         </span>
         <h2 
           style={{ 
@@ -125,10 +178,12 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
             letterSpacing: '-0.02em'
           }}
         >
-          MADE TO FIT <span style={{ color: accentColor || '#D96B32' }}>REAL LIFE.</span>
+          MADE TO FIT <span style={{ color: accentColor || '#3B4959' }}>REAL LIFE.</span>
         </h2>
         <p style={{ fontSize: '15px', color: '#666', fontWeight: 500, margin: 0 }}>
-          See how customers are making {productName} part of their everyday wellness routines.
+          {isVideoMode 
+            ? 'Watch real customers share how Sonnus fits into their nightly wind-down ritual.' 
+            : `See how customers are making ${productName || 'our products'} part of their everyday wellness routines.`}
         </p>
       </div>
 
@@ -148,7 +203,7 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
             display: 'flex',
             gap: '24px',
             width: 'max-content',
-            animation: 'infiniteScroll 48s linear infinite',
+            animation: 'infiniteScroll 52s linear infinite',
             willChange: 'transform'
           }}
         >
@@ -167,28 +222,53 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
                 flexShrink: 0
               }}
             >
-              {/* Photo Box with CSS Crop hiding bottom burned-in weight badges */}
-              <div 
-                style={{ 
-                  width: '100%', 
-                  height: '255px', 
-                  position: 'relative',
-                  backgroundColor: '#FAF7F2',
-                  overflow: 'hidden'
-                }}
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  style={{
-                    width: '100%',
-                    height: '118%',
-                    objectFit: 'cover',
-                    objectPosition: 'top center',
-                    display: 'block'
+              {/* Media Box: Video or Photo */}
+              {item.videoSrc ? (
+                <div 
+                  style={{ 
+                    width: '100%', 
+                    height: '310px', 
+                    position: 'relative',
+                    backgroundColor: '#000000',
+                    overflow: 'hidden'
                   }}
-                />
-              </div>
+                >
+                  <video
+                    src={item.videoSrc}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+              ) : (
+                <div 
+                  style={{ 
+                    width: '100%', 
+                    height: '255px', 
+                    position: 'relative',
+                    backgroundColor: '#FAF7F2',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    style={{
+                      width: '100%',
+                      height: '118%',
+                      objectFit: 'cover',
+                      objectPosition: 'top center',
+                      display: 'block'
+                    }}
+                  />
+                </div>
+              )}
 
               {/* Feedback & Customer Name Footer Box */}
               <div style={{ padding: '18px', backgroundColor: '#FFFFFF', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -227,10 +307,11 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
 
         @media (max-width: 640px) {
           .transformations-track > div {
-            width: 270px !important;
+            width: 280px !important;
           }
         }
       `}</style>
     </section>
   );
 }
+

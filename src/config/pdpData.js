@@ -802,40 +802,42 @@ export const PDP_DATA = {
   sonnus: {
     id: 'sonnus',
     brand: 'SONNUS®',
-    title: 'A RESTORATIVE EVENING RITUAL FOR DEEP NIGHTTIME REST.',
-    subtitle: 'Sonnus is a soothing evening liquid formula formulated to complement your nighttime wind-down routine, natural relaxation habits and restful sleep support.',
-    rating: 4.9,
+    title: 'YOUR NIGHT DESERVES MORE THAN JUST MORE MELATONIN.',
+    subtitle: 'A complete 10-ingredient nighttime gummy built around relaxation, healthy sleep support and a calmer transition into bedtime — with just 0.9 mg of melatonin as one part of the formula.',
+    rating: 4.8,
     reviewCount: '9,480+',
     startingPrice: '$19.99',
     accentColor: '#3B4959',
     accentLight: 'rgba(59, 73, 89, 0.12)',
-    heroImage: '/assets/products/highlight_sonnus.png',
+    heroImage: '/sonnus/images/hero.png',
     
     usps: [
-      'Supports natural evening relaxation',
-      'Complements healthy sleep routines',
-      'Non-habit forming botanical blend',
-      'Easy liquid dropper before bedtime',
-      'Wake up feeling refreshed'
+      'Supports nighttime relaxation',
+      'Helps support restful sleep',
+      'Supports a calm transition into bedtime',
+      '10 sleep-support ingredients',
+      'Only 0.9 mg of melatonin',
+      'Wild Berry gummy format',
+      'No caffeine or stimulants'
     ],
 
     gallery: [
-      { id: 'g1', label: 'PRODUCT HERO', src: '/assets/products/highlight_sonnus.png' },
-      { id: 'g2', label: 'BOTTLE', src: '/assets/products/product_sonnus_bottle.png' },
-      { id: 'g3', label: 'SELECTOR', src: '/assets/products/selector_sonnus.png' }
+      { id: 'g1', label: 'PRODUCT HERO', src: '/sonnus/images/hero.png' },
+      { id: 'g2', label: 'BOTTLE', src: '/sonnus/images/bottle.png' },
+      { id: 'g3', label: 'SELECTOR', src: '/sonnus/images/selector.png' }
     ],
 
     bundlesSection: {
-      tag: 'READY TO REST BETTER?',
+      tag: 'CHOOSE YOUR NIGHTLY ROUTINE',
       title: 'SAVE MORE WHEN YOU STOCK UP ON SONNUS®',
-      subtitle: 'Select your Sonnus bundle to build a consistent evening routine.',
+      subtitle: 'Sonnus is designed for consistent nightly use. Choose the bundle that gives you more nights — at a lower cost per bottle.',
       finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
       bundles: [
         {
           id: 'starter',
-          name: 'STARTER BUNDLE',
+          name: 'STARTER ROUTINE',
           badge: 'SAVE 50%',
-          image: '/assets/products/product_sonnus_bottle.png',
+          image: '/sonnus/images/bundle-1.png',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -846,13 +848,13 @@ export const PDP_DATA = {
           savings: 'Save $69.50',
           perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
           ctaText: 'GET MY 2 BOTTLES →',
-          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usesonnus.com/checkout.php?hid=b2lkPW9mZl80MjQwNDIwJmFpZD1hZmYxOTgyODE0JnVpZD1ibF85MDY2ODgw&affid=aff1982814'
         },
         {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/assets/products/selector_sonnus.png',
+          image: '/sonnus/images/bundle-2.png',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -861,16 +863,16 @@ export const PDP_DATA = {
           totalPrice: '$109.96',
           originalTotal: '$219.92',
           savings: 'Save $109.96',
-          bonusText: '✓ Priority Handling + Free U.S. Shipping',
-          perks: ['Better Value', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Handling'],
+          bonusText: '✓ Better Price Per Bottle + Priority Processing',
+          perks: ['Better Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Processing'],
           ctaText: 'GET MY 4 BOTTLES →',
-          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usesonnus.com/checkout.php?hid=b2lkPW9mZl80MjQwNDIwJmFpZD1hZmYxOTgyODE0JnVpZD1ibF85MDY2ODgw&affid=aff1982814'
         },
         {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/assets/products/highlight_sonnus.png',
+          image: '/sonnus/images/bundle-3.png',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -879,10 +881,10 @@ export const PDP_DATA = {
           totalPrice: '$119.94',
           originalTotal: '$329.80',
           savings: 'Save $209.86',
-          bonusText: '✓ Lowest Price Per Bottle + Expedited Processing',
-          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Expedited Handling'],
+          bonusText: '✓ Lowest Price Per Bottle + Best Long-Term Value',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Best Long-Term Value'],
           ctaText: 'GET THE BEST VALUE →',
-          checkoutUrl: 'https://cc.sonnusliquid.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usesonnus.com/checkout.php?hid=b2lkPW9mZl80MjQwNDIwJmFpZD1hZmYxOTgyODE0JnVpZD1ibF85MDY2ODgw&affid=aff1982814'
         }
       ]
     },
@@ -891,7 +893,7 @@ export const PDP_DATA = {
       tag: 'TRUST & QUALITY',
       title: 'RESTFUL WELLNESS SUPPORT',
       items: [
-        { title: 'NON-HABIT FORMING', desc: 'Gentle botanical ingredients designed for daily evening rest.' },
+        { title: '10-INGREDIENT BLEND', desc: 'Combines magnesium, L-Theanine, GABA, apigenin, B vitamins and 0.9 mg melatonin.' },
         { title: 'THIRD-PARTY TESTED', desc: 'Quality tested by an independent third-party laboratory.' },
         { title: 'U.S. MADE', desc: 'Manufactured in the United States in a registered facility.' },
         { title: 'FREE U.S. SHIPPING', desc: 'Fast shipping directly from our U.S. fulfillment centers.' },
@@ -900,129 +902,155 @@ export const PDP_DATA = {
     },
 
     whyBlock: {
-      tag: 'WHY SONNUS?',
-      title: 'A CALM EVENING IS THE FOUNDATION OF A GREAT DAY.',
-      lead: 'Rest is not a luxury — it is an essential part of daily wellbeing.',
-      p1: 'Modern schedules can make winding down at night difficult. Sonnus brings relaxing botanicals together in one easy liquid formula.',
-      boxTag: 'THE SONNUS EVENING RITUAL:',
-      boxTitle: 'TAKE A DROPPER. WIND DOWN. REST DEEPLY.',
-      p2: 'Incorporate Sonnus into your evening routine alongside dimming lights and unplugging from screens.',
-      tagline: 'GENTLE REST. REFRESHED MORNINGS.',
-      ctaText: 'MAKE SONNUS PART OF MY NIGHT →',
-      image: '/assets/products/highlight_sonnus.png'
+      tag: 'THE DIFFERENCE',
+      title: 'SLEEP SUPPORT SHOULDN\'T BEGIN AND END WITH ONE INGREDIENT.',
+      lead: 'Many nighttime supplements are built around a simple idea: MORE MELATONIN = BETTER.',
+      p1: 'Sonnus takes a different approach. Melatonin plays an important role in normal sleep-wake timing. But nighttime wellness involves more than one pathway — and that\'s why Sonnus doesn\'t build the entire formula around melatonin alone.',
+      boxTag: 'THE SONNUS NIGHTTIME FORMULA:',
+      boxTitle: '10 INGREDIENTS. 2 GUMMIES. ONE SIMPLE NIGHTLY RITUAL.',
+      p2: 'Instead of relying on melatonin as the entire nighttime strategy, Sonnus combines Magnesium, L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, Vitamins B2 + B6 with just 0.9 mg of melatonin per serving.',
+      tagline: 'MELATONIN IS PART OF THE FORMULA. NOT THE ENTIRE FORMULA.',
+      ctaText: 'SEE THE FULL SONNUS FORMULA →',
+      image: '/sonnus/images/why-sonnus.jpg'
     },
 
     whyChoose: {
       tag: 'WHY PEOPLE CHOOSE SONNUS',
-      title: 'AN EVENING ROUTINE YOU LOOK FORWARD TO',
-      titleHighlight: 'EVERY NIGHT.',
-      subtitle: 'Simple dropper format that fits seamlessly into your wind-down habits.',
-      tagline: 'RESTFUL NIGHTS. CLEAR MORNINGS.',
+      title: 'A BETTER NIGHT STARTS BEFORE YOU FALL ASLEEP.',
+      titleHighlight: 'THE TRANSITION MATTERS.',
+      subtitle: 'Your day doesn\'t always stop when your head reaches the pillow. Emails, screens, deadlines and mental stimulation follow you straight into bed.',
+      tagline: 'CHEW. UNWIND. REST.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/selector_sonnus.png',
+      image: '/sonnus/images/why-choose.jpg',
       features: [
-        { icon: 'Droplets', title: 'CONVENIENT LIQUID DROPPER', desc: 'Easy to take right before bedtime.' },
-        { icon: 'Leaf', title: 'CALMING BOTANICALS', desc: 'Formulated with soothing natural plant extracts.' },
-        { icon: 'Sun', title: 'NON-DROWSY MORNINGS', desc: 'Wake up feeling refreshed without morning groggy feelings.' },
-        { icon: 'ShieldCheck', title: '90-DAY RISK FREE GUARANTEE', desc: 'Plenty of time to evaluate your sleep routine.' }
+        { icon: 'Droplets', title: '2 WILD BERRY GUMMIES', desc: 'Convenient gummy format. No powder, no shaker, no mixing required.' },
+        { icon: 'Leaf', title: '10 SLEEP-SUPPORT INGREDIENTS', desc: 'Formulated with botanicals, amino acids, minerals and vitamins.' },
+        { icon: 'Sun', title: 'CALMER BEDTIME TRANSITION', desc: 'Designed to signal to your mind and body that the day is done.' },
+        { icon: 'ShieldCheck', title: '90-DAY RISK-FREE GUARANTEE', desc: 'Plenty of time to evaluate your new evening ritual.' }
       ]
     },
 
     benefitsSection: {
-      tag: 'BENEFITS',
-      title: 'SUPPORTING YOUR BODY\'S NATURAL EVENING WIND-DOWN.',
-      subtitle: 'Sonnus complements your evening routine to foster calm and restful sleep.',
-      highlightText: 'CALMING BOTANICALS. SOOTHING RITUAL. RESTFUL SLEEP.',
+      tag: 'NIGHTTIME SUPPORT',
+      title: 'BUILT FOR THE MOMENT YOUR DAY NEEDS TO SLOW DOWN.',
+      subtitle: 'Sonnus complements your evening routine to foster calm, relaxation and restful sleep.',
+      highlightText: 'TEN INGREDIENTS. TWO GUMMIES. ONE EASY NIGHTLY RITUAL.',
       ctaText: 'TRY SONNUS TODAY →',
+      image: '/sonnus/images/benefits.jpg',
       benefits: [
-        { title: 'EVENING RELAXATION', desc: 'Helps signal to your mind and body that it is time to unwind.' },
-        { title: 'RESTFUL SLEEP SUPPORT', desc: 'Complements healthy sleep cycles without heavy drugs.' },
-        { title: 'EASY LIQUID DROPPER', desc: 'Takes seconds to incorporate into your night.' }
+        { title: 'NIGHTTIME RELAXATION', desc: 'Ingredients such as L-Theanine, GABA, magnesium and apigenin are included as part of a formula designed around nighttime calm and relaxation.' },
+        { title: 'RESTFUL SLEEP SUPPORT', desc: 'A multi-ingredient formula designed to complement healthy sleep habits and support restful sleep.' },
+        { title: 'CALMER BEDTIME ROUTINE', desc: 'Designed to fit into the transition from a busy day into a more intentional nighttime environment.' },
+        { title: 'HEALTHY SLEEP-WAKE TIMING', desc: 'Contains 0.9 mg of melatonin, a hormone naturally involved in normal sleep-wake timing.' },
+        { title: 'EASY NIGHTLY CONSISTENCY', desc: 'Two Wild Berry gummies. No powder. No shaker. No complicated protocol.' }
       ]
     },
 
     howItWorks: {
-      tag: 'HOW IT WORKS',
-      title: 'THIRTY SECONDS BEFORE BEDTIME.',
-      subtitle: 'The ultimate evening wind-down companion.',
-      image: '/assets/products/highlight_sonnus.png',
+      tag: 'HOW TO USE',
+      title: 'GIVE YOUR DAY A CLEAR ENDING.',
+      subtitle: 'Sonnus takes seconds to use. The rest of the routine is about giving your body and mind a consistent environment for sleep.',
+      image: '/sonnus/images/how-it-works.jpg',
       steps: [
-        { step: '01', title: 'TAKE', desc: 'Take one dropper of Sonnus 30 minutes before bed.' },
-        { step: '02', title: 'UNWIND', desc: 'Dim lights and disconnect from electronic screens.' },
-        { step: '03', title: 'REST', desc: 'Fall asleep naturally and wake up refreshed.' }
+        { step: '01', title: 'CHEW', desc: 'Take 2 gummies approximately 30 minutes before bedtime.' },
+        { step: '02', title: 'DIM', desc: 'Lower the lights and begin reducing unnecessary stimulation.' },
+        { step: '03', title: 'DISCONNECT', desc: 'Give yourself a little distance from work, notifications and screens.' },
+        { step: '04', title: 'REST', desc: 'Allow Sonnus to complement the nighttime habits that support healthy sleep.' }
       ],
-      tagline: 'TAKE. UNWIND. REST.',
-      ctaText: 'START MY SONNUS ROUTINE →'
+      tagline: 'CHEW. DIM. DISCONNECT. REST.',
+      ctaText: 'START MY NIGHTLY ROUTINE →'
     },
 
     ingredientsSection: {
       tag: 'WHAT\'S INSIDE',
-      title: 'GENTLE, TIME-TESTED BOTANICAL INGREDIENTS.',
-      subtitle: 'Pure plant extracts chosen for relaxation.',
-      description: 'Sonnus features natural botanicals crafted for evening peace.',
-      highlightText: 'CLEAN BOTANICAL EXTRACTS. NO HARSH CHEMICALS.',
+      title: 'A NIGHTTIME STACK — WITHOUT THE NIGHTTIME STACK.',
+      subtitle: 'Instead of asking you to buy several separate supplements, Sonnus combines 10 sleep-support ingredients into one convenient gummy formula.',
+      description: 'Sonnus features clean botanical extracts, calming amino acids, essential minerals, and vitamins.',
+      highlightText: 'NOT A MELATONIN-ONLY PRODUCT. A MULTI-INGREDIENT NIGHTTIME FORMULA.',
       ctaText: 'VIEW SUPPLEMENT FACTS →',
-      image: '/assets/products/product_sonnus_bottle.png',
+      image: '/sonnus/images/ingredients.jpg',
       ingredients: [
-        { name: 'CHAMOMILE EXTRACT', desc: 'Traditionally used to soothe tension and promote evening calm.', whyItsHere: 'Calming foundation.' },
-        { name: 'VALERIAN ROOT', desc: 'Renowned botanical for restful sleep support.', whyItsHere: 'Sleep cycle support.' },
-        { name: 'PASSIONFLOWER', desc: 'Helps calm a busy mind before bed.', whyItsHere: 'Mind relaxation.' }
+        { name: 'MAGNESIUM BISGLYCINATE + GLYCINATE', desc: 'Magnesium is an essential mineral involved in hundreds of physiological processes, including normal nervous-system and muscle function.', whyItsHere: 'To form part of Sonnus\' broader relaxation and nighttime-wellness approach.' },
+        { name: 'L-THEANINE', desc: 'An amino acid found naturally in tea and frequently studied in relation to relaxation and stress response.', whyItsHere: 'To complement Sonnus\' nighttime-calming profile.' },
+        { name: 'GABA', desc: 'A naturally occurring neurotransmitter involved in inhibitory signaling in the nervous system.', whyItsHere: 'As part of the formula\'s broader relaxation approach.' },
+        { name: '5-HTP', desc: 'A precursor involved in the body\'s normal serotonin pathway.', whyItsHere: 'To complement the multi-pathway nighttime formula.' },
+        { name: 'APIGENIN', desc: 'A naturally occurring flavonoid found in several plants, including chamomile.', whyItsHere: 'To complement Sonnus\' nighttime botanical profile.' },
+        { name: 'LEMON BALM', desc: 'Lemon balm has a long history of traditional use in calming and evening botanical preparations.', whyItsHere: 'To complement the formula\'s relaxation-focused ingredients.' },
+        { name: 'VITAMINS B6 & B2', desc: 'Vitamin B6 serves as a cofactor in multiple biochemical pathways, while B2 plays a recognized role in normal cellular energy metabolism.', whyItsHere: 'To support the nutritional architecture of Sonnus\' nighttime formula.' },
+        { name: 'MELATONIN — 0.9 MG', desc: 'Melatonin is naturally produced by the body and plays an important role in normal sleep-wake timing.', whyItsHere: 'Sonnus uses 0.9 mg per serving as one part of a broader 10-ingredient formula.' }
       ]
     },
 
     comparisonSection: {
       tag: 'WHY SONNUS?',
-      title: 'A NATURAL WIND-DOWN vs. HEAVY SLEEPING PILLS.',
-      tagline: 'GENTLE. NATURAL. REFRESHING.',
-      image: '/assets/products/selector_sonnus.png',
-      headers: ['FEATURES', 'SONNUS®', 'SLEEPING PILLS'],
+      title: 'MELATONIN-ONLY VS. A MORE COMPLETE NIGHTTIME FORMULA.',
+      tagline: 'TEN INGREDIENTS. TWO GUMMIES. ONE NIGHTLY HABIT.',
+      image: '/sonnus/images/comparison.jpg',
+      headers: ['FEATURES', 'SONNUS®', 'BASIC MELATONIN-ONLY PRODUCTS'],
       rows: [
-        { feature: 'Natural plant extracts', product: true, opponent: 'False' },
-        { feature: 'Non-habit forming', product: true, opponent: 'False' },
-        { feature: 'No morning grogginess', product: true, opponent: 'False' },
+        { feature: 'Multi-ingredient approach', product: true, opponent: false },
+        { feature: 'Magnesium', product: true, opponent: 'Varies' },
+        { feature: 'L-Theanine', product: true, opponent: 'Varies' },
+        { feature: 'GABA', product: true, opponent: 'Varies' },
+        { feature: 'Apigenin', product: true, opponent: 'Varies' },
+        { feature: 'Lemon Balm', product: true, opponent: 'Varies' },
+        { feature: '5-HTP', product: true, opponent: 'Varies' },
+        { feature: 'Melatonin (0.9 mg)', product: '0.9 mg', opponent: 'Varies' },
+        { feature: 'Wild Berry gummy format', product: true, opponent: 'Varies' },
         { feature: '90-Day Guarantee', product: true, opponent: 'Varies' }
       ]
     },
 
     reviewsSection: {
       tag: 'CUSTOMER REVIEWS',
-      title: 'RESTFUL NIGHTS. HAPPY CUSTOMERS.',
-      ratingText: '★★★★★ 4.9/5 Customer Rating',
-      headline: 'VERIFIED CUSTOMER FEEDBACK',
+      title: 'REAL NIGHTS. REAL ROUTINES.',
+      ratingText: '★★★★★ 4.8/5 Customer Rating',
+      headline: 'MADE TO FIT INTO BEDTIME — NOT TAKE IT OVER.',
       disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
       reviews: [
-        { quote: '“FINALLY SLEEPING THROUGH THE NIGHT.”', body: '“Sonnus has become my favourite evening habit. I feel calm within 20 minutes.”', author: 'David L. — 5 Stars', stars: 5 },
-        { quote: '“NO GROGGINESS IN THE MORNING!”', body: '“Unlike other products, I wake up completely clear-headed and ready for my morning walk.”', author: 'Rachel B. — 5 Stars', stars: 5 }
+        { quote: '“IT\'S BECOME MY SIGNAL TO START WINDING DOWN.”', body: '“The gummies are easy to take and I like having a consistent step that tells me it\'s time to start shutting things down for the night.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”', body: '“I was looking for something with a broader formula, and the ingredient blend is what made menu choose Sonnus.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“THE WILD BERRY GUMMIES MAKE IT EASY.”', body: '“No capsules or mixing anything. Two gummies before bed fits naturally into my routine.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“SIMPLE ENOUGH TO STAY CONSISTENT.”', body: '“I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.”', author: 'Verified Buyer — 5 Stars', stars: 5 }
       ]
     },
 
     guaranteeSection: {
-      tag: '90-DAY GUARANTEE',
-      title: 'TRY SONNUS FOR 90 NIGHTS RISK-FREE.',
-      subtitle: 'YOUR SATISFACTION IS GUARANTEED.',
-      lead: 'We stand behind our formulas with a full 90-day money-back guarantee.',
-      body: 'If Sonnus does not improve your evening wind-down routine, contact our customer support team for a hassle-free refund.',
-      highlight: '90 DAYS TO DECIDE.',
-      ctaText: 'TRY SONNUS RISK-FREE →'
+      tag: '90-DAY MONEY-BACK GUARANTEE',
+      title: 'GIVE YOUR NIGHTTIME ROUTINE A FAIR SHOT.',
+      subtitle: 'KEEP THE DECISION IN YOUR HANDS.',
+      lead: 'Sleep habits are personal. And trying a new nighttime routine shouldn\'t feel like a gamble.',
+      body: 'Use Sonnus according to the directions. Make it part of a consistent nighttime routine. Then decide whether it\'s right for you. If you\'re not satisfied, contact our customer support team during the guarantee period according to the terms of the refund policy.',
+      highlight: '90 DAYS. YOUR DECISION.',
+      ctaText: 'TRY SONNUS WITH CONFIDENCE →',
+      microcopy: 'Free U.S. Shipping • Secure Checkout • One-Time Purchase'
     },
 
     faqSection: {
       tag: 'FAQ',
-      title: 'FREQUENTLY ASKED QUESTIONS ABOUT SONNUS®',
+      title: 'QUESTIONS? WE\'VE GOT ANSWERS.',
       faqs: [
-        { q: 'WHEN SHOULD I TAKE SONNUS?', a: 'Take Sonnus approximately 30 minutes before your intended bedtime.' },
-        { q: 'WILL I FEEL GROGGY IN THE MORNING?', a: 'Sonnus is formulated with natural botanicals to support refreshing sleep without morning grogginess.' }
+        { q: 'WHAT EXACTLY IS SONNUS?', a: 'Sonnus is a nighttime dietary supplement in Wild Berry gummy form featuring 10 ingredients selected around relaxation, nighttime wellness and healthy sleep support.' },
+        { q: 'HOW MANY GUMMIES DO I TAKE?', a: 'Take 2 gummies approximately 30 minutes before bedtime, according to the current product directions.' },
+        { q: 'DOES SONNUS CONTAIN MELATONIN?', a: 'Yes. Sonnus contains 0.9 mg of melatonin per serving as part of its broader 10-ingredient formula.' },
+        { q: 'WHY DOES SONNUS USE A MULTI-INGREDIENT FORMULA?', a: 'Because Sonnus is designed around a broader nighttime-wellness approach rather than relying entirely on one ingredient. Its formula includes magnesium, L-Theanine, GABA, 5-HTP, apigenin, lemon balm, B vitamins and melatonin among its components.' },
+        { q: 'IS SONNUS A SLEEPING PILL?', a: 'No. Sonnus is a dietary supplement and should not be positioned as a prescription or OTC sleep medication.' },
+        { q: 'WILL IT "KNOCK ME OUT"?', a: 'That isn\'t how Sonnus should be positioned. Sonnus is designed to support relaxation and healthy sleep as part of a consistent bedtime routine rather than to act as a sedative medication.' },
+        { q: 'HOW QUICKLY SHOULD I EXPECT RESULTS?', a: 'Individual experiences vary. Sleep can be influenced by stress, caffeine, alcohol, medications, screen exposure, work schedules, sleep environment and underlying health factors. Sonnus should be viewed as part of a consistent nighttime routine rather than as a guaranteed immediate solution.' },
+        { q: 'CAN I TAKE SONNUS EVERY NIGHT?', a: 'Use Sonnus according to the current label directions. If you have questions about regular melatonin or supplement use based on your health history, speak with a qualified healthcare professional.' },
+        { q: 'CAN I COMBINE SONNUS WITH SLEEP MEDICATION?', a: 'Do not combine sleep-support products casually. If you use prescription sleep aids, sedatives, antidepressants, other melatonin products or medications that may interact with the formula, speak with a qualified healthcare professional before using Sonnus.' },
+        { q: 'WHAT IF SONNUS ISN\'T RIGHT FOR ME?', a: 'Eligible purchases are protected by our 90-Day Money-Back Guarantee, subject to the current refund-policy terms.' }
       ]
     },
 
     finalOffer: {
-      tag: 'READY TO REST BETTER?',
-      title: 'START YOUR RESTORATIVE EVENING RITUAL TODAY.',
-      subtitle: 'Enjoy deep relaxation and wake up feeling renewed.',
+      tag: 'READY TO GIVE YOUR NIGHT A BETTER ROUTINE?',
+      title: 'MORE THAN MELATONIN.',
+      subtitle: 'WITHOUT MAKING BEDTIME MORE COMPLICATED.',
       ctaText: 'CHOOSE MY SONNUS BUNDLE →'
     },
 
-    disclaimer: 'Sonnus® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.'
+    disclaimer: 'Sonnus® is a dietary supplement intended to complement healthy sleep habits and a balanced lifestyle. Individual experiences may vary. Sleep difficulties may have multiple causes. Persistent or significant sleep problems should be discussed with a qualified healthcare professional. Consult a healthcare professional before using dietary supplements if you are pregnant, nursing, have a medical condition or take prescription medication. Use additional caution if you take sleep aids, sedatives, antidepressants, other products containing melatonin or medications that may interact with the formula. Do not drive or operate machinery if you experience drowsiness after using the product. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.'
   },
 
   crowned: {

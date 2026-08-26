@@ -141,7 +141,7 @@ export function ProductPage({ productData, onBackToHome }) {
       <WhySlimSodaBlock whyBlock={whyBlock} accentColor={accentColor} />
 
       {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES */}
-      <RealTransformations productName={brand} accentColor={accentColor} />
+      <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
 
       {/* 06 — BENEFÍCIOS PRINCIPAIS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />

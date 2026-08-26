@@ -24,7 +24,7 @@ export function ProductGallery({ gallery = [], accentColor }) {
       >
         <img
           src={current.src}
-          alt={current.caption || current.label || 'SlimSoda Product Image'}
+          alt={current.caption || current.label || 'Product Image'}
           style={{
             width: '100%',
             height: '100%',
