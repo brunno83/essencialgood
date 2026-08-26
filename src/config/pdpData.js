@@ -401,7 +401,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#4B6833',
     accentLight: 'rgba(75, 104, 51, 0.15)',
-    heroImage: '/assets/products/highlight_linfaflow.png',
+    heroImage: '/linfaflow/images/gallery-hero.jpg',
     
     usps: [
       'Supports healthy lymphatic function',
@@ -416,30 +416,30 @@ export const PDP_DATA = {
       {
         id: 'gallery-1',
         label: 'PRODUCT HERO',
-        caption: 'Clean premium bottle & dropper packaging',
-        subtitle: 'DAILY BOTANICAL WELLNESS SUPPORT',
-        src: '/assets/products/highlight_linfaflow.png'
+        caption: 'Support your daily flow',
+        subtitle: 'A SIMPLE LIQUID ADDITION TO YOUR ROUTINE',
+        src: '/linfaflow/images/gallery-hero.jpg'
       },
       {
         id: 'gallery-2',
-        label: 'EXPERIENCE',
-        caption: 'LinfaFlow daily routine',
-        subtitle: 'DROP. HYDRATE. MOVE. REPEAT.',
-        src: '/assets/products/product_linfaflow_bottle.png'
+        label: 'SIMPLE ROUTINE',
+        caption: 'One dropper. One simple routine.',
+        subtitle: 'SIMPLE DAILY WELLNESS, MADE EASY',
+        src: '/linfaflow/images/gallery-routine.jpg'
       },
       {
         id: 'gallery-3',
-        label: 'BENEFITS',
-        caption: 'Lymphatic & circulation support',
-        subtitle: 'SIMPLE DAILY LIQUID DROPPER',
-        src: '/assets/products/selector_linfaflow.png'
+        label: 'LIFESTYLE',
+        caption: 'LinfaFlow at-home wellness routine',
+        subtitle: 'DROP. HYDRATE. MOVE. REPEAT.',
+        src: '/linfaflow/images/gallery-lifestyle.jpg'
       },
       {
         id: 'gallery-4',
-        label: 'INGREDIENTS',
-        caption: '4 traditional botanical extracts',
-        subtitle: 'CLEAVERS, STILLINGIA, RED CLOVER & PRICKLY ASH',
-        src: '/linfaflow/images/02-hero-bottle.webp'
+        label: 'FORMULA',
+        caption: 'Four botanicals. One daily formula.',
+        subtitle: 'CLEAVERS, NETTLE, DANDELION & BURDOCK',
+        src: '/linfaflow/images/gallery-botanicals.jpg'
       },
       {
         id: 'gallery-5',
