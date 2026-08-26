@@ -74,7 +74,7 @@ export function App() {
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
       {/* Top Marquee Announcement Banner - Only on Product Pages */}
-      {isProductPage && <ProductMarquee />}
+      {isProductPage && <ProductMarquee accentColor={PDP_DATA[activeProductId]?.accentColor} />}
 
       {/* Fixed Luxury Navigation Bar */}
       <Header 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Truck, ShieldCheck, Leaf, Star, Lock } from 'lucide-react';
 
-export function ProductMarquee() {
+export function ProductMarquee({ accentColor }) {
   const items = [
     { icon: Truck, text: 'FREE EXPEDITED U.S. SHIPPING ON ALL ORDERS TODAY' },
     { icon: ShieldCheck, text: '90-DAY MONEY-BACK GUARANTEE' },
@@ -29,8 +29,8 @@ export function ProductMarquee() {
     <div 
       className="product-top-marquee"
       style={{
-        backgroundColor: '#D96B32',
-        color: '#141210',
+        backgroundColor: accentColor || '#D96B32',
+        color: '#FFFFFF',
         fontSize: '11px',
         fontWeight: 900,
         letterSpacing: '0.08em',
