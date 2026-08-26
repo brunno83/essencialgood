@@ -53,6 +53,12 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
     : defaultCompliantReviews;
 
   const [reviewsList, setReviewsList] = useState(initialReviews);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [formName, setFormName] = useState('');
+  const [formRating, setFormRating] = useState(5);
+  const [formTitle, setFormTitle] = useState('');
+  const [formBody, setFormBody] = useState('');
+  const [submittedMessage, setSubmittedMessage] = useState(false);
 
   useEffect(() => {
     if (reviewsSection && reviewsSection.reviews && reviewsSection.reviews.length) {
