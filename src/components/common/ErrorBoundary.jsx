@@ -33,6 +33,11 @@ export class ErrorBoundary extends React.Component {
           <h2 style={{ fontSize: '24px', fontWeight: 900, marginBottom: '12px' }}>
             Something went wrong loading this product page.
           </h2>
+          {this.state.error && (
+            <pre style={{ fontSize: '11.5px', color: '#C0392B', backgroundColor: '#FFF0F0', border: '1px solid #F5C6CB', padding: '12px 16px', borderRadius: '8px', maxWidth: '700px', overflowX: 'auto', textAlign: 'left', margin: '12px 0 20px 0' }}>
+              {this.state.error.toString()}
+            </pre>
+          )}
           <p style={{ fontSize: '14px', color: '#666', marginBottom: '24px', maxWidth: '500px' }}>
             Please click below to return to our full collection.
           </p>

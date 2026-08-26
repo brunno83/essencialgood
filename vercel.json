@@ -40,6 +40,7 @@
     { "source": "/sonnus", "destination": "/index.html" },
     { "source": "/sonnus/:path*", "destination": "/index.html" },
     { "source": "/crowned", "destination": "/index.html" },
-    { "source": "/crowned/:path*", "destination": "/index.html" }
+    { "source": "/crowned/:path*", "destination": "/index.html" },
+    { "source": "/:path*", "destination": "/index.html" }
   ]
 }
