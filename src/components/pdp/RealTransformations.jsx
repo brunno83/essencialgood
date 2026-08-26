@@ -173,11 +173,70 @@ export function RealTransformations({ productName = '', productId = '', accentCo
     }
   ];
 
-  const transformationItems = isSonnus
-    ? sonnusCustomerPhotos
+  const crownedImages = [
+    { 
+      id: 1, 
+      src: '/crowned/images/03-result-01.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Amanda K.',
+      badgeText: 'Verified Buyer',
+      headline: '“I LOVE HOW LIGHT IT FEELS.”',
+      feedback: 'I\'ve tried scalp oils before and hated how my roots felt afterward. Crowned is much easier to work into my daily routine.'
+    },
+    { 
+      id: 2, 
+      src: '/crowned/images/03-result-02.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Jessica W.',
+      badgeText: 'Verified Buyer',
+      headline: '“FINALLY, A SCALP PRODUCT I ACTUALLY USE.”',
+      feedback: 'One dropper, a quick massage and I\'m done. It doesn\'t complicate everything else I already do with my hair.'
+    },
+    { 
+      id: 3, 
+      src: '/crowned/images/03-result-03.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Rachel B.',
+      badgeText: 'Verified Buyer',
+      headline: '“THE FORMULA IS WHAT CAUGHT MY ATTENTION.”',
+      feedback: 'I had seen copper peptides in skincare before, so I liked the idea of a scalp serum built around GHK-Cu.'
+    },
+    { 
+      id: 4, 
+      src: '/crowned/images/03-result-04.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Emily S.',
+      badgeText: 'Verified Buyer',
+      headline: '“EASY TO USE WITHOUT CHANGING MY ROUTINE.”',
+      feedback: 'I still use my regular shampoo and styling products. Crowned is just one extra step, which makes it easy to stay consistent.'
+    },
+    { 
+      id: 5, 
+      src: '/crowned/images/03-result-05.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Claire T.',
+      badgeText: 'Verified Buyer',
+      headline: '“MY SCALP FEELS MUCH BETTER CONDITIONED.”',
+      feedback: 'I noticed my hair looks fuller and my scalp feels great after consistent daily use.'
+    },
+    { 
+      id: 6, 
+      src: '/crowned/images/03-result-06.webp', 
+      alt: 'Crowned Daily Scalp Care Routine',
+      name: 'Sophia M.',
+      badgeText: 'Verified Buyer',
+      headline: '“NO HEAVY OIL FORMAT.”',
+      feedback: 'I wanted direct scalp care without weighing down my hair. Crowned absorbs fast and feels weightless.'
+    }
+  ];
+
+  const transformationItems = isCrowned
+    ? crownedImages
     : isLinfaFlow 
       ? linfaFlowImages 
-      : slimSodaImages;
+      : isSlimSoda
+        ? slimSodaImages
+        : sonnusCustomerPhotos;
 
   // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
   const repeatList = [

@@ -1058,40 +1058,44 @@ export const PDP_DATA = {
   crowned: {
     id: 'crowned',
     brand: 'CROWNED®',
-    title: 'ADVANCED BOTANICAL FORMULA FOR HAIR & SCALP VITALITY.',
-    subtitle: 'Crowned is a premium botanical formula designed to complement your daily hair care routine, scalp vitality and strand strength.',
+    title: 'FULLER-LOOKING HAIR STARTS WHERE YOUR HAIR STARTS.',
+    subtitle: 'A lightweight daily scalp serum featuring Copper Tripeptide-1 (GHK-Cu), Niacinamide, Panthenol and Biotin — created to support a healthier-looking scalp environment and stronger, fuller-looking hair.',
     rating: 4.8,
     reviewCount: '12,340+',
     startingPrice: '$19.99',
     accentColor: '#7E57C2',
     accentLight: 'rgba(126, 87, 194, 0.12)',
-    heroImage: '/assets/products/highlight_crowned.png',
+    heroImage: '/crowned/images/02-hero.webp',
     
     usps: [
-      'Supports scalp health & hair follicle vitality',
-      'Formulated with botanical nutrients & antioxidants',
-      'Supports strand strength & shine',
-      'Easy daily routine',
-      'Suitable for all hair types'
+      'Supports fuller-looking hair',
+      'Helps strengthen and condition fragile strands',
+      'Supports a healthier-looking scalp',
+      'Helps reduce the appearance of breakage',
+      'Featuring Copper Tripeptide-1 (GHK-Cu)',
+      'Lightweight, non-greasy leave-in serum',
+      'One simple daily application'
     ],
 
     gallery: [
-      { id: 'cg1', label: 'PRODUCT HERO', src: '/assets/products/highlight_crowned.png' },
-      { id: 'cg2', label: 'BOTTLE', src: '/assets/products/product_crowned_bottle.png' },
-      { id: 'cg3', label: 'SELECTOR', src: '/assets/products/selector_crowned.png' }
+      { id: 'cg1', label: 'HERO', src: '/crowned/images/02-hero.webp' },
+      { id: 'cg2', label: 'APPLICATION', src: '/crowned/images/02-gal-a.webp' },
+      { id: 'cg3', label: 'BENEFITS', src: '/crowned/images/02-gal-b.webp' },
+      { id: 'cg4', label: 'FORMULA', src: '/crowned/images/02-gal-c.webp' },
+      { id: 'cg5', label: 'TRUST', src: '/crowned/images/02-gal-d.webp' }
     ],
 
     bundlesSection: {
-      tag: 'READY FOR STRONGER HAIR?',
-      title: 'SAVE MORE WHEN YOU STOCK UP ON CROWNED®',
-      subtitle: 'Select your Crowned bundle to nourish your scalp consistently.',
+      tag: 'CHOOSE YOUR CROWNED ROUTINE',
+      title: 'SAVE MORE WHEN YOU STAY CONSISTENT.',
+      subtitle: 'Hair and scalp care is a routine — not a one-day event. Choose the bundle that gives you more time to stay consistent while lowering your cost per bottle.',
       finePrint: 'ONE-TIME PURCHASE • NO AUTO-SHIP • 🔒 SECURE CHECKOUT',
       bundles: [
         {
           id: 'starter',
-          name: 'STARTER BUNDLE',
-          badge: 'SAVE 50%',
-          image: '/assets/products/product_crowned_bottle.png',
+          name: 'STARTER ROUTINE',
+          badge: 'BUY 1, GET 1 FREE',
+          image: '/crowned/images/00-bottle.webp',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -1102,13 +1106,13 @@ export const PDP_DATA = {
           savings: 'Save $69.50',
           perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
           ctaText: 'GET MY 2 BOTTLES →',
-          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmYxOTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814'
         },
         {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/assets/products/selector_crowned.png',
+          image: '/crowned/images/00-trio.webp',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -1117,16 +1121,16 @@ export const PDP_DATA = {
           totalPrice: '$109.96',
           originalTotal: '$219.92',
           savings: 'Save $109.96',
-          bonusText: '✓ Priority Handling + Free U.S. Shipping',
-          perks: ['Better Value', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Handling'],
+          bonusText: '✓ Better Price Per Bottle + Priority Processing',
+          perks: ['Better Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Processing'],
           ctaText: 'GET MY 4 BOTTLES →',
-          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmYxOTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814'
         },
         {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/assets/products/highlight_crowned.png',
+          image: '/crowned/images/00-trio.webp',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -1135,21 +1139,21 @@ export const PDP_DATA = {
           totalPrice: '$119.94',
           originalTotal: '$329.80',
           savings: 'Save $209.86',
-          bonusText: '✓ Lowest Price Per Bottle + Expedited Processing',
-          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Expedited Handling'],
+          bonusText: '✓ Lowest Price Per Bottle + Best Long-Term Value',
+          perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Best Long-Term Value'],
           ctaText: 'GET THE BEST VALUE →',
-          checkoutUrl: 'https://cc.crownedhair.com/v1/checkout.php'
+          checkoutUrl: 'https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmYxOTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814'
         }
       ]
     },
 
     trustStrip: {
       tag: 'TRUST & QUALITY',
-      title: 'NOURISHING HAIR VITALITY',
+      title: 'PEPTIDE SCALP CARE. ONCE A DAY.',
       items: [
-        { title: 'BOTANICAL FORMULA', desc: 'Rich in antioxidants and essential plant nutrients.' },
+        { title: 'COPPER TRIPEPTIDE-1', desc: 'Hero copper-binding peptide (GHK-Cu) for targeted scalp care.' },
+        { title: 'LIGHTWEIGHT SERUM', desc: 'Non-greasy, leave-in formula that won\'t weigh down hair.' },
         { title: 'THIRD-PARTY TESTED', desc: 'Quality tested by an independent laboratory.' },
-        { title: 'U.S. MADE', desc: 'Manufactured in the United States in a registered facility.' },
         { title: 'FREE U.S. SHIPPING', desc: 'Fast shipping directly to your doorstep.' },
         { title: '90-DAY GUARANTEE', desc: 'Try Crowned risk-free for 90 days.' }
       ]
@@ -1157,128 +1161,150 @@ export const PDP_DATA = {
 
     whyBlock: {
       tag: 'WHY CROWNED?',
-      title: 'HEALTHY HAIR STARTS AT THE ROOT.',
-      lead: 'True hair vitality comes from nurturing scalp health consistently.',
-      p1: 'Crowned combines essential botanicals and nutrients crafted to nourish hair from the inside out.',
-      boxTag: 'THE CROWNED ROUTINE:',
-      boxTitle: 'ONE SIMPLE DAILY HABIT FOR LUSTROUS HAIR.',
-      p2: 'Make Crowned part of your daily routine to support scalp nourishment and hair strength.',
-      tagline: 'STRENGTH. SHINE. VITALITY.',
-      ctaText: 'MAKE CROWNED PART OF MY DAY →',
-      image: '/assets/products/highlight_crowned.png'
+      title: 'MOST HAIR ROUTINES START TOO FAR FROM THE SOURCE.',
+      lead: 'Shampoo. Conditioner. Masks. Oils. Styling creams. Most traditional hair care focuses almost entirely on the visible hair fiber. But every strand begins at the scalp.',
+      p1: 'And that makes scalp care one of the most logical places to build a more complete hair routine.',
+      boxTag: 'CROWNED WAS CREATED AROUND A SIMPLE IDEA:',
+      boxTitle: 'DON\'T JUST STYLE THE HAIR. CARE FOR THE ENVIRONMENT IT GROWS FROM.',
+      p2: 'That is why Crowned is applied directly to the scalp. Not just to the ends. Not just to the surface of the hair. A focused serum designed to complement the rest of your routine from the foundation up.',
+      tagline: 'SCALP FIRST. STRANDS SECOND. ROUTINE SIMPLE.',
+      ctaText: 'START MY CROWNED ROUTINE →',
+      image: '/crowned/images/07-scalp.webp'
     },
 
     whyChoose: {
-      tag: 'WHY PEOPLE CHOOSE CROWNED',
-      title: 'A FORMULA DESIGNED FOR REAL RESULTS',
-      titleHighlight: 'AND EASY CONSISTENCY.',
-      subtitle: 'Convenient daily supplementation for hair confidence.',
-      tagline: 'NOURISH. STRENGTHEN. SHINE.',
+      tag: 'WHY A SCALP SERUM?',
+      title: 'BECAUSE HAIR OIL AND SCALP CARE',
+      titleHighlight: 'ARE NOT THE SAME THING.',
+      subtitle: 'Traditional oils are often designed around coating or conditioning the hair fiber. Crowned is designed as a lightweight leave-in serum applied directly to the scalp.',
+      tagline: 'CARE WHERE IT COUNTS. WITHOUT THE HEAVY FEEL.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/selector_crowned.png',
+      image: '/crowned/images/02-gal-a.webp',
       features: [
-        { icon: 'Droplets', title: 'EASY DAILY ROUTINE', desc: 'Effortless to take alongside breakfast.' },
-        { icon: 'Leaf', title: 'PLANT-BASED NUTRIENTS', desc: 'Formulated with key antioxidants and botanical extracts.' },
-        { icon: 'Sun', title: 'HEALTHY SHINE & DENSITY', desc: 'Supports natural hair strand resilience.' },
-        { icon: 'ShieldCheck', title: '90-DAY RISK FREE GUARANTEE', desc: 'Full 90 days to test and love your results.' }
+        { icon: 'Droplets', title: 'LIGHTWEIGHT & LEAVE-IN', desc: 'Applied directly to dry or towel-dried scalp with no heavy oil residue.' },
+        { icon: 'Leaf', title: 'PEPTIDE + VITAMIN FORMULA', desc: 'Copper Tripeptide-1 (GHK-Cu), Niacinamide, Panthenol, and Biotin.' },
+        { icon: 'Sun', title: 'TEN SECONDS A DAY', desc: 'One dropper, quick massage, and you\'re done. Fits existing routine.' },
+        { icon: 'ShieldCheck', title: '90-DAY RISK FREE GUARANTEE', desc: 'Give consistent scalp care a fair shot for 90 full days.' }
       ]
     },
 
     benefitsSection: {
-      tag: 'BENEFITS',
-      title: 'NUTRIENT-RICH SUPPORT FOR SCALP & HAIR VITALITY.',
-      subtitle: 'Crowned brings together essential vitamins and botanical extracts to support hair confidence.',
-      highlightText: 'SCALP NOURISHMENT. HAIR STRENGTH. NATURAL SHINE.',
-      ctaText: 'TRY CROWNED TODAY →',
+      tag: 'WHAT CROWNED SUPPORTS',
+      title: 'BETTER-LOOKING HAIR ISN\'T JUST ABOUT SHINE.',
+      subtitle: 'Crowned combines scalp conditioning and strand care in one lightweight daily formula.',
+      highlightText: 'SCALP CARE. STRAND CARE. ONE DAILY SERUM.',
+      ctaText: 'TRY CROWNED →',
+      image: '/crowned/images/02-gal-b.webp',
       benefits: [
-        { title: 'SCALP VITALITY', desc: 'Nourishes the hair follicle environment.' },
-        { title: 'STRAND STRENGTH', desc: 'Supports hair resilience and reduces breakage.' },
-        { title: 'NATURAL SHINE', desc: 'Promotes healthy-looking luster and texture.' }
+        { title: 'FULLER-LOOKING HAIR', desc: 'Designed to support the appearance of greater body, density and fullness as part of a consistent scalp-care routine.' },
+        { title: 'STRONGER-LOOKING STRANDS', desc: 'Conditioning ingredients help support hair resilience and improve the appearance and feel of fragile strands.' },
+        { title: 'HEALTHIER-LOOKING SCALP', desc: 'A scalp-focused formula designed to help maintain a well-conditioned, balanced-looking scalp environment.' },
+        { title: 'LESS VISIBLE BREAKAGE', desc: 'Helps condition the hair and support strands that look smoother, stronger and better cared for.' },
+        { title: 'SIMPLE DAILY CARE', desc: 'One lightweight leave-in application. No rinse, no heavy residue, no complicated new routine.' }
       ]
     },
 
     howItWorks: {
-      tag: 'HOW IT WORKS',
-      title: 'SIMPLE DAILY NOURISHMENT.',
-      subtitle: 'Build consistency for lasting hair health.',
-      image: '/assets/products/highlight_crowned.png',
+      tag: 'HOW TO USE',
+      title: 'TEN SECONDS. ONE TARGETED STEP.',
+      subtitle: 'You do not need an entirely new hair-care system. Crowned is designed to slot into the one you already have.',
+      image: '/crowned/images/02-gal-a.webp',
       steps: [
-        { step: '01', title: 'TAKE', desc: 'Take Crowned daily with water or your favorite beverage.' },
-        { step: '02', title: 'NOURISH', desc: 'Essential botanical nutrients reach hair roots.' },
-        { step: '03', title: 'THRIZE', desc: 'Enjoy stronger, healthier-looking hair over time.' }
+        { step: '01', title: 'APPLY', desc: 'Apply 1 full dropper daily directly to the dry or towel-dried scalp.' },
+        { step: '02', title: 'TARGET', desc: 'Focus the application on scalp areas where you want to be most consistent.' },
+        { step: '03', title: 'MASSAGE', desc: 'Gently massage the serum into the scalp.' },
+        { step: '04', title: 'LEAVE IT IN', desc: 'No rinse required. Continue with your regular styling routine.' }
       ],
-      tagline: 'TAKE. NOURISH. THRIVE.',
-      ctaText: 'START MY CROWNED ROUTINE →'
+      tagline: 'APPLY. MASSAGE. GO.',
+      ctaText: 'START MY DAILY ROUTINE →'
     },
 
     ingredientsSection: {
       tag: 'WHAT\'S INSIDE',
-      title: 'TARGETED BOTANICAL & NUTRIENT COMPLEX.',
-      subtitle: 'Formulated with hair-essential botanicals.',
-      description: 'Crowned blends botanical extracts and nutrients.',
-      highlightText: 'TARGETED BOTANICAL EXTRACTS.',
-      ctaText: 'VIEW SUPPLEMENT FACTS →',
-      image: '/assets/products/product_crowned_bottle.png',
+      title: 'FOUR FOCUSED INGREDIENTS. FOUR DIFFERENT ROLES.',
+      subtitle: 'Crowned combines peptide technology, scalp-barrier care and strand conditioning in one lightweight serum.',
+      description: 'Instead of relying only on traditional oils or basic conditioning ingredients, Crowned puts a modern cosmetic peptide at the center of the formula.',
+      highlightText: 'PEPTIDE. BARRIER CARE. CONDITIONING. ONE FORMULA.',
+      ctaText: 'VIEW FULL INGREDIENT LIST →',
+      image: '/crowned/images/02-gal-c.webp',
       ingredients: [
-        { name: 'SAW PALMETTO EXTRACT', desc: 'Popular botanical for scalp and follicle vitality.', whyItsHere: 'Follicle health.' },
-        { name: 'BIOTIN & ZINC', desc: 'Essential micronutrients for hair keratin structure.', whyItsHere: 'Keratin support.' },
-        { name: 'HORSETAIL EXTRACT', desc: 'Rich in natural silica to support strand strength.', whyItsHere: 'Strand strength.' }
+        { name: 'COPPER TRIPEPTIDE-1 — GHK-Cu', desc: 'A copper-binding cosmetic peptide studied in skin and hair-related biological research to anchor Crowned\'s advanced scalp-care approach.', whyItsHere: 'Peptide Scalp Care' },
+        { name: 'NIACINAMIDE — VITAMIN B3', desc: 'One of the most established cosmetic ingredients for supporting skin-barrier function and maintaining a well-conditioned scalp environment.', whyItsHere: 'Scalp Barrier Care' },
+        { name: 'PANTHENOL — PROVITAMIN B5', desc: 'Widely used in hair-care formulations for conditioning, moisture, and helping support softer, smoother and more resilient-looking strands.', whyItsHere: 'Moisture + Strand Conditioning' },
+        { name: 'BIOTIN — VITAMIN B7', desc: 'Widely recognized in hair-care for conditioning and appearance, complementing Crowned\'s overall hair-care profile.', whyItsHere: 'Familiar Hair-Care Ingredient' }
       ]
     },
 
     comparisonSection: {
       tag: 'WHY CROWNED?',
-      title: 'TARGETED BOTANICAL VITALITY vs. GIMMICKY TOPICAL SHAMPOOS.',
-      tagline: 'NOURISH FROM WITHIN.',
-      image: '/assets/products/selector_crowned.png',
-      headers: ['FEATURES', 'CROWNED®', 'SURFACE SHAMPOOS'],
+      title: 'A FOCUSED SCALP SERUM VS. ANOTHER COMPLICATED HAIR STACK.',
+      tagline: 'SCALP FIRST. ROUTINE SIMPLE.',
+      image: '/crowned/images/02-gal-d.webp',
+      headers: ['FEATURES', 'CROWNED®', 'COMPLEX HAIR ROUTINES'],
       rows: [
-        { feature: 'Nourishes hair roots from within', product: true, opponent: 'False' },
-        { feature: 'Targeted botanical extracts', product: true, opponent: 'Varies' },
-        { feature: 'Free U.S. Shipping', product: true, opponent: 'Varies' },
-        { feature: '90-Day Guarantee', product: true, opponent: 'False' }
+        { feature: 'Direct scalp application', product: true, opponent: 'Varies' },
+        { feature: 'Copper Tripeptide-1 (GHK-Cu)', product: true, opponent: 'Varies' },
+        { feature: 'Niacinamide + Panthenol', product: true, opponent: 'Varies' },
+        { feature: 'Lightweight leave-in serum', product: true, opponent: 'Varies' },
+        { feature: 'Once-daily use', product: true, opponent: 'Varies' },
+        { feature: 'No rinse required', product: true, opponent: 'Varies' },
+        { feature: 'No heavy oil format', product: true, opponent: 'Varies' },
+        { feature: 'Fits existing routine', product: true, opponent: 'Varies' },
+        { feature: '90-Day Guarantee', product: true, opponent: 'Varies' }
       ]
     },
 
     reviewsSection: {
       tag: 'CUSTOMER REVIEWS',
-      title: 'LOVE IS IN THE HAIR.',
+      title: 'REAL ROUTINES FROM REAL BUYERS.',
       ratingText: '★★★★★ 4.8/5 Customer Rating',
-      headline: 'VERIFIED CUSTOMER REVIEWS',
+      headline: 'BUILT FOR PEOPLE WHO DON\'T WANT ANOTHER GREASY HAIR PRODUCT.',
       disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
       reviews: [
-        { quote: '“MY HAIR FEELS SO MUCH STRONGER!”', body: '“After 60 days of taking Crowned, my hair feels thicker and looks shinier than ever before.”', author: 'Amanda K. — 5 Stars', stars: 5 },
-        { quote: '“EASY AND EFFECTIVE.”', body: '“I love how simple it is to add to my daily routine. Highly recommend!”', author: 'Jessica W. — 5 Stars', stars: 5 }
+        { quote: '“I LOVE HOW LIGHT IT FEELS.”', body: '“I\'ve tried scalp oils before and hated how my roots felt afterward. Crowned is much easier to work into my daily routine.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“FINALLY, A SCALP PRODUCT I ACTUALLY USE.”', body: '“One dropper, a quick massage and I\'m done. It doesn\'t complicate everything else I already do with my hair.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“THE FORMULA IS WHAT CAUGHT MY ATTENTION.”', body: '“I had seen copper peptides in skincare before, so I liked the idea of a scalp serum built around GHK-Cu.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
+        { quote: '“EASY TO USE WITHOUT CHANGING MY ROUTINE.”', body: '“I still use my regular shampoo and styling products. Crowned is just one extra step, which makes it easy to stay consistent.”', author: 'Verified Buyer — 5 Stars', stars: 5 }
       ]
     },
 
     guaranteeSection: {
-      tag: '90-DAY GUARANTEE',
-      title: 'TRY CROWNED FOR 90 DAYS RISK-FREE.',
-      subtitle: 'YOUR SATISFACTION IS GUARANTEED.',
-      lead: 'Experience the Crowned difference backed by our 90-day money-back guarantee.',
-      body: 'If you are not delighted with your hair vitality routine, contact us within 90 days for a prompt refund.',
-      highlight: '90 DAYS TO DECIDE.',
-      ctaText: 'TRY CROWNED RISK-FREE →'
+      tag: '90-DAY MONEY-BACK GUARANTEE',
+      title: 'GIVE CONSISTENT CARE A FAIR SHOT.',
+      subtitle: 'THEN DECIDE FOR YOURSELF.',
+      lead: 'Hair and scalp routines take consistency. Trying Crowned shouldn\'t feel like a gamble.',
+      body: 'Apply Crowned according to product directions. Make it part of your daily scalp-care routine. Then decide whether it earns a permanent place in your bathroom. If you\'re not satisfied, contact customer support within 90 days according to our refund-policy terms.',
+      highlight: '90 DAYS. YOUR DECISION.',
+      ctaText: 'TRY CROWNED WITH CONFIDENCE →',
+      microcopy: 'Free U.S. Shipping • Secure Checkout • One-Time Purchase',
+      image: '/crowned/images/15-seal-90.webp'
     },
 
     faqSection: {
       tag: 'FAQ',
-      title: 'FREQUENTLY ASKED QUESTIONS ABOUT CROWNED®',
+      title: 'QUESTIONS? WE\'VE GOT ANSWERS.',
       faqs: [
-        { q: 'HOW LONG UNTIL I NOTICE RESULTS?', a: 'Hair grows gradually. Most customers notice improvements in scalp hydration and shine within 30 to 60 days of consistent daily use.' },
-        { q: 'IS CROWNED SUITABLE FOR ALL HAIR TYPES?', a: 'Yes! Crowned is formulated for both men and women across all hair types and textures.' }
+        { q: 'WHAT EXACTLY IS CROWNED?', a: 'Crowned is a lightweight leave-in cosmetic scalp serum formulated with Copper Tripeptide-1 (GHK-Cu), Niacinamide, Panthenol, Biotin and complementary ingredients. It is designed to support scalp condition and the appearance of stronger, fuller-looking hair.' },
+        { q: 'WHAT MAKES CROWNED DIFFERENT?', a: 'Its scalp-first approach. Instead of functioning primarily as a styling product or heavy hair oil, Crowned is designed for direct once-daily scalp application and features Copper Tripeptide-1 as its hero cosmetic ingredient.' },
+        { q: 'WHAT IS GHK-Cu?', a: 'GHK-Cu is a copper-binding tripeptide studied in cosmetic and biological research involving skin remodeling and hair-follicle biology. Crowned should not be interpreted as clinically proven to regrow hair simply because its formula contains GHK-Cu.' },
+        { q: 'DOES NIACINAMIDE GROW HAIR?', a: 'That is not how Crowned positions niacinamide. Niacinamide has strong relevance to cosmetic skin-barrier care, while existing evidence does not establish topical niacinamide itself as a hair-growth stimulant. In Crowned, its role is centered on scalp conditioning and barrier support.' },
+        { q: 'HOW DO I USE CROWNED?', a: 'Apply 1 full dropper daily directly to a dry or towel-dried scalp according to product directions. Massage gently. Leave it in. No rinse is required.' },
+        { q: 'WILL IT MAKE MY HAIR GREASY?', a: 'Crowned is designed as a lightweight serum rather than a heavy traditional hair oil. Individual hair type, scalp type and amount applied may affect how the product feels.' },
+        { q: 'DO I NEED TO CHANGE MY SHAMPOO?', a: 'No. Crowned is designed to complement your existing hair-care routine.' },
+        { q: 'IS CROWNED A HAIR-LOSS TREATMENT?', a: 'No. Crowned is a cosmetic scalp-care product and is not intended to diagnose, treat, cure or prevent a medical cause of hair loss.' },
+        { q: 'WHEN SHOULD I EXPECT TO NOTICE A DIFFERENCE?', a: 'Hair and scalp appearance changes gradually, and individual experiences vary. Consistency matters, while age, genetics, styling practices, nutrition, hormonal factors and underlying health conditions may also influence hair appearance. Crowned does not promise a specific result within a specific number of days.' },
+        { q: 'WHAT IF CROWNED ISN\'T RIGHT FOR ME?', a: 'Eligible purchases are protected by our 90-Day Money-Back Guarantee according to the current refund-policy terms.' }
       ]
     },
 
     finalOffer: {
-      tag: 'READY FOR HAIR VITALITY?',
-      title: 'NOURISH YOUR HAIR FROM THE ROOT UP.',
-      subtitle: 'Claim your Crowned bundle today.',
+      tag: 'READY TO UPGRADE THE FOUNDATION OF YOUR HAIR ROUTINE?',
+      title: 'START WITH THE SCALP.',
+      subtitle: 'KEEP THE ROUTINE SIMPLE.',
       ctaText: 'CHOOSE MY CROWNED BUNDLE →'
     },
 
-    disclaimer: 'Crowned® is a dietary supplement intended to complement a balanced lifestyle. Individual experiences may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.'
+    disclaimer: 'Crowned® is a cosmetic scalp-care product intended to support scalp condition and the appearance of healthier, stronger, fuller-looking hair. Individual experiences may vary. Crowned is not intended to diagnose, treat, cure or prevent androgenetic alopecia, alopecia areata or any other medical cause of hair loss. Sudden, persistent, patchy or unexplained hair loss may have underlying medical causes and should be evaluated by a qualified healthcare professional. For external use only. Avoid contact with eyes. Discontinue use if significant irritation occurs.'
   }
 };
 

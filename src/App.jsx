@@ -25,7 +25,7 @@ export function App() {
     const params = new URLSearchParams(window.location.search);
     const rawQuery = params.get('product') || params.get('p');
     if (rawQuery) {
-      const cleanQuery = rawQuery.trim().toLowerCase().replace(/\/$/, '');
+      const cleanQuery = rawQuery.trim().toLowerCase().replace(/\/$/, '').split('/')[0];
       if (PDP_DATA[cleanQuery]) {
         return cleanQuery;
       }
@@ -34,18 +34,22 @@ export function App() {
     // 2. Check hash: #slimsoda or #/slimsoda
     const rawHash = window.location.hash.replace(/^#\/?/, '');
     if (rawHash) {
-      const cleanHash = rawHash.trim().toLowerCase().replace(/\/$/, '');
+      const cleanHash = rawHash.trim().toLowerCase().replace(/\/$/, '').split('/')[0];
       if (PDP_DATA[cleanHash]) {
         return cleanHash;
       }
     }
 
-    // 3. Check pathname: /slimsoda
+    // 3. Check pathname: /crowned or /crowned/index.html or /adv-crowned
     const rawPath = window.location.pathname.replace(/^\//, '');
     if (rawPath) {
-      const cleanPath = rawPath.trim().toLowerCase().replace(/\/$/, '');
+      const parts = rawPath.trim().toLowerCase().replace(/\/$/, '').split('/');
+      const cleanPath = parts[0];
       if (PDP_DATA[cleanPath]) {
         return cleanPath;
+      }
+      if (cleanPath === 'adv-crowned') {
+        return 'crowned';
       }
     }
 
@@ -63,7 +67,7 @@ export function App() {
   }, []);
 
   const openProductPDP = (productId) => {
-    const id = (productId || '').trim().toLowerCase().replace(/\/$/, '');
+    const id = (productId || '').trim().toLowerCase().replace(/\/$/, '').split('/')[0];
     if (PDP_DATA[id]) {
       setActiveProductId(id);
       window.history.pushState(null, '', `/${id}`);
