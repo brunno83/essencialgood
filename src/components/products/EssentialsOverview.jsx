@@ -172,13 +172,14 @@ export const EssentialsOverview = ({ onSelectProduct }) => {
                 <div>
                   <CTAButton
                     onClick={(e) => handleProductClick(product.id, e)}
-                    variant={isHovered ? 'primary' : 'outline'}
                     size="small"
                     style={{
                       width: '100%',
-                      borderColor: isHovered ? product.accentColor : 'rgba(75, 104, 51, 0.3)',
-                      backgroundColor: isHovered ? product.accentColor : 'transparent',
-                      color: isHovered ? '#FFFFFF' : 'var(--color-primary)',
+                      borderColor: product.accentColor,
+                      backgroundColor: product.accentColor,
+                      color: '#FFFFFF',
+                      boxShadow: `0 6px 20px ${product.accentColor}35`,
+                      borderRadius: '10px'
                     }}
                   >
                     EXPLORE {product.name.toUpperCase()}

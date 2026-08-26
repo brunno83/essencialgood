@@ -27,7 +27,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
     : '#4B6833';
 
   const handleHomeClick = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setProductsDropdownOpen(false);
     setMobileMenuOpen(false);
     if (onNavHome) {
@@ -38,7 +38,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
   };
 
   const handleProductSelect = (id, e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setProductsDropdownOpen(false);
     setMobileMenuOpen(false);
     if (onSelectProduct) {
@@ -47,7 +47,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
   };
 
   const scrollToBundles = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setMobileMenuOpen(false);
     const el = document.getElementById('bundles-section');
     if (el) {
@@ -58,19 +58,19 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
   };
 
   const pdpNavLinks = [
-    { label: 'Bundles & Pricing', href: '#bundles-section' },
-    { label: 'Benefits', href: '#benefits-section' },
-    { label: 'Ingredients', href: '#ingredients-section' },
-    { label: 'Reviews', href: '#reviews-section' },
+    { label: 'PRICING', href: '#bundles-section' },
+    { label: 'BENEFITS', href: '#benefits-section' },
+    { label: 'INGREDIENTS', href: '#ingredients-section' },
+    { label: 'REVIEWS', href: '#reviews-section' },
     { label: 'FAQ', href: '#faq-section' }
   ];
 
   const homeNavLinks = [
-    { label: 'Collection', href: '#meet-essentials' },
-    { label: 'Highlights', href: '#product-highlights' },
-    { label: 'Selector', href: '#find-essential' },
-    { label: 'Reviews', href: '#customer-stories' },
-    { label: 'Guarantee', href: '#guarantee' },
+    { label: 'COLLECTION', href: '#meet-essentials' },
+    { label: 'HIGHLIGHTS', href: '#product-highlights' },
+    { label: 'SELECTOR', href: '#find-essential' },
+    { label: 'REVIEWS', href: '#customer-stories' },
+    { label: 'GUARANTEE', href: '#guarantee' },
     { label: 'FAQ', href: '#faq' },
   ];
 
@@ -88,12 +88,12 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
         backgroundColor: isSolidHeader ? 'rgba(238, 233, 222, 0.96)' : 'transparent',
         backdropFilter: isSolidHeader ? 'blur(20px)' : 'none',
         borderBottom: isSolidHeader ? '1px solid rgba(75, 104, 51, 0.15)' : '1px solid transparent',
-        padding: isSolidHeader ? '0.75rem 0' : '1.25rem 0',
+        padding: isSolidHeader ? '0.6rem 0' : '1.1rem 0',
         boxShadow: isSolidHeader ? '0 10px 30px rgba(0, 0, 0, 0.06)' : 'none',
       }}
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        {/* Brand Logo Image */}
+        {/* Brand Logo Image Only */}
         <a
           href="/"
           onClick={handleHomeClick}
@@ -101,7 +101,6 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
           }}
         >
           {!logoError ? (
@@ -110,7 +109,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
               alt="Essencial Good Logo"
               onError={() => setLogoError(true)}
               style={{
-                height: isSolidHeader ? '44px' : '54px',
+                height: isSolidHeader ? '42px' : '50px',
                 width: 'auto',
                 transition: 'height 0.3s ease',
                 display: 'block',
@@ -121,7 +120,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
               style={{
                 color: isSolidHeader ? 'var(--color-primary)' : '#FFFFFF',
                 fontFamily: 'var(--font-brand-display)',
-                fontSize: '1.4rem',
+                fontSize: '1.3rem',
                 fontWeight: 400,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
@@ -133,25 +132,15 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
           )}
         </a>
 
-        {/* Desktop E-Commerce Navigation Links */}
+        {/* Desktop Navigation Links */}
         <nav
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.25rem',
+            gap: '1.2rem',
           }}
           className="desktop-nav"
         >
-          {/* Direct HOME Link */}
-          <a
-            href="/"
-            onClick={handleHomeClick}
-            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
-            style={{ fontWeight: 700 }}
-          >
-            HOME
-          </a>
-
           {/* OUR ESSENTIALS Dropdown Selector */}
           <div style={{ position: 'relative' }}>
             <button
@@ -164,10 +153,13 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 display: 'flex',
                 alignItems: 'center',
                 gap: '4px',
-                padding: '4px 0'
+                padding: '4px 0',
+                fontSize: '0.72rem',
+                letterSpacing: '0.08em',
+                fontWeight: 700
               }}
             >
-              OUR ESSENTIALS <ChevronDown size={14} />
+              OUR ESSENTIALS <ChevronDown size={13} />
             </button>
 
             {productsDropdownOpen && (
@@ -186,6 +178,26 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                   zIndex: 200
                 }}
               >
+                <a
+                  href="/"
+                  onClick={handleHomeClick}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    color: '#4B6833',
+                    fontWeight: 700,
+                    fontSize: '12.5px',
+                    marginBottom: '4px',
+                    backgroundColor: 'rgba(75, 104, 51, 0.06)'
+                  }}
+                >
+                  🏠 HOME PAGE
+                </a>
+                <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.06)', margin: '4px 0 8px 0' }} />
                 {PRODUCTS.map((p) => (
                   <a
                     key={p.id}
@@ -195,12 +207,12 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                       display: 'flex',
                       alignItems: 'center',
                       gap: '10px',
-                      padding: '10px 12px',
+                      padding: '8px 12px',
                       borderRadius: '8px',
                       textDecoration: 'none',
                       color: activeProductId === p.id ? p.accentColor : '#141210',
                       fontWeight: activeProductId === p.id ? 800 : 600,
-                      fontSize: '13px',
+                      fontSize: '12.5px',
                       backgroundColor: activeProductId === p.id ? `${p.accentColor}12` : 'transparent',
                       transition: 'background 0.2s ease'
                     }}
@@ -220,44 +232,24 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
             )}
           </div>
 
-          {/* Quick Direct Product Links */}
-          <a
-            href="/slimsoda"
-            onClick={(e) => handleProductSelect('slimsoda', e)}
-            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
-            style={{
-              color: activeProductId === 'slimsoda' ? '#D96B32' : undefined,
-              fontWeight: activeProductId === 'slimsoda' ? 800 : 600
-            }}
-          >
-            SLIMSODA
-          </a>
-
-          <a
-            href="/linfaflow"
-            onClick={(e) => handleProductSelect('linfaflow', e)}
-            className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
-            style={{
-              color: activeProductId === 'linfaflow' ? '#4B6833' : undefined,
-              fontWeight: activeProductId === 'linfaflow' ? 800 : 600
-            }}
-          >
-            LINFAFLOW
-          </a>
-
-          {/* Section Anchors */}
+          {/* Clean Section Navigation Links */}
           {currentNavLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               className={`nav-link ${isSolidHeader ? 'nav-link-scrolled' : ''}`}
+              style={{
+                fontSize: '0.72rem',
+                letterSpacing: '0.08em',
+                fontWeight: 700
+              }}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Desktop Header Action Button - Standardized Brand Style */}
+        {/* Desktop Header Action Button - Standardized Brand Button */}
         <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           {isProductPage ? (
             <CTAButton
@@ -267,13 +259,11 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 backgroundColor: activeAccentColor,
                 color: '#FFFFFF',
                 borderColor: activeAccentColor,
-                fontWeight: 800,
-                letterSpacing: '0.08em',
-                boxShadow: `0 6px 20px ${activeAccentColor}44`,
-                borderRadius: '9999px'
+                boxShadow: `0 6px 20px ${activeAccentColor}35`,
+                borderRadius: '10px'
               }}
             >
-              CHOOSE BUNDLE →
+              CHOOSE BUNDLE
             </CTAButton>
           ) : (
             <CTAButton
@@ -283,13 +273,11 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 backgroundColor: activeAccentColor,
                 color: '#FFFFFF',
                 borderColor: activeAccentColor,
-                fontWeight: 800,
-                letterSpacing: '0.08em',
-                boxShadow: `0 6px 20px ${activeAccentColor}44`,
-                borderRadius: '9999px'
+                boxShadow: `0 6px 20px ${activeAccentColor}35`,
+                borderRadius: '10px'
               }}
             >
-              SHOP ESSENTIALS →
+              SHOP ESSENTIALS
             </CTAButton>
           )}
         </div>
@@ -336,13 +324,13 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
             style={{
               color: 'var(--color-primary)',
               textDecoration: 'none',
-              fontSize: '1rem',
+              fontSize: '0.95rem',
               fontWeight: 800,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
             }}
           >
-            🏠 HOME
+            🏠 HOME PAGE
           </a>
 
           <div style={{ fontSize: '11px', fontWeight: 800, color: '#888', letterSpacing: '0.1em', marginTop: '4px' }}>
@@ -357,7 +345,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
               style={{
                 color: p.accentColor,
                 textDecoration: 'none',
-                fontSize: '1rem',
+                fontSize: '0.95rem',
                 fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
@@ -378,7 +366,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
               style={{
                 color: 'var(--color-primary)',
                 textDecoration: 'none',
-                fontSize: '0.95rem',
+                fontSize: '0.9rem',
                 fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
@@ -398,7 +386,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
                 borderColor: activeAccentColor
               }}
             >
-              CHOOSE BUNDLE →
+              CHOOSE BUNDLE
             </CTAButton>
           </div>
         </div>
@@ -409,9 +397,9 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
         .nav-link {
           color: rgba(255, 255, 255, 0.9);
           text-decoration: none;
-          font-size: 0.775rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           transition: color 0.3s ease, opacity 0.3s ease;
           position: relative;
