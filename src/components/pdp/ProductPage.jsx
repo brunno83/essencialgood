@@ -5,6 +5,7 @@ import { BundleSelector } from './BundleSelector';
 import { TrustStrip } from './TrustStrip';
 import { WhySlimSodaBlock } from './WhySlimSodaBlock';
 import { RealTransformations } from './RealTransformations';
+import { VideoReviewsSection } from './VideoReviewsSection';
 import { ProductBenefits } from './ProductBenefits';
 import { IngredientsSection } from './IngredientsSection';
 import { WhyPeopleChooseSection } from './WhyPeopleChooseSection';
@@ -142,6 +143,9 @@ export function ProductPage({ productData, onBackToHome }) {
 
       {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES */}
       <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+
+      {/* 05B — DEDICATED VIDEO REVIEWS (SONNUS) */}
+      <VideoReviewsSection productName={brand} accentColor={accentColor} />
 
       {/* 06 — BENEFÍCIOS PRINCIPAIS */}
       <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />

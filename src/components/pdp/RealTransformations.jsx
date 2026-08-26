@@ -89,50 +89,95 @@ export function RealTransformations({ productName = '', productId = '', accentCo
     }
   ];
 
-  const sonnusVideos = [
+  const sonnusCustomerPhotos = [
     { 
       id: 1, 
-      videoSrc: '/sonnus/videos-lp/ad01.mp4', 
-      alt: 'Sonnus Video Testimonial 1',
+      src: '/sonnus/images/image-1.jpg', 
+      alt: 'Sonnus Customer Routine 1',
       name: 'Elena M.',
-      badgeText: 'Verified Buyer',
+      badgeText: 'Verified Customer',
       headline: '“IT\'S BECOME MY SIGNAL TO START WINDING DOWN.”',
       feedback: 'The gummies are easy to take and I like having a consistent step that tells me it\'s time to start shutting things down for the night.'
     },
     { 
       id: 2, 
-      videoSrc: '/sonnus/videos-lp/ad02.mp4', 
-      alt: 'Sonnus Video Testimonial 2',
-      name: 'David L.',
-      badgeText: 'Verified Buyer',
+      src: '/sonnus/images/imagem-2.jpg', 
+      alt: 'Sonnus Customer Routine 2',
+      name: 'Rachel B.',
+      badgeText: 'Verified Customer',
       headline: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”',
       feedback: 'I was looking for something with a broader formula, and the ingredient blend is what made me choose Sonnus.'
     },
     { 
       id: 3, 
-      videoSrc: '/sonnus/videos-lp/ad03.mp4', 
-      alt: 'Sonnus Video Testimonial 3',
-      name: 'Rachel B.',
-      badgeText: 'Verified Buyer',
+      src: '/sonnus/images/imagem-3.jpg', 
+      alt: 'Sonnus Customer Routine 3',
+      name: 'Jessica T.',
+      badgeText: 'Verified Customer',
       headline: '“THE WILD BERRY GUMMIES MAKE IT EASY.”',
       feedback: 'No capsules or mixing anything. Two gummies before bed fits naturally into my evening routine.'
     },
     { 
       id: 4, 
-      videoSrc: '/sonnus/videos-lp/ad05.mp4', 
-      alt: 'Sonnus Video Testimonial 4',
-      name: 'Marcus P.',
-      badgeText: 'Verified Buyer',
+      src: '/sonnus/images/imagem-4.jpg', 
+      alt: 'Sonnus Customer Routine 4',
+      name: 'Sarah H.',
+      badgeText: 'Verified Customer',
       headline: '“SIMPLE ENOUGH TO STAY CONSISTENT.”',
-      feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with night after night.'
+      feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.'
+    },
+    { 
+      id: 5, 
+      src: '/sonnus/images/imagem-5.jpg', 
+      alt: 'Sonnus Customer Routine 5',
+      name: 'Amanda K.',
+      badgeText: 'Verified Customer',
+      headline: '“A BETTER EVENING RITUAL.”',
+      feedback: 'Taking two gummies 30 minutes before bed has become my favorite way to signal that the day is done.'
+    },
+    { 
+      id: 6, 
+      src: '/sonnus/images/imagem-6.jpg', 
+      alt: 'Sonnus Customer Routine 6',
+      name: 'Emily R.',
+      badgeText: 'Verified Customer',
+      headline: '“WAKING UP FEELING REFRESHED.”',
+      feedback: 'I love waking up without that groggy feeling. Highly recommend adding this to your night.'
+    },
+    { 
+      id: 7, 
+      src: '/sonnus/images/imagem-7.jpg', 
+      alt: 'Sonnus Customer Routine 7',
+      name: 'David L.',
+      badgeText: 'Verified Customer',
+      headline: '“PERFECT FOR BUSY SCHEDULES.”',
+      feedback: 'Traveling constantly used to mess up my sleep routine. Sonnus made winding down on hotel nights effortless.'
+    },
+    { 
+      id: 8, 
+      src: '/sonnus/images/imagem-8.jpg', 
+      alt: 'Sonnus Customer Routine 8',
+      name: 'Marcus P.',
+      badgeText: 'Verified Customer',
+      headline: '“GENTLE AND EFFECTIVE.”',
+      feedback: 'Great ingredient formula. It feels natural and gives my evening routine a clear ending.'
+    },
+    { 
+      id: 9, 
+      src: '/sonnus/images/imagem-9.jpg', 
+      alt: 'Sonnus Customer Routine 9',
+      name: 'Daniel S.',
+      badgeText: 'Verified Customer',
+      headline: '“NO COMPLICATED PROTOCOL.”',
+      feedback: 'Two gummies, turn off the screens, and unwind. Couldn\'t be simpler.'
     }
   ];
 
-  const transformationItems = isSlimSoda 
-    ? slimSodaImages 
+  const transformationItems = isSonnus
+    ? sonnusCustomerPhotos
     : isLinfaFlow 
       ? linfaFlowImages 
-      : sonnusVideos;
+      : slimSodaImages;
 
   // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
   const repeatList = [
@@ -141,8 +186,6 @@ export function RealTransformations({ productName = '', productId = '', accentCo
     ...transformationItems, 
     ...transformationItems
   ];
-
-  const isVideoMode = !isSlimSoda && !isLinfaFlow;
 
   return (
     <section 
@@ -167,7 +210,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
             marginBottom: '8px'
           }}
         >
-          {isVideoMode ? 'VIDEO REVIEWS & TESTIMONIALS' : 'REAL PEOPLE. REAL ROUTINES.'}
+          REAL PEOPLE. REAL ROUTINES.
         </span>
         <h2 
           style={{ 
@@ -181,9 +224,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
           MADE TO FIT <span style={{ color: accentColor || '#3B4959' }}>REAL LIFE.</span>
         </h2>
         <p style={{ fontSize: '15px', color: '#666', fontWeight: 500, margin: 0 }}>
-          {isVideoMode 
-            ? 'Watch real customers share how Sonnus fits into their nightly wind-down ritual.' 
-            : `See how customers are making ${productName || 'our products'} part of their everyday wellness routines.`}
+          See how customers are making {productName || 'SONNUS®'} part of their everyday wellness routines.
         </p>
       </div>
 
