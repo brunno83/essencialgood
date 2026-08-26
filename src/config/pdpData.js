@@ -401,7 +401,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#4B6833',
     accentLight: 'rgba(75, 104, 51, 0.15)',
-    heroImage: '/linfaflow/images/gallery-hero.jpg',
+    heroImage: '/linfaflow/images/gallery-hero-cover.jpg',
     
     usps: [
       'Supports healthy lymphatic function',
@@ -416,26 +416,33 @@ export const PDP_DATA = {
       {
         id: 'gallery-1',
         label: 'PRODUCT HERO',
+        caption: 'Support your daily flow with LinfaFlow',
+        subtitle: 'A SIMPLE LIQUID BOTANICAL ADDITION TO YOUR ROUTINE',
+        src: '/linfaflow/images/gallery-hero-cover.jpg'
+      },
+      {
+        id: 'gallery-2',
+        label: 'DAILY FLOW',
         caption: 'Support your daily flow',
         subtitle: 'A SIMPLE LIQUID ADDITION TO YOUR ROUTINE',
         src: '/linfaflow/images/gallery-hero.jpg'
       },
       {
-        id: 'gallery-2',
+        id: 'gallery-3',
         label: 'SIMPLE ROUTINE',
         caption: 'One dropper. One simple routine.',
         subtitle: 'SIMPLE DAILY WELLNESS, MADE EASY',
         src: '/linfaflow/images/gallery-routine.jpg'
       },
       {
-        id: 'gallery-3',
+        id: 'gallery-4',
         label: 'LIFESTYLE',
         caption: 'LinfaFlow at-home wellness routine',
         subtitle: 'DROP. HYDRATE. MOVE. REPEAT.',
         src: '/linfaflow/images/gallery-lifestyle.jpg'
       },
       {
-        id: 'gallery-4',
+        id: 'gallery-5',
         label: 'FORMULA',
         caption: 'Four botanicals. One daily formula.',
         subtitle: 'CLEAVERS, NETTLE, DANDELION & BURDOCK',
