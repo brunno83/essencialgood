@@ -560,7 +560,7 @@ export const PDP_DATA = {
       subtitle: 'Instead of adding more complexity to your day, LinfaFlow brings four traditional botanicals together in one convenient liquid dropper format.',
       tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/selector_linfaflow.png',
+      image: '/linfaflow/images/why-choose-linfaflow.jpg',
       features: [
         {
           icon: 'Droplets',
