@@ -446,14 +446,14 @@ export const PDP_DATA = {
         label: 'BUNDLE 4 BOTTLES',
         caption: 'Most Popular Routine Bundle',
         subtitle: 'BUY 2 + GET 2 FREE',
-        src: '/linfaflow/images/14-oferta-4.webp'
+        src: '/linfaflow/images/bundle-2.png'
       },
       {
         id: 'gallery-6',
         label: 'BEST VALUE 6 BOTTLES',
         caption: 'Best Value Routine Bundle',
         subtitle: 'BUY 3 + GET 3 FREE',
-        src: '/linfaflow/images/14-oferta-6.webp'
+        src: '/linfaflow/images/bundle-3.png'
       }
     ],
 
@@ -467,7 +467,7 @@ export const PDP_DATA = {
           id: 'starter',
           name: 'STARTER ROUTINE',
           badge: 'SAVE 50%',
-          image: '/assets/products/product_linfaflow_bottle.png',
+          image: '/linfaflow/images/bundle-1.png',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -484,7 +484,7 @@ export const PDP_DATA = {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/linfaflow/images/14-oferta-4.webp',
+          image: '/linfaflow/images/bundle-2.png',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -502,7 +502,7 @@ export const PDP_DATA = {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/linfaflow/images/14-oferta-6.webp',
+          image: '/linfaflow/images/bundle-3.png',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -557,7 +557,7 @@ export const PDP_DATA = {
       p2: 'Instead of a harsh "flush" or dramatic overnight cleanse, LinfaFlow combines four traditional botanicals into a simple liquid formula designed to complement healthy everyday habits.',
       tagline: 'SUPPORT THE PROCESS. KEEP THE ROUTINE SIMPLE.',
       ctaText: 'MAKE LINFAFLOW PART OF MY DAY →',
-      image: '/linfaflow/images/03-reason-1.jpg'
+      image: '/linfaflow/images/why-linfaflow.jpg'
     },
 
     whyChoose: {
