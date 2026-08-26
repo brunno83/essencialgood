@@ -25,8 +25,8 @@ export function IngredientsSection({ ingredientsSection, accentColor }) {
         {/* Left Column: Ingredients Flatlay Photo */}
         <div style={{ width: '100%' }}>
           <img
-            src="/assets/products/slimsoda-section-ingredients.jpg"
-            alt="SlimSoda Natural Ingredients Formula"
+            src={ingredientsSection.image || "/assets/products/slimsoda-section-ingredients.jpg"}
+            alt={title || "Ingredients Formula"}
             style={{
               width: '100%',
               height: 'auto',
@@ -142,7 +142,7 @@ export function IngredientsSection({ ingredientsSection, accentColor }) {
                   cursor: 'pointer'
                 }}
               >
-                {ctaText || 'TRY SLIMSODA →'}
+                {ctaText || 'VIEW SUPPLEMENT FACTS →'}
               </button>
             </div>
           )}

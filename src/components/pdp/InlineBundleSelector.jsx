@@ -140,7 +140,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
         })}
       </div>
 
-      {/* Main Hero CTA Button (Vibrant Green #27AE60) */}
+      {/* Main Hero CTA Button */}
       <a
         href={selectedBundle.checkoutUrl}
         target="_top"
@@ -165,7 +165,7 @@ export function InlineBundleSelector({ bundles = [], accentColor }) {
           cursor: 'pointer'
         }}
       >
-        CLAIM MY SLIMSODA (90-DAY RISK FREE) →
+        {selectedBundle.ctaText || 'CLAIM MY BUNDLE (90-DAY RISK FREE) →'}
       </a>
 
       {/* Low Stock Warning Progress Bar Widget right below CTA button */}

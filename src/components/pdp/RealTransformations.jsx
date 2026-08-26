@@ -1,7 +1,9 @@
 import React from 'react';
 
 export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
-  const transformationImages = [
+  const isLinfaFlow = productName.toLowerCase().includes('linfaflow');
+
+  const defaultImages = [
     { 
       id: 1, 
       src: '/assets/transformations/transformation-4.png', 
@@ -9,7 +11,7 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
       name: 'Emily R.',
       badgeText: 'Verified Buyer',
       headline: '“It became one of the easiest parts of my morning routine.”',
-      feedback: 'I love how simple it is to mix and how naturally it fits into my day.'
+      feedback: 'I love how simple the daily routine is and how naturally it fits into my day.'
     },
     { 
       id: 2, 
@@ -39,6 +41,47 @@ export function RealTransformations({ productName = 'SlimSoda', accentColor }) {
       feedback: 'No complicated preparation. I take it and get on with my day.'
     }
   ];
+
+  const linfaFlowImages = [
+    { 
+      id: 1, 
+      src: '/linfaflow/images/ugc-01.png', 
+      alt: 'LinfaFlow Daily Routine Transformation',
+      name: 'Sarah M.',
+      badgeText: 'Verified Customer',
+      headline: '“IT\'S BECOME PART OF MY MORNING.”',
+      feedback: 'The dropper format is what I like most. It takes almost no time and I don\'t have another handful of pills to remember.'
+    },
+    { 
+      id: 2, 
+      src: '/linfaflow/images/ugc-02.png', 
+      alt: 'LinfaFlow Daily Routine Transformation',
+      name: 'Elena B.',
+      badgeText: 'Verified Customer',
+      headline: '“FINALLY, A FORMULA I CAN UNDERSTAND.”',
+      feedback: 'I liked seeing four clearly named botanicals instead of a huge proprietary-looking ingredient list. It\'s straightforward and easy to use.'
+    },
+    { 
+      id: 3, 
+      src: '/linfaflow/images/ugc-03.png', 
+      alt: 'LinfaFlow Daily Routine Transformation',
+      name: 'Jessica R.',
+      badgeText: 'Verified Customer',
+      headline: '“IT FITS MY ROUTINE.”',
+      feedback: 'I\'ve been paying more attention to hydration, walking and my overall wellness routine, and LinfaFlow is easy to incorporate alongside those habits.'
+    },
+    { 
+      id: 4, 
+      src: '/linfaflow/images/ugc-04.png', 
+      alt: 'LinfaFlow Daily Routine Transformation',
+      name: 'Patricia K.',
+      badgeText: 'Verified Customer',
+      headline: '“SIMPLE IS BETTER FOR ME.”',
+      feedback: 'I\'ve tried routines with several bottles before and never stayed consistent. The liquid format makes this much easier.'
+    }
+  ];
+
+  const transformationImages = isLinfaFlow ? linfaFlowImages : defaultImages;
 
   // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
   const repeatList = [

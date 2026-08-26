@@ -40,25 +40,35 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
     }
   ];
 
-  const [reviewsList, setReviewsList] = useState(() => {
-    // Check if saved in localStorage and has compliant title
-    const saved = localStorage.getItem('slimsoda_reviews_v2');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
-    }
-    return defaultCompliantReviews;
-  });
+  const initialReviews = (reviewsSection && reviewsSection.reviews && reviewsSection.reviews.length)
+    ? reviewsSection.reviews.map((r, i) => ({
+        id: i + 1,
+        author: r.author || 'Verified Customer',
+        rating: r.stars || 5,
+        title: r.quote || 'Great product',
+        body: r.body,
+        verified: true,
+        date: 'Verified Buyer'
+      }))
+    : defaultCompliantReviews;
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [formName, setFormName] = useState('');
-  const [formRating, setFormRating] = useState(5);
-  const [formTitle, setFormTitle] = useState('');
-  const [formBody, setFormBody] = useState('');
-  const [submittedMessage, setSubmittedMessage] = useState(false);
+  const [reviewsList, setReviewsList] = useState(initialReviews);
 
   useEffect(() => {
-    localStorage.setItem('slimsoda_reviews_v2', JSON.stringify(reviewsList));
-  }, [reviewsList]);
+    if (reviewsSection && reviewsSection.reviews && reviewsSection.reviews.length) {
+      setReviewsList(
+        reviewsSection.reviews.map((r, i) => ({
+          id: i + 1,
+          author: r.author || 'Verified Customer',
+          rating: r.stars || 5,
+          title: r.quote || 'Great product',
+          body: r.body,
+          verified: true,
+          date: 'Verified Buyer'
+        }))
+      );
+    }
+  }, [reviewsSection]);
 
   const getInitials = (name) => {
     if (!name) return 'U';
@@ -263,7 +273,7 @@ export function CustomerReviews({ reviewsSection, accentColor }) {
               Write a Product Review
             </h3>
             <p style={{ fontSize: '13.5px', color: '#666', margin: '0 0 20px' }}>
-              Share your experience with SlimSoda® to help others.
+              Share your experience with this product to help others.
             </p>
 
             {submittedMessage ? (

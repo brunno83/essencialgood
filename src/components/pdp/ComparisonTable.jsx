@@ -55,8 +55,8 @@ export function ComparisonTable({ comparisonSection, accentColor }) {
           {/* Left Column: Side-by-side Comparison Image with Dark Border Glow */}
           <div style={{ width: '100%' }}>
             <img
-              src="/assets/products/slimsoda-section-comparison.jpg"
-              alt="Messy pill bottles vs 1 SlimSoda tub"
+              src={comparisonSection.image || "/assets/products/slimsoda-section-comparison.jpg"}
+              alt={title || "Comparison"}
               style={{
                 width: '100%',
                 height: 'auto',

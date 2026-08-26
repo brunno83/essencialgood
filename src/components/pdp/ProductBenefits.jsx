@@ -108,7 +108,7 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
                   cursor: 'pointer'
                 }}
               >
-                {ctaText || 'MAKE SLIMSODA PART OF MY DAY →'}
+                {ctaText || 'SEE BUNDLES →'}
               </button>
             </div>
           )}
@@ -117,8 +117,8 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
         {/* Right Column: Lifestyle Image */}
         <div style={{ width: '100%' }}>
           <img
-            src="/assets/products/slimsoda-section-benefits.jpg"
-            alt="SlimSoda Daily Routine Benefits"
+            src={benefitsSection.image || "/assets/products/slimsoda-section-benefits.jpg"}
+            alt={title || "Daily Routine Benefits"}
             style={{
               width: '100%',
               height: 'auto',

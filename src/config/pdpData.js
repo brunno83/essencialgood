@@ -356,7 +356,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#4B6833',
     accentLight: 'rgba(75, 104, 51, 0.15)',
-    heroImage: '/assets/products/linfaflow-gallery-1.png',
+    heroImage: '/assets/products/highlight_linfaflow.png',
     
     usps: [
       'Supports healthy lymphatic function',
@@ -373,42 +373,42 @@ export const PDP_DATA = {
         label: 'PRODUCT HERO',
         caption: 'Clean premium bottle & dropper packaging',
         subtitle: 'DAILY BOTANICAL WELLNESS SUPPORT',
-        src: '/assets/products/linfaflow-gallery-1.png'
+        src: '/assets/products/highlight_linfaflow.png'
       },
       {
         id: 'gallery-2',
         label: 'EXPERIENCE',
         caption: 'LinfaFlow daily routine',
         subtitle: 'DROP. HYDRATE. MOVE. REPEAT.',
-        src: '/assets/products/linfaflow-gallery-2.png'
+        src: '/assets/products/product_linfaflow_bottle.png'
       },
       {
         id: 'gallery-3',
         label: 'BENEFITS',
         caption: 'Lymphatic & circulation support',
         subtitle: 'SIMPLE DAILY LIQUID DROPPER',
-        src: '/assets/products/linfaflow-gallery-3.png'
+        src: '/assets/products/selector_linfaflow.png'
       },
       {
         id: 'gallery-4',
         label: 'INGREDIENTS',
         caption: '4 traditional botanical extracts',
         subtitle: 'CLEAVERS, STILLINGIA, RED CLOVER & PRICKLY ASH',
-        src: '/assets/products/linfaflow-gallery-4.png'
+        src: '/linfaflow/images/02-hero-bottle.webp'
       },
       {
         id: 'gallery-5',
-        label: 'TRUST & GUARANTEE',
-        caption: 'Risk-free 90-day trial',
-        subtitle: '90-DAY MONEY-BACK GUARANTEE',
-        src: '/assets/products/linfaflow-gallery-5.png'
+        label: 'BUNDLE 4 BOTTLES',
+        caption: 'Most Popular Routine Bundle',
+        subtitle: 'BUY 2 + GET 2 FREE',
+        src: '/linfaflow/images/14-oferta-4.webp'
       },
       {
         id: 'gallery-6',
-        label: 'QUALITY FORMULA',
-        caption: 'Pure botanical liquid extract',
-        subtitle: 'LAB TESTED & MADE IN USA',
-        src: '/assets/products/linfaflow-gallery-6.png'
+        label: 'BEST VALUE 6 BOTTLES',
+        caption: 'Best Value Routine Bundle',
+        subtitle: 'BUY 3 + GET 3 FREE',
+        src: '/linfaflow/images/14-oferta-6.webp'
       }
     ],
 
@@ -422,7 +422,7 @@ export const PDP_DATA = {
           id: 'starter',
           name: 'STARTER ROUTINE',
           badge: 'SAVE 50%',
-          image: '/assets/products/linfaflow-1.png',
+          image: '/assets/products/product_linfaflow_bottle.png',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -433,13 +433,13 @@ export const PDP_DATA = {
           savings: 'Save $69.50',
           perks: ['Free U.S. Shipping', '90-Day Guarantee', 'One-Time Purchase'],
           ctaText: 'GET MY 2 BOTTLES →',
-          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814'
         },
         {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/assets/products/linfaflow-2.png',
+          image: '/linfaflow/images/14-oferta-4.webp',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -451,13 +451,13 @@ export const PDP_DATA = {
           bonusText: '✓ Better Price Per Bottle + Priority Processing',
           perks: ['Better Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Priority Processing'],
           ctaText: 'GET MY 4 BOTTLES →',
-          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814'
         },
         {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/assets/products/linfaflow-3.png',
+          image: '/linfaflow/images/14-oferta-6.webp',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -469,7 +469,7 @@ export const PDP_DATA = {
           bonusText: '✓ Lowest Price Per Bottle + Best Long-Term Value',
           perks: ['Lowest Price Per Bottle', 'Free U.S. Shipping', '90-Day Guarantee', 'Best Long-Term Value'],
           ctaText: 'GET THE BEST VALUE →',
-          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php'
+          checkoutUrl: 'https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814'
         }
       ]
     },
@@ -512,7 +512,7 @@ export const PDP_DATA = {
       p2: 'Instead of a harsh "flush" or dramatic overnight cleanse, LinfaFlow combines four traditional botanicals into a simple liquid formula designed to complement healthy everyday habits.',
       tagline: 'SUPPORT THE PROCESS. KEEP THE ROUTINE SIMPLE.',
       ctaText: 'MAKE LINFAFLOW PART OF MY DAY →',
-      image: '/assets/products/linfaflow-lifestyle-routine.jpg'
+      image: '/linfaflow/images/03-reason-1.jpg'
     },
 
     whyChoose: {
@@ -522,7 +522,7 @@ export const PDP_DATA = {
       subtitle: 'Instead of adding more complexity to your day, LinfaFlow brings four traditional botanicals together in one convenient liquid dropper format.',
       tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/linfaflow-stone-pedestal.jpg',
+      image: '/assets/products/selector_linfaflow.png',
       features: [
         {
           icon: 'Droplets',
@@ -553,6 +553,7 @@ export const PDP_DATA = {
       subtitle: 'LinfaFlow brings together four traditional botanicals in one convenient formula designed around three complementary wellness goals.',
       highlightText: 'FOUR BOTANICALS. THREE COMPLEMENTARY WELLNESS GOALS. ONE SIMPLE ROUTINE.',
       ctaText: 'TRY LINFAFLOW →',
+      image: '/linfaflow/images/03-reason-2.jpg',
       benefits: [
         {
           title: 'LYMPHATIC WELLNESS',
@@ -581,6 +582,7 @@ export const PDP_DATA = {
       tag: 'HOW IT WORKS',
       title: 'THIRTY SECONDS CAN BE ENOUGH TO START A BETTER ROUTINE.',
       subtitle: 'The best wellness routine is usually the one you can actually maintain.',
+      image: '/linfaflow/images/03-reason-4.jpg',
       steps: [
         {
           step: '01',
@@ -614,6 +616,7 @@ export const PDP_DATA = {
       description: 'LinfaFlow brings selected traditional plant extracts together in one concentrated liquid formula.',
       highlightText: 'FOUR NAMED BOTANICALS. NOTHING MYSTERIOUS.',
       ctaText: 'VIEW SUPPLEMENT FACTS →',
+      image: '/linfaflow/images/03-reason-3.jpg',
       ingredients: [
         {
           name: 'CLEAVERS (Galium aparine)',
@@ -642,6 +645,7 @@ export const PDP_DATA = {
       tag: 'WHY KEEP IT SIMPLE?',
       title: 'ONE FOCUSED ROUTINE VS. ANOTHER CABINET FULL OF PRODUCTS.',
       tagline: 'FEWER STEPS. MORE CONSISTENCY.',
+      image: '/linfaflow/images/pb-flow-compare.webp',
       headers: ['FEATURES', 'LINFAFLOW®', 'COMPLEX ROUTINES'],
       rows: [
         { feature: 'Four named botanicals', product: true, opponent: 'Varies' },
