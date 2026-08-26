@@ -440,20 +440,6 @@ export const PDP_DATA = {
         caption: 'Four botanicals. One daily formula.',
         subtitle: 'CLEAVERS, NETTLE, DANDELION & BURDOCK',
         src: '/linfaflow/images/gallery-botanicals.jpg'
-      },
-      {
-        id: 'gallery-5',
-        label: 'BUNDLE 4 BOTTLES',
-        caption: 'Most Popular Routine Bundle',
-        subtitle: 'BUY 2 + GET 2 FREE',
-        src: '/linfaflow/images/bundle-2.png'
-      },
-      {
-        id: 'gallery-6',
-        label: 'BEST VALUE 6 BOTTLES',
-        caption: 'Best Value Routine Bundle',
-        subtitle: 'BUY 3 + GET 3 FREE',
-        src: '/linfaflow/images/bundle-3.png'
       }
     ],
 
