@@ -1065,7 +1065,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#7E57C2',
     accentLight: 'rgba(126, 87, 194, 0.12)',
-    heroImage: '/crowned/images/crowned-gal-1.png',
+    heroImage: '/assets/products/crowned-gal-1.png',
     
     usps: [
       'Supports fuller-looking hair',
@@ -1078,12 +1078,12 @@ export const PDP_DATA = {
     ],
 
     gallery: [
-      { id: 'cg1', label: 'HERO', src: '/crowned/images/crowned-gal-1.png' },
-      { id: 'cg2', label: 'APPLICATION', src: '/crowned/images/crowned-gal-2.png' },
-      { id: 'cg3', label: 'BENEFITS', src: '/crowned/images/crowned-gal-3.png' },
-      { id: 'cg4', label: 'FORMULA', src: '/crowned/images/crowned-gal-4.png' },
-      { id: 'cg5', label: 'RESULT', src: '/crowned/images/crowned-gal-5.png' },
-      { id: 'cg6', label: 'TRUST', src: '/crowned/images/crowned-gal-6.png' }
+      { id: 'cg1', label: 'HERO', src: '/assets/products/crowned-gal-1.png' },
+      { id: 'cg2', label: 'APPLICATION', src: '/assets/products/crowned-gal-2.png' },
+      { id: 'cg3', label: 'BENEFITS', src: '/assets/products/crowned-gal-3.png' },
+      { id: 'cg4', label: 'FORMULA', src: '/assets/products/crowned-gal-4.png' },
+      { id: 'cg5', label: 'RESULT', src: '/assets/products/crowned-gal-5.png' },
+      { id: 'cg6', label: 'TRUST', src: '/assets/products/crowned-gal-6.png' }
     ],
 
     bundlesSection: {

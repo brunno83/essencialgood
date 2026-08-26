@@ -33,6 +33,10 @@
       ],
       "destination": "/adv-linfaflow/:path*"
     },
+    { "source": "/crowned/images/:path*", "destination": "/crowned/images/:path*" },
+    { "source": "/linfaflow/images/:path*", "destination": "/linfaflow/images/:path*" },
+    { "source": "/sonnus/images/:path*", "destination": "/sonnus/images/:path*" },
+    { "source": "/slimsoda/images/:path*", "destination": "/slimsoda/images/:path*" },
     { "source": "/slimsoda", "destination": "/index.html" },
     { "source": "/slimsoda/:path*", "destination": "/index.html" },
     { "source": "/linfaflow", "destination": "/index.html" },
