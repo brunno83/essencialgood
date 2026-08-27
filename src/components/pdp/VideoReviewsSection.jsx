@@ -17,7 +17,7 @@ export function VideoReviewsSection({ productName = 'SONNUS®', accentColor = '#
     { 
       id: 2, 
       videoSrc: '/sonnus/videos-lp/ad02.mp4', 
-      name: 'David L.',
+      name: 'Melissa S.',
       badgeText: 'Verified Buyer',
       headline: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”',
       feedback: 'I was looking for something with a broader formula, and the 10-ingredient blend is what made me choose Sonnus.'
@@ -33,7 +33,7 @@ export function VideoReviewsSection({ productName = 'SONNUS®', accentColor = '#
     { 
       id: 4, 
       videoSrc: '/sonnus/videos-lp/ad05.mp4', 
-      name: 'Marcus P.',
+      name: 'Monica P.',
       badgeText: 'Verified Buyer',
       headline: '“SIMPLE ENOUGH TO STAY CONSISTENT.”',
       feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with night after night.'
