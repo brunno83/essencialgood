@@ -55,7 +55,7 @@ export function IngredientsSection({ ingredientsSection, accentColor }) {
                 width: '100%',
                 height: 'auto',
                 aspectRatio: ingredientsSection.aspectRatio || '3 / 4',
-                objectFit: 'contain',
+                objectFit: 'cover',
                 display: 'block'
               }}
             />
