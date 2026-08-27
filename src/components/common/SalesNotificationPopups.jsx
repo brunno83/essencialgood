@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export function SalesNotificationPopups({ onSelectProduct }) {
   const notifications = [
+    // --- SLIMSODA ---
     {
       id: 1,
       name: 'Sarah M.',
       city: 'Austin, TX',
-      product: 'SlimSoda® 6-Bottle Bundle',
+      product: 'SlimSODA® 6-Tub Bundle',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
       image: '/assets/products/slimsoda-3.png',
       timeAgo: '2 minutes ago',
@@ -17,43 +18,169 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       id: 2,
       name: 'Michael K.',
       city: 'Miami, FL',
-      product: 'SlimSoda® 4-Bottle Bundle',
-      deal: 'Buy 2, Get 2 FREE (Most Popular)',
+      product: 'SlimSODA® 4-Tub Bundle',
+      deal: 'Buy 2, Get 2 FREE',
       image: '/assets/products/slimsoda-2.png',
-      timeAgo: '4 minutes ago',
+      timeAgo: '5 minutes ago',
       productId: 'slimsoda'
     },
     {
       id: 3,
       name: 'Jennifer L.',
       city: 'Denver, CO',
-      product: 'SlimSoda® 2-Bottle Starter Bundle',
+      product: 'SlimSODA® 2-Tub Starter',
       deal: 'Buy 1, Get 1 FREE',
       image: '/assets/products/slimsoda-1.png',
-      timeAgo: '6 minutes ago',
-      productId: 'slimsoda'
-    },
-    {
-      id: 4,
-      name: 'Amanda B.',
-      city: 'Chicago, IL',
-      product: 'SlimSoda® 6-Bottle Bundle',
-      deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/slimsoda-3.png',
       timeAgo: '8 minutes ago',
       productId: 'slimsoda'
     },
     {
-      id: 5,
+      id: 4,
       name: 'David R.',
       city: 'Seattle, WA',
-      product: 'SlimSoda® 4-Bottle Bundle',
-      deal: 'Buy 2, Get 2 FREE',
-      image: '/assets/products/slimsoda-2.png',
-      timeAgo: '11 minutes ago',
+      product: 'SlimSODA® 6-Tub Bundle',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/slimsoda-3.png',
+      timeAgo: '12 minutes ago',
       productId: 'slimsoda'
+    },
+
+    // --- LINFAFLOW ---
+    {
+      id: 5,
+      name: 'Amanda B.',
+      city: 'Chicago, IL',
+      product: 'LinfaFlow® 6-Bottle Kit',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/linfaflow-bundle-3.png',
+      timeAgo: '3 minutes ago',
+      productId: 'linfaflow'
+    },
+    {
+      id: 6,
+      name: 'Robert T.',
+      city: 'Phoenix, AZ',
+      product: 'LinfaFlow® 4-Bottle Kit',
+      deal: 'Buy 2, Get 2 FREE',
+      image: '/linfaflow/images/bundle-2.png',
+      timeAgo: '6 minutes ago',
+      productId: 'linfaflow'
+    },
+    {
+      id: 7,
+      name: 'Jessica W.',
+      city: 'Portland, OR',
+      product: 'LinfaFlow® 2-Bottle Starter',
+      deal: 'Buy 1, Get 1 FREE',
+      image: '/linfaflow/images/bundle-1.png',
+      timeAgo: '9 minutes ago',
+      productId: 'linfaflow'
+    },
+    {
+      id: 8,
+      name: 'Brian S.',
+      city: 'Dallas, TX',
+      product: 'LinfaFlow® 6-Bottle Kit',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/linfaflow-bundle-3.png',
+      timeAgo: '14 minutes ago',
+      productId: 'linfaflow'
+    },
+
+    // --- SONNUS ---
+    {
+      id: 9,
+      name: 'Elena M.',
+      city: 'San Diego, CA',
+      product: 'Sonnus® 6-Bottle Rest Pack',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/product_sonnus_bottle.png',
+      timeAgo: '1 minute ago',
+      productId: 'sonnus'
+    },
+    {
+      id: 10,
+      name: 'Daniel H.',
+      city: 'Boston, MA',
+      product: 'Sonnus® 4-Bottle Pack',
+      deal: 'Buy 2, Get 2 FREE',
+      image: '/assets/products/product_sonnus_bottle.png',
+      timeAgo: '4 minutes ago',
+      productId: 'sonnus'
+    },
+    {
+      id: 11,
+      name: 'Rachel V.',
+      city: 'Atlanta, GA',
+      product: 'Sonnus® 2-Bottle Pack',
+      deal: 'Buy 1, Get 1 FREE',
+      image: '/assets/products/product_sonnus_bottle.png',
+      timeAgo: '7 minutes ago',
+      productId: 'sonnus'
+    },
+    {
+      id: 12,
+      name: 'Christopher P.',
+      city: 'Nashville, TN',
+      product: 'Sonnus® 6-Bottle Rest Pack',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/product_sonnus_bottle.png',
+      timeAgo: '11 minutes ago',
+      productId: 'sonnus'
+    },
+
+    // --- CROWNED ---
+    {
+      id: 13,
+      name: 'Claire T.',
+      city: 'Los Angeles, CA',
+      product: 'Crowned® 6-Bottle Scalp Kit',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/crowned-bundle-3.png',
+      timeAgo: '2 minutes ago',
+      productId: 'crowned'
+    },
+    {
+      id: 14,
+      name: 'Sophia M.',
+      city: 'New York, NY',
+      product: 'Crowned® 4-Bottle Scalp Kit',
+      deal: 'Buy 2, Get 2 FREE',
+      image: '/assets/products/crowned-bundle-2.png',
+      timeAgo: '5 minutes ago',
+      productId: 'crowned'
+    },
+    {
+      id: 15,
+      name: 'Karen B.',
+      city: 'Charlotte, NC',
+      product: 'Crowned® 2-Bottle Scalp Kit',
+      deal: 'Buy 1, Get 1 FREE',
+      image: '/assets/products/crowned-bundle-1.png',
+      timeAgo: '9 minutes ago',
+      productId: 'crowned'
+    },
+    {
+      id: 16,
+      name: 'Hannah G.',
+      city: 'Minneapolis, MN',
+      product: 'Crowned® 6-Bottle Scalp Kit',
+      deal: 'Buy 3, Get 3 FREE (Best Value)',
+      image: '/assets/products/crowned-bundle-3.png',
+      timeAgo: '13 minutes ago',
+      productId: 'crowned'
     }
   ];
+
+  // Shuffle list order on initial render so it varies on every page visit
+  const [queue] = useState(() => {
+    const list = [...notifications];
+    for (let i = list.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list;
+  });
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -62,10 +189,11 @@ export function SalesNotificationPopups({ onSelectProduct }) {
   useEffect(() => {
     if (dismissed) return;
 
-    // First popup appears after 4 seconds
+    // First popup appears after a natural delay (8 to 12 seconds)
+    const randomInitialDelay = Math.floor(Math.random() * 4000) + 8000;
     const initialTimer = setTimeout(() => {
       setVisible(true);
-    }, 4000);
+    }, randomInitialDelay);
 
     return () => clearTimeout(initialTimer);
   }, [dismissed]);
@@ -73,23 +201,27 @@ export function SalesNotificationPopups({ onSelectProduct }) {
   useEffect(() => {
     if (dismissed || !visible) return;
 
-    // Show popup for 6 seconds, then hide for 9 seconds before showing next
+    // Show popup for 5.5 seconds, then hide for 20 to 35 seconds before showing next
     const hideTimer = setTimeout(() => {
       setVisible(false);
+
+      const randomPause = Math.floor(Math.random() * 15000) + 20000;
       setTimeout(() => {
-        setCurrentIdx((prev) => (prev + 1) % notifications.length);
-        if (!dismissed) setVisible(true);
-      }, 9000);
-    }, 6000);
+        if (!dismissed) {
+          setCurrentIdx((prev) => (prev + 1) % queue.length);
+          setVisible(true);
+        }
+      }, randomPause);
+    }, 5500);
 
     return () => clearTimeout(hideTimer);
-  }, [visible, dismissed, notifications.length]);
+  }, [visible, dismissed, queue.length]);
 
-  if (dismissed) return null;
-  const current = notifications[currentIdx];
+  if (dismissed || !queue || queue.length === 0) return null;
+  const current = queue[currentIdx];
 
   const handleClick = () => {
-    if (onSelectProduct) {
+    if (onSelectProduct && current.productId) {
       onSelectProduct(current.productId);
       const el = document.getElementById('bundles-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -98,7 +230,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && current && (
         <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -112,7 +244,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
             zIndex: 9990,
             backgroundColor: '#FFFFFF',
             borderRadius: '16px',
-            border: '1.5px solid rgba(217, 107, 50, 0.25)',
+            border: '1.5px solid rgba(39, 174, 96, 0.25)',
             boxShadow: '0 16px 36px rgba(0, 0, 0, 0.12)',
             padding: '14px 16px',
             display: 'flex',
@@ -180,7 +312,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#141210', lineHeight: 1.3 }}>
               {current.name} <span style={{ fontWeight: 500, color: '#666' }}>from {current.city}</span>
             </div>
-            <div style={{ fontSize: '12px', fontWeight: 700, color: '#D96B32', marginTop: '1px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 700, color: '#27AE60', marginTop: '1px' }}>
               Purchased {current.deal}
             </div>
             <div style={{ fontSize: '10.5px', color: '#999', marginTop: '2px' }}>
