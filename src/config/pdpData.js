@@ -1170,7 +1170,7 @@ export const PDP_DATA = {
       p2: 'That is why Crowned is applied directly to the scalp. Not just to the ends. Not just to the surface of the hair. A focused serum designed to complement the rest of your routine from the foundation up.',
       tagline: 'SCALP FIRST. STRANDS SECOND. ROUTINE SIMPLE.',
       ctaText: 'START MY CROWNED ROUTINE →',
-      image: '/crowned/images/07-scalp.webp'
+      image: '/assets/products/crowned-sec-1.png'
     },
 
     whyChoose: {
@@ -1180,7 +1180,7 @@ export const PDP_DATA = {
       subtitle: 'Traditional oils are often designed around coating or conditioning the hair fiber. Crowned is designed as a lightweight leave-in serum applied directly to the scalp.',
       tagline: 'CARE WHERE IT COUNTS. WITHOUT THE HEAVY FEEL.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/crowned/images/02-gal-a.webp',
+      image: '/assets/products/crowned-sec-4.png',
       features: [
         { icon: 'Droplets', title: 'LIGHTWEIGHT & LEAVE-IN', desc: 'Applied directly to dry or towel-dried scalp with no heavy oil residue.' },
         { icon: 'Leaf', title: 'PEPTIDE + VITAMIN FORMULA', desc: 'Copper Tripeptide-1 (GHK-Cu), Niacinamide, Panthenol, and Biotin.' },
@@ -1195,7 +1195,7 @@ export const PDP_DATA = {
       subtitle: 'Crowned combines scalp conditioning and strand care in one lightweight daily formula.',
       highlightText: 'SCALP CARE. STRAND CARE. ONE DAILY SERUM.',
       ctaText: 'TRY CROWNED →',
-      image: '/crowned/images/02-gal-b.webp',
+      image: '/assets/products/crowned-sec-2.png',
       benefits: [
         { title: 'FULLER-LOOKING HAIR', desc: 'Designed to support the appearance of greater body, density and fullness as part of a consistent scalp-care routine.' },
         { title: 'STRONGER-LOOKING STRANDS', desc: 'Conditioning ingredients help support hair resilience and improve the appearance and feel of fragile strands.' },
@@ -1209,7 +1209,7 @@ export const PDP_DATA = {
       tag: 'HOW TO USE',
       title: 'TEN SECONDS. ONE TARGETED STEP.',
       subtitle: 'You do not need an entirely new hair-care system. Crowned is designed to slot into the one you already have.',
-      image: '/crowned/images/02-gal-a.webp',
+      image: '/assets/products/crowned-sec-5.png',
       steps: [
         { step: '01', title: 'APPLY', desc: 'Apply 1 full dropper daily directly to the dry or towel-dried scalp.' },
         { step: '02', title: 'TARGET', desc: 'Focus the application on scalp areas where you want to be most consistent.' },
@@ -1227,7 +1227,7 @@ export const PDP_DATA = {
       description: 'Instead of relying only on traditional oils or basic conditioning ingredients, Crowned puts a modern cosmetic peptide at the center of the formula.',
       highlightText: 'PEPTIDE. BARRIER CARE. CONDITIONING. ONE FORMULA.',
       ctaText: 'VIEW FULL INGREDIENT LIST →',
-      image: '/crowned/images/02-gal-c.webp',
+      image: '/assets/products/crowned-sec-3.png',
       ingredients: [
         { name: 'COPPER TRIPEPTIDE-1 — GHK-Cu', desc: 'A copper-binding cosmetic peptide studied in skin and hair-related biological research to anchor Crowned\'s advanced scalp-care approach.', whyItsHere: 'Peptide Scalp Care' },
         { name: 'NIACINAMIDE — VITAMIN B3', desc: 'One of the most established cosmetic ingredients for supporting skin-barrier function and maintaining a well-conditioned scalp environment.', whyItsHere: 'Scalp Barrier Care' },
