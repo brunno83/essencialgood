@@ -166,7 +166,7 @@ export const PDP_DATA = {
       p2: 'Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.',
       tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
       ctaText: 'TRY SLIMSODA →',
-      image: '/assets/products/slimsoda-lifestyle-routine.jpg'
+      image: '/assets/products/slimsoda-section-1-routine.jpg'
     },
 
     whyChoose: {
@@ -176,7 +176,7 @@ export const PDP_DATA = {
       subtitle: 'Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.',
       tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/slimsoda-stone-pedestal.jpg',
+      image: '/assets/products/slimsoda-section-4-choose.jpg',
       features: [
         {
           icon: 'Droplets',
@@ -207,6 +207,7 @@ export const PDP_DATA = {
       subtitle: 'SlimSoda brings selected wellness ingredients together in one convenient powdered formula designed to complement a balanced lifestyle.',
       highlightText: 'ONE FORMULA. MULTIPLE WELLNESS GOALS. ONE SIMPLE ROUTINE.',
       ctaText: 'MAKE SLIMSODA PART OF MY DAY →',
+      image: '/assets/products/slimsoda-section-2-benefits.jpg',
       benefits: [
         {
           title: 'METABOLIC WELLNESS',
@@ -235,6 +236,7 @@ export const PDP_DATA = {
       tag: 'HOW IT WORKS',
       title: 'ONE SIMPLE ADDITION TO YOUR DAY.',
       subtitle: 'No complicated preparation. No elaborate wellness ritual.',
+      image: '/assets/products/slimsoda-section-5-howitworks.jpg',
       steps: [
         {
           step: '01',
@@ -263,6 +265,7 @@ export const PDP_DATA = {
       description: 'SlimSoda brings selected ingredients together in one convenient powdered formula.',
       highlightText: 'SELECTED INGREDIENTS. PURPOSEFUL FORMULATION. SIMPLE DAILY USE.',
       ctaText: 'TRY SLIMSODA →',
+      image: '/assets/products/slimsoda-section-3-ingredients.jpg',
       ingredients: [
         {
           name: 'GINGER EXTRACT',

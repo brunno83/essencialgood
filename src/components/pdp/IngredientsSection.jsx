@@ -205,7 +205,7 @@ export function IngredientsSection({ ingredientsSection, accentColor }) {
                 }}
               >
                 <div style={{ fontSize: '10.5px', fontWeight: 900, color: brandAccent, letterSpacing: '0.08em', marginBottom: '3px' }}>
-                  WHY IT'S IN THE SONNUS® FORMULA:
+                  WHY IT'S IN THE FORMULA:
                 </div>
                 <div style={{ fontSize: '12.5px', color: '#141210', fontWeight: 700 }}>
                   {activeItem.whyItsHere}
