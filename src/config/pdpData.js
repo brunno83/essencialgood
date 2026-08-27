@@ -553,7 +553,7 @@ export const PDP_DATA = {
       p2: 'Instead of a harsh "flush" or dramatic overnight cleanse, LinfaFlow combines four traditional botanicals into a simple liquid formula designed to complement healthy everyday habits.',
       tagline: 'SUPPORT THE PROCESS. KEEP THE ROUTINE SIMPLE.',
       ctaText: 'MAKE LINFAFLOW PART OF MY DAY →',
-      image: '/linfaflow/images/why-linfaflow.jpg'
+      image: '/linfaflow/images/linfaflow-sec-1-why.jpg'
     },
 
     whyChoose: {
@@ -563,7 +563,7 @@ export const PDP_DATA = {
       subtitle: 'Instead of adding more complexity to your day, LinfaFlow brings four traditional botanicals together in one convenient liquid dropper format.',
       tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/linfaflow/images/why-choose-linfaflow.jpg',
+      image: '/linfaflow/images/linfaflow-sec-4-whychoose.jpg',
       features: [
         {
           icon: 'Droplets',
@@ -594,7 +594,7 @@ export const PDP_DATA = {
       subtitle: 'LinfaFlow brings together four traditional botanicals in one convenient formula designed around three complementary wellness goals.',
       highlightText: 'FOUR BOTANICALS. THREE COMPLEMENTARY WELLNESS GOALS. ONE SIMPLE ROUTINE.',
       ctaText: 'TRY LINFAFLOW →',
-      image: '/linfaflow/images/03-reason-2.jpg',
+      image: '/linfaflow/images/linfaflow-sec-2-benefits.jpg',
       benefits: [
         {
           title: 'LYMPHATIC WELLNESS',
@@ -623,7 +623,7 @@ export const PDP_DATA = {
       tag: 'HOW IT WORKS',
       title: 'THIRTY SECONDS CAN BE ENOUGH TO START A BETTER ROUTINE.',
       subtitle: 'The best wellness routine is usually the one you can actually maintain.',
-      image: '/linfaflow/images/03-reason-4.jpg',
+      image: '/linfaflow/images/linfaflow-sec-5-howitworks.jpg',
       steps: [
         {
           step: '01',
@@ -657,7 +657,7 @@ export const PDP_DATA = {
       description: 'LinfaFlow brings selected traditional plant extracts together in one concentrated liquid formula.',
       highlightText: 'FOUR NAMED BOTANICALS. NOTHING MYSTERIOUS.',
       ctaText: 'VIEW SUPPLEMENT FACTS →',
-      image: '/linfaflow/images/03-reason-3.jpg',
+      image: '/linfaflow/images/linfaflow-sec-3-ingredients.jpg',
       ingredients: [
         {
           name: 'CLEAVERS (Galium aparine)',
