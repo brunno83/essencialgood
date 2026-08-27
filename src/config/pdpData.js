@@ -1170,7 +1170,8 @@ export const PDP_DATA = {
       p2: 'That is why Crowned is applied directly to the scalp. Not just to the ends. Not just to the surface of the hair. A focused serum designed to complement the rest of your routine from the foundation up.',
       tagline: 'SCALP FIRST. STRANDS SECOND. ROUTINE SIMPLE.',
       ctaText: 'START MY CROWNED ROUTINE →',
-      image: '/assets/products/crowned-sec-1.png'
+      image: '/assets/products/crowned-sec-1.png',
+      aspectRatio: '1 / 1'
     },
 
     whyChoose: {

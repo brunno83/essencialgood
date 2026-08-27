@@ -59,7 +59,7 @@ export function WhySlimSodaBlock({ whyBlock, accentColor }) {
                 style={{
                   width: '100%',
                   height: 'auto',
-                  aspectRatio: '3 / 4',
+                  aspectRatio: data.aspectRatio || '1 / 1',
                   objectFit: 'cover',
                   display: 'block'
                 }}
