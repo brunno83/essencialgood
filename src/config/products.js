@@ -97,7 +97,7 @@ export const PRODUCTS = [
     transitionTone: 'copper-brown',
     link: PRODUCT_LINKS.Crowned,
     // Asset file paths for all 3 section contexts
-    imageBottle: '/assets/products/product_crowned_bottle.png',       // Seção 04 (Meet The Essentials)
+    imageBottle: '/assets/products/crowned-bundle-1.png',       // Seção 04 (Meet The Essentials)
     imageHighlight: '/assets/products/highlight_crowned.png',       // Seção 05 (Product Highlights - 3:4 photo)
     imageSelector: '/assets/products/selector_crowned.png',         // Seção 06 (Find Your Essential - Routine Selector)
     bottleStyle: {
