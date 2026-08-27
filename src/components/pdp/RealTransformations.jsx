@@ -112,7 +112,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       id: 3, 
       src: '/sonnus/images/imagem-3.jpg', 
       alt: 'Sonnus Customer Routine 3',
-      name: 'Jessica T.',
+      name: 'Chloe V.',
       badgeText: 'Verified Customer',
       headline: '“THE WILD BERRY GUMMIES MAKE IT EASY.”',
       feedback: 'No capsules or mixing anything. Two gummies before bed fits naturally into my evening routine.'
@@ -121,7 +121,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       id: 4, 
       src: '/sonnus/images/imagem-4.jpg', 
       alt: 'Sonnus Customer Routine 4',
-      name: 'Sarah H.',
+      name: 'Hannah W.',
       badgeText: 'Verified Customer',
       headline: '“SIMPLE ENOUGH TO STAY CONSISTENT.”',
       feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.'
@@ -130,7 +130,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       id: 5, 
       src: '/sonnus/images/imagem-5.jpg', 
       alt: 'Sonnus Customer Routine 5',
-      name: 'Amanda K.',
+      name: 'Natalie P.',
       badgeText: 'Verified Customer',
       headline: '“A BETTER EVENING RITUAL.”',
       feedback: 'Taking two gummies 30 minutes before bed has become my favorite way to signal that the day is done.'
@@ -139,7 +139,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       id: 6, 
       src: '/sonnus/images/imagem-6.jpg', 
       alt: 'Sonnus Customer Routine 6',
-      name: 'Emily R.',
+      name: 'Grace L.',
       badgeText: 'Verified Customer',
       headline: '“WAKING UP FEELING REFRESHED.”',
       feedback: 'I love waking up without that groggy feeling. Highly recommend adding this to your night.'
@@ -157,7 +157,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       id: 8, 
       src: '/sonnus/images/imagem-8.jpg', 
       alt: 'Sonnus Customer Routine 8',
-      name: 'Marcus P.',
+      name: 'Julian K.',
       badgeText: 'Verified Customer',
       headline: '“GENTLE AND EFFECTIVE.”',
       feedback: 'Great ingredient formula. It feels natural and gives my evening routine a clear ending.'

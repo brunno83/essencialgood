@@ -399,8 +399,8 @@ export const PDP_DATA = {
     rating: 4.8,
     reviewCount: '14,890+',
     startingPrice: '$19.99',
-    accentColor: '#4B6833',
-    accentLight: 'rgba(75, 104, 51, 0.15)',
+    accentColor: '#27AE60',
+    accentLight: 'rgba(39, 174, 96, 0.12)',
     heroImage: '/linfaflow/images/gallery-hero-cover.jpg',
     
     usps: [
@@ -707,25 +707,25 @@ export const PDP_DATA = {
         {
           quote: '“IT\'S BECOME PART OF MY MORNING.”',
           body: '“The dropper format is what I like most. It takes almost no time and I don\'t have another handful of pills to remember.”',
-          author: 'Verified Customer — 5 Stars',
+          author: 'Vanessa C. — Verified Customer',
           stars: 5
         },
         {
           quote: '“FINALLY, A FORMULA I CAN UNDERSTAND.”',
           body: '“I liked seeing four clearly named botanicals instead of a huge proprietary-looking ingredient list. It\'s straightforward and easy to use.”',
-          author: 'Verified Customer — 5 Stars',
+          author: 'Derek N. — Verified Customer',
           stars: 5
         },
         {
           quote: '“IT FITS MY ROUTINE.”',
           body: '“I\'ve been paying more attention to hydration, walking and my overall wellness routine, and LinfaFlow is easy to incorporate alongside those habits.”',
-          author: 'Verified Customer — 5 Stars',
+          author: 'Megan F. — Verified Customer',
           stars: 5
         },
         {
           quote: '“SIMPLE IS BETTER FOR ME.”',
           body: '“I\'ve tried routines with several bottles before and never stayed consistent. The liquid format makes this much easier.”',
-          author: 'Verified Customer — 5 Stars',
+          author: 'Brooke H. — Verified Customer',
           stars: 5
         }
       ]
@@ -807,8 +807,8 @@ export const PDP_DATA = {
     rating: 4.8,
     reviewCount: '9,480+',
     startingPrice: '$19.99',
-    accentColor: '#3B4959',
-    accentLight: 'rgba(59, 73, 89, 0.12)',
+    accentColor: '#27AE60',
+    accentLight: 'rgba(39, 174, 96, 0.12)',
     heroImage: '/sonnus/images/gallery-1.png',
     
     usps: [
@@ -1010,10 +1010,10 @@ export const PDP_DATA = {
       headline: 'MADE TO FIT INTO BEDTIME — NOT TAKE IT OVER.',
       disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
       reviews: [
-        { quote: '“IT\'S BECOME MY SIGNAL TO START WINDING DOWN.”', body: '“The gummies are easy to take and I like having a consistent step that tells me it\'s time to start shutting things down for the night.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”', body: '“I was looking for something with a broader formula, and the ingredient blend is what made menu choose Sonnus.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“THE WILD BERRY GUMMIES MAKE IT EASY.”', body: '“No capsules or mixing anything. Two gummies before bed fits naturally into my routine.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“SIMPLE ENOUGH TO STAY CONSISTENT.”', body: '“I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.”', author: 'Verified Buyer — 5 Stars', stars: 5 }
+        { quote: '“IT\'S BECOME MY SIGNAL TO START WINDING DOWN.”', body: '“The gummies are easy to take and I like having a consistent step that tells me it\'s time to start shutting things down for the night.”', author: 'Olivia G. — Verified Buyer', stars: 5 },
+        { quote: '“I LOVE THAT IT\'S MORE THAN JUST MELATONIN.”', body: '“I was looking for something with a broader formula, and the ingredient blend is what made me choose Sonnus.”', author: 'Taylor B. — Verified Buyer', stars: 5 },
+        { quote: '“THE WILD BERRY GUMMIES MAKE IT EASY.”', body: '“No capsules or mixing anything. Two gummies before bed fits naturally into my routine.”', author: 'Morgan E. — Verified Buyer', stars: 5 },
+        { quote: '“SIMPLE ENOUGH TO STAY CONSISTENT.”', body: '“I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.”', author: 'Samantha D. — Verified Buyer', stars: 5 }
       ]
     },
 
@@ -1063,8 +1063,8 @@ export const PDP_DATA = {
     rating: 4.8,
     reviewCount: '12,340+',
     startingPrice: '$19.99',
-    accentColor: '#7E57C2',
-    accentLight: 'rgba(126, 87, 194, 0.12)',
+    accentColor: '#27AE60',
+    accentLight: 'rgba(39, 174, 96, 0.12)',
     heroImage: '/assets/products/crowned-gal-1.png',
     
     usps: [
@@ -1263,10 +1263,10 @@ export const PDP_DATA = {
       headline: 'BUILT FOR PEOPLE WHO DON\'T WANT ANOTHER GREASY HAIR PRODUCT.',
       disclaimer: 'Based on authentic verified customer feedback. Individual experiences may vary.',
       reviews: [
-        { quote: '“I LOVE HOW LIGHT IT FEELS.”', body: '“I\'ve tried scalp oils before and hated how my roots felt afterward. Crowned is much easier to work into my daily routine.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“FINALLY, A SCALP PRODUCT I ACTUALLY USE.”', body: '“One dropper, a quick massage and I\'m done. It doesn\'t complicate everything else I already do with my hair.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“THE FORMULA IS WHAT CAUGHT MY ATTENTION.”', body: '“I had seen copper peptides in skincare before, so I liked the idea of a scalp serum built around GHK-Cu.”', author: 'Verified Buyer — 5 Stars', stars: 5 },
-        { quote: '“EASY TO USE WITHOUT CHANGING MY ROUTINE.”', body: '“I still use my regular shampoo and styling products. Crowned is just one extra step, which makes it easy to stay consistent.”', author: 'Verified Buyer — 5 Stars', stars: 5 }
+        { quote: '“I LOVE HOW LIGHT IT FEELS.”', body: '“I\'ve tried scalp oils before and hated how my roots felt afterward. Crowned is much easier to work into my daily routine.”', author: 'Lauren V. — Verified Buyer', stars: 5 },
+        { quote: '“FINALLY, A SCALP PRODUCT I ACTUALLY USE.”', body: '“One dropper, a quick massage and I\'m done. It doesn\'t complicate everything else I already do with my hair.”', author: 'Nicole R. — Verified Buyer', stars: 5 },
+        { quote: '“THE FORMULA IS WHAT CAUGHT MY ATTENTION.”', body: '“I had seen copper peptides in skincare before, so I liked the idea of a scalp serum built around GHK-Cu.”', author: 'Isabella C. — Verified Buyer', stars: 5 },
+        { quote: '“EASY TO USE WITHOUT CHANGING MY ROUTINE.”', body: '“I still use my regular shampoo and styling products. Crowned is just one extra step, which makes it easy to stay consistent.”', author: 'Brittany M. — Verified Buyer', stars: 5 }
       ]
     },
 

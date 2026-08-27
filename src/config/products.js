@@ -16,7 +16,7 @@ export const PRODUCTS = [
     transitionTone: 'warm-orange',
     link: PRODUCT_LINKS.SlimSODA,
     // Asset file paths for all 3 section contexts
-    imageBottle: '/assets/products/product_slimsoda_bottle.png',       // Seção 04 (Meet The Essentials)
+    imageBottle: '/assets/products/product_slimsoda_bottle.png',       // Seção 04 (Meet The Essentials - 3 Tubs)
     imageHighlight: '/assets/products/highlight_slimsoda.png',       // Seção 05 (Product Highlights - 3:4 photo)
     imageSelector: '/assets/products/selector_slimsoda.png',         // Seção 06 (Find Your Essential - Routine Selector)
     bottleStyle: {
@@ -43,9 +43,9 @@ export const PRODUCTS = [
     transitionTone: 'muted-green',
     link: PRODUCT_LINKS.LinfaFlow,
     // Asset file paths for all 3 section contexts
-    imageBottle: '/assets/products/product_linfaflow_bottle.png',       // Seção 04 (Meet The Essentials)
+    imageBottle: '/assets/products/linfaflow-bundle-3.png',            // Seção 04 (Meet The Essentials - 3 Bottles)
     imageHighlight: '/assets/products/highlight_linfaflow.png',       // Seção 05 (Product Highlights - 3:4 photo)
-    imageSelector: '/assets/products/selector_linfaflow.png',         // Seção 06 (Find Your Essential - Routine Selector)
+    imageSelector: '/linfaflow/images/gallery-lifestyle.jpg',         // Seção 06 (Find Your Essential - Routine Selector Lifestyle with Person)
     bottleStyle: {
       primaryColor: '#4B6833',
       secondaryColor: '#88B097',
@@ -70,7 +70,7 @@ export const PRODUCTS = [
     transitionTone: 'midnight-navy',
     link: PRODUCT_LINKS.Sonnus,
     // Asset file paths for all 3 section contexts
-    imageBottle: '/assets/products/product_sonnus_bottle.png',       // Seção 04 (Meet The Essentials)
+    imageBottle: '/assets/products/product_sonnus_bottle.png',       // Seção 04 (Meet The Essentials - 3 Bottles)
     imageHighlight: '/assets/products/highlight_sonnus.png',       // Seção 05 (Product Highlights - 3:4 photo)
     imageSelector: '/assets/products/selector_sonnus.png',         // Seção 06 (Find Your Essential - Routine Selector)
     bottleStyle: {
@@ -97,7 +97,7 @@ export const PRODUCTS = [
     transitionTone: 'copper-brown',
     link: PRODUCT_LINKS.Crowned,
     // Asset file paths for all 3 section contexts
-    imageBottle: '/assets/products/crowned-bundle-1.png',       // Seção 04 (Meet The Essentials)
+    imageBottle: '/assets/products/crowned-bundle-3.png',              // Seção 04 (Meet The Essentials - 3 Bottles)
     imageHighlight: '/assets/products/highlight_crowned.png',       // Seção 05 (Product Highlights - 3:4 photo)
     imageSelector: '/assets/products/selector_crowned.png',         // Seção 06 (Find Your Essential - Routine Selector)
     bottleStyle: {
