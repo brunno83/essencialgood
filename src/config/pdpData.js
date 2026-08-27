@@ -1232,7 +1232,7 @@ export const PDP_DATA = {
       description: 'Instead of relying only on traditional oils or basic conditioning ingredients, Crowned puts a modern cosmetic peptide at the center of the formula.',
       highlightText: 'PEPTIDE. BARRIER CARE. CONDITIONING. ONE FORMULA.',
       ctaText: 'VIEW FULL INGREDIENT LIST →',
-      image: '/assets/products/crowned-sec-3.png',
+      image: '/assets/products/crowned-sec-3.jpg',
       ingredients: [
         { name: 'COPPER TRIPEPTIDE-1 — GHK-Cu', desc: 'A copper-binding cosmetic peptide studied in skin and hair-related biological research to anchor Crowned\'s advanced scalp-care approach.', whyItsHere: 'Peptide Scalp Care' },
         { name: 'NIACINAMIDE — VITAMIN B3', desc: 'One of the most established cosmetic ingredients for supporting skin-barrier function and maintaining a well-conditioned scalp environment.', whyItsHere: 'Scalp Barrier Care' },
