@@ -75,21 +75,23 @@ export function SlimSodaListicle({ onNavHome }) {
         <div style={{
           backgroundColor: '#0D1508',
           color: '#E2E8F0',
-          padding: '6px 24px',
-          fontSize: '11px',
+          padding: '6px 16px',
+          fontSize: '10.5px',
           fontWeight: 600,
-          letterSpacing: '1px',
+          letterSpacing: '0.8px',
           textTransform: 'uppercase',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '4px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ color: 'var(--color-slimsoda, #D96B32)', fontWeight: 800 }}>ESSENTIAL GOOD</span>
             <span style={{ opacity: 0.4 }}>|</span>
             <span>WELLNESS EDIT</span>
           </div>
-          <div style={{ opacity: 0.7, fontSize: '10px', letterSpacing: '0.8px' }}>
+          <div className="desktop-only" style={{ opacity: 0.7, fontSize: '10px', letterSpacing: '0.8px' }}>
             SPONSORED WELLNESS FEATURE
           </div>
         </div>
@@ -99,9 +101,10 @@ export function SlimSodaListicle({ onNavHome }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '14px 24px',
+          padding: '10px 16px',
           maxWidth: '1280px',
-          margin: '0 auto'
+          margin: '0 auto',
+          gap: '10px'
         }}>
           {/* Logo Button */}
           <button 
@@ -112,14 +115,15 @@ export function SlimSodaListicle({ onNavHome }) {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
-              padding: 0
+              gap: '6px',
+              padding: 0,
+              flexShrink: 0
             }}
           >
             <img 
               src="/assets/logo/logo_brand_white.png" 
               alt="Essential Good" 
-              style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '28px', width: 'auto', objectFit: 'contain' }}
               onError={(e) => {
                 e.target.style.display = 'none';
                 if (e.target.nextSibling) {
@@ -130,7 +134,7 @@ export function SlimSodaListicle({ onNavHome }) {
             <span style={{
               display: 'none',
               fontFamily: 'var(--font-brand-display)',
-              fontSize: '22px',
+              fontSize: '20px',
               fontWeight: 700,
               color: '#FFFFFF',
               letterSpacing: '1px'
@@ -161,53 +165,55 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: '#27AE60',
               color: '#FFFFFF',
               border: 'none',
-              padding: '10px 20px',
-              borderRadius: '10px',
-              fontSize: '13px',
-              fontWeight: 700,
+              padding: '8px 14px',
+              borderRadius: '8px',
+              fontSize: '12px',
+              fontWeight: 800,
               cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
-              letterSpacing: '0.5px',
-              textDecoration: 'none'
+              gap: '4px',
+              letterSpacing: '0.3px',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
             }}
           >
             <span>SHOP SLIMSODA®</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
           </a>
         </div>
       </header>
 
       {/* ARTICLE CONTAINER */}
-      <div style={{ maxWidth: '840px', margin: '0 auto', padding: '40px 20px 20px' }}>
+      <div style={{ maxWidth: '840px', margin: '0 auto', padding: '30px 16px 20px' }}>
         
         {/* 02 — HERO SECTION */}
-        <header style={{ marginBottom: '40px', textAlign: 'center' }}>
+        <header style={{ marginBottom: '32px', textAlign: 'center' }}>
           {/* CLEAN PILL BADGE WITHOUT ICON/SPARKLES */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             backgroundColor: 'rgba(217, 107, 50, 0.1)',
             color: 'var(--color-slimsoda, #D96B32)',
-            padding: '6px 16px',
+            padding: '6px 14px',
             borderRadius: '999px',
-            fontSize: '12px',
+            fontSize: '11px',
             fontWeight: 700,
-            letterSpacing: '1.2px',
+            letterSpacing: '1px',
             textTransform: 'uppercase',
-            marginBottom: '16px'
+            marginBottom: '14px'
           }}>
             <span>THE SIMPLER WELLNESS MOVEMENT</span>
           </div>
 
           <h1 style={{
             fontFamily: 'var(--font-brand-display)',
-            fontSize: 'clamp(28px, 5vw, 46px)',
-            lineHeight: '1.15',
+            fontSize: 'clamp(24px, 5vw, 44px)',
+            lineHeight: '1.18',
             fontWeight: 600,
             color: 'var(--color-primary)',
-            margin: '16px 0 20px',
+            margin: '12px 0 16px',
             letterSpacing: '-0.5px'
           }}>
             5 Reasons Simple Powdered Wellness Routines Are Getting So Much Attention
@@ -215,10 +221,10 @@ export function SlimSodaListicle({ onNavHome }) {
 
           <p style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: '18px',
+            fontSize: '16.5px',
             lineHeight: '1.6',
             color: 'var(--color-secondary)',
-            marginBottom: '24px',
+            marginBottom: '20px',
             maxWidth: '760px',
             marginInline: 'auto'
           }}>
@@ -229,33 +235,34 @@ export function SlimSodaListicle({ onNavHome }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '16px',
-            fontSize: '13px',
+            flexWrap: 'wrap',
+            gap: '12px',
+            fontSize: '12px',
             color: 'var(--color-muted)',
             borderTop: '1px solid var(--color-border)',
             borderBottom: '1px solid var(--color-border)',
-            padding: '12px 0',
+            padding: '10px 0',
             fontWeight: 500
           }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Clock size={15} /> 3 MIN READ
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Clock size={14} /> 3 MIN READ
             </span>
             <span>•</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <BookOpen size={15} /> WELLNESS & NUTRITION
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <BookOpen size={14} /> WELLNESS & NUTRITION
             </span>
           </div>
         </header>
 
-        {/* HERO IMAGE 01: slimsoda_hero_morning.jpg */}
+        {/* HERO IMAGE 01: slimsoda_hero_morning.jpg (FLUID 16:9 ASPECT RATIO) */}
         <div style={{
           backgroundColor: 'var(--bg-card-alt)',
           borderRadius: 'var(--radius-md)',
           border: '1px solid var(--color-border)',
-          minHeight: '380px',
-          maxHeight: '480px',
+          width: '100%',
+          aspectRatio: '16 / 9',
           overflow: 'hidden',
-          marginBottom: '48px',
+          marginBottom: '40px',
           position: 'relative',
           boxShadow: '0 8px 30px rgba(0,0,0,0.06)',
           display: 'flex',
@@ -358,13 +365,13 @@ export function SlimSodaListicle({ onNavHome }) {
             IT TURNS SUPPLEMENTATION INTO ONE SIMPLE ACTION
           </h2>
 
-          {/* IMAGE 02: slimsoda_scoop_action.jpg */}
+          {/* IMAGE 02: slimsoda_scoop_action.jpg (FLUID 16:9 ASPECT RATIO) */}
           <div style={{
             backgroundColor: 'var(--bg-card)',
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--color-border)',
-            minHeight: '260px',
-            maxHeight: '420px',
+            width: '100%',
+            aspectRatio: '16 / 9',
             overflow: 'hidden',
             marginBottom: '24px',
             boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
@@ -1300,8 +1307,10 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: 'var(--bg-card-alt)',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--color-border)',
-              minHeight: '320px',
-              maxHeight: '400px',
+              width: '100%',
+              aspectRatio: '4 / 3',
+              maxHeight: '380px',
+              padding: '12px',
               overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
@@ -1310,7 +1319,7 @@ export function SlimSodaListicle({ onNavHome }) {
               <img 
                 src="/LISTICLE SLIMSODA/Imagens/slimsoda_product_tub.jpg" 
                 alt="SlimSoda Product Tub" 
-                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
                 onError={(e) => {
                   e.target.src = "/assets/listicle/slimsoda/slimsoda_product_tub.jpg";
                 }}
@@ -1672,8 +1681,15 @@ export function SlimSodaListicle({ onNavHome }) {
                 </div>
 
                 {/* Third & Fourth Row: Review Title & Body Content with Customer Photo */}
-                <div style={{ display: 'grid', gridTemplateColumns: rev.img ? '1fr 140px' : '1fr', gap: '20px', alignItems: 'center' }}>
-                  <div>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap-reverse',
+                  gap: '16px',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}>
+                  <div style={{ flex: '1 1 240px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#141210', margin: '0 0 8px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
                       "{rev.title}"
                     </h3>
@@ -1684,8 +1700,8 @@ export function SlimSodaListicle({ onNavHome }) {
 
                   {rev.img && (
                     <div style={{
-                      width: '140px',
-                      height: '140px',
+                      width: '130px',
+                      height: '130px',
                       borderRadius: '12px',
                       overflow: 'hidden',
                       flexShrink: 0,
