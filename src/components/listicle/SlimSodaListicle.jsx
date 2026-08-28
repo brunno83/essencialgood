@@ -81,10 +81,9 @@ export function SlimSodaListicle({ onNavHome }) {
           letterSpacing: '0.8px',
           textTransform: 'uppercase',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '4px'
+          gap: '8px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ color: 'var(--color-slimsoda, #D96B32)', fontWeight: 800 }}>ESSENTIAL GOOD</span>
@@ -92,7 +91,7 @@ export function SlimSodaListicle({ onNavHome }) {
             <span>WELLNESS EDIT</span>
           </div>
           <div className="desktop-only" style={{ opacity: 0.7, fontSize: '10px', letterSpacing: '0.8px' }}>
-            SPONSORED WELLNESS FEATURE
+            • SPONSORED WELLNESS FEATURE
           </div>
         </div>
 
@@ -103,8 +102,7 @@ export function SlimSodaListicle({ onNavHome }) {
           justifyContent: 'space-between',
           padding: '10px 16px',
           maxWidth: '1280px',
-          margin: '0 auto',
-          gap: '10px'
+          margin: '0 auto'
         }}>
           {/* Logo Button */}
           <button 
@@ -143,7 +141,7 @@ export function SlimSodaListicle({ onNavHome }) {
             </span>
           </button>
 
-          {/* Center Badge */}
+          {/* Center Badge (Desktop Only) */}
           <div className="desktop-only" style={{
             fontSize: '12px',
             color: 'rgba(255,255,255,0.7)',
@@ -153,7 +151,7 @@ export function SlimSodaListicle({ onNavHome }) {
             gap: '8px',
             letterSpacing: '0.5px'
           }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--color-slimsoda, #D96B32)' }}></span>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#27AE60' }}></span>
             <span>FEATURED ARTICLE: SLIMSODA®</span>
           </div>
 
@@ -165,14 +163,14 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: '#27AE60',
               color: '#FFFFFF',
               border: 'none',
-              padding: '8px 14px',
-              borderRadius: '8px',
-              fontSize: '12px',
+              padding: '8px 16px',
+              borderRadius: '10px',
+              fontSize: '12.5px',
               fontWeight: 800,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px',
+              gap: '6px',
               letterSpacing: '0.3px',
               textDecoration: 'none',
               whiteSpace: 'nowrap',
@@ -180,7 +178,7 @@ export function SlimSodaListicle({ onNavHome }) {
             }}
           >
             <span>SHOP SLIMSODA®</span>
-            <ArrowRight size={13} />
+            <ArrowRight size={14} />
           </a>
         </div>
       </header>
