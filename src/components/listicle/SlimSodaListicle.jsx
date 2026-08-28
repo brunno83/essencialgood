@@ -888,13 +888,13 @@ export function SlimSodaListicle({ onNavHome }) {
             A wellness product only matters if people actually use it.
           </p>
 
-          {/* IMAGE 04: slimsoda_routine_comparison.jpg */}
+          {/* IMAGE 04: slimsoda_routine_comparison.jpg (FLUID 16:9 ASPECT RATIO) */}
           <div style={{
             backgroundColor: 'var(--bg-card)',
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--color-border)',
-            minHeight: '260px',
-            maxHeight: '420px',
+            width: '100%',
+            aspectRatio: '16 / 9',
             overflow: 'hidden',
             marginBottom: '24px',
             boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
