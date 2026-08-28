@@ -39,6 +39,8 @@
     { "source": "/slimsoda/images/:path*", "destination": "/slimsoda/images/:path*" },
     { "source": "/slimsoda", "destination": "/index.html" },
     { "source": "/slimsoda/:path*", "destination": "/index.html" },
+    { "source": "/listicle/slimsoda", "destination": "/index.html" },
+    { "source": "/listicle/slimsoda/:path*", "destination": "/index.html" },
     { "source": "/linfaflow", "destination": "/index.html" },
     { "source": "/linfaflow/:path*", "destination": "/index.html" },
     { "source": "/sonnus", "destination": "/index.html" },

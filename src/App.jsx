@@ -17,24 +17,37 @@ import { ProductPage } from './components/pdp/ProductPage';
 import { ProductMarquee } from './components/pdp/ProductMarquee';
 import { SalesNotificationPopups } from './components/common/SalesNotificationPopups';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { SlimSodaListicle } from './components/listicle/SlimSodaListicle';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
   const getProductFromLocation = () => {
-    // 1. Check query string: ?product=slimsoda
+    // 0. Check Listicle routes in pathname
+    const rawPathname = window.location.pathname.toLowerCase().replace(/\/$/, '');
+    if (rawPathname.endsWith('/listicle/slimsoda') || rawPathname.endsWith('/listicle-slimsoda') || rawPathname === '/listicle/slimsoda') {
+      return 'listicle-slimsoda';
+    }
+
+    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda
     const params = new URLSearchParams(window.location.search);
-    const rawQuery = params.get('product') || params.get('p');
+    const rawQuery = params.get('product') || params.get('p') || params.get('listicle');
     if (rawQuery) {
       const cleanQuery = rawQuery.trim().toLowerCase().replace(/\/$/, '').split('/')[0];
+      if (cleanQuery === 'listicle-slimsoda' || (params.get('listicle') === 'slimsoda')) {
+        return 'listicle-slimsoda';
+      }
       if (PDP_DATA[cleanQuery]) {
         return cleanQuery;
       }
     }
 
-    // 2. Check hash: #slimsoda or #/slimsoda
-    const rawHash = window.location.hash.replace(/^#\/?/, '');
+    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda
+    const rawHash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
     if (rawHash) {
-      const cleanHash = rawHash.trim().toLowerCase().replace(/\/$/, '').split('/')[0];
+      if (rawHash.includes('listicle/slimsoda') || rawHash.includes('listicle-slimsoda')) {
+        return 'listicle-slimsoda';
+      }
+      const cleanHash = rawHash.trim().split('/')[0];
       if (PDP_DATA[cleanHash]) {
         return cleanHash;
       }
@@ -45,6 +58,9 @@ export function App() {
     if (rawPath) {
       const parts = rawPath.trim().toLowerCase().replace(/\/$/, '').split('/');
       const cleanPath = parts[0];
+      if (cleanPath === 'listicle' && parts[1] === 'slimsoda') {
+        return 'listicle-slimsoda';
+      }
       if (PDP_DATA[cleanPath]) {
         return cleanPath;
       }
@@ -83,22 +99,32 @@ export function App() {
   };
 
   const isProductPage = Boolean(activeProductId && PDP_DATA[activeProductId]);
-  const activeDisclaimer = isProductPage ? PDP_DATA[activeProductId]?.disclaimer : null;
+  const activeDisclaimer = isProductPage 
+    ? PDP_DATA[activeProductId]?.disclaimer 
+    : activeProductId === 'listicle-slimsoda' 
+      ? PDP_DATA.slimsoda?.disclaimer 
+      : null;
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
       {/* Top Marquee Announcement Banner - Only on Product Pages */}
       {isProductPage && <ProductMarquee accentColor={PDP_DATA[activeProductId]?.accentColor} />}
 
-      {/* Fixed Luxury Navigation Bar */}
-      <Header 
-        onNavHome={backToHome} 
-        onSelectProduct={openProductPDP} 
-        isProductPage={isProductPage}
-        activeProductId={activeProductId}
-      />
+      {/* Fixed Luxury Navigation Bar (hidden on listicle pages which render dedicated editorial header) */}
+      {activeProductId !== 'listicle-slimsoda' && (
+        <Header 
+          onNavHome={backToHome} 
+          onSelectProduct={openProductPDP} 
+          isProductPage={isProductPage}
+          activeProductId={activeProductId}
+        />
+      )}
 
-      {isProductPage ? (
+      {activeProductId === 'listicle-slimsoda' ? (
+        <ErrorBoundary>
+          <SlimSodaListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
+        </ErrorBoundary>
+      ) : isProductPage ? (
         <ErrorBoundary>
           <ProductPage productData={PDP_DATA[activeProductId]} onBackToHome={backToHome} />
         </ErrorBoundary>
