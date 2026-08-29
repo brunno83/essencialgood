@@ -1619,84 +1619,67 @@ export function SlimSodaListicle({ onNavHome }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 10.5 — UGC SOCIAL PROOF BANNER CARD (EXPANDED PROMINENT HORIZONTAL BANNER) */}
-        <section style={{ marginBottom: '80px', width: '100%' }}>
+        {/* 10.5 — UGC SOCIAL PROOF BANNER CARD (EXACT REFERENCE MATCH) */}
+        <section style={{ marginBottom: '64px', width: '100%' }}>
           <div style={{
             backgroundColor: '#1B2613',
-            borderRadius: '28px',
-            padding: '64px 52px',
+            borderRadius: '24px',
+            padding: '32px',
             color: '#FFFFFF',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.18)',
-            overflow: 'hidden',
+            boxShadow: '0 16px 40px rgba(0,0,0,0.18)',
             border: '1px solid rgba(255,255,255,0.08)'
           }}>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '52px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '32px',
               alignItems: 'center'
             }}>
-              {/* Left Column: Customer Graphic Card (PROMINENT & LARGE) */}
+              {/* Left Column: Customer Graphic Card (MATCHES HEIGHT OF RIGHT COLUMN) */}
               <div style={{
-                borderRadius: '20px',
+                borderRadius: '16px',
                 overflow: 'hidden',
-                boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                width: '100%'
+                boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}>
                 <img 
                   src="/LISTICLE SLIMSODA/Imagens/slimsoda_ugc_card.jpg" 
                   alt="SlimSoda Real Customer Reviews Collage" 
-                  style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                  style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', borderRadius: '16px' }}
                   onError={(e) => {
                     e.target.src = "/assets/listicle/slimsoda/slimsoda_ugc_card.jpg";
                   }}
                 />
               </div>
 
-              {/* Right Column: Prominent Headline, Body Text & Action Button */}
+              {/* Right Column: Reference Headline, Body Text & Pill Button */}
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{
-                  fontSize: '12.5px',
-                  fontWeight: 800,
-                  letterSpacing: '2px',
-                  color: 'var(--color-slimsoda, #D96B32)',
-                  textTransform: 'uppercase',
-                  marginBottom: '14px'
-                }}>
-                  THE SIMPLER ROUTINE MOVEMENT
-                </div>
-
                 <h2 style={{
-                  fontFamily: 'var(--font-brand-display)',
-                  fontSize: 'clamp(28px, 3.8vw, 40px)',
+                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontSize: 'clamp(26px, 3.5vw, 36px)',
                   lineHeight: '1.2',
-                  fontWeight: 800,
+                  fontWeight: 400,
                   color: '#FFFFFF',
                   margin: '0 0 20px',
-                  letterSpacing: '-0.5px'
+                  letterSpacing: '-0.3px'
                 }}>
-                  Simplify Your Morning.<br className="desktop-only" /> Take Your Routine Back.
+                  Simplify Your Morning.<br />
+                  Support Your Wellness.<br />
+                  Take Your Routine Back.
                 </h2>
 
                 <p style={{
-                  fontSize: '16.5px',
+                  fontSize: '15px',
                   lineHeight: '1.65',
-                  color: '#CBD5E1',
-                  marginBottom: '16px',
+                  color: 'rgba(255, 255, 255, 0.88)',
+                  marginBottom: '28px',
                   fontWeight: 400
                 }}>
-                  One simple scoop of SlimSoda® mixed into water each morning — that is the entire daily protocol. No multiple pill bottles, no complicated schedules, no synthetic fillers.
-                </p>
-
-                <p style={{
-                  fontSize: '16.5px',
-                  lineHeight: '1.65',
-                  color: '#CBD5E1',
-                  marginBottom: '32px',
-                  fontWeight: 400
-                }}>
-                  Real people are discovering how easy daily consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Money-Back Guarantee.
+                  One simple scoop of SlimSoda® mixed into water each morning. That is the entire protocol. No multiple pill bottles, no complicated schedules, no synthetic fillers. Real people are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
                 </p>
 
                 <div>
@@ -1707,20 +1690,20 @@ export function SlimSodaListicle({ onNavHome }) {
                       backgroundColor: '#FFFFFF',
                       color: '#1B2613',
                       border: 'none',
-                      padding: '16px 36px',
-                      borderRadius: '12px',
+                      padding: '14px 36px',
+                      borderRadius: '999px',
                       fontWeight: 800,
-                      fontSize: '15.5px',
+                      fontSize: '15px',
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '10px',
+                      gap: '8px',
                       textDecoration: 'none',
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.15)'
                     }}
                   >
-                    <span>SEE SLIMSODA BUNDLES</span>
-                    <ArrowRight size={18} />
+                    <span>Claim The Offer</span>
+                    <ArrowRight size={16} />
                   </a>
                 </div>
               </div>
