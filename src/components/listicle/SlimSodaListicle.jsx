@@ -448,19 +448,23 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: '#27AE60',
               color: '#FFF',
               border: 'none',
-              padding: '14px 28px',
+              padding: '12px 20px',
               borderRadius: '12px',
-              fontWeight: 700,
-              fontSize: '15px',
+              fontWeight: 800,
+              fontSize: '13.5px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '8px',
-              textDecoration: 'none'
+              justifyContent: 'center',
+              gap: '6px',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              boxSizing: 'border-box'
             }}
           >
             <span>EXPLORE SLIMSODA®</span>
-            <ArrowRight size={16} />
+            <ArrowRight size={15} />
           </a>
         </section>
 
@@ -1264,20 +1268,24 @@ export function SlimSodaListicle({ onNavHome }) {
                     backgroundColor: '#27AE60',
                     color: '#FFFFFF',
                     border: 'none',
-                    padding: '16px 32px',
+                    padding: '12px 20px',
                     borderRadius: '12px',
                     fontWeight: 800,
-                    fontSize: '15px',
+                    fontSize: '13.5px',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '10px',
+                    justifyContent: 'center',
+                    gap: '6px',
                     textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    maxWidth: '100%',
+                    boxSizing: 'border-box',
                     boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
                   }}
                 >
                   <span>TRY SLIMSODA® RISK-FREE</span>
-                  <ArrowRight size={18} />
+                  <ArrowRight size={15} />
                 </a>
               </div>
 
@@ -1428,23 +1436,24 @@ export function SlimSodaListicle({ onNavHome }) {
                   backgroundColor: '#27AE60',
                   color: '#FFFFFF',
                   border: 'none',
-                  padding: '16px 32px',
+                  padding: '12px 20px',
                   borderRadius: '12px',
                   fontWeight: 800,
-                  fontSize: '16px',
+                  fontSize: '13.5px',
                   cursor: 'pointer',
                   width: '100%',
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '10px',
+                  gap: '6px',
                   marginBottom: '8px',
                   boxSizing: 'border-box',
-                  textDecoration: 'none'
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 <span>DISCOVER SLIMSODA®</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={15} />
               </a>
               <div style={{ textAlign: 'center', fontSize: '12px', color: 'var(--color-muted)' }}>
                 View ingredients, directions, bundles & guarantee
@@ -1614,32 +1623,36 @@ export function SlimSodaListicle({ onNavHome }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 10.5 — UGC SOCIAL PROOF SECTION (ENLARGED IMAGE - SIDE BY SIDE LAYOUT) */}
-        <section style={{
-          marginBottom: '64px',
-          width: '100%',
-          maxWidth: '960px',
-          marginInline: 'calc(50% - 480px)',
-          position: 'relative'
-        }}>
-          <div style={{
+        {/* 10.5 — UGC SOCIAL PROOF SECTION (PERFECTLY CENTERED ON DESKTOP & MOBILE) */}
+        <section className="ugc-banner-section">
+          <div className="ugc-banner-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: '40px',
-            alignItems: 'center'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '48px',
+            alignItems: 'center',
+            width: '100%'
           }}>
-            {/* Left Column: Customer Graphic Card (ENLARGED 1:1 IMAGE) */}
-            <div style={{
+            {/* Left Column: Customer Graphic Card (ENLARGED 520px 1:1 IMAGE) */}
+            <div className="ugc-banner-img-container" style={{
               borderRadius: '24px',
               overflow: 'hidden',
-              boxShadow: '0 16px 44px rgba(0,0,0,0.1)',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.1)',
               border: '1px solid var(--color-border)',
-              width: '100%'
+              width: '100%',
+              maxWidth: '520px',
+              justifySelf: 'center'
             }}>
               <img 
                 src="/LISTICLE SLIMSODA/Imagens/slimsoda_ugc_card.jpg" 
                 alt="SlimSoda Real Customer Reviews Collage" 
-                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', borderRadius: '24px' }}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '1 / 1',
+                  display: 'block',
+                  objectFit: 'cover',
+                  borderRadius: '24px'
+                }}
                 onError={(e) => {
                   e.target.src = "/assets/listicle/slimsoda/slimsoda_ugc_card.jpg";
                 }}
@@ -1649,30 +1662,30 @@ export function SlimSodaListicle({ onNavHome }) {
             {/* Right Column: Clean Fluid Headline, Paragraph & CTA */}
             <div>
               <div style={{
-                fontSize: '12px',
+                fontSize: '12.5px',
                 fontWeight: 800,
-                letterSpacing: '1.5px',
+                letterSpacing: '1.8px',
                 color: '#27AE60',
                 textTransform: 'uppercase',
-                marginBottom: '10px'
+                marginBottom: '12px'
               }}>
                 THE SIMPLER ROUTINE MOVEMENT
               </div>
 
-              <h2 style={{
+              <h2 className="ugc-banner-headline" style={{
                 fontFamily: 'var(--font-brand-display)',
-                fontSize: 'clamp(28px, 4vw, 36px)',
-                lineHeight: '1.25',
+                fontSize: 'clamp(28px, 4vw, 40px)',
+                lineHeight: '1.2',
                 fontWeight: 800,
                 color: 'var(--color-primary)',
-                margin: '0 0 16px',
+                margin: '0 0 18px',
                 letterSpacing: '-0.5px'
               }}>
                 Simplify Your Morning. Support Your Daily Wellness.
               </h2>
 
-              <p style={{
-                fontSize: '16px',
+              <p className="ugc-banner-text" style={{
+                fontSize: '16.5px',
                 lineHeight: '1.65',
                 color: 'var(--color-secondary)',
                 marginBottom: '28px',
@@ -1692,7 +1705,7 @@ export function SlimSodaListicle({ onNavHome }) {
                     padding: '16px 36px',
                     borderRadius: '12px',
                     fontWeight: 800,
-                    fontSize: '15px',
+                    fontSize: '15.5px',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1918,20 +1931,24 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: '#27AE60',
               color: '#FFFFFF',
               border: 'none',
-              padding: '16px 36px',
+              padding: '12px 20px',
               borderRadius: '12px',
               fontWeight: 800,
-              fontSize: '16px',
+              fontSize: '13.5px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '10px',
+              justifyContent: 'center',
+              gap: '6px',
               marginBottom: '16px',
-              textDecoration: 'none'
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              boxSizing: 'border-box'
             }}
           >
             <span>SEE SLIMSODA OPTIONS</span>
-            <ArrowRight size={18} />
+            <ArrowRight size={15} />
           </a>
 
           <div style={{ fontSize: '13px', color: '#718096', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
@@ -2235,21 +2252,25 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: '#27AE60',
               color: '#FFF',
               border: 'none',
-              padding: '16px 36px',
+              padding: '12px 20px',
               borderRadius: '12px',
               fontWeight: 800,
-              fontSize: '16px',
+              fontSize: '13.5px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '10px',
+              justifyContent: 'center',
+              gap: '6px',
               marginBottom: '20px',
               textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              boxSizing: 'border-box',
               boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
             }}
           >
             <span>EXPLORE SLIMSODA®</span>
-            <ArrowRight size={18} />
+            <ArrowRight size={15} />
           </a>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', fontSize: '12px', color: 'var(--color-muted)', fontWeight: 600 }}>

@@ -106,3 +106,48 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   }
 }
 
+/* UGC Social Proof Banner Section */
+.ugc-banner-section {
+  margin-bottom: 72px;
+  width: min(1080px, 100vw - 40px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .ugc-banner-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    margin-bottom: 48px !important;
+    padding: 0 !important;
+  }
+
+  .ugc-banner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .ugc-banner-img-container {
+    max-width: 100% !important;
+  }
+
+  .ugc-banner-headline {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .ugc-banner-text {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+
