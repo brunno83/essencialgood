@@ -18,34 +18,44 @@ import { ProductMarquee } from './components/pdp/ProductMarquee';
 import { SalesNotificationPopups } from './components/common/SalesNotificationPopups';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SlimSodaListicle } from './components/listicle/SlimSodaListicle';
+import { LinfaflowListicle } from './components/listicle/linfaflowListicle';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
   const getProductFromLocation = () => {
     // 0. Check Listicle routes in pathname
     const rawPathname = window.location.pathname.toLowerCase().replace(/\/$/, '');
-    if (rawPathname.endsWith('/listicle/slimsoda') || rawPathname.endsWith('/listicle-slimsoda') || rawPathname === '/listicle/slimsoda') {
+    if (rawPathname.includes('listicle/slimsoda') || rawPathname.includes('listicle-slimsoda')) {
       return 'listicle-slimsoda';
     }
+    if (rawPathname.includes('listicle/linfaflow') || rawPathname.includes('listicle-linfaflow')) {
+      return 'listicle-linfaflow';
+    }
 
-    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda
+    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda / ?listicle=linfaflow
     const params = new URLSearchParams(window.location.search);
-    const rawQuery = params.get('product') || params.get('p') || params.get('listicle');
+    const rawQuery = (params.get('product') || params.get('p') || params.get('listicle') || '').trim().toLowerCase();
     if (rawQuery) {
-      const cleanQuery = rawQuery.trim().toLowerCase().replace(/\/$/, '').split('/')[0];
-      if (cleanQuery === 'listicle-slimsoda' || (params.get('listicle') === 'slimsoda')) {
+      if (rawQuery.includes('slimsoda') && (params.get('listicle') || rawQuery.includes('listicle'))) {
         return 'listicle-slimsoda';
       }
+      if (rawQuery.includes('linfaflow') && (params.get('listicle') || rawQuery.includes('listicle'))) {
+        return 'listicle-linfaflow';
+      }
+      const cleanQuery = rawQuery.replace(/\/$/, '').split('/')[0];
       if (PDP_DATA[cleanQuery]) {
         return cleanQuery;
       }
     }
 
-    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda
+    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda or #listicle/linfaflow
     const rawHash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
     if (rawHash) {
       if (rawHash.includes('listicle/slimsoda') || rawHash.includes('listicle-slimsoda')) {
         return 'listicle-slimsoda';
+      }
+      if (rawHash.includes('listicle/linfaflow') || rawHash.includes('listicle-linfaflow')) {
+        return 'listicle-linfaflow';
       }
       const cleanHash = rawHash.trim().split('/')[0];
       if (PDP_DATA[cleanHash]) {
@@ -58,8 +68,9 @@ export function App() {
     if (rawPath) {
       const parts = rawPath.trim().toLowerCase().replace(/\/$/, '').split('/');
       const cleanPath = parts[0];
-      if (cleanPath === 'listicle' && parts[1] === 'slimsoda') {
-        return 'listicle-slimsoda';
+      if (cleanPath === 'listicle') {
+        if (parts[1] === 'slimsoda') return 'listicle-slimsoda';
+        if (parts[1] === 'linfaflow') return 'listicle-linfaflow';
       }
       if (PDP_DATA[cleanPath]) {
         return cleanPath;
@@ -83,10 +94,21 @@ export function App() {
   }, []);
 
   const openProductPDP = (productId) => {
-    const id = (productId || '').trim().toLowerCase().replace(/\/$/, '').split('/')[0];
-    if (PDP_DATA[id]) {
-      setActiveProductId(id);
-      window.history.pushState(null, '', `/${id}`);
+    const id = (productId || '').trim().toLowerCase().replace(/\/$/, '');
+    if (id === 'listicle-slimsoda' || id === 'listicle/slimsoda') {
+      setActiveProductId('listicle-slimsoda');
+      window.history.pushState(null, '', '/listicle/slimsoda');
+      return;
+    }
+    if (id === 'listicle-linfaflow' || id === 'listicle/linfaflow') {
+      setActiveProductId('listicle-linfaflow');
+      window.history.pushState(null, '', '/listicle/linfaflow');
+      return;
+    }
+    const cleanId = id.split('/')[0];
+    if (PDP_DATA[cleanId]) {
+      setActiveProductId(cleanId);
+      window.history.pushState(null, '', `/${cleanId}`);
     } else {
       setActiveProductId('slimsoda');
       window.history.pushState(null, '', '/slimsoda');
@@ -103,7 +125,9 @@ export function App() {
     ? PDP_DATA[activeProductId]?.disclaimer 
     : activeProductId === 'listicle-slimsoda' 
       ? PDP_DATA.slimsoda?.disclaimer 
-      : null;
+      : activeProductId === 'listicle-linfaflow'
+        ? PDP_DATA.linfaflow?.disclaimer
+        : null;
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
@@ -111,7 +135,7 @@ export function App() {
       {isProductPage && <ProductMarquee accentColor={PDP_DATA[activeProductId]?.accentColor} />}
 
       {/* Fixed Luxury Navigation Bar (hidden on listicle pages which render dedicated editorial header) */}
-      {activeProductId !== 'listicle-slimsoda' && (
+      {!activeProductId?.startsWith('listicle') && (
         <Header 
           onNavHome={backToHome} 
           onSelectProduct={openProductPDP} 
@@ -123,6 +147,10 @@ export function App() {
       {activeProductId === 'listicle-slimsoda' ? (
         <ErrorBoundary>
           <SlimSodaListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
+        </ErrorBoundary>
+      ) : activeProductId === 'listicle-linfaflow' ? (
+        <ErrorBoundary>
+          <LinfaflowListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
         </ErrorBoundary>
       ) : isProductPage ? (
         <ErrorBoundary>
