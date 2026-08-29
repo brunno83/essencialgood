@@ -1614,41 +1614,47 @@ export function SlimSodaListicle({ onNavHome }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 10.5 — UGC SOCIAL PROOF BANNER CARD (EXACT REFERENCE 1 BANNER MATCH) */}
+        {/* 10.5 — UGC SOCIAL PROOF BANNER CARD (WIDESCREEN 16:9 BANNER BREAKOUT & 1:1 UNCROPPED IMAGE) */}
         <section style={{
           marginBottom: '64px',
           width: '100%',
-          maxWidth: '1040px',
-          marginInline: 'auto',
+          maxWidth: '1100px',
+          marginInline: 'calc(50% - 550px)',
           position: 'relative'
         }}>
           <div style={{
             backgroundColor: '#1B2613',
             borderRadius: '24px',
-            padding: '36px',
+            padding: '36px 40px',
             color: '#FFFFFF',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.18)',
             border: '1px solid rgba(255,255,255,0.08)'
           }}>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '40px',
-              alignItems: 'stretch'
+              gap: '44px',
+              alignItems: 'center'
             }}>
-              {/* Left Column: Customer Graphic Card (1:1 SQUARE ASPECT RATIO UNTOUCHED) */}
+              {/* Left Column: Customer Graphic Card (1:1 SQUARE UNCROPPED IMAGE) */}
               <div style={{
-                borderRadius: '16px',
+                borderRadius: '18px',
                 overflow: 'hidden',
                 boxShadow: '0 12px 32px rgba(0,0,0,0.3)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.12)',
                 width: '100%',
-                aspectRatio: '1 / 1'
+                backgroundColor: '#FAF7F2'
               }}>
                 <img 
                   src="/LISTICLE SLIMSODA/Imagens/slimsoda_ugc_card.jpg" 
                   alt="SlimSoda Real Customer Reviews Collage" 
-                  style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    aspectRatio: '1 / 1',
+                    display: 'block',
+                    objectFit: 'contain'
+                  }}
                   onError={(e) => {
                     e.target.src = "/assets/listicle/slimsoda/slimsoda_ugc_card.jpg";
                   }}
@@ -1656,34 +1662,32 @@ export function SlimSodaListicle({ onNavHome }) {
               </div>
 
               {/* Right Column: Reference Headline, Body Text & Pill Button */}
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h2 style={{
+                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontSize: 'clamp(26px, 3.4vw, 36px)',
+                  lineHeight: '1.25',
+                  fontWeight: 400,
+                  color: '#FFFFFF',
+                  margin: '0 0 20px',
+                  letterSpacing: '-0.3px'
+                }}>
+                  Simplify Your Morning.<br />
+                  Support Your Wellness.<br />
+                  Take Your Routine Back.
+                </h2>
+
+                <p style={{
+                  fontSize: '15.5px',
+                  lineHeight: '1.65',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  marginBottom: '32px',
+                  fontWeight: 400
+                }}>
+                  One simple scoop of SlimSoda® mixed into water each morning. That is the entire protocol. No multiple pill bottles, no complicated schedules, no synthetic fillers. Real people are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
+                </p>
+
                 <div>
-                  <h2 style={{
-                    fontFamily: 'Georgia, "Times New Roman", serif',
-                    fontSize: 'clamp(28px, 3.5vw, 38px)',
-                    lineHeight: '1.2',
-                    fontWeight: 400,
-                    color: '#FFFFFF',
-                    margin: '0 0 20px',
-                    letterSpacing: '-0.3px'
-                  }}>
-                    Simplify Your Morning.<br />
-                    Support Your Wellness.<br />
-                    Take Your Routine Back.
-                  </h2>
-
-                  <p style={{
-                    fontSize: '15.5px',
-                    lineHeight: '1.65',
-                    color: 'rgba(255, 255, 255, 0.88)',
-                    marginBottom: '28px',
-                    fontWeight: 400
-                  }}>
-                    One simple scoop of SlimSoda® mixed into water each morning. That is the entire protocol. No multiple pill bottles, no complicated schedules, no synthetic fillers. Real people are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
-                  </p>
-                </div>
-
-                <div style={{ marginTop: 'auto' }}>
                   <a 
                     href={CHECKOUT_URL}
                     onClick={handleGoToCheckout}
@@ -1691,16 +1695,15 @@ export function SlimSodaListicle({ onNavHome }) {
                       backgroundColor: '#FFFFFF',
                       color: '#1B2613',
                       border: 'none',
-                      padding: '16px 32px',
+                      padding: '16px 48px',
                       borderRadius: '999px',
                       fontWeight: 800,
-                      fontSize: '16px',
+                      fontSize: '15.5px',
                       cursor: 'pointer',
-                      display: 'block',
-                      width: '100%',
+                      display: 'inline-block',
                       textAlign: 'center',
                       textDecoration: 'none',
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+                      boxShadow: '0 6px 20px rgba(0,0,0,0.18)',
                       boxSizing: 'border-box'
                     }}
                   >
