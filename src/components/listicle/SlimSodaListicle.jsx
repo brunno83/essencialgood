@@ -505,21 +505,41 @@ export function SlimSodaListicle({ onNavHome }) {
             </p>
           </div>
 
-          {/* 4 INGREDIENT CARDS WITH ICONS */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px', marginBottom: '32px' }}>
+          {/* 4 INGREDIENT CARDS WITH PHOTOS & DETAILS */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '32px' }}>
             
             {/* INGREDIENT 1: BERBERINE */}
             <div style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
-              padding: '24px',
+              padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
             }}>
               <div>
+                {/* Ingredient Image */}
+                <div style={{
+                  width: '100%',
+                  height: '150px',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  marginBottom: '16px',
+                  backgroundColor: '#FAF7F2',
+                  border: '1px solid var(--color-border)'
+                }}>
+                  <img 
+                    src="/LISTICLE SLIMSODA/Imagens/ingredient_berberine.jpg" 
+                    alt="Berberine Botanical Extract" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => {
+                      e.target.src = "/assets/listicle/slimsoda/ingredient_berberine.jpg";
+                    }}
+                  />
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-slimsoda)', letterSpacing: '1px', marginBottom: '4px' }}>
@@ -530,8 +550,8 @@ export function SlimSodaListicle({ onNavHome }) {
                     </h3>
                   </div>
                   <div style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '36px',
+                    height: '36px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(217,107,50,0.12)',
                     display: 'flex',
@@ -540,11 +560,11 @@ export function SlimSodaListicle({ onNavHome }) {
                     color: 'var(--color-slimsoda)',
                     flexShrink: 0
                   }}>
-                    <Leaf size={20} />
+                    <Leaf size={18} />
                   </div>
                 </div>
 
-                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '12px' }}>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
                   One of the most researched ingredients in the formula
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
@@ -567,13 +587,33 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
-              padding: '24px',
+              padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
             }}>
               <div>
+                {/* Ingredient Image */}
+                <div style={{
+                  width: '100%',
+                  height: '150px',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  marginBottom: '16px',
+                  backgroundColor: '#FAF7F2',
+                  border: '1px solid var(--color-border)'
+                }}>
+                  <img 
+                    src="/LISTICLE SLIMSODA/Imagens/ingredient_ginger.jpg" 
+                    alt="Ginger Extract" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => {
+                      e.target.src = "/assets/listicle/slimsoda/ingredient_ginger.jpg";
+                    }}
+                  />
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-sage)', letterSpacing: '1px', marginBottom: '4px' }}>
@@ -584,8 +624,8 @@ export function SlimSodaListicle({ onNavHome }) {
                     </h3>
                   </div>
                   <div style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '36px',
+                    height: '36px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(75,104,51,0.12)',
                     display: 'flex',
@@ -594,11 +634,11 @@ export function SlimSodaListicle({ onNavHome }) {
                     color: 'var(--color-sage)',
                     flexShrink: 0
                   }}>
-                    <Sprout size={20} />
+                    <Sprout size={18} />
                   </div>
                 </div>
 
-                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '12px' }}>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
                   A familiar botanical with a long history of use
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
@@ -621,13 +661,33 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
-              padding: '24px',
+              padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
             }}>
               <div>
+                {/* Ingredient Image */}
+                <div style={{
+                  width: '100%',
+                  height: '150px',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  marginBottom: '16px',
+                  backgroundColor: '#FAF7F2',
+                  border: '1px solid var(--color-border)'
+                }}>
+                  <img 
+                    src="/LISTICLE SLIMSODA/Imagens/ingredient_bicarbonate.jpg" 
+                    alt="Sodium Bicarbonate Mineral" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => {
+                      e.target.src = "/assets/listicle/slimsoda/ingredient_bicarbonate.jpg";
+                    }}
+                  />
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-slimsoda)', letterSpacing: '1px', marginBottom: '4px' }}>
@@ -638,8 +698,8 @@ export function SlimSodaListicle({ onNavHome }) {
                     </h3>
                   </div>
                   <div style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '36px',
+                    height: '36px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(217,107,50,0.12)',
                     display: 'flex',
@@ -648,11 +708,11 @@ export function SlimSodaListicle({ onNavHome }) {
                     color: 'var(--color-slimsoda)',
                     flexShrink: 0
                   }}>
-                    <Droplets size={20} />
+                    <Droplets size={18} />
                   </div>
                 </div>
 
-                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '12px' }}>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
                   Familiar doesn't mean uninteresting
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
@@ -675,13 +735,33 @@ export function SlimSodaListicle({ onNavHome }) {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
-              padding: '24px',
+              padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
             }}>
               <div>
+                {/* Ingredient Image */}
+                <div style={{
+                  width: '100%',
+                  height: '150px',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  marginBottom: '16px',
+                  backgroundColor: '#FAF7F2',
+                  border: '1px solid var(--color-border)'
+                }}>
+                  <img 
+                    src="/LISTICLE SLIMSODA/Imagens/ingredient_nad.jpg" 
+                    alt="NAD+ Cellular Energy Support" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    onError={(e) => {
+                      e.target.src = "/assets/listicle/slimsoda/ingredient_nad.jpg";
+                    }}
+                  />
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-sage)', letterSpacing: '1px', marginBottom: '4px' }}>
@@ -692,8 +772,8 @@ export function SlimSodaListicle({ onNavHome }) {
                     </h3>
                   </div>
                   <div style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '36px',
+                    height: '36px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(75,104,51,0.12)',
                     display: 'flex',
@@ -702,11 +782,11 @@ export function SlimSodaListicle({ onNavHome }) {
                     color: 'var(--color-sage)',
                     flexShrink: 0
                   }}>
-                    <Activity size={20} />
+                    <Activity size={18} />
                   </div>
                 </div>
 
-                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '12px' }}>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
                   Part of a broader wellness formulation
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
