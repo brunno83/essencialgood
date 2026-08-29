@@ -1614,26 +1614,32 @@ export function SlimSodaListicle({ onNavHome }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 10.5 — UGC SOCIAL PROOF SECTION (NO GREEN BACKGROUND CARD - SIDE BY SIDE LAYOUT) */}
-        <section style={{ marginBottom: '64px' }}>
+        {/* 10.5 — UGC SOCIAL PROOF SECTION (ENLARGED IMAGE - SIDE BY SIDE LAYOUT) */}
+        <section style={{
+          marginBottom: '64px',
+          width: '100%',
+          maxWidth: '960px',
+          marginInline: 'calc(50% - 480px)',
+          position: 'relative'
+        }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '36px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            gap: '40px',
             alignItems: 'center'
           }}>
-            {/* Left Column: Customer Graphic Card (LARGER 1:1 IMAGE) */}
+            {/* Left Column: Customer Graphic Card (ENLARGED 1:1 IMAGE) */}
             <div style={{
-              borderRadius: '20px',
+              borderRadius: '24px',
               overflow: 'hidden',
-              boxShadow: '0 12px 36px rgba(0,0,0,0.08)',
+              boxShadow: '0 16px 44px rgba(0,0,0,0.1)',
               border: '1px solid var(--color-border)',
               width: '100%'
             }}>
               <img 
                 src="/LISTICLE SLIMSODA/Imagens/slimsoda_ugc_card.jpg" 
                 alt="SlimSoda Real Customer Reviews Collage" 
-                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', borderRadius: '20px' }}
+                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', borderRadius: '24px' }}
                 onError={(e) => {
                   e.target.src = "/assets/listicle/slimsoda/slimsoda_ugc_card.jpg";
                 }}
