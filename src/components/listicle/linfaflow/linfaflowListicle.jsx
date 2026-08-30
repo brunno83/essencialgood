@@ -2042,7 +2042,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 16 — REAL CUSTOMER EXPERIENCES (RESPONSIVE MOBILE UX STACK) */}
+        {/* 16 — REAL CUSTOMER EXPERIENCES (DESKTOP LEFT IMAGE + STARS ABOVE TITLE / MOBILE UNTOUCHED) */}
         <section id="reviews-section" style={{ marginBottom: '56px' }}>
           <style>{`
             .review-card-item {
@@ -2080,6 +2080,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 gap: 14px !important;
               }
               .review-photo-wrapper {
+                order: 3 !important;
                 width: 100% !important;
                 height: 190px !important;
                 max-height: 190px !important;
@@ -2149,52 +2150,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               }
             ].map((rev) => (
               <div key={rev.id} className="review-card-item">
-                <div style={{ flex: 1, width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div
-                        style={{
-                          width: '32px',
-                          height: '32px',
-                          borderRadius: '50%',
-                          backgroundColor: 'rgba(39, 174, 96, 0.12)',
-                          color: '#27AE60',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '12px',
-                          fontWeight: 900,
-                          flexShrink: 0
-                        }}
-                      >
-                        {rev.initials}
-                      </div>
-
-                      <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
-                        {rev.author}
-                      </span>
-
-                      <span style={{ fontSize: '11px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                        <CheckCircle2 size={12} /> Verified Buyer
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '3px' }}>
-                      {[...Array(rev.stars)].map((_, s) => (
-                        <Star key={s} size={15} fill="#F59E0B" style={{ color: '#F59E0B' }} />
-                      ))}
-                    </div>
-                  </div>
-
-                  <h3 style={{ fontSize: '15.5px', fontWeight: 900, color: '#141210', margin: '0 0 6px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
-                    "{rev.title}"
-                  </h3>
-                  <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
-                    "{rev.body}"
-                  </p>
-                </div>
-
-                {/* REVIEW PHOTO WITH FALLBACK */}
+                {/* PHOTO ON LEFT ON DESKTOP / BOTTOM ON MOBILE */}
                 {rev.img && (
                   <div className="review-photo-wrapper">
                     <img
@@ -2207,6 +2163,55 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     />
                   </div>
                 )}
+
+                {/* REVIEW TEXT CONTENT */}
+                <div style={{ flex: 1, width: '100%', order: 1 }}>
+                  {/* AUTHOR ROW */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <div
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(39, 174, 96, 0.12)',
+                        color: '#27AE60',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '12px',
+                        fontWeight: 900,
+                        flexShrink: 0
+                      }}
+                    >
+                      {rev.initials}
+                    </div>
+
+                    <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
+                      {rev.author}
+                    </span>
+
+                    <span style={{ fontSize: '11px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <CheckCircle2 size={12} /> Verified Buyer
+                    </span>
+                  </div>
+
+                  {/* 5 STARS (ABOVE TITLE) */}
+                  <div style={{ display: 'flex', gap: '3px', marginBottom: '8px' }}>
+                    {[...Array(rev.stars)].map((_, s) => (
+                      <Star key={s} size={15} fill="#F59E0B" style={{ color: '#F59E0B' }} />
+                    ))}
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 style={{ fontSize: '15.5px', fontWeight: 900, color: '#141210', margin: '0 0 6px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+                    "{rev.title}"
+                  </h3>
+
+                  {/* BODY */}
+                  <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
+                    "{rev.body}"
+                  </p>
+                </div>
               </div>
             ))}
           </div>

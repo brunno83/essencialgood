@@ -1776,7 +1776,7 @@ export function SlimSodaListicle({ onNavHome }) {
                 title: 'EASY TO STAY CONSISTENT WITH',
                 body: 'I wanted something simple enough to fit into my routine. SlimSoda is easy to mix with water and has become one of the easiest parts of my morning routine.',
                 verified: true,
-                img: '/assets/transformations/transformation-4.png'
+                img: '/assets/home/transformations/transformation-4.png'
               },
               {
                 id: 2,
@@ -1786,7 +1786,7 @@ export function SlimSodaListicle({ onNavHome }) {
                 title: 'FITS NATURALLY INTO MY MORNING',
                 body: 'I wanted a wellness routine that didn\'t involve several different bottles and schedules. SlimSoda makes it simple to stay consistent.',
                 verified: true,
-                img: '/assets/transformations/transformation-5.jpg'
+                img: '/assets/home/transformations/transformation-5.jpg'
               },
               {
                 id: 3,
@@ -1796,7 +1796,7 @@ export function SlimSodaListicle({ onNavHome }) {
                 title: 'SIMPLE AND CONVENIENT',
                 body: 'A quick daily routine and I\'m done. Mixes quickly with cold water and fits easily into my day without hassle.',
                 verified: true,
-                img: '/assets/transformations/transformation-1.png'
+                img: '/assets/home/transformations/transformation-1.png'
               },
               {
                 id: 4,
@@ -1806,33 +1806,24 @@ export function SlimSodaListicle({ onNavHome }) {
                 title: 'EASY TO MAKE PART OF MY DAY',
                 body: 'No complicated preparation. I take it every morning and get on with my day. Highly recommend for anyone looking for simplicity.',
                 verified: true,
-                img: '/assets/transformations/transformation-3.png'
+                img: '/assets/home/transformations/transformation-3.png'
               }
             ].map((rev) => (
               <div
                 key={rev.id}
                 style={{
                   backgroundColor: '#FFFFFF',
-                  borderRadius: '16px',
+                  borderRadius: '20px',
                   border: '1px solid rgba(0, 0, 0, 0.08)',
-                  padding: '24px 28px',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+                  padding: '24px 20px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '14px'
+                  gap: '16px'
                 }}
               >
-                {/* Top Row: Stars on left */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', gap: '3px' }}>
-                    {[...Array(rev.stars)].map((_, s) => (
-                      <Star key={s} size={16} fill="#F59E0B" style={{ color: '#F59E0B' }} />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Second Row: Initials Circle + Author + Only Green Verified Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                {/* 1. TOP ROW: Initials Badge + Name + Verified Buyer Badge */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div
                     style={{
                       width: '36px',
@@ -1856,48 +1847,80 @@ export function SlimSodaListicle({ onNavHome }) {
                     {rev.author}
                   </span>
 
-                  <span style={{ fontSize: '11.5px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span style={{
+                    fontSize: '11.5px',
+                    color: '#27AE60',
+                    fontWeight: 700,
+                    backgroundColor: 'rgba(39, 174, 96, 0.08)',
+                    padding: '3px 10px',
+                    borderRadius: '12px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}>
                     <CheckCircle2 size={12} /> Verified Buyer
                   </span>
                 </div>
 
-                {/* Third & Fourth Row: Review Title & Body Content with Customer Photo */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap-reverse',
-                  gap: '16px',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}>
-                  <div style={{ flex: '1 1 240px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#141210', margin: '0 0 8px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
-                      "{rev.title}"
-                    </h3>
-                    <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
-                      "{rev.body}"
-                    </p>
-                  </div>
-
-                  {rev.img && (
-                    <div style={{
-                      width: '130px',
-                      height: '130px',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                      flexShrink: 0,
-                      backgroundColor: '#FAF7F2',
-                      border: '1px solid rgba(0,0,0,0.08)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
-                    }}>
-                      <img
-                        src={rev.img}
-                        alt={`${rev.author} Routine Photo`}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }}
-                      />
-                    </div>
-                  )}
+                {/* 2. SECOND ROW: 5 Gold Stars */}
+                <div style={{ display: 'flex', gap: '3px' }}>
+                  {[...Array(rev.stars)].map((_, s) => (
+                    <Star key={s} size={17} fill="#F59E0B" style={{ color: '#F59E0B' }} />
+                  ))}
                 </div>
+
+                {/* 3. THIRD ROW: Bold Serif Headline */}
+                <h3 style={{
+                  fontFamily: 'var(--font-brand-display)',
+                  fontSize: '17px',
+                  fontWeight: 900,
+                  color: '#141210',
+                  margin: 0,
+                  letterSpacing: '-0.01em',
+                  textTransform: 'uppercase'
+                }}>
+                  "{rev.title}"
+                </h3>
+
+                {/* 4. FOURTH ROW: Review Body Paragraph */}
+                <p style={{
+                  fontSize: '15px',
+                  color: '#333333',
+                  lineHeight: 1.6,
+                  margin: 0,
+                  fontWeight: 400
+                }}>
+                  "{rev.body}"
+                </p>
+
+                {/* 5. FIFTH ROW: Full-width Customer Photo (BEFORE/AFTER weight badges cropped out) */}
+                {rev.img && (
+                  <div style={{
+                    width: '100%',
+                    height: '240px',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    marginTop: '4px',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                    position: 'relative'
+                  }}>
+                    <img
+                      src={rev.img}
+                      alt={`${rev.author} Routine Photo`}
+                      style={{
+                        width: '100%',
+                        height: '118%',
+                        objectFit: 'cover',
+                        objectPosition: 'top center',
+                        display: 'block'
+                      }}
+                      onError={(e) => {
+                        e.target.src = "/LISTICLE SLIMSODA/Imagens/slimsoda_lifestyle_user.jpg";
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
