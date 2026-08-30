@@ -1714,7 +1714,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           <h3 style={{ fontFamily: 'var(--font-brand-display)', fontSize: '24px', color: 'var(--color-primary)', marginBottom: '12px' }}>
             "CAN'T I JUST BUY THESE HERBS SEPARATELY?"
           </h3>
-          <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', maxWidth: '680px', margin: '0 auto 20px', lineHeight: '1.6' }}>
+          <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', maxWidth: '680px', margin: '0 auto 20px', lineHeight: '1.6', textAlign: 'left' }}>
             Of course! That's why this isn't a story about "secret ingredients". Buying botanicals separately means four different bottles, four labels, four purchasing decisions, and multiple steps. The real value proposition is <strong>CONVENIENCE</strong>: Four traditional botanicals brought together into a single liquid dropper formula.
           </p>
           <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60' }}>
