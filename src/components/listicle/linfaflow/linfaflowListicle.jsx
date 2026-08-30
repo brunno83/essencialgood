@@ -1027,71 +1027,71 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               </div>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(125px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(128px, 1fr))',
                 gap: '8px'
               }}>
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
                   borderRadius: '10px',
-                  padding: '10px 8px',
+                  padding: '10px 6px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
                   minWidth: 0,
                   boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO LARGE PILLS</span>
+                  <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO LARGE PILLS</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
                   borderRadius: '10px',
-                  padding: '10px 8px',
+                  padding: '10px 6px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
                   minWidth: 0,
                   boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO POWDERS TO MIX</span>
+                  <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO POWDERS TO MIX</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
                   borderRadius: '10px',
-                  padding: '10px 8px',
+                  padding: '10px 6px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
                   minWidth: 0,
                   boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO CAFFEINE</span>
+                  <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO CAFFEINE</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
                   borderRadius: '10px',
-                  padding: '10px 8px',
+                  padding: '10px 6px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
                   minWidth: 0,
                   boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO STIMULANTS</span>
+                  <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO STIMULANTS</span>
                 </div>
               </div>
             </div>
@@ -1369,7 +1369,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 Give the routine a fair opportunity. If it doesn't fit your daily lifestyle, simply contact us according to our refund policy.
               </p>
 
-              <div style={{ marginBottom: '24px' }}>
+              <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
                 <a
                   href={CHECKOUT_URL}
                   onClick={handleGoToCheckout}
@@ -1788,34 +1788,36 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 ))}
               </div>
 
-              <a 
-                href={CHECKOUT_URL}
-                onClick={handleGoToCheckout}
-                style={{
-                  backgroundColor: '#27AE60',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  padding: '12px 20px',
-                  borderRadius: '12px',
-                  fontWeight: 800,
-                  fontSize: '13.5px',
-                  cursor: 'pointer',
-                  width: '100%',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  marginBottom: '8px',
-                  boxSizing: 'border-box',
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <span>DISCOVER LINFAFLOW®</span>
-                <ArrowRight size={15} />
-              </a>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <a 
+                  href={CHECKOUT_URL}
+                  onClick={handleGoToCheckout}
+                  style={{
+                    backgroundColor: '#27AE60',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    fontWeight: 800,
+                    fontSize: '13.5px',
+                    cursor: 'pointer',
+                    width: '100%',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    marginBottom: '8px',
+                    boxSizing: 'border-box',
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  <span>DISCOVER LINFAFLOW®</span>
+                  <ArrowRight size={15} />
+                </a>
+              </div>
               <div style={{ textAlign: 'center', fontSize: '12px', color: 'var(--color-muted)' }}>
-                View botanicals, directions, bundles & guarantee
+                Covered by our 90-Day Money-Back Guarantee
               </div>
             </div>
           </div>
@@ -1858,268 +1860,199 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 borderRadius: '16px 16px 0 0'
               }} />
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                marginBottom: '20px'
+                fontSize: '12px',
+                fontWeight: 900,
+                letterSpacing: '1.5px',
+                color: '#27AE60',
+                marginBottom: '16px',
+                textTransform: 'uppercase'
               }}>
-                <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  backgroundColor: 'rgba(39, 174, 96, 0.12)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  <CheckCircle2 size={18} style={{ color: '#27AE60' }} />
-                </div>
-                <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', margin: 0 }}>
-                  LINFAFLOW IS:
-                </h3>
+                WHAT LINFAFLOW IS
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
-                  'A liquid botanical dietary supplement.',
-                  'A convenient daily wellness dropper.',
-                  'A blend of 4 traditional plant extracts.',
-                  'Designed to complement healthy hydration and movement.*'
-                ].map((item, idx) => (
-                  <li key={idx} style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    marginBottom: '14px',
-                    fontSize: '15px',
-                    color: 'var(--color-primary)',
-                    fontWeight: 500,
-                    lineHeight: '1.4'
-                  }}>
-                    <CheckCircle2 size={17} style={{ color: '#27AE60', flexShrink: 0, marginTop: '2px' }} />
+                  'A targeted botanical formula focused on traditional Western herbal use',
+                  'A practical liquid dropper created for effortless daily consistency',
+                  'Stimulant-free and designed around natural physiological flow',
+                  'Backed by a 90-Day Money-Back Guarantee'
+                ].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
+                    <CheckCircle2 size={18} style={{ color: '#27AE60', flexShrink: 0, marginTop: '2px' }} />
                     <span>{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
             {/* ISN'T */}
             <div style={{
               backgroundColor: '#FFFFFF',
-              border: '2px solid rgba(220, 38, 38, 0.25)',
+              border: '1px solid var(--color-border)',
               borderRadius: '16px',
               padding: '32px 28px',
-              boxShadow: '0 8px 24px rgba(220, 38, 38, 0.06)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.03)',
               position: 'relative',
               overflow: 'hidden'
             }}>
               <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '4px',
-                backgroundColor: '#DC2626',
-                borderRadius: '16px 16px 0 0'
-              }} />
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                marginBottom: '20px'
+                fontSize: '12px',
+                fontWeight: 900,
+                letterSpacing: '1.5px',
+                color: 'var(--color-muted)',
+                marginBottom: '16px',
+                textTransform: 'uppercase'
               }}>
-                <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  backgroundColor: 'rgba(220, 38, 38, 0.08)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  <XCircle size={18} style={{ color: '#DC2626' }} />
-                </div>
-                <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#DC2626', letterSpacing: '1px', margin: 0 }}>
-                  LINFAFLOW ISN'T:
-                </h3>
+                WHAT LINFAFLOW IS NOT
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
-                  'A prescription medication or OTC diuretic drug.',
-                  'A substitute for professional medical care.',
-                  'A harsh laxative or overnight detox.',
-                  'A weight loss miracle drug.'
-                ].map((item, idx) => (
-                  <li key={idx} style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    marginBottom: '14px',
-                    fontSize: '15px',
-                    color: 'var(--color-primary)',
-                    fontWeight: 500,
-                    lineHeight: '1.4'
-                  }}>
-                    <XCircle size={17} style={{ color: '#DC2626', flexShrink: 0, marginTop: '2px' }} />
+                  'A "miracle flush" promising overnight weight loss or instant fixes',
+                  'A replacement for healthy lifestyle habits like hydration and walking',
+                  'A harsh diuretic or stimulant-packed cleanser',
+                  'A complicated stack requiring 10 different pills'
+                ].map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
+                    <span style={{ color: '#E53E3E', fontWeight: 900, fontSize: '16px', lineHeight: '1', flexShrink: 0, marginTop: '2px' }}>✕</span>
                     <span>{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-          </div>
-
-          <div style={{
-            textAlign: 'center',
-            fontSize: '16px',
-            fontWeight: 700,
-            color: 'var(--color-primary)',
-            fontStyle: 'italic'
-          }}>
-            No magic required. Just a simpler approach to daily consistency.
           </div>
         </section>
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 15 — UGC SOCIAL PROOF SECTION */}
-        <section className="ugc-banner-section">
-          <div className="ugc-banner-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '48px',
-            alignItems: 'center',
-            width: '100%'
+        {/* 15 — UGC SOCIAL PROOF BANNER CARD */}
+        <section style={{ marginBottom: '56px' }}>
+          <div style={{
+            backgroundColor: '#FAF7F2',
+            borderRadius: '24px',
+            border: '1px solid rgba(0, 0, 0, 0.08)',
+            padding: '40px 32px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.04)',
+            maxWidth: '1100px',
+            margin: '0 auto',
+            boxSizing: 'border-box'
           }}>
-            <div className="ugc-banner-img-container" style={{
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 16px 48px rgba(0,0,0,0.1)',
-              border: '1px solid var(--color-border)',
-              width: '100%',
-              maxWidth: '520px',
-              justifySelf: 'center'
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '40px',
+              alignItems: 'center'
             }}>
-              <img 
-                src="/assets/listicle/linfaflow/rev-07.jpg" 
-                alt="LinfaFlow Real Customer Reviews Collage" 
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  aspectRatio: '1 / 1',
-                  display: 'block',
-                  objectFit: 'cover',
-                  borderRadius: '24px'
-                }}
-                onError={(e) => {
-                  e.target.src = "/LISTICLE LINFAFLOW/Imagens/rev-07.jpg";
-                }}
-              />
-            </div>
-
-            <div>
               <div style={{
-                fontSize: '12.5px',
-                fontWeight: 800,
-                letterSpacing: '1.8px',
-                color: '#27AE60',
-                textTransform: 'uppercase',
-                marginBottom: '12px'
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.08)',
+                border: '1px solid rgba(0, 0, 0, 0.06)',
+                backgroundColor: '#FFFFFF',
+                width: '100%',
+                aspectRatio: '16 / 9',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}>
-                THE SIMPLER ROUTINE MOVEMENT
+                <img 
+                  src="/assets/listicle/linfaflow/rev-07.jpg" 
+                  alt="Real LinfaFlow Customers"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 25%',
+                    display: 'block',
+                    borderRadius: '24px'
+                  }}
+                  onError={(e) => {
+                    e.target.src = "/assets/pdp/linfaflow/rev-07.jpg";
+                  }}
+                />
               </div>
 
-              <h2 className="ugc-banner-headline" style={{
-                fontFamily: 'var(--font-brand-display)',
-                fontSize: 'clamp(28px, 4vw, 40px)',
-                lineHeight: '1.2',
-                fontWeight: 800,
-                color: 'var(--color-primary)',
-                margin: '0 0 18px',
-                letterSpacing: '-0.5px'
-              }}>
-                Simplify Your Daily Flow. Support Your Body.
-              </h2>
-
-              <p className="ugc-banner-text" style={{
-                fontSize: '16.5px',
-                lineHeight: '1.65',
-                color: 'var(--color-secondary)',
-                marginBottom: '28px',
-                fontWeight: 400
-              }}>
-                One simple dropper of LinfaFlow® in water each day — that is the entire protocol. No swallowing multiple pills, no complicated schedules, no synthetic fillers. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
-              </p>
-
               <div>
-                <a 
-                  href={CHECKOUT_URL}
-                  onClick={handleGoToCheckout}
-                  style={{
-                    backgroundColor: '#27AE60',
-                    color: '#FFFFFF',
-                    border: 'none',
-                    padding: '16px 36px',
-                    borderRadius: '12px',
-                    fontWeight: 800,
-                    fontSize: '15.5px',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    textDecoration: 'none',
-                    whiteSpace: 'nowrap',
-                    boxShadow: '0 6px 20px rgba(39, 174, 96, 0.25)'
-                  }}
-                >
-                  <span>SEE LINFAFLOW BUNDLES</span>
-                  <ArrowRight size={18} />
-                </a>
+                <div style={{
+                  fontSize: '12px',
+                  fontWeight: 900,
+                  letterSpacing: '1.5px',
+                  color: '#27AE60',
+                  backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                  padding: '5px 14px',
+                  borderRadius: '999px',
+                  textTransform: 'uppercase',
+                  display: 'inline-block',
+                  marginBottom: '14px'
+                }}>
+                  REAL ROUTINES. REAL REASONS.
+                </div>
+
+                <h2 style={{
+                  fontFamily: 'var(--font-brand-display)',
+                  fontSize: '32px',
+                  fontWeight: 900,
+                  color: 'var(--color-primary)',
+                  marginBottom: '16px',
+                  lineHeight: '1.2'
+                }}>
+                  WHY PEOPLE CHOOSE LINFAFLOW®
+                </h2>
+
+                <p style={{
+                  fontSize: '15.5px',
+                  lineHeight: '1.65',
+                  color: 'var(--color-secondary)',
+                  marginBottom: '24px'
+                }}>
+                  One simple dropper of LinfaFlow® in water each day — that is the entire protocol. No swallowing multiple pills, no complicated schedules, no synthetic fillers. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
+                </p>
+
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <a 
+                    href={CHECKOUT_URL}
+                    onClick={handleGoToCheckout}
+                    style={{
+                      backgroundColor: '#27AE60',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      padding: '14px 28px',
+                      borderRadius: '12px',
+                      fontWeight: 800,
+                      fontSize: '15px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      textDecoration: 'none',
+                      whiteSpace: 'nowrap',
+                      boxShadow: '0 6px 20px rgba(39, 174, 96, 0.25)',
+                      maxWidth: '100%',
+                      boxSizing: 'border-box'
+                    }}
+                  >
+                    <span>SEE LINFAFLOW BUNDLES</span>
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 16 — CUSTOMER REVIEWS */}
-        <section id="reviews-section" style={{ marginBottom: '64px' }}>
+        {/* 16 — REAL CUSTOMER EXPERIENCES */}
+        <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <span style={{
-              fontSize: '12px',
-              fontWeight: 900,
-              letterSpacing: '0.14em',
-              color: '#27AE60',
-              textTransform: 'uppercase',
-              display: 'block',
-              marginBottom: '8px'
-            }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
               CUSTOMER REVIEWS
             </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
-              fontSize: 'clamp(26px, 4vw, 36px)',
-              fontWeight: 900,
-              color: '#141210',
-              margin: '0 0 10px',
-              letterSpacing: '-0.02em'
+              fontSize: '32px',
+              color: 'var(--color-primary)',
+              marginTop: '6px'
             }}>
-              REAL PEOPLE. REAL ROUTINES.
+              WHAT PEOPLE ARE SAYING
             </h2>
-            <div style={{
-              fontSize: '15px',
-              fontWeight: 800,
-              color: '#F5A623',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px'
-            }}>
-              <div style={{ display: 'flex', gap: '2px' }}>
-                {[...Array(5)].map((_, s) => (
-                  <Star key={s} size={18} fill="#F5A623" style={{ color: '#F5A623' }} />
-                ))}
-              </div>
-              <span style={{ color: '#F5A623' }}>4.8/5 Customer Rating</span>
-            </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -2174,82 +2107,56 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   padding: '24px 28px',
                   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
                   display: 'flex',
-                  flexDirection: 'column',
-                  gap: '14px'
+                  flexDirection: 'row',
+                  gap: '20px',
+                  alignItems: 'flex-start'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', gap: '3px' }}>
+                {/* REVIEW PHOTO WITH FALLBACK */}
+                {rev.img && (
+                  <div style={{
+                    width: '120px',
+                    height: '120px',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                    backgroundColor: '#FAF7F2',
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
+                  }}>
+                    <img
+                      src={rev.img}
+                      alt={`${rev.author} Routine Photo`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }}
+                      onError={(e) => {
+                        e.target.src = "/assets/pdp/linfaflow/rev-0" + rev.id + ".jpg";
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', gap: '3px', marginBottom: '8px' }}>
                     {[...Array(rev.stars)].map((_, s) => (
                       <Star key={s} size={16} fill="#F59E0B" style={{ color: '#F59E0B' }} />
                     ))}
                   </div>
-                </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                  <div
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      backgroundColor: 'rgba(39, 174, 96, 0.12)',
-                      color: '#27AE60',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '13px',
-                      fontWeight: 900,
-                      letterSpacing: '0.04em',
-                      flexShrink: 0
-                    }}
-                  >
-                    {rev.initials}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
+                      {rev.author}
+                    </span>
+                    <span style={{ fontSize: '11px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <CheckCircle2 size={12} /> Verified Buyer
+                    </span>
                   </div>
 
-                  <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
-                    {rev.author}
-                  </span>
-
-                  <span style={{ fontSize: '11.5px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <CheckCircle2 size={12} /> Verified Buyer
-                  </span>
-                </div>
-
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap-reverse',
-                  gap: '16px',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}>
-                  <div style={{ flex: '1 1 240px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#141210', margin: '0 0 8px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
-                      "{rev.title}"
-                    </h3>
-                    <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
-                      "{rev.body}"
-                    </p>
-                  </div>
-
-                  {rev.img && (
-                    <div style={{
-                      width: '130px',
-                      height: '130px',
-                      borderRadius: '12px',
-                      overflow: 'hidden',
-                      flexShrink: 0,
-                      backgroundColor: '#FAF7F2',
-                      border: '1px solid rgba(0,0,0,0.08)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
-                    }}>
-                      <img
-                        src={rev.img}
-                        alt={`${rev.author} Routine Photo`}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }}
-                      />
-                    </div>
-                  )}
+                  <h3 style={{ fontSize: '15px', fontWeight: 900, color: '#141210', margin: '0 0 6px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
+                    "{rev.title}"
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#444', lineHeight: 1.55, margin: 0, fontWeight: 400 }}>
+                    "{rev.body}"
+                  </p>
                 </div>
               </div>
             ))}
