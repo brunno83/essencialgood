@@ -2560,29 +2560,34 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           <p style={{ fontSize: '15px', color: 'var(--color-secondary)', marginBottom: '24px', maxWidth: '540px', marginInline: 'auto' }}>
             Support lymphatic wellness, normal fluid balance and healthy circulation without adding another complicated routine.
           </p>
-          <a
-            href={CHECKOUT_URL}
-            onClick={handleGoToCheckout}
-            style={{
-              backgroundColor: '#27AE60',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '14px 32px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '15px',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
-            }}
-          >
-            <span>CHOOSE MY LINFAFLOW® BUNDLE</span>
-            <ArrowRight size={16} />
-          </a>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <a
+              href={CHECKOUT_URL}
+              onClick={handleGoToCheckout}
+              style={{
+                backgroundColor: '#27AE60',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '12px 16px',
+                borderRadius: '12px',
+                fontWeight: 800,
+                fontSize: '13.5px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                maxWidth: '100%',
+                boxSizing: 'border-box',
+                boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
+              }}
+            >
+              <span>CHOOSE MY LINFAFLOW® BUNDLE</span>
+              <ArrowRight size={15} style={{ flexShrink: 0 }} />
+            </a>
+          </div>
         </div>
 
       </div>
