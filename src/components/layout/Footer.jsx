@@ -8,8 +8,8 @@ export const Footer = ({ disclaimer }) => {
   const [activePolicy, setActivePolicy] = useState(null);
   const [logoError, setLogoError] = useState(false);
 
-  const logoWhitePath = '/assets/logo/logo_brand_white.png';
-  const diegoLogoPath = '/assets/brand/diego_abrantes_logo.png';
+  const logoWhitePath = '/assets/home/logo/logo_brand_white.png';
+  const diegoLogoPath = '/assets/home/brand/diego_abrantes_logo.png';
 
   return (
     <footer

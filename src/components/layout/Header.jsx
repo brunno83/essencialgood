@@ -19,7 +19,7 @@ export const Header = ({ onNavHome, onSelectProduct, isProductPage, activeProduc
   }, []);
 
   const isSolidHeader = isProductPage || scrolled;
-  const logoSrc = isSolidHeader ? "/assets/logo/logo_brand_dark.png" : "/assets/logo/logo_brand_white.png";
+  const logoSrc = isSolidHeader ? "/assets/home/logo/logo_brand_dark.png" : "/assets/home/logo/logo_brand_white.png";
   
   // Dynamic header accent color matching active product or brand green (#4B6833)
   const activeAccentColor = (isProductPage && PDP_DATA[activeProductId]?.accentColor)

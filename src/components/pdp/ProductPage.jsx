@@ -3,7 +3,7 @@ import { ProductGallery } from './ProductGallery';
 import { InlineBundleSelector } from './InlineBundleSelector';
 import { BundleSelector } from './BundleSelector';
 import { TrustStrip } from './TrustStrip';
-import { WhySlimSodaBlock } from './WhySlimSodaBlock';
+import { WhySlimSodaBlock } from './slimsoda/WhySlimSodaBlock';
 import { RealTransformations } from './RealTransformations';
 import { VideoReviewsSection } from './VideoReviewsSection';
 import { ProductBenefits } from './ProductBenefits';

@@ -12,7 +12,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#27AE60',
     accentLight: 'rgba(39, 174, 96, 0.12)',
-    heroImage: '/assets/products/slimsoda-gallery-1.png',
+    heroImage: '/assets/pdp/slimsoda/slimsoda-gallery-1.png',
     
     usps: [
       'Supports metabolic wellness',
@@ -28,42 +28,42 @@ export const PDP_DATA = {
         label: 'PRODUCT HERO',
         caption: 'Clean premium packaging',
         subtitle: 'DAILY METABOLIC WELLNESS SUPPORT',
-        src: '/assets/products/slimsoda-gallery-1.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-1.png'
       },
       {
         id: 'gallery-2',
         label: 'EXPERIENCE',
         caption: 'SlimSoda daily routine',
         subtitle: 'MIX. SIP. KEEP MOVING.',
-        src: '/assets/products/slimsoda-gallery-2.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-2.png'
       },
       {
         id: 'gallery-3',
         label: 'BENEFITS',
         caption: 'Metabolic & appetite support',
         subtitle: 'EASY-TO-MIX DAILY ROUTINE',
-        src: '/assets/products/slimsoda-gallery-3.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-3.png'
       },
       {
         id: 'gallery-4',
         label: 'INGREDIENTS',
         caption: 'Focused wellness formula',
         subtitle: 'GINGER, BERBERINE, BAKING SODA & NAD+',
-        src: '/assets/products/slimsoda-gallery-4.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-4.png'
       },
       {
         id: 'gallery-5',
         label: 'TRUST & GUARANTEE',
         caption: 'Risk-free 90-day trial',
         subtitle: '90-DAY MONEY-BACK GUARANTEE',
-        src: '/assets/products/slimsoda-gallery-5.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-5.png'
       },
       {
         id: 'gallery-6',
         label: 'QUALITY FORMULA',
         caption: 'Pure plant-based formula',
         subtitle: 'LAB TESTED & MADE IN USA',
-        src: '/assets/products/slimsoda-gallery-6.png'
+        src: '/assets/pdp/slimsoda/slimsoda-gallery-6.png'
       }
     ],
 
@@ -77,7 +77,7 @@ export const PDP_DATA = {
           id: 'starter',
           name: 'STARTER BUNDLE',
           badge: 'SAVE 50%',
-          image: '/assets/products/slimsoda-1.png',
+          image: '/assets/pdp/slimsoda/slimsoda-1.png',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -94,7 +94,7 @@ export const PDP_DATA = {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/assets/products/slimsoda-2.png',
+          image: '/assets/pdp/slimsoda/slimsoda-2.png',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -112,7 +112,7 @@ export const PDP_DATA = {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/assets/products/slimsoda-3.png',
+          image: '/assets/pdp/slimsoda/slimsoda-3.png',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -166,7 +166,7 @@ export const PDP_DATA = {
       p2: 'Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.',
       tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
       ctaText: 'TRY SLIMSODA →',
-      image: '/assets/products/slimsoda-section-1-routine.jpg'
+      image: '/assets/pdp/slimsoda/slimsoda-section-1-routine.jpg'
     },
 
     whyChoose: {
@@ -176,7 +176,7 @@ export const PDP_DATA = {
       subtitle: 'Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.',
       tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/slimsoda-section-4-choose.jpg',
+      image: '/assets/pdp/slimsoda/slimsoda-section-4-choose.jpg',
       features: [
         {
           icon: 'Droplets',
@@ -207,7 +207,7 @@ export const PDP_DATA = {
       subtitle: 'SlimSoda brings selected wellness ingredients together in one convenient powdered formula designed to complement a balanced lifestyle.',
       highlightText: 'ONE FORMULA. MULTIPLE WELLNESS GOALS. ONE SIMPLE ROUTINE.',
       ctaText: 'MAKE SLIMSODA PART OF MY DAY →',
-      image: '/assets/products/slimsoda-section-2-benefits.jpg',
+      image: '/assets/pdp/slimsoda/slimsoda-section-2-benefits.jpg',
       benefits: [
         {
           title: 'METABOLIC WELLNESS',
@@ -236,7 +236,7 @@ export const PDP_DATA = {
       tag: 'HOW IT WORKS',
       title: 'ONE SIMPLE ADDITION TO YOUR DAY.',
       subtitle: 'No complicated preparation. No elaborate wellness ritual.',
-      image: '/assets/products/slimsoda-section-5-howitworks.jpg',
+      image: '/assets/pdp/slimsoda/slimsoda-section-5-howitworks.jpg',
       steps: [
         {
           step: '01',
@@ -265,7 +265,7 @@ export const PDP_DATA = {
       description: 'SlimSoda brings selected ingredients together in one convenient powdered formula.',
       highlightText: 'SELECTED INGREDIENTS. PURPOSEFUL FORMULATION. SIMPLE DAILY USE.',
       ctaText: 'TRY SLIMSODA →',
-      image: '/assets/products/slimsoda-section-3-ingredients.jpg',
+      image: '/assets/pdp/slimsoda/slimsoda-section-3-ingredients.jpg',
       ingredients: [
         {
           name: 'GINGER EXTRACT',
@@ -1069,7 +1069,7 @@ export const PDP_DATA = {
     startingPrice: '$19.99',
     accentColor: '#27AE60',
     accentLight: 'rgba(39, 174, 96, 0.12)',
-    heroImage: '/assets/products/crowned-gal-1.png',
+    heroImage: '/assets/pdp/crowned/crowned-gal-1.png',
     
     usps: [
       'Supports fuller-looking hair',
@@ -1082,12 +1082,12 @@ export const PDP_DATA = {
     ],
 
     gallery: [
-      { id: 'cg1', label: 'HERO', src: '/assets/products/crowned-gal-1.png' },
-      { id: 'cg2', label: 'APPLICATION', src: '/assets/products/crowned-gal-2.png' },
-      { id: 'cg3', label: 'BENEFITS', src: '/assets/products/crowned-gal-3.png' },
-      { id: 'cg4', label: 'FORMULA', src: '/assets/products/crowned-gal-4.png' },
-      { id: 'cg5', label: 'RESULT', src: '/assets/products/crowned-gal-5.png' },
-      { id: 'cg6', label: 'TRUST', src: '/assets/products/crowned-gal-6.png' }
+      { id: 'cg1', label: 'HERO', src: '/assets/pdp/crowned/crowned-gal-1.png' },
+      { id: 'cg2', label: 'APPLICATION', src: '/assets/pdp/crowned/crowned-gal-2.png' },
+      { id: 'cg3', label: 'BENEFITS', src: '/assets/pdp/crowned/crowned-gal-3.png' },
+      { id: 'cg4', label: 'FORMULA', src: '/assets/pdp/crowned/crowned-gal-4.png' },
+      { id: 'cg5', label: 'RESULT', src: '/assets/pdp/crowned/crowned-gal-5.png' },
+      { id: 'cg6', label: 'TRUST', src: '/assets/pdp/crowned/crowned-gal-6.png' }
     ],
 
     bundlesSection: {
@@ -1100,7 +1100,7 @@ export const PDP_DATA = {
           id: 'starter',
           name: 'STARTER ROUTINE',
           badge: 'BUY 1, GET 1 FREE',
-          image: '/assets/products/crowned-bundle-1.png',
+          image: '/assets/pdp/crowned/crowned-bundle-1.png',
           isPopular: false,
           isBestValue: false,
           bottles: '2 BOTTLES TOTAL',
@@ -1117,7 +1117,7 @@ export const PDP_DATA = {
           id: 'most-popular',
           name: 'MOST POPULAR',
           badge: 'MOST POPULAR',
-          image: '/assets/products/crowned-bundle-2.png',
+          image: '/assets/pdp/crowned/crowned-bundle-2.png',
           isPopular: true,
           isBestValue: false,
           bottles: '4 BOTTLES TOTAL',
@@ -1135,7 +1135,7 @@ export const PDP_DATA = {
           id: 'best-value',
           name: 'BEST VALUE',
           badge: 'BEST VALUE',
-          image: '/assets/products/crowned-bundle-3.png',
+          image: '/assets/pdp/crowned/crowned-bundle-3.png',
           isPopular: false,
           isBestValue: true,
           bottles: '6 BOTTLES TOTAL',
@@ -1174,7 +1174,7 @@ export const PDP_DATA = {
       p2: 'That is why Crowned is applied directly to the scalp. Not just to the ends. Not just to the surface of the hair. A focused serum designed to complement the rest of your routine from the foundation up.',
       tagline: 'SCALP FIRST. STRANDS SECOND. ROUTINE SIMPLE.',
       ctaText: 'START MY CROWNED ROUTINE →',
-      image: '/assets/products/crowned-sec-1.png',
+      image: '/assets/pdp/crowned/crowned-sec-1.png',
       aspectRatio: '1 / 1'
     },
 
@@ -1185,7 +1185,7 @@ export const PDP_DATA = {
       subtitle: 'Traditional oils are often designed around coating or conditioning the hair fiber. Crowned is designed as a lightweight leave-in serum applied directly to the scalp.',
       tagline: 'CARE WHERE IT COUNTS. WITHOUT THE HEAVY FEEL.',
       ctaText: 'CHOOSE MY BUNDLE →',
-      image: '/assets/products/crowned-sec-4.png',
+      image: '/assets/pdp/crowned/crowned-sec-4.png',
       features: [
         { icon: 'Droplets', title: 'LIGHTWEIGHT & LEAVE-IN', desc: 'Applied directly to dry or towel-dried scalp with no heavy oil residue.' },
         { icon: 'Leaf', title: 'PEPTIDE + VITAMIN FORMULA', desc: 'Copper Tripeptide-1 (GHK-Cu), Niacinamide, Panthenol, and Biotin.' },
@@ -1200,7 +1200,7 @@ export const PDP_DATA = {
       subtitle: 'Crowned combines scalp conditioning and strand care in one lightweight daily formula.',
       highlightText: 'SCALP CARE. STRAND CARE. ONE DAILY SERUM.',
       ctaText: 'TRY CROWNED →',
-      image: '/assets/products/crowned-sec-2.png',
+      image: '/assets/pdp/crowned/crowned-sec-2.png',
       benefits: [
         { title: 'FULLER-LOOKING HAIR', desc: 'Designed to support the appearance of greater body, density and fullness as part of a consistent scalp-care routine.' },
         { title: 'STRONGER-LOOKING STRANDS', desc: 'Conditioning ingredients help support hair resilience and improve the appearance and feel of fragile strands.' },
@@ -1214,7 +1214,7 @@ export const PDP_DATA = {
       tag: 'HOW TO USE',
       title: 'TEN SECONDS. ONE TARGETED STEP.',
       subtitle: 'You do not need an entirely new hair-care system. Crowned is designed to slot into the one you already have.',
-      image: '/assets/products/crowned-sec-5.png',
+      image: '/assets/pdp/crowned/crowned-sec-5.png',
       steps: [
         { step: '01', title: 'APPLY', desc: 'Apply 1 full dropper daily directly to the dry or towel-dried scalp.' },
         { step: '02', title: 'TARGET', desc: 'Focus the application on scalp areas where you want to be most consistent.' },
@@ -1232,7 +1232,7 @@ export const PDP_DATA = {
       description: 'Instead of relying only on traditional oils or basic conditioning ingredients, Crowned puts a modern cosmetic peptide at the center of the formula.',
       highlightText: 'PEPTIDE. BARRIER CARE. CONDITIONING. ONE FORMULA.',
       ctaText: 'VIEW FULL INGREDIENT LIST →',
-      image: '/assets/products/crowned-sec-3.jpg',
+      image: '/assets/pdp/crowned/crowned-sec-3.jpg',
       ingredients: [
         { name: 'COPPER TRIPEPTIDE-1 — GHK-Cu', desc: 'A copper-binding cosmetic peptide studied in skin and hair-related biological research to anchor Crowned\'s advanced scalp-care approach.', whyItsHere: 'Peptide Scalp Care' },
         { name: 'NIACINAMIDE — VITAMIN B3', desc: 'One of the most established cosmetic ingredients for supporting skin-barrier function and maintaining a well-conditioned scalp environment.', whyItsHere: 'Scalp Barrier Care' },

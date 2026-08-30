@@ -10,7 +10,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Austin, TX',
       product: 'SlimSODA® 6-Tub Bundle',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/slimsoda-3.png',
+      image: '/assets/pdp/slimsoda/slimsoda-3.png',
       timeAgo: '2 minutes ago',
       productId: 'slimsoda'
     },
@@ -20,7 +20,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Miami, FL',
       product: 'SlimSODA® 4-Tub Bundle',
       deal: 'Buy 2, Get 2 FREE',
-      image: '/assets/products/slimsoda-2.png',
+      image: '/assets/pdp/slimsoda/slimsoda-2.png',
       timeAgo: '5 minutes ago',
       productId: 'slimsoda'
     },
@@ -30,7 +30,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Denver, CO',
       product: 'SlimSODA® 2-Tub Starter',
       deal: 'Buy 1, Get 1 FREE',
-      image: '/assets/products/slimsoda-1.png',
+      image: '/assets/pdp/slimsoda/slimsoda-1.png',
       timeAgo: '8 minutes ago',
       productId: 'slimsoda'
     },
@@ -40,7 +40,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Seattle, WA',
       product: 'SlimSODA® 6-Tub Bundle',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/slimsoda-3.png',
+      image: '/assets/pdp/slimsoda/slimsoda-3.png',
       timeAgo: '12 minutes ago',
       productId: 'slimsoda'
     },
@@ -52,7 +52,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Chicago, IL',
       product: 'LinfaFlow® 6-Bottle Kit',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/linfaflow-bundle-3.png',
+      image: '/assets/pdp/linfaflow/linfaflow-bundle-3.png',
       timeAgo: '3 minutes ago',
       productId: 'linfaflow'
     },
@@ -62,7 +62,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Phoenix, AZ',
       product: 'LinfaFlow® 4-Bottle Kit',
       deal: 'Buy 2, Get 2 FREE',
-      image: '/linfaflow/images/bundle-2.png',
+      image: '/assets/pdp/linfaflow/bundle-2.png',
       timeAgo: '6 minutes ago',
       productId: 'linfaflow'
     },
@@ -72,7 +72,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Portland, OR',
       product: 'LinfaFlow® 2-Bottle Starter',
       deal: 'Buy 1, Get 1 FREE',
-      image: '/linfaflow/images/bundle-1.png',
+      image: '/assets/pdp/linfaflow/bundle-1.png',
       timeAgo: '9 minutes ago',
       productId: 'linfaflow'
     },
@@ -82,7 +82,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Dallas, TX',
       product: 'LinfaFlow® 6-Bottle Kit',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/linfaflow-bundle-3.png',
+      image: '/assets/pdp/linfaflow/linfaflow-bundle-3.png',
       timeAgo: '14 minutes ago',
       productId: 'linfaflow'
     },
@@ -94,7 +94,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'San Diego, CA',
       product: 'Sonnus® 6-Bottle Rest Pack',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/product_sonnus_bottle.png',
+      image: '/assets/pdp/sonnus/product_sonnus_bottle.png',
       timeAgo: '1 minute ago',
       productId: 'sonnus'
     },
@@ -104,7 +104,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Boston, MA',
       product: 'Sonnus® 4-Bottle Pack',
       deal: 'Buy 2, Get 2 FREE',
-      image: '/assets/products/product_sonnus_bottle.png',
+      image: '/assets/pdp/sonnus/product_sonnus_bottle.png',
       timeAgo: '4 minutes ago',
       productId: 'sonnus'
     },
@@ -114,7 +114,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Atlanta, GA',
       product: 'Sonnus® 2-Bottle Pack',
       deal: 'Buy 1, Get 1 FREE',
-      image: '/assets/products/product_sonnus_bottle.png',
+      image: '/assets/pdp/sonnus/product_sonnus_bottle.png',
       timeAgo: '7 minutes ago',
       productId: 'sonnus'
     },
@@ -124,7 +124,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Nashville, TN',
       product: 'Sonnus® 6-Bottle Rest Pack',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/product_sonnus_bottle.png',
+      image: '/assets/pdp/sonnus/product_sonnus_bottle.png',
       timeAgo: '11 minutes ago',
       productId: 'sonnus'
     },
@@ -136,7 +136,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Los Angeles, CA',
       product: 'Crowned® 6-Bottle Scalp Kit',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/crowned-bundle-3.png',
+      image: '/assets/pdp/crowned/crowned-bundle-3.png',
       timeAgo: '2 minutes ago',
       productId: 'crowned'
     },
@@ -146,7 +146,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'New York, NY',
       product: 'Crowned® 4-Bottle Scalp Kit',
       deal: 'Buy 2, Get 2 FREE',
-      image: '/assets/products/crowned-bundle-2.png',
+      image: '/assets/pdp/crowned/crowned-bundle-2.png',
       timeAgo: '5 minutes ago',
       productId: 'crowned'
     },
@@ -156,7 +156,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Charlotte, NC',
       product: 'Crowned® 2-Bottle Scalp Kit',
       deal: 'Buy 1, Get 1 FREE',
-      image: '/assets/products/crowned-bundle-1.png',
+      image: '/assets/pdp/crowned/crowned-bundle-1.png',
       timeAgo: '9 minutes ago',
       productId: 'crowned'
     },
@@ -166,7 +166,7 @@ export function SalesNotificationPopups({ onSelectProduct }) {
       city: 'Minneapolis, MN',
       product: 'Crowned® 6-Bottle Scalp Kit',
       deal: 'Buy 3, Get 3 FREE (Best Value)',
-      image: '/assets/products/crowned-bundle-3.png',
+      image: '/assets/pdp/crowned/crowned-bundle-3.png',
       timeAgo: '13 minutes ago',
       productId: 'crowned'
     }

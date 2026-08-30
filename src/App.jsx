@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/layout/Header';
-import { CinematicHero } from './components/hero/CinematicHero';
+import { CinematicHero } from './components/home/CinematicHero';
 import { CountdownBanner } from './components/common/CountdownBanner';
-import { BrandStatement } from './components/brand/BrandStatement';
-import { WhoWeAre } from './components/brand/WhoWeAre';
-import { EssentialsOverview } from './components/products/EssentialsOverview';
-import { ProductHighlights } from './components/products/ProductHighlights';
-import { FindYourEssential } from './components/products/FindYourEssential';
-import { CustomerStories } from './components/social-proof/CustomerStories';
-import { Guarantee90Day } from './components/trust/Guarantee90Day';
-import { PhysicalStore } from './components/store/PhysicalStore';
-import { FinalCTA } from './components/cta/FinalCTA';
-import { FAQ } from './components/faq/FAQ';
+import { BrandStatement } from './components/home/BrandStatement';
+import { WhoWeAre } from './components/home/WhoWeAre';
+import { EssentialsOverview } from './components/home/EssentialsOverview';
+import { ProductHighlights } from './components/home/ProductHighlights';
+import { FindYourEssential } from './components/home/FindYourEssential';
+import { CustomerStories } from './components/home/CustomerStories';
+import { Guarantee90Day } from './components/home/Guarantee90Day';
+import { PhysicalStore } from './components/home/PhysicalStore';
+import { FinalCTA } from './components/home/FinalCTA';
+import { FAQ } from './components/home/FAQ';
 import { Footer } from './components/layout/Footer';
 import { ProductPage } from './components/pdp/ProductPage';
 import { ProductMarquee } from './components/pdp/ProductMarquee';
 import { SalesNotificationPopups } from './components/common/SalesNotificationPopups';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
-import { SlimSodaListicle } from './components/listicle/SlimSodaListicle';
-import { LinfaflowListicle } from './components/listicle/linfaflowListicle';
+import { SlimSodaListicle } from './components/listicle/slimsoda/SlimSodaListicle';
+import { LinfaflowListicle } from './components/listicle/linfaflow/linfaflowListicle';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
