@@ -1933,117 +1933,108 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 15 — UGC SOCIAL PROOF BANNER CARD */}
+        {/* 15 — UGC SOCIAL PROOF BANNER (SLIMSODA MATCH: NO OUTER CARD & ENLARGED 1:1 IMAGE) */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{
-            backgroundColor: '#FAF7F2',
-            borderRadius: '24px',
-            border: '1px solid rgba(0, 0, 0, 0.08)',
-            padding: '40px 32px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.04)',
-            maxWidth: '1100px',
-            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '40px',
+            alignItems: 'center',
+            width: '100%',
             boxSizing: 'border-box'
           }}>
+            {/* Left Column: Customer Collage Graphic (1:1 ENLARGED IMAGE) */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '40px',
-              alignItems: 'center'
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.08)',
+              border: '1px solid var(--color-border)',
+              width: '100%',
+              maxWidth: '520px',
+              justifySelf: 'center',
+              boxSizing: 'border-box'
             }}>
+              <img 
+                src="/assets/listicle/linfaflow/rev-07.jpg" 
+                alt="Real LinfaFlow Customers"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '1 / 1',
+                  display: 'block',
+                  objectFit: 'cover',
+                  borderRadius: '24px'
+                }}
+                onError={(e) => {
+                  e.target.src = "/assets/pdp/linfaflow/rev-07.jpg";
+                }}
+              />
+            </div>
+
+            {/* Right Column: Headline, Paragraph & Centered CTA */}
+            <div>
               <div style={{
-                borderRadius: '20px',
-                overflow: 'hidden',
-                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.08)',
-                border: '1px solid rgba(0, 0, 0, 0.06)',
-                backgroundColor: '#FFFFFF',
-                width: '100%',
-                aspectRatio: '16 / 9',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                fontSize: '12px',
+                fontWeight: 900,
+                letterSpacing: '1.5px',
+                color: '#27AE60',
+                backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                padding: '5px 14px',
+                borderRadius: '999px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '14px'
               }}>
-                <img 
-                  src="/assets/listicle/linfaflow/rev-07.jpg" 
-                  alt="Real LinfaFlow Customers"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center 25%',
-                    display: 'block',
-                    borderRadius: '24px'
-                  }}
-                  onError={(e) => {
-                    e.target.src = "/assets/pdp/linfaflow/rev-07.jpg";
-                  }}
-                />
+                REAL ROUTINES. REAL REASONS.
               </div>
 
-              <div>
-                <div style={{
-                  fontSize: '12px',
-                  fontWeight: 900,
-                  letterSpacing: '1.5px',
-                  color: '#27AE60',
-                  backgroundColor: 'rgba(39, 174, 96, 0.1)',
-                  padding: '5px 14px',
-                  borderRadius: '999px',
-                  textTransform: 'uppercase',
-                  display: 'inline-block',
-                  marginBottom: '14px'
-                }}>
-                  REAL ROUTINES. REAL REASONS.
-                </div>
+              <h2 style={{
+                fontFamily: 'var(--font-brand-display)',
+                fontSize: 'clamp(26px, 4vw, 38px)',
+                fontWeight: 900,
+                color: 'var(--color-primary)',
+                marginBottom: '16px',
+                lineHeight: '1.2'
+              }}>
+                WHY PEOPLE CHOOSE LINFAFLOW®
+              </h2>
 
-                <h2 style={{
-                  fontFamily: 'var(--font-brand-display)',
-                  fontSize: '32px',
-                  fontWeight: 900,
-                  color: 'var(--color-primary)',
-                  marginBottom: '16px',
-                  lineHeight: '1.2'
-                }}>
-                  WHY PEOPLE CHOOSE LINFAFLOW®
-                </h2>
+              <p style={{
+                fontSize: '15.5px',
+                lineHeight: '1.65',
+                color: 'var(--color-secondary)',
+                marginBottom: '24px'
+              }}>
+                One simple dropper of LinfaFlow® in water each day — that is the entire protocol. No swallowing multiple pills, no complicated schedules, no synthetic fillers. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
+              </p>
 
-                <p style={{
-                  fontSize: '15.5px',
-                  lineHeight: '1.65',
-                  color: 'var(--color-secondary)',
-                  marginBottom: '24px'
-                }}>
-                  One simple dropper of LinfaFlow® in water each day — that is the entire protocol. No swallowing multiple pills, no complicated schedules, no synthetic fillers. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
-                </p>
-
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <a 
-                    href={CHECKOUT_URL}
-                    onClick={handleGoToCheckout}
-                    style={{
-                      backgroundColor: '#27AE60',
-                      color: '#FFFFFF',
-                      border: 'none',
-                      padding: '14px 28px',
-                      borderRadius: '12px',
-                      fontWeight: 800,
-                      fontSize: '15px',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap',
-                      boxShadow: '0 6px 20px rgba(39, 174, 96, 0.25)',
-                      maxWidth: '100%',
-                      boxSizing: 'border-box'
-                    }}
-                  >
-                    <span>SEE LINFAFLOW BUNDLES</span>
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <a 
+                  href={CHECKOUT_URL}
+                  onClick={handleGoToCheckout}
+                  style={{
+                    backgroundColor: '#27AE60',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    padding: '14px 28px',
+                    borderRadius: '12px',
+                    fontWeight: 800,
+                    fontSize: '15px',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 6px 20px rgba(39, 174, 96, 0.25)',
+                    maxWidth: '100%',
+                    boxSizing: 'border-box'
+                  }}
+                >
+                  <span>SEE LINFAFLOW BUNDLES</span>
+                  <ArrowRight size={16} />
+                </a>
               </div>
             </div>
           </div>
