@@ -1306,7 +1306,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 borderRadius: '50%'
               }} />
               <img
-                src="/assets/brand/guarantee_badge.png"
+                src="/assets/listicle/linfaflow/guarantee_badge.png"
                 alt="EssencialGood 90-Day Guarantee Badge"
                 style={{
                   maxHeight: '320px',
@@ -1317,6 +1317,9 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   filter: 'drop-shadow(0 16px 36px rgba(0,0,0,0.12))',
                   position: 'relative',
                   zIndex: 2
+                }}
+                onError={(e) => {
+                  e.target.src = "/assets/home/brand/guarantee_badge.png";
                 }}
               />
             </div>
@@ -1595,14 +1598,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               }}>
                 <div style={{
                   display: 'flex',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   justifyContent: 'space-between',
-                  flexWrap: 'wrap',
                   gap: '8px',
                   borderBottom: '1px solid rgba(0,0,0,0.06)',
                   paddingBottom: '12px'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', minWidth: 0 }}>
                     <span style={{
                       backgroundColor: '#27AE60',
                       color: '#FFFFFF',
@@ -1619,7 +1621,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                       • {activeItem.title}
                     </span>
                   </div>
-                  <CheckCircle2 size={20} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <CheckCircle2 size={20} style={{ color: '#27AE60', flexShrink: 0, marginTop: '2px' }} />
                 </div>
 
                 <div style={{ fontSize: '17px', fontWeight: 800, color: '#141210', lineHeight: '1.35' }}>
