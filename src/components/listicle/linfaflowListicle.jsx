@@ -271,7 +271,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             alt="LinfaFlow Daily Lymphatic Wellness Routine" 
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             onError={(e) => {
-              e.target.src = "/linfaflow/images/linfaflow-sec-1-why.jpg";
+              e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-1-why.jpg";
             }}
           />
         </div>
@@ -577,7 +577,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     alt="Cleavers Botanical Extract" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/linfaflow/images/gallery-botanicals.jpg";
+                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/gallery-botanicals.jpg";
                     }}
                   />
                 </div>
@@ -653,7 +653,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     alt="Stillingia Root Extract" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/linfaflow/images/linfaflow-sec-3-ingredients.jpg";
+                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-3-ingredients.jpg";
                     }}
                   />
                 </div>
@@ -729,7 +729,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     alt="Red Clover Blossom" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/linfaflow/images/gallery-lifestyle.jpg";
+                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/gallery-lifestyle.jpg";
                     }}
                   />
                 </div>
@@ -805,7 +805,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     alt="Prickly Ash Bark" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/linfaflow/images/linfaflow-sec-2-benefits.jpg";
+                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-2-benefits.jpg";
                     }}
                   />
                 </div>
@@ -905,7 +905,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               alt="LinfaFlow How It Works Routine" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/linfaflow/images/linfaflow-sec-5-howitworks.jpg";
+                e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-5-howitworks.jpg";
               }}
             />
           </div>
@@ -993,7 +993,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               alt="LinfaFlow Routine vs Complex Supplements" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/linfaflow/images/linfaflow-sec-4-whychoose.jpg";
+                e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-4-whychoose.jpg";
               }}
             />
           </div>
@@ -1729,7 +1729,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 alt="LinfaFlow Bottle" 
                 style={{ width: '100%', height: 'auto', maxHeight: '380px', objectFit: 'contain', borderRadius: 'var(--radius-md)', display: 'block' }}
                 onError={(e) => {
-                  e.target.src = "/linfaflow/images/02-hero-bottle.webp";
+                  e.target.src = "/LISTICLE LINFAFLOW/Imagens/02-hero-bottle.webp";
                 }}
               />
             </div>
@@ -1979,7 +1979,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   borderRadius: '24px'
                 }}
                 onError={(e) => {
-                  e.target.src = "/linfaflow/images/rev-07.jpg";
+                  e.target.src = "/LISTICLE LINFAFLOW/Imagens/rev-07.jpg";
                 }}
               />
             </div>
