@@ -1509,15 +1509,25 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             </p>
           </div>
 
-          {/* TAB SELECTOR STRIP — UNIFORM ALIGNMENT PATTERN */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-            gap: '8px',
-            marginBottom: '20px',
-            width: '100%',
-            boxSizing: 'border-box'
-          }}>
+          <style>{`
+            .buyer-tab-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+              gap: 8px;
+              margin-bottom: 20px;
+              width: 100%;
+              box-sizing: border-box;
+            }
+            @media (min-width: 641px) {
+              .buyer-tab-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+              }
+            }
+          `}</style>
+
+          {/* TAB SELECTOR STRIP — EXACT 3X2 GRID ON DESKTOP */}
+          <div className="buyer-tab-grid">
             {[
               { num: '01', title: 'INGREDIENTS' },
               { num: '02', title: 'FORMULA' },
