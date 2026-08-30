@@ -2545,27 +2545,26 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           </div>
         </section>
 
-        {/* FINAL CALL TO ACTION FOOTER BANNER */}
+        {/* FINAL CALL TO ACTION FOOTER BANNER (NO CARD BOX) */}
         <div style={{
           textAlign: 'center',
-          padding: '36px 20px',
-          backgroundColor: 'var(--bg-card)',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--color-border)',
+          padding: '24px 0',
           marginBottom: '40px'
         }}>
           <h3 style={{
             fontFamily: 'var(--font-brand-display)',
-            fontSize: '26px',
+            fontSize: '28px',
             color: 'var(--color-primary)',
-            marginBottom: '12px'
+            marginBottom: '12px',
+            lineHeight: '1.2'
           }}>
             FOUR BOTANICALS. ONE DROPPER. ONE SIMPLE DAILY RITUAL.
           </h3>
-          <p style={{ fontSize: '15px', color: 'var(--color-secondary)', marginBottom: '24px', maxWidth: '540px', marginInline: 'auto' }}>
+          <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', marginBottom: '24px', maxWidth: '560px', marginInline: 'auto', lineHeight: '1.55' }}>
             Support lymphatic wellness, normal fluid balance and healthy circulation without adding another complicated routine.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
             <a
               href={CHECKOUT_URL}
               onClick={handleGoToCheckout}
@@ -2573,15 +2572,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 backgroundColor: '#27AE60',
                 color: '#FFFFFF',
                 border: 'none',
-                padding: '12px 16px',
+                padding: '14px 28px',
                 borderRadius: '12px',
                 fontWeight: 800,
-                fontSize: '13.5px',
+                fontSize: '14.5px',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px',
+                gap: '8px',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
                 maxWidth: '100%',
@@ -2590,8 +2589,27 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               }}
             >
               <span>CHOOSE MY LINFAFLOW® BUNDLE</span>
-              <ArrowRight size={15} style={{ flexShrink: 0 }} />
+              <ArrowRight size={16} style={{ flexShrink: 0 }} />
             </a>
+          </div>
+
+          {/* TRUST BADGES PHRASE (DESKTOP & MOBILE) */}
+          <div style={{
+            fontSize: '13px',
+            fontWeight: 700,
+            color: '#27AE60',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '16px',
+            maxWidth: '680px',
+            margin: '0 auto',
+            lineHeight: '1.6'
+          }}>
+            <span>✓ 90-Day Money-Back Guarantee</span>
+            <span>✓ Free U.S. Shipping on Qualifying Bundles</span>
+            <span>✓ Secure Checkout</span>
           </div>
         </div>
 

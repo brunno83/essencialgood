@@ -1811,96 +1811,19 @@ export function SlimSodaListicle({ onNavHome }) {
             ].map((rev) => (
               <div
                 key={rev.id}
+                className="review-card-container"
                 style={{
                   backgroundColor: '#FFFFFF',
                   borderRadius: '20px',
                   border: '1px solid rgba(0, 0, 0, 0.08)',
-                  padding: '24px 20px',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px'
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)'
                 }}
               >
-                {/* 1. TOP ROW: Initials Badge + Name + Verified Buyer Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      backgroundColor: 'rgba(39, 174, 96, 0.12)',
-                      color: 'var(--color-sage, #27AE60)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '13px',
-                      fontWeight: 900,
-                      letterSpacing: '0.04em',
-                      flexShrink: 0
-                    }}
-                  >
-                    {rev.initials}
-                  </div>
-
-                  <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
-                    {rev.author}
-                  </span>
-
-                  <span style={{
-                    fontSize: '11.5px',
-                    color: '#27AE60',
-                    fontWeight: 700,
-                    backgroundColor: 'rgba(39, 174, 96, 0.08)',
-                    padding: '3px 10px',
-                    borderRadius: '12px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                  }}>
-                    <CheckCircle2 size={12} /> Verified Buyer
-                  </span>
-                </div>
-
-                {/* 2. SECOND ROW: 5 Gold Stars */}
-                <div style={{ display: 'flex', gap: '3px' }}>
-                  {[...Array(rev.stars)].map((_, s) => (
-                    <Star key={s} size={17} fill="#F59E0B" style={{ color: '#F59E0B' }} />
-                  ))}
-                </div>
-
-                {/* 3. THIRD ROW: Bold Serif Headline */}
-                <h3 style={{
-                  fontFamily: 'var(--font-brand-display)',
-                  fontSize: '17px',
-                  fontWeight: 900,
-                  color: '#141210',
-                  margin: 0,
-                  letterSpacing: '-0.01em',
-                  textTransform: 'uppercase'
-                }}>
-                  "{rev.title}"
-                </h3>
-
-                {/* 4. FOURTH ROW: Review Body Paragraph */}
-                <p style={{
-                  fontSize: '15px',
-                  color: '#333333',
-                  lineHeight: 1.6,
-                  margin: 0,
-                  fontWeight: 400
-                }}>
-                  "{rev.body}"
-                </p>
-
-                {/* 5. FIFTH ROW: Full-width Customer Photo (BEFORE/AFTER weight badges cropped out) */}
+                {/* Customer Photo (LEFT on Desktop, BOTTOM on Mobile) */}
                 {rev.img && (
-                  <div style={{
-                    width: '100%',
-                    height: '240px',
+                  <div className="review-card-img-wrapper" style={{
                     borderRadius: '16px',
                     overflow: 'hidden',
-                    marginTop: '4px',
                     boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
                     border: '1px solid rgba(0,0,0,0.06)',
                     position: 'relative'
@@ -1921,6 +1844,80 @@ export function SlimSodaListicle({ onNavHome }) {
                     />
                   </div>
                 )}
+
+                {/* Text Content (RIGHT on Desktop, TOP on Mobile) */}
+                <div className="review-card-content" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {/* 1. TOP ROW: Initials Badge + Name + Verified Buyer Badge */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(39, 174, 96, 0.12)',
+                        color: 'var(--color-sage, #27AE60)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '13px',
+                        fontWeight: 900,
+                        letterSpacing: '0.04em',
+                        flexShrink: 0
+                      }}
+                    >
+                      {rev.initials}
+                    </div>
+
+                    <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
+                      {rev.author}
+                    </span>
+
+                    <span style={{
+                      fontSize: '11.5px',
+                      color: '#27AE60',
+                      fontWeight: 700,
+                      backgroundColor: 'rgba(39, 174, 96, 0.08)',
+                      padding: '3px 10px',
+                      borderRadius: '12px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}>
+                      <CheckCircle2 size={12} /> Verified Buyer
+                    </span>
+                  </div>
+
+                  {/* 2. SECOND ROW: 5 Gold Stars */}
+                  <div style={{ display: 'flex', gap: '3px' }}>
+                    {[...Array(rev.stars)].map((_, s) => (
+                      <Star key={s} size={17} fill="#F59E0B" style={{ color: '#F59E0B' }} />
+                    ))}
+                  </div>
+
+                  {/* 3. THIRD ROW: Bold Serif Headline */}
+                  <h3 style={{
+                    fontFamily: 'var(--font-brand-display)',
+                    fontSize: '17px',
+                    fontWeight: 900,
+                    color: '#141210',
+                    margin: 0,
+                    letterSpacing: '-0.01em',
+                    textTransform: 'uppercase'
+                  }}>
+                    "{rev.title}"
+                  </h3>
+
+                  {/* 4. FOURTH ROW: Review Body Paragraph */}
+                  <p style={{
+                    fontSize: '15px',
+                    color: '#333333',
+                    lineHeight: 1.6,
+                    margin: 0,
+                    fontWeight: 400
+                  }}>
+                    "{rev.body}"
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -2235,10 +2232,7 @@ export function SlimSodaListicle({ onNavHome }) {
 
         {/* 15 — FINAL CLOSE */}
         <section style={{
-          backgroundColor: 'var(--bg-card-alt)',
-          border: '1px solid var(--color-border)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '44px 28px',
+          padding: '24px 0',
           textAlign: 'center',
           marginBottom: '48px'
         }}>

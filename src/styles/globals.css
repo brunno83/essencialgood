@@ -141,13 +141,55 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     word-break: break-word !important;
     overflow-wrap: break-word !important;
   }
+}
 
-  .ugc-banner-text {
-    font-size: 15px !important;
-    line-height: 1.6 !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
+/* Customer Review Card (Desktop vs Mobile UX Layout) */
+@media (min-width: 769px) {
+  .review-card-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 24px !important;
+    padding: 24px 28px !important;
+  }
+
+  .review-card-img-wrapper {
+    order: 1 !important; /* Image on LEFT on Desktop */
+    width: 160px !important;
+    height: 160px !important;
+    flex-shrink: 0 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    margin-top: 0 !important;
+  }
+
+  .review-card-content {
+    order: 2 !important; /* Content on RIGHT on Desktop */
+    flex: 1 !important;
   }
 }
+
+@media (max-width: 768px) {
+  .review-card-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 24px 20px !important;
+  }
+
+  .review-card-content {
+    order: 1 !important; /* Content FIRST on Mobile */
+  }
+
+  .review-card-img-wrapper {
+    order: 2 !important; /* Image at the BOTTOM on Mobile */
+    width: 100% !important;
+    height: 240px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    margin-top: 4px !important;
+  }
+}
+
 
 
