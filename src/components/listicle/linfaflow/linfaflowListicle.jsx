@@ -2596,8 +2596,8 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           {/* TRUST BADGES PHRASE (DESKTOP & MOBILE) */}
           <div style={{
             fontSize: '13px',
-            fontWeight: 700,
-            color: '#27AE60',
+            fontWeight: 800,
+            color: '#1B2613',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
