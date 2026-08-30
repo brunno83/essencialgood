@@ -73,8 +73,6 @@ export const FinalCTA = ({ onSelectProduct }) => {
             >
               <picture>
                 <source media="(max-width: 768px)" srcSet={mobileImagePath} />
-                <source media="(max-width: 768px)" srcSet="/assets/home/brand/collection_lineup_mobile.png" />
-                <source media="(max-width: 768px)" srcSet="/assets/home/brand/collection_full_lineup_mobile.jpg" />
                 <img
                   src={desktopImagePath}
                   alt="Essencial Good — Complete Wellness Collection Lineup"

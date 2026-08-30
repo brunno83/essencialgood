@@ -120,7 +120,7 @@ export function HowItWorks({ howItWorks, accentColor }) {
           {/* Right Column: Close-up Photo */}
           <div style={{ width: '100%' }}>
             <img
-              src={howItWorks.image || "/assets/products/slimsoda-section-howitworks.jpg"}
+              src={howItWorks.image || "/assets/pdp/slimsoda/slimsoda-section-howitworks.jpg"}
               alt={title || "How to use routine"}
               style={{
                 width: '100%',

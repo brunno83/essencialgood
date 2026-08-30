@@ -16,7 +16,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
     subtitle: 'Instead of adding more complexity to your day, SlimSoda brings selected ingredients together in one convenient powdered format.',
     tagline: 'SIMPLE TO START. EASY TO KEEP GOING.',
     ctaText: 'CHOOSE MY BUNDLE →',
-    image: '/assets/products/slimsoda-stone-pedestal.jpg',
+    image: '/assets/pdp/slimsoda/slimsoda-stone-pedestal.jpg',
     features: [
       {
         icon: 'Droplets',
@@ -105,7 +105,7 @@ export function WhyPeopleChooseSection({ whyChoose, accentColor }) {
               }}
             >
               <img
-                src={data.image || "/assets/products/slimsoda-stone-pedestal.jpg"}
+                src={data.image || "/assets/pdp/slimsoda/slimsoda-stone-pedestal.jpg"}
                 alt={data.tag}
                 style={{
                   width: '100%',

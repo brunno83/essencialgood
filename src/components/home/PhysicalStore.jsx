@@ -97,7 +97,6 @@ export const PhysicalStore = () => {
               style={{ display: 'block', width: '100%', height: '100%' }}
             >
               <source media="(max-width: 768px)" srcSet={customMobileImage} />
-              <source media="(max-width: 768px)" srcSet="/assets/home/store/store_flagship_sanctuary_mobile.jpg" />
               <img
                 src={customImage}
                 alt="Essencial Good Flagship Store"

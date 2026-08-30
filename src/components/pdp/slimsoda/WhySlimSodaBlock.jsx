@@ -13,7 +13,7 @@ export function WhySlimSodaBlock({ whyBlock, accentColor }) {
     p2: 'Mix it with water. Make it part of your day. Keep focusing on the fundamentals that matter: balanced nutrition, hydration, movement and consistency.',
     tagline: 'LESS COMPLEXITY. MORE CONSISTENCY.',
     ctaText: 'TRY SLIMSODA →',
-    image: '/assets/products/slimsoda-lifestyle-routine.jpg'
+    image: '/assets/pdp/slimsoda/slimsoda-lifestyle-routine.jpg'
   };
 
   const data = whyBlock || defaultWhy;
@@ -54,7 +54,7 @@ export function WhySlimSodaBlock({ whyBlock, accentColor }) {
               }}
             >
               <img
-                src={data.image || "/assets/products/slimsoda-lifestyle-routine.jpg"}
+                src={data.image || "/assets/pdp/slimsoda/slimsoda-lifestyle-routine.jpg"}
                 alt={data.tag}
                 style={{
                   width: '100%',

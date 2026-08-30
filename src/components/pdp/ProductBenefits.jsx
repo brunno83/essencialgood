@@ -117,7 +117,7 @@ export function ProductBenefits({ benefitsSection, accentColor }) {
         {/* Right Column: Lifestyle Image */}
         <div style={{ width: '100%' }}>
           <img
-            src={benefitsSection.image || "/assets/products/slimsoda-section-benefits.jpg"}
+            src={benefitsSection.image || "/assets/pdp/slimsoda/slimsoda-section-benefits.jpg"}
             alt={title || "Daily Routine Benefits"}
             style={{
               width: '100%',

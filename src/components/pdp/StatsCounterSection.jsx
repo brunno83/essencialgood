@@ -124,7 +124,7 @@ export function StatsCounterSection({ accentColor }) {
               }}
             >
               <img
-                src="/assets/products/slimsoda-stone-pedestal.jpg"
+                src="/assets/pdp/slimsoda/slimsoda-stone-pedestal.jpg"
                 alt="SlimSoda tub on natural stone pedestal"
                 style={{
                   width: '100%',

@@ -43,7 +43,7 @@ export function GuaranteeSection({ guaranteeSection, accentColor }) {
         {/* Guarantee Badge Image from Brand Assets - Prominent & Enlarged */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
           <img
-            src="/assets/brand/guarantee_badge.png"
+            src="/assets/home/brand/guarantee_badge.png"
             alt="EssencialGood 90-Day Guarantee Badge"
             style={{
               maxHeight: '280px',
