@@ -2593,21 +2593,22 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             </a>
           </div>
 
-          {/* TRUST BADGES PHRASE (DESKTOP & MOBILE) */}
+          {/* TRUST BADGES PHRASE (DESKTOP & MOBILE MATCH) */}
           <div style={{
-            fontSize: '13px',
-            fontWeight: 800,
-            color: '#1B2613',
+            fontSize: '13.5px',
+            fontWeight: 600,
+            color: 'var(--color-secondary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexWrap: 'wrap',
-            gap: '16px',
-            maxWidth: '680px',
+            gap: '20px',
+            maxWidth: '750px',
             margin: '0 auto',
-            lineHeight: '1.6'
+            lineHeight: '1.6',
+            letterSpacing: '-0.1px'
           }}>
-            <span>✓ 90-Day Money-Back Guarantee</span>
+            <span>✓ 90–Day Money-Back Guarantee</span>
             <span>✓ Free U.S. Shipping on Qualifying Bundles</span>
             <span>✓ Secure Checkout</span>
           </div>
