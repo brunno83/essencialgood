@@ -1005,21 +1005,21 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             <p style={{ marginBottom: '16px' }}>
               People rarely stop because they decided wellness no longer matters — they stop because the routine becomes annoying. Too many pills, too many instructions, too much friction.
             </p>
-            
-            {/* PERFECT 2X2 GRID FOR 4 FRICTION CHIPS */}
+
+            {/* PERFECT RESPONSIVE GRID FOR 4 FRICTION CHIPS */}
             <div style={{
               backgroundColor: 'rgba(39, 174, 96, 0.06)',
               border: '1.5px solid #27AE60',
               borderRadius: '16px',
-              padding: '24px 20px',
+              padding: '20px 14px',
               marginBottom: '24px'
             }}>
               <div style={{
-                fontSize: '15px',
+                fontSize: '14px',
                 fontWeight: 900,
                 color: 'var(--color-primary)',
-                letterSpacing: '0.8px',
-                marginBottom: '16px',
+                letterSpacing: '0.5px',
+                marginBottom: '14px',
                 textAlign: 'center',
                 textTransform: 'uppercase'
               }}>
@@ -1027,63 +1027,71 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               </div>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '12px'
+                gridTemplateColumns: 'repeat(auto-fit, minmax(125px, 1fr))',
+                gap: '8px'
               }}>
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
-                  borderRadius: '12px',
-                  padding: '14px 16px',
+                  borderRadius: '10px',
+                  padding: '10px 8px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
+                  gap: '6px',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={18} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.3px', whiteSpace: 'nowrap' }}>NO LARGE PILLS</span>
+                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO LARGE PILLS</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
-                  borderRadius: '12px',
-                  padding: '14px 16px',
+                  borderRadius: '10px',
+                  padding: '10px 8px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
+                  gap: '6px',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={18} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.3px', whiteSpace: 'nowrap' }}>NO POWDERS TO MIX</span>
+                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO POWDERS TO MIX</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
-                  borderRadius: '12px',
-                  padding: '14px 16px',
+                  borderRadius: '10px',
+                  padding: '10px 8px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
+                  gap: '6px',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={18} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.3px', whiteSpace: 'nowrap' }}>NO CAFFEINE</span>
+                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO CAFFEINE</span>
                 </div>
 
                 <div style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid rgba(39, 174, 96, 0.25)',
-                  borderRadius: '12px',
-                  padding: '14px 16px',
+                  borderRadius: '10px',
+                  padding: '10px 8px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
+                  gap: '6px',
+                  minWidth: 0,
+                  boxSizing: 'border-box',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
-                  <CheckCircle2 size={18} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.3px', whiteSpace: 'nowrap' }}>NO STIMULANTS</span>
+                  <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>NO STIMULANTS</span>
                 </div>
               </div>
             </div>
@@ -1298,7 +1306,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 borderRadius: '50%'
               }} />
               <img
-                src="/assets/home/brand/guarantee_badge.png"
+                src="/assets/brand/guarantee_badge.png"
                 alt="EssencialGood 90-Day Guarantee Badge"
                 style={{
                   maxHeight: '320px',
@@ -1463,46 +1471,49 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           backgroundColor: '#F8FAF6',
           border: '2px solid #27AE60',
           borderRadius: '24px',
-          padding: '36px 24px',
+          padding: '24px 16px',
           marginBottom: '56px',
-          boxShadow: '0 12px 40px rgba(39, 174, 96, 0.1)'
+          boxShadow: '0 12px 40px rgba(39, 174, 96, 0.1)',
+          boxSizing: 'border-box'
         }}>
-          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <span style={{
-              fontSize: '12px',
+              fontSize: '11px',
               fontWeight: 900,
               color: '#FFFFFF',
               backgroundColor: '#27AE60',
-              padding: '5px 16px',
+              padding: '4px 14px',
               borderRadius: '999px',
-              letterSpacing: '1.5px',
+              letterSpacing: '1.2px',
               textTransform: 'uppercase',
               display: 'inline-block',
-              marginBottom: '10px'
+              marginBottom: '8px'
             }}>
               INTERACTIVE BUYER'S CHECKLIST
             </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
-              fontSize: 'clamp(24px, 4vw, 32px)',
+              fontSize: 'clamp(20px, 4vw, 30px)',
               color: '#141210',
               fontWeight: 800,
-              margin: '6px 0 0',
+              margin: '4px 0 0',
               lineHeight: '1.25'
             }}>
               BEFORE BUYING ANY "LYMPHATIC" SUPPLEMENT, ASK THESE 6 QUESTIONS:
             </h2>
-            <p style={{ fontSize: '14px', color: 'var(--color-muted)', marginTop: '8px' }}>
+            <p style={{ fontSize: '13px', color: 'var(--color-muted)', marginTop: '6px' }}>
               Click through the tabs below to inspect our standards step-by-step:
             </p>
           </div>
 
-          {/* TAB SELECTOR STRIP — EXACT 3 ON TOP, 3 ON BOTTOM */}
+          {/* TAB SELECTOR STRIP — FULLY RESPONSIVE */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '10px',
-            marginBottom: '24px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(95px, 1fr))',
+            gap: '6px',
+            marginBottom: '20px',
+            width: '100%',
+            boxSizing: 'border-box'
           }}>
             {[
               { num: '01', title: 'INGREDIENTS' },
@@ -1521,37 +1532,38 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     backgroundColor: isActive ? '#27AE60' : 'rgba(255, 255, 255, 0.9)',
                     color: isActive ? '#FFFFFF' : '#27AE60',
                     border: isActive ? '1.5px solid #27AE60' : '1.5px solid rgba(39, 174, 96, 0.3)',
-                    padding: '10px 12px',
-                    borderRadius: '12px',
-                    fontSize: '12.5px',
+                    padding: '8px 6px',
+                    borderRadius: '10px',
+                    fontSize: '11px',
                     fontWeight: 800,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '8px',
+                    gap: '5px',
                     transition: 'all 0.2s ease',
-                    boxShadow: isActive ? '0 4px 12px rgba(39, 174, 96, 0.3)' : 'none',
+                    boxShadow: isActive ? '0 3px 10px rgba(39, 174, 96, 0.25)' : 'none',
                     whiteSpace: 'nowrap',
                     width: '100%',
-                    boxSizing: 'border-box'
+                    boxSizing: 'border-box',
+                    minWidth: 0
                   }}
                 >
                   <span style={{
-                    width: '22px',
-                    height: '22px',
+                    width: '18px',
+                    height: '18px',
                     borderRadius: '50%',
                     backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(39, 174, 96, 0.15)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '11px',
+                    fontSize: '10px',
                     fontWeight: 900,
                     flexShrink: 0
                   }}>
                     {item.num}
                   </span>
-                  <span>{item.title}</span>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</span>
                 </button>
               );
             })}
@@ -1571,83 +1583,98 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             return (
               <div style={{
                 backgroundColor: '#FFFFFF',
-                borderRadius: '20px',
-                padding: '28px 24px',
+                borderRadius: '16px',
+                padding: '20px 16px',
                 border: '1.5px solid rgba(39, 174, 96, 0.3)',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.05)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.05)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '20px'
+                gap: '16px',
+                boxSizing: 'border-box',
+                width: '100%'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.06)', paddingBottom: '14px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  borderBottom: '1px solid rgba(0,0,0,0.06)',
+                  paddingBottom: '12px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                     <span style={{
                       backgroundColor: '#27AE60',
                       color: '#FFFFFF',
-                      padding: '4px 12px',
+                      padding: '3px 10px',
                       borderRadius: '999px',
-                      fontSize: '12px',
+                      fontSize: '11px',
                       fontWeight: 900,
-                      letterSpacing: '0.8px'
+                      letterSpacing: '0.5px',
+                      whiteSpace: 'nowrap'
                     }}>
                       CHECKPOINT {activeItem.num} OF 06
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#27AE60' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', whiteSpace: 'nowrap' }}>
                       • {activeItem.title}
                     </span>
                   </div>
-                  <CheckCircle2 size={22} style={{ color: '#27AE60' }} />
+                  <CheckCircle2 size={20} style={{ color: '#27AE60', flexShrink: 0 }} />
                 </div>
 
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#141210', lineHeight: '1.3' }}>
+                <div style={{ fontSize: '17px', fontWeight: 800, color: '#141210', lineHeight: '1.35' }}>
                   {activeItem.q}
                 </div>
 
                 <div style={{
                   backgroundColor: 'rgba(39, 174, 96, 0.08)',
                   borderLeft: '4px solid #27AE60',
-                  borderRadius: '0 14px 14px 0',
-                  padding: '18px 20px',
-                  fontSize: '15px',
+                  borderRadius: '0 12px 12px 0',
+                  padding: '14px 14px',
+                  fontSize: '14px',
                   color: 'var(--color-secondary)',
-                  lineHeight: '1.6'
+                  lineHeight: '1.55'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                    <ShieldCheck size={18} style={{ color: '#27AE60' }} />
-                    <strong style={{ color: '#27AE60', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                    <ShieldCheck size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
+                    <strong style={{ color: '#27AE60', fontSize: '11px', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
                       THE LINFAFLOW® STANDARD
                     </strong>
                   </div>
                   {activeItem.a}
                 </div>
 
-                {/* PREV / NEXT NAVIGATION CONTROLS */}
+                {/* PREV / NEXT NAVIGATION CONTROLS — PERFECT MOBILE FLEX */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  paddingTop: '10px',
+                  gap: '8px',
+                  paddingTop: '12px',
                   borderTop: '1px solid rgba(0,0,0,0.06)'
                 }}>
                   <button
                     disabled={activeBuyerTab === 0}
                     onClick={() => setActiveBuyerTab(prev => Math.max(0, prev - 1))}
                     style={{
-                      backgroundColor: 'transparent',
+                      backgroundColor: activeBuyerTab === 0 ? 'transparent' : 'rgba(39, 174, 96, 0.08)',
                       color: activeBuyerTab === 0 ? '#CBD5E0' : '#27AE60',
-                      border: 'none',
-                      fontSize: '13.5px',
+                      border: activeBuyerTab === 0 ? '1px solid #E2E8F0' : '1px solid rgba(39, 174, 96, 0.3)',
+                      padding: '8px 12px',
+                      borderRadius: '10px',
+                      fontSize: '12px',
                       fontWeight: 800,
                       cursor: activeBuyerTab === 0 ? 'default' : 'pointer',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '4px'
+                      gap: '4px',
+                      whiteSpace: 'nowrap'
                     }}
                   >
-                    ← Previous Standard
+                    ← Prev
                   </button>
 
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-muted)' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-primary)', whiteSpace: 'nowrap' }}>
                     {activeBuyerTab + 1} / 6
                   </div>
 
@@ -1655,20 +1682,22 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     disabled={activeBuyerTab === list.length - 1}
                     onClick={() => setActiveBuyerTab(prev => Math.min(list.length - 1, prev + 1))}
                     style={{
-                      backgroundColor: activeBuyerTab === list.length - 1 ? 'transparent' : 'rgba(39, 174, 96, 0.1)',
-                      color: activeBuyerTab === list.length - 1 ? '#CBD5E0' : '#27AE60',
-                      border: 'none',
-                      padding: '6px 14px',
-                      borderRadius: '999px',
-                      fontSize: '13.5px',
+                      backgroundColor: activeBuyerTab === list.length - 1 ? 'transparent' : '#27AE60',
+                      color: activeBuyerTab === list.length - 1 ? '#CBD5E0' : '#FFFFFF',
+                      border: activeBuyerTab === list.length - 1 ? '1px solid #E2E8F0' : 'none',
+                      padding: '8px 12px',
+                      borderRadius: '10px',
+                      fontSize: '12px',
                       fontWeight: 800,
                       cursor: activeBuyerTab === list.length - 1 ? 'default' : 'pointer',
-                      display: 'flex',
+                      display: 'inline-flex',
                       alignItems: 'center',
-                      gap: '4px'
+                      gap: '4px',
+                      whiteSpace: 'nowrap',
+                      boxShadow: activeBuyerTab === list.length - 1 ? 'none' : '0 3px 10px rgba(39, 174, 96, 0.25)'
                     }}
                   >
-                    Next Standard →
+                    Next →
                   </button>
                 </div>
               </div>
