@@ -1509,11 +1509,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             </p>
           </div>
 
-          {/* TAB SELECTOR STRIP — FULLY RESPONSIVE */}
+          {/* TAB SELECTOR STRIP — UNIFORM ALIGNMENT PATTERN */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(95px, 1fr))',
-            gap: '6px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+            gap: '8px',
             marginBottom: '20px',
             width: '100%',
             boxSizing: 'border-box'
@@ -1535,15 +1535,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     backgroundColor: isActive ? '#27AE60' : 'rgba(255, 255, 255, 0.9)',
                     color: isActive ? '#FFFFFF' : '#27AE60',
                     border: isActive ? '1.5px solid #27AE60' : '1.5px solid rgba(39, 174, 96, 0.3)',
-                    padding: '8px 6px',
-                    borderRadius: '10px',
-                    fontSize: '11px',
+                    padding: '9px 12px',
+                    borderRadius: '12px',
+                    fontSize: '11.5px',
                     fontWeight: 800,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '5px',
+                    justifyContent: 'flex-start',
+                    gap: '8px',
                     transition: 'all 0.2s ease',
                     boxShadow: isActive ? '0 3px 10px rgba(39, 174, 96, 0.25)' : 'none',
                     whiteSpace: 'nowrap',
@@ -1553,8 +1553,8 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   }}
                 >
                   <span style={{
-                    width: '18px',
-                    height: '18px',
+                    width: '20px',
+                    height: '20px',
                     borderRadius: '50%',
                     backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(39, 174, 96, 0.15)',
                     display: 'inline-flex',
@@ -1598,13 +1598,12 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               }}>
                 <div style={{
                   display: 'flex',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',
+                  flexDirection: 'column',
                   gap: '8px',
                   borderBottom: '1px solid rgba(0,0,0,0.06)',
                   paddingBottom: '12px'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', minWidth: 0 }}>
+                  <div>
                     <span style={{
                       backgroundColor: '#27AE60',
                       color: '#FFFFFF',
@@ -1612,16 +1611,19 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                       borderRadius: '999px',
                       fontSize: '11px',
                       fontWeight: 900,
-                      letterSpacing: '0.5px',
-                      whiteSpace: 'nowrap'
+                      letterSpacing: '0.6px',
+                      display: 'inline-block'
                     }}>
                       CHECKPOINT {activeItem.num} OF 06
                     </span>
-                    <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', whiteSpace: 'nowrap' }}>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#27AE60' }}>
                       • {activeItem.title}
                     </span>
+                    <CheckCircle2 size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
                   </div>
-                  <CheckCircle2 size={20} style={{ color: '#27AE60', flexShrink: 0, marginTop: '2px' }} />
                 </div>
 
                 <div style={{ fontSize: '17px', fontWeight: 800, color: '#141210', lineHeight: '1.35' }}>
