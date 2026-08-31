@@ -20,7 +20,7 @@ import {
   Zap
 } from 'lucide-react';
 
-const CHECKOUT_URL = "https://cc.slimsodapowder.com/dtcnew-whop/?hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF83Nzg0OTU4&affid=aff1982814";
+const CHECKOUT_URL = "https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814";
 
 export function SlimSodaListicle({ onNavHome }) {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
