@@ -20,13 +20,18 @@ import {
   Zap,
   HelpCircle,
   ShieldCheck,
-  Footprints,
-  HeartPulse
+  Moon,
+  Sparkles,
+  Layers,
+  Brain,
+  HeartPulse,
+  Smile,
+  PackageCheck
 } from 'lucide-react';
 
-const CHECKOUT_URL = "https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814";
+const CHECKOUT_URL = "https://cc.usesonnus.com/checkout.php?hid=b2lkPW9mZl80MjQwNDIwJmFpZD1hZmYxOTgyODE0JnVpZD1ibF85MDY6ODgw&affid=aff1982814";
 
-export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
+export function SonnusListicle({ onNavHome, onSelectProduct }) {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeBuyerTab, setActiveBuyerTab] = useState(0);
@@ -60,7 +65,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
   };
 
   return (
-    <div className="listicle-linfaflow-wrapper" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--color-primary)', minHeight: '100vh' }}>
+    <div className="listicle-sonnus-wrapper" style={{ backgroundColor: 'var(--bg-page)', color: 'var(--color-primary)', minHeight: '100vh' }}>
       
       {/* 01 — STICKY EDITORIAL & BRAND HEADER BAR */}
       <header style={{
@@ -152,7 +157,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             letterSpacing: '0.5px'
           }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#27AE60' }}></span>
-            <span>FEATURED ARTICLE: LINFAFLOW®</span>
+            <span>FEATURED ARTICLE: SONNUS®</span>
           </div>
 
           {/* Action CTA -> Checkout */}
@@ -170,14 +175,17 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '6px',
               letterSpacing: '0.3px',
               textDecoration: 'none',
               whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              boxSizing: 'border-box',
               flexShrink: 0
             }}
           >
-            <span>SHOP LINFAFLOW®</span>
+            <span>SHOP SONNUS®</span>
             <ArrowRight size={14} />
           </a>
         </div>
@@ -201,7 +209,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             textTransform: 'uppercase',
             marginBottom: '14px'
           }}>
-            <span>LYMPHATIC WELLNESS REPORT</span>
+            <span>NIGHTTIME WELLNESS REPORT</span>
           </div>
 
           <h1 style={{
@@ -213,7 +221,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             margin: '12px 0 16px',
             letterSpacing: '-0.5px'
           }}>
-            7 Reasons More People Are Paying Attention to Lymphatic Wellness — And Why LinfaFlow® Is Making the Routine Surprisingly Simple
+            7 Reasons More People Are Rethinking Their Nighttime Routine — And Looking Beyond “Just More Melatonin”
           </h1>
 
           <p style={{
@@ -225,7 +233,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             maxWidth: '760px',
             marginInline: 'auto'
           }}>
-            Your body already has a natural system responsible for moving fluid through tissues and supporting everyday balance. LinfaFlow was created around one simple idea: support that natural flow without turning wellness into another complicated routine.
+            Sonnus combines 10 nighttime-support ingredients with just 0.9 mg of melatonin in two Wild Berry gummies — creating a simpler way to make winding down part of the night.
           </p>
 
           <div style={{
@@ -246,7 +254,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             </span>
             <span>•</span>
             <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-              <BookOpen size={14} /> BOTANICAL & LYMPHATIC WELLNESS
+              <BookOpen size={14} /> BOTANICAL & NIGHTTIME WELLNESS
             </span>
           </div>
         </header>
@@ -267,11 +275,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           justifyContent: 'center'
         }}>
           <img 
-            src="/assets/listicle/linfaflow/linfaflow-sec-1-why.jpg" 
-            alt="LinfaFlow Daily Lymphatic Wellness Routine" 
+            src="/assets/listicle/sonnus/sonnus_hero_routine.jpg" 
+            alt="Sonnus Nighttime Gummies Routine" 
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             onError={(e) => {
-              e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-1-why.jpg";
+              e.target.src = "/assets/listicle/sonnus/gallery-1.png";
             }}
           />
         </div>
@@ -285,25 +293,38 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: 1.3
           }}>
-            THE SYSTEM WORKING QUIETLY IN THE BACKGROUND EVERY SINGLE DAY
+            SHOULD AN ENTIRE NIGHTTIME ROUTINE REALLY REVOLVE AROUND ONE INGREDIENT?
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '18px' }}>
-              Most people can name a few things they associate with everyday wellness: Hydration, Nutrition, Movement, Sleep, and maybe Gut Health.
+              For years, the sleep-support aisle has followed a surprisingly simple formula: Put melatonin in a bottle. Increase the number on the front (3 mg... 5 mg... 10 mg...). Call it a nighttime solution.
             </p>
             <p style={{ marginBottom: '18px' }}>
-              But there is another vital network working continuously in your body — <strong>YOUR LYMPHATIC SYSTEM</strong>.
+              And while melatonin plays an important role in normal sleep-wake timing, there's an obvious question more people are starting to ask: <strong>IS MORE MELATONIN TRULY THE BETTER WAY?</strong>
             </p>
             <p style={{ marginBottom: '18px', paddingLeft: '16px', borderLeft: '3px solid #27AE60', fontStyle: 'italic' }}>
-              It is part of an extensive system that helps move fluid through tissues, supporting normal fluid balance and immune function. And unlike the cardiovascular system, it doesn't have one central pump doing all the work.
+              Because the transition from a busy day into rest involves more than simply looking at the clock. There's the mental pace of the evening, screen exposure, late work, stress, caffeine, environment, and routine.
             </p>
             <p style={{ marginBottom: '18px' }}>
-              Movement, muscle activity, breathing and normal body processes all contribute to lymphatic movement. Which raises an interesting question: If movement and flow are such fundamental parts of everyday physiology... <em>why do so many wellness routines ignore them completely?</em>
+              That's where <strong>Sonnus®</strong> takes a different approach. Instead of building the entire formula around melatonin alone, Sonnus combines <strong>10 nighttime-support ingredients</strong> into two convenient Wild Berry gummies.
             </p>
             <p style={{ marginBottom: '24px' }}>
-              That's the idea behind <strong>LinfaFlow®</strong>. Not a harsh cleanse. Not a caffeine stimulant. Not a 12-step protocol. LinfaFlow is a concentrated liquid dietary supplement built around four traditional botanicals: <strong>Cleavers, Stillingia Root, Red Clover Blossom, and Prickly Ash Bark</strong>.
+              Ten ingredients. Two gummies. One easy nightly ritual.
             </p>
+
+            <div style={{
+              backgroundColor: '#1B2613',
+              color: '#FFFFFF',
+              padding: '20px 24px',
+              borderRadius: 'var(--radius-md)',
+              textAlign: 'center',
+              marginBottom: '24px'
+            }}>
+              <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '20px', color: '#27AE60', fontWeight: 700 }}>
+                CHEW. UNWIND. REST.
+              </div>
+            </div>
 
             <div style={{ textAlign: 'center', marginTop: '28px' }}>
               <button 
@@ -353,7 +374,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            YOUR LYMPHATIC SYSTEM DOES MORE THAN MOST PEOPLE REALIZE
+            YOUR NIGHT STARTS BEFORE YOUR HEAD HITS THE PILLOW
           </h2>
 
           {/* PRODUCT HIGHLIGHT IMAGE FOR REASON #1 */}
@@ -371,18 +392,18 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             justifyContent: 'center'
           }}>
             <img 
-              src="/assets/listicle/linfaflow/linfaflow_sec1_product_hero.jpg" 
-              alt="LinfaFlow Liquid Dropper Bottle Highlight" 
+              src="/assets/listicle/sonnus/sonnus_evening_winddown.jpg" 
+              alt="Sonnus Bedtime Routine Highlight" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/assets/listicle/linfaflow/linfaflow_sec_2_dropper_action.jpg";
+                e.target.src = "/assets/listicle/sonnus/gallery-2.png";
               }}
             />
           </div>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '16px' }}>
-              Think of your cardiovascular system and most people immediately picture the heart pumping blood through vessels. The lymphatic system works differently: it consists of vessels, nodes and tissues that transport lymph fluid back toward circulation.
+              One of the biggest mistakes people make with nighttime routines is thinking sleep begins the moment they get into bed. It doesn't. The transition starts earlier — as your environment changes, activity slows down, and stimulation drops.
             </p>
             
             <div style={{
@@ -393,26 +414,23 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '20px'
             }}>
               <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '10px' }}>
-                KEY PHYSIOLOGICAL ROLES OF THE LYMPHATIC SYSTEM:
+                CREATING A CLEAR EVENING TRANSITION:
               </h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontWeight: 600 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> Normal fluid movement across body tissues
+                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> ON → OFF: Dimming lights and closing laptop work
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontWeight: 600 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> Supporting natural immune function and filtration
+                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> BUSY → QUIET: Reducing screen stimulation and late messages
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
-                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> Return of fluid from tissues back into circulation
+                  <CheckCircle2 size={16} style={{ color: '#27AE60' }} /> DAY → NIGHT: Giving your body a clear bedtime signal
                 </li>
               </ul>
             </div>
 
-            <p style={{ marginBottom: '16px' }}>
-              And there is one crucial difference: <strong>THERE IS NO SINGLE CENTRAL "LYMPHATIC PUMP."</strong>
-            </p>
             <p style={{ marginBottom: '24px' }}>
-              Normal lymphatic movement is assisted by everyday actions — walking, moving muscles, breathing, and physical activity. LinfaFlow does not replace movement; it was designed to complement a daily routine built around movement, hydration, and botanical wellness.
+              Sonnus was built around that transition. Two gummies become a simple ritual you can pair with the habits that already support a better nighttime environment.
             </p>
 
             <div style={{
@@ -424,7 +442,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '24px'
             }}>
               <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '20px', color: '#27AE60', fontWeight: 700 }}>
-                SUPPORT THE FLOW YOUR BODY ALREADY KNOWS.
+                GIVE YOUR NIGHT A CLEAR BEGINNING.
               </div>
             </div>
           </div>
@@ -455,7 +473,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            LINFAFLOW DOESN'T TRY TO TURN WELLNESS INTO A 12-STEP PROJECT
+            SONNUS DOESN'T BUILD THE ENTIRE FORMULA AROUND MELATONIN
           </h2>
 
           {/* PRODUCT HIGHLIGHT IMAGE FOR REASON #2 */}
@@ -473,24 +491,24 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             justifyContent: 'center'
           }}>
             <img 
-              src="/assets/listicle/linfaflow/linfaflow_sec2_product_routine.jpg" 
-              alt="LinfaFlow Daily Dropper Routine Highlight" 
+              src="/assets/listicle/sonnus/onnus_gummy_close-up.jpg" 
+              alt="Sonnus 0.9mg Melatonin Formula" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/assets/listicle/linfaflow/02-hero-bottle.webp";
+                e.target.src = "/assets/listicle/sonnus/gallery-4.png";
               }}
             />
           </div>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '16px' }}>
-              There is an irony in modern wellness: products that are supposed to make people feel better often create routines that are almost impossible to maintain.
+              Melatonin matters. It is a hormone naturally produced by the body and involved in normal sleep-wake timing. But Sonnus uses a different formula philosophy:
             </p>
-            <p style={{ marginBottom: '16px' }}>
-              One capsule before breakfast, two pills at lunch, a powder in the afternoon, another supplement before bed... Before long, <em>the routine itself becomes the problem.</em>
+            <p style={{ marginBottom: '16px', fontWeight: 700, color: 'var(--color-primary)' }}>
+              MELATONIN IS PART OF THE NIGHTTIME STORY — NOT THE ENTIRE STORY.
             </p>
             <p style={{ marginBottom: '24px' }}>
-              LinfaFlow starts from the opposite philosophy: <strong>MAKE IT EASY ENOUGH TO ACTUALLY DO.</strong>
+              Sonnus contains just <strong>0.9 mg of melatonin per serving</strong> as part of a broader 10-ingredient blend. Instead of relying on a single high-dose ingredient, the formula includes nutrients, amino acids and botanical compounds selected around nighttime wellness.
             </p>
 
             <div style={{
@@ -502,10 +520,10 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '24px'
             }}>
               <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '8px' }}>
-                ONE BOTTLE. ONE DROPPER. ABOUT 30 SECONDS.
+                MORE INGREDIENT STRATEGY. LESS DEPENDENCE ON ONE NUMBER.
               </div>
               <p style={{ fontSize: '14px', color: 'var(--color-secondary)', margin: 0 }}>
-                No large pills. No powders to mix. No shaker bottle. No caffeine or stimulants.
+                0.9 mg Melatonin + Magnesium + L-Theanine + GABA + 5-HTP + Apigenin + Lemon Balm + B Vitamins.
               </p>
             </div>
           </div>
@@ -513,7 +531,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 06 — REASON #3 (4 BOTANICALS) */}
+        {/* 06 — REASON #3 (10 INGREDIENTS GRID) */}
         <section id="reason-3" style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'inline-flex',
@@ -536,22 +554,22 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            IT USES A FOCUSED 4-BOTANICAL FORMULA INSTEAD OF AN OVERSTUFFED "DETOX" BLEND
+            TEN NIGHTTIME-SUPPORT INGREDIENTS. NOT TEN SEPARATE BOTTLES.
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)', marginBottom: '28px' }}>
             <p style={{ marginBottom: '16px' }}>
-              More ingredients can look impressive on a label, but more does not automatically mean better. Some formulas stuff 15 or 20 ingredients without a clear reason for each.
+              Imagine trying to build the Sonnus formula one product at a time: a bottle of magnesium, another of L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, B vitamins, and Melatonin. Suddenly your "simple bedtime routine" has become another supplement stack.
             </p>
             <p style={{ marginBottom: '16px' }}>
-              LinfaFlow focuses on four principal, clearly identified Western botanicals:
+              Sonnus removes that friction by bringing together key complementary components:
             </p>
           </div>
 
           {/* 4 INGREDIENT CARDS WITH PHOTOS & DETAILS */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '32px' }}>
             
-            {/* INGREDIENT 1: CLEAVERS */}
+            {/* INGREDIENT 1: MAGNESIUM */}
             <div style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
@@ -573,11 +591,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   border: '1px solid var(--color-border)'
                 }}>
                   <img 
-                    src="/assets/listicle/linfaflow/gallery-botanicals.jpg" 
-                    alt="Cleavers Botanical Extract" 
+                    src="/assets/listicle/sonnus/ingredient_magnesium.jpg" 
+                    alt="Magnesium Mineral Foundation" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/gallery-botanicals.jpg";
+                      e.target.src = "/assets/listicle/sonnus/section-ingredients.png";
                     }}
                   />
                 </div>
@@ -585,13 +603,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      KEY BOTANICAL
+                      MINERAL FOUNDATION
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      CLEAVERS
+                      MAGNESIUM
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
-                      (Galium aparine)
+                      (Essential Mineral)
                     </div>
                   </div>
                   <div style={{
@@ -605,15 +623,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     color: '#27AE60',
                     flexShrink: 0
                   }}>
-                    <Leaf size={18} />
+                    <ShieldCheck size={18} />
                   </div>
                 </div>
 
                 <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
-                  The cornerstone botanical of lymphatic herbalism
+                  Involved in normal nervous system and muscle function
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
-                  A familiar plant in traditional Western herbalism and historically associated with normal fluid balance and lymphatic wellness.
+                  Essential mineral used widely in modern nighttime-wellness formulations to form part of a broader relaxation profile.
                 </p>
               </div>
               <div style={{
@@ -623,11 +641,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 fontSize: '12px',
                 color: 'var(--color-primary)'
               }}>
-                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To anchor LinfaFlow's traditional lymphatic-wellness positioning.*
+                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To form part of Sonnus' broader relaxation foundation.*
               </div>
             </div>
 
-            {/* INGREDIENT 2: STILLINGIA ROOT */}
+            {/* INGREDIENT 2: L-THEANINE */}
             <div style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
@@ -649,11 +667,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   border: '1px solid var(--color-border)'
                 }}>
                   <img 
-                    src="/assets/listicle/linfaflow/linfaflow-sec-3-ingredients.jpg" 
-                    alt="Stillingia Root Extract" 
+                    src="/assets/listicle/sonnus/ingredient_ltheanine.jpg" 
+                    alt="L-Theanine Amino Acid" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-3-ingredients.jpg";
+                      e.target.src = "/assets/listicle/sonnus/section-benefits.png";
                     }}
                   />
                 </div>
@@ -661,13 +679,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      HERBAL ROOT
+                      TEA LEAF AMINO ACID
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      STILLINGIA ROOT
+                      L-THEANINE
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
-                      (Stillingia sylvatica)
+                      (Camellia sinensis extract)
                     </div>
                   </div>
                   <div style={{
@@ -686,10 +704,10 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 </div>
 
                 <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
-                  Also known as Queen's Root in traditional practice
+                  Well-studied amino acid associated with relaxation
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
-                  Has a documented history of use in traditional North American herbal practice for fluid balance and tissue support.
+                  Occurs naturally in tea leaves and has attracted considerable research around relaxation and stress-response support.
                 </p>
               </div>
               <div style={{
@@ -699,11 +717,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 fontSize: '12px',
                 color: 'var(--color-primary)'
               }}>
-                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To complement the formula's traditional botanical profile.*
+                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To complement Sonnus' nighttime-calming approach.*
               </div>
             </div>
 
-            {/* INGREDIENT 3: RED CLOVER BLOSSOM */}
+            {/* INGREDIENT 3: GABA & 5-HTP */}
             <div style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
@@ -725,11 +743,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   border: '1px solid var(--color-border)'
                 }}>
                   <img 
-                    src="/assets/listicle/linfaflow/gallery-lifestyle.jpg" 
-                    alt="Red Clover Blossom" 
+                    src="/assets/listicle/sonnus/ingredient_gaba_5htp.jpg" 
+                    alt="GABA and 5-HTP Precursors" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/gallery-lifestyle.jpg";
+                      e.target.src = "/assets/listicle/sonnus/section-how-it-works.png";
                     }}
                   />
                 </div>
@@ -737,13 +755,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      BOTANICAL FLOWER
+                      NEUROTRANSMITTER PATHWAYS
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      RED CLOVER BLOSSOM
+                      GABA & 5-HTP
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
-                      (Trifolium pratense)
+                      (Inhibitory & Serotonin Co-factors)
                     </div>
                   </div>
                   <div style={{
@@ -757,15 +775,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     color: '#27AE60',
                     flexShrink: 0
                   }}>
-                    <Droplets size={18} />
+                    <Brain size={18} />
                   </div>
                 </div>
 
                 <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
-                  Rich in naturally occurring plant compounds
+                  Key components involved in body's natural signaling
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
-                  One of the most recognizable plants in Western herbal traditions, valued for its plant compounds and general wellness profile.
+                  Naturally occurring amino acid compounds involved in normal neurotransmitter signaling throughout the nervous system.
                 </p>
               </div>
               <div style={{
@@ -775,11 +793,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 fontSize: '12px',
                 color: 'var(--color-primary)'
               }}>
-                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To broaden the botanical profile with active plant compounds.*
+                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To support multi-pathway relaxation.*
               </div>
             </div>
 
-            {/* INGREDIENT 4: PRICKLY ASH BARK */}
+            {/* INGREDIENT 4: APIGENIN & LEMON BALM */}
             <div style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--color-border)',
@@ -801,11 +819,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   border: '1px solid var(--color-border)'
                 }}>
                   <img 
-                    src="/assets/listicle/linfaflow/linfaflow-sec-2-benefits.jpg" 
-                    alt="Prickly Ash Bark" 
+                    src="/assets/listicle/sonnus/ingredient_apigenin_lemonbalm.jpg" 
+                    alt="Apigenin and Lemon Balm Botanicals" 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     onError={(e) => {
-                      e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-2-benefits.jpg";
+                      e.target.src = "/assets/listicle/sonnus/section-why-choose.png";
                     }}
                   />
                 </div>
@@ -813,13 +831,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      CIRCULATORY BARK
+                      EVENING BOTANICALS
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      PRICKLY ASH BARK
+                      APIGENIN & LEMON BALM
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
-                      (Zanthoxylum)
+                      (Chamomile & Melissa officinalis)
                     </div>
                   </div>
                   <div style={{
@@ -833,15 +851,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     color: '#27AE60',
                     flexShrink: 0
                   }}>
-                    <Activity size={18} />
+                    <Leaf size={18} />
                   </div>
                 </div>
 
                 <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-muted)', marginBottom: '10px' }}>
-                  Traditionally described as a warming botanical
+                  Classic evening plant compounds with traditional history
                 </p>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '16px' }}>
-                  Traditionally described by herbalists as a "warming" botanical with a history of use in practices associated with healthy circulation.
+                  Apigenin (found naturally in chamomile) and Lemon Balm have long histories of use in traditional evening preparations.
                 </p>
               </div>
               <div style={{
@@ -851,7 +869,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 fontSize: '12px',
                 color: 'var(--color-primary)'
               }}>
-                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To complement LinfaFlow's circulatory-wellness approach.*
+                <strong style={{ color: '#27AE60' }}>WHY IT'S HERE:</strong> To add a botanical dimension to evening wellness.*
               </div>
             </div>
 
@@ -860,7 +878,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 07 — REASON #4 (FLOW NOT HARSH FLUSH) */}
+        {/* 07 — REASON #4 */}
         <section id="reason-4" style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'inline-flex',
@@ -883,7 +901,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            IT'S DESIGNED AROUND FLOW — NOT A HARSH "FLUSH"
+            THE FORMULA IS BUILT AROUND MULTIPLE PARTS OF NIGHTTIME WELLNESS
           </h2>
 
           {/* IMAGE FOR REASON #4 */}
@@ -901,46 +919,46 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             justifyContent: 'center'
           }}>
             <img 
-              src="/assets/listicle/linfaflow/linfaflow-sec-5-howitworks.jpg" 
-              alt="LinfaFlow How It Works Routine" 
+              src="/assets/listicle/sonnus/sonnus_bedtime_ritual.jpg" 
+              alt="Sonnus How It Works Routine" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-5-howitworks.jpg";
+                e.target.src = "/assets/listicle/sonnus/section-how-it-works.png";
               }}
             />
           </div>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '16px' }}>
-              A lot of products in the wellness category use dramatic marketing: <em>"Flush everything out", "Detox overnight", "Cleanse in days"</em>.
+              Sonnus isn't trying to convince you that one ingredient is magic. Its story is the <strong>COMBINATION</strong>.
             </p>
             <p style={{ marginBottom: '16px', fontWeight: 700, color: 'var(--color-primary)' }}>
-              Your body is not a dirty pipe that needs to be flushed.
+              A good nighttime routine should help you slow down — not give you more things to think about.
             </p>
             <p style={{ marginBottom: '24px' }}>
-              It already has sophisticated systems responsible for normal circulation, fluid movement and waste processing. LinfaFlow is designed to complement normal body processes, not pretend to replace them.
+              Think about how backwards some wellness routines have become: people reach bedtime exhausted, then open six supplement bottles, check three apps, review a sleep score, and set five alarms. Sonnus is intentionally simpler:
             </p>
 
             {/* 4-STEP RITUAL CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px', marginBottom: '24px' }}>
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>01 — DROP</div>
-                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Use LinfaFlow liquid drops according to product directions.</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>01 — CHEW</div>
+                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Take two Wild Berry gummies approx. 30 minutes before bedtime.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>02 — HYDRATE</div>
-                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Adequate hydration is vital for normal physiological fluid function.</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>02 — UNWIND</div>
+                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Dim the lights, lower stimulation, and put work away.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>03 — MOVE</div>
-                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Regular walking and movement naturally encourage lymphatic flow.</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>03 — REST</div>
+                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Let your body transition naturally into a calmer evening environment.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
                 <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>04 — REPEAT</div>
-                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Build a simple daily routine you can actually maintain.</div>
+                <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Build a consistent nightly signal you can actually stick with.</div>
               </div>
             </div>
           </div>
@@ -948,7 +966,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 08 — REASON #5 (LIQUID FORMAT VS CABINET OF PILLS) */}
+        {/* 08 — REASON #5 */}
         <section id="reason-5" style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'inline-flex',
@@ -971,7 +989,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            THE LIQUID FORMAT MAKES IT DIFFERENT FROM ANOTHER CABINET FULL OF PILLS
+            IT CHALLENGES THE "MORE MELATONIN MUST BE BETTER" MINDSET
           </h2>
 
           {/* IMAGE FOR REASON #5 */}
@@ -989,21 +1007,21 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             justifyContent: 'center'
           }}>
             <img 
-              src="/assets/listicle/linfaflow/linfaflow-sec-4-whychoose.jpg" 
-              alt="LinfaFlow Routine vs Complex Supplements" 
+              src="/assets/listicle/sonnus/sonnus_routine_vs_stack.jpg" 
+              alt="Sonnus Melatonin Philosophy Comparison" 
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => {
-                e.target.src = "/LISTICLE LINFAFLOW/Imagens/linfaflow-sec-4-whychoose.jpg";
+                e.target.src = "/assets/listicle/sonnus/section-comparison.png";
               }}
             />
           </div>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '16px' }}>
-              Buying a supplement and actually using it consistently are two very different things. Think about how many pill bottles end up sitting unfinished in kitchen cabinets.
+              Spend five minutes shopping for sleep gummies and you'll notice a trend: a lot of products compete using one number — Melatonin MG. Higher. Higher. Higher.
             </p>
             <p style={{ marginBottom: '16px' }}>
-              People rarely stop because they decided wellness no longer matters — they stop because the routine becomes annoying. Too many pills, too many instructions, too much friction.
+              But dose size isn't the same thing as product completeness. Instead of asking "How much melatonin can we fit into this gummy?", Sonnus asks: <em>"How can we create a broader nighttime ritual using multiple complementary ingredients?"</em>
             </p>
 
             {/* PERFECT RESPONSIVE GRID FOR 4 FRICTION CHIPS */}
@@ -1023,7 +1041,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 textAlign: 'center',
                 textTransform: 'uppercase'
               }}>
-                LINFAFLOW® REMOVES ROUTINE FRICTION:
+                SONNUS® REMOVES ROUTINE FRICTION:
               </div>
               <div style={{
                 display: 'grid',
@@ -1043,7 +1061,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO LARGE PILLS</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>0.9 MG MELATONIN</span>
                 </div>
 
                 <div style={{
@@ -1059,7 +1077,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO POWDERS TO MIX</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO HARSH POWDERS</span>
                 </div>
 
                 <div style={{
@@ -1100,7 +1118,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 09 — REASON #6 (FITS STRATEGY THAT MAKES SENSE) */}
+        {/* 09 — REASON #6 */}
         <section id="reason-6" style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'inline-flex',
@@ -1123,21 +1141,18 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            IT FITS INTO A WELLNESS STRATEGY THAT ALREADY MAKES SENSE
+            TWO GUMMIES MAKE THE ROUTINE ALMOST IMPOSSIBLE TO OVERCOMPLICATE
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
             <p style={{ marginBottom: '16px' }}>
-              One of the problems with many supplement pitches is that the product somehow becomes responsible for everything. LinfaFlow doesn't make that promise.
-            </p>
-            <p style={{ marginBottom: '20px' }}>
-              Instead, it makes sense as one focused component of a broader, sensible lifestyle foundation:
+              People love looking for one secret or sleep hack, but real life is less dramatic. A better nighttime environment is created by repeated signals:
             </p>
 
-            {/* 3 LIFESTYLE CARDS WITH LUCIDE ICONS (NO EMOJIS) */}
+            {/* 3 LIFESTYLE CARDS WITH LUCIDE ICONS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '28px' }}>
               
-              {/* CARD 1: MOVEMENT */}
+              {/* CARD 1: CONSISTENT SCHEDULE */}
               <div style={{
                 backgroundColor: '#FFFFFF',
                 border: '1px solid rgba(0,0,0,0.08)',
@@ -1159,19 +1174,19 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <Footprints size={22} />
+                  <Clock size={22} />
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    MOVEMENT
+                    CONSISTENT SCHEDULE
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
-                    Walking and muscle contraction support circulatory and lymphatic movement.
+                    Going to bed around the same time signals your body to wind down naturally.
                   </div>
                 </div>
               </div>
 
-              {/* CARD 2: HYDRATION */}
+              {/* CARD 2: DARKER ROOM */}
               <div style={{
                 backgroundColor: '#FFFFFF',
                 border: '1px solid rgba(0,0,0,0.08)',
@@ -1193,19 +1208,19 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <GlassWater size={22} />
+                  <Moon size={22} />
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    HYDRATION
+                    DARKER & COOLER ROOM
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
-                    Adequate fluid intake is essential for tissue hydration and fluid transport.
+                    Lower light and comfortable room temperatures encourage restful surroundings.
                   </div>
                 </div>
               </div>
 
-              {/* CARD 3: NUTRITION & REST */}
+              {/* CARD 3: CHEW & REST */}
               <div style={{
                 backgroundColor: '#FFFFFF',
                 border: '1px solid rgba(0,0,0,0.08)',
@@ -1227,14 +1242,14 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <HeartPulse size={22} />
+                  <Sparkles size={22} />
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    NUTRITION & REST
+                    NIGHTLY GUMMY RITUAL
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
-                    Whole food nutrition and recovery remain foundational to overall wellness.
+                    Two Wild Berry gummies provide 30 seconds of delicious wind-down routine.
                   </div>
                 </div>
               </div>
@@ -1252,14 +1267,14 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               letterSpacing: '0.3px',
               lineHeight: '1.4'
             }}>
-              IT DOESN'T ASK YOU TO REBUILD YOUR LIFE AROUND A BOTTLE. IT FITS INTO THE LIFE YOU ARE ALREADY LIVING.
+              IT DOESN'T NEED TO BECOME THE ENTIRE NIGHT. IT JUST NEEDS TO BECOME ONE CONSISTENT PART OF IT.
             </div>
           </div>
         </section>
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 10 — REASON #7 (90-DAY GUARANTEE) */}
+        {/* 10 — REASON #7 */}
         <section id="reason-7" style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'inline-flex',
@@ -1282,7 +1297,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '28px',
             lineHeight: '1.2'
           }}>
-            YOU GET 90 DAYS TO DECIDE WHETHER IT DESERVES A PLACE IN YOUR ROUTINE
+            YOU GET 90 DAYS TO DECIDE WHETHER IT DESERVES A PLACE ON YOUR NIGHTSTAND
           </h2>
 
           <div style={{
@@ -1357,7 +1372,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 color: 'var(--color-secondary)',
                 marginBottom: '20px'
               }}>
-                Supplements are personal. What fits one person's routine may not fit another's. That's why LinfaFlow® purchases are backed by a <strong>90-Day Money-Back Guarantee</strong>.
+                Trying a nighttime supplement always comes with uncertainty. That's why eligible Sonnus® purchases are covered by a <strong>90-Day Money-Back Guarantee</strong>.
               </p>
 
               <p style={{
@@ -1366,7 +1381,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 color: 'var(--color-secondary)',
                 marginBottom: '24px'
               }}>
-                Give the routine a fair opportunity. If it doesn't fit your daily lifestyle, simply contact us according to our refund policy.
+                Give the routine a fair opportunity. If it doesn't fit your nighttime lifestyle, simply contact customer support within the guarantee period.
               </p>
 
               <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
@@ -1393,7 +1408,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
                   }}
                 >
-                  <span>TRY LINFAFLOW® RISK-FREE</span>
+                  <span>TRY SONNUS® RISK-FREE</span>
                   <ArrowRight size={15} />
                 </a>
               </div>
@@ -1502,7 +1517,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               margin: '4px 0 0',
               lineHeight: '1.25'
             }}>
-              BEFORE BUYING ANY "LYMPHATIC" SUPPLEMENT, ASK THESE 6 QUESTIONS:
+              BEFORE BUYING ANY NIGHTTIME GUMMY, ASK THESE 6 QUESTIONS:
             </h2>
             <p style={{ fontSize: '13px', color: 'var(--color-muted)', marginTop: '6px' }}>
               Click through the tabs below to inspect our standards step-by-step:
@@ -1529,11 +1544,11 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           {/* TAB SELECTOR STRIP — EXACT 3X2 GRID ON DESKTOP */}
           <div className="buyer-tab-grid">
             {[
-              { num: '01', title: 'INGREDIENTS' },
+              { num: '01', title: 'MELATONIN' },
               { num: '02', title: 'FORMULA' },
-              { num: '03', title: 'CLAIMS' },
+              { num: '03', title: 'ROUTINE' },
               { num: '04', title: 'STIMULANTS' },
-              { num: '05', title: 'ROUTINE' },
+              { num: '05', title: 'STACK' },
               { num: '06', title: 'GUARANTEE' }
             ].map((item, idx) => {
               const isActive = activeBuyerTab === idx;
@@ -1585,12 +1600,12 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           {/* ACTIVE FEATURED SPOTLIGHT CARD */}
           {(() => {
             const list = [
-              { num: '01', title: 'INGREDIENTS', q: '1. Does it clearly tell you what\'s inside?', a: 'LinfaFlow does: Cleavers, Stillingia Root, Red Clover Blossom, and Prickly Ash Bark. 100% full ingredient disclosure.' },
-              { num: '02', title: 'FORMULA PURPOSE', q: '2. Can you understand why those ingredients are there?', a: 'The formula is built around botanicals with histories of traditional Western herbal use for lymphatic/circulatory wellness.' },
-              { num: '03', title: 'REALISTIC CLAIMS', q: '3. Is it promising a "miracle detox"?', a: 'LinfaFlow doesn\'t need to. It supports your body\'s natural physiological processes without false hype.' },
-              { num: '04', title: 'STIMULANT-FREE', q: '4. Is it loaded with stimulants?', a: 'No caffeine. No harsh laxatives. No stimulant-heavy positioning.' },
-              { num: '05', title: 'DAILY ROUTINE', q: '5. Is the routine realistic?', a: 'One simple liquid serving in water according to the label. No stack of 10 pills or powders to mix.' },
-              { num: '06', title: 'GUARANTEE', q: '6. Is there a meaningful guarantee?', a: 'Eligible LinfaFlow purchases come with a 90-Day Money-Back Guarantee.' }
+              { num: '01', title: 'MELATONIN DOSE', q: '1. Is the entire product built around high-dose melatonin alone?', a: 'Sonnus isn\'t. Melatonin (0.9 mg) is just one component of a 10-ingredient nighttime formula.' },
+              { num: '02', title: 'FORMULA COMPLETENESS', q: '2. Does it include complementary nighttime ingredients?', a: 'Yes. Magnesium, L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, B6, and B2 work together.' },
+              { num: '03', title: 'EASY ROUTINE', q: '3. Is the routine simple and easy to stick with?', a: 'Two Wild Berry gummies approximately 30 minutes before bedtime. Chew, unwind, and rest.' },
+              { num: '04', title: 'STIMULANT-FREE', q: '4. Is it completely free of caffeine and stimulants?', a: '100% caffeine-free and free of harsh stimulants or habit-forming sedatives.' },
+              { num: '05', title: 'REDUCES FRICTION', q: '5. Does it eliminate the need for 5 separate bottles?', a: 'Sonnus replaces supplement stack clutter with 1 simple 2-gummy nightly ritual.' },
+              { num: '06', title: 'RISK-FREE TRIAL', q: '6. Do you have time to decide if you like it?', a: 'Eligible Sonnus purchases include a 90-Day Money-Back Guarantee.' }
             ];
             const activeItem = list[activeBuyerTab];
             return (
@@ -1652,13 +1667,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
                     <ShieldCheck size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
                     <strong style={{ color: '#27AE60', fontSize: '11px', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
-                      THE LINFAFLOW® STANDARD
+                      THE SONNUS® STANDARD
                     </strong>
                   </div>
                   {activeItem.a}
                 </div>
 
-                {/* PREV / NEXT NAVIGATION CONTROLS — PERFECT MOBILE FLEX */}
+                {/* PREV / NEXT NAVIGATION CONTROLS */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -1719,16 +1734,16 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           })()}
         </section>
 
-        {/* 12 — CONVENIENCE VS BUYING HERBS SEPARATELY */}
+        {/* 12 — CONVENIENCE VS BUYING INGREDIENTS SEPARATELY */}
         <section style={{ marginBottom: '56px', textAlign: 'center', backgroundColor: 'var(--bg-card)', padding: '32px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
           <h3 style={{ fontFamily: 'var(--font-brand-display)', fontSize: '24px', color: 'var(--color-primary)', marginBottom: '12px' }}>
-            "CAN'T I JUST BUY THESE HERBS SEPARATELY?"
+            "CAN'T I JUST BUY THESE INGREDIENTS SEPARATELY?"
           </h3>
           <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', maxWidth: '680px', margin: '0 auto 20px', lineHeight: '1.6', textAlign: 'left' }}>
-            Of course! That's why this isn't a story about "secret ingredients". Buying botanicals separately means four different bottles, four labels, four purchasing decisions, and multiple steps. The real value proposition is <strong>CONVENIENCE</strong>: Four traditional botanicals brought together into a single liquid dropper formula.
+            Of course! But then you've recreated the exact problem Sonnus was designed to solve: buying 10 separate bottles, managing multiple labels, and cluttering your nightstand. The real value proposition is <strong>CONVENIENCE</strong>: Ten nighttime-support ingredients brought together into a single 2-gummy nightly ritual.
           </p>
           <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60' }}>
-            FOUR BOTANICALS. ONE DROPPER. DONE.
+            TEN INGREDIENTS. TWO GUMMIES. DONE.
           </div>
         </section>
 
@@ -1743,7 +1758,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
         }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
-              THE BOTANICAL FORMULA
+              THE NIGHTTIME FORMULA
             </div>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -1751,10 +1766,10 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               marginBottom: '12px'
             }}>
-              MEET LINFAFLOW®
+              MEET SONNUS®
             </h2>
             <p style={{ fontSize: '16px', fontWeight: 600, color: 'var(--color-secondary)' }}>
-              Four traditional botanicals. One liquid dropper. One simple routine.
+              Ten nighttime ingredients. Two Wild Berry gummies. One simple routine.
             </p>
           </div>
 
@@ -1768,27 +1783,27 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               width: '100%'
             }}>
               <img 
-                src="/assets/listicle/linfaflow/02-hero-bottle.webp" 
-                alt="LinfaFlow Bottle" 
+                src="/assets/listicle/sonnus/gallery-1.png" 
+                alt="Sonnus Bottle" 
                 style={{ width: '100%', height: 'auto', maxHeight: '380px', objectFit: 'contain', borderRadius: 'var(--radius-md)', display: 'block' }}
                 onError={(e) => {
-                  e.target.src = "/LISTICLE LINFAFLOW/Imagens/02-hero-bottle.webp";
+                  e.target.src = "/public/sonnus/images/gallery-1.png";
                 }}
               />
             </div>
 
             <div>
               <p style={{ fontSize: '15px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '20px' }}>
-                LinfaFlow is a concentrated liquid dietary supplement designed for adults looking for a practical, natural way to complement their daily fluid-balance and lymphatic wellness routine.*
+                Sonnus® is a concentrated nighttime dietary supplement designed for adults looking for a practical, enjoyable way to complement their evening wind-down routine.*
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '10px', marginBottom: '28px' }}>
                 {[
-                  'Convenient liquid dropper format',
-                  '4 traditional Western botanical extracts',
-                  'Supports healthy lymphatic function*',
-                  'Complements normal fluid balance*',
-                  'Supports healthy circulation comfort*',
+                  'Delicious Wild Berry gummy format',
+                  '10 complementary nighttime ingredients',
+                  'Balanced 0.9 mg of melatonin per serving',
+                  'Magnesium, L-Theanine, GABA & 5-HTP',
+                  'Apigenin, Lemon Balm & B-Vitamins',
                   'No caffeine or harsh stimulants'
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px', fontWeight: 600, color: 'var(--color-primary)' }}>
@@ -1822,7 +1837,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  <span>DISCOVER LINFAFLOW®</span>
+                  <span>DISCOVER SONNUS®</span>
                   <ArrowRight size={15} />
                 </a>
               </div>
@@ -1833,7 +1848,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           </div>
         </section>
 
-        {/* 14 — WHAT LINFAFLOW IS AND ISN'T */}
+        {/* 14 — WHAT SONNUS IS AND ISN'T */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{
@@ -1842,7 +1857,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               marginBottom: '4px'
             }}>
-              WHAT LINFAFLOW IS — AND WHAT IT ISN'T
+              WHAT SONNUS IS — AND WHAT IT ISN'T
             </h2>
             <p style={{ fontSize: '14px', color: 'var(--color-muted)' }}>
               Transparency is our core standard.
@@ -1877,13 +1892,13 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 marginBottom: '16px',
                 textTransform: 'uppercase'
               }}>
-                WHAT LINFAFLOW IS
+                WHAT SONNUS IS
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
-                  'A targeted botanical formula focused on traditional Western herbal use',
-                  'A practical liquid dropper created for effortless daily consistency',
-                  'Stimulant-free and designed around natural physiological flow',
+                  'A multi-ingredient nighttime formula combining 10 complementary nutrients',
+                  'A practical 2-gummy daily ritual created for effortless evening consistency',
+                  'Stimulant-free and designed around natural evening relaxation',
                   'Backed by a 90-Day Money-Back Guarantee'
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
@@ -1912,14 +1927,14 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 marginBottom: '16px',
                 textTransform: 'uppercase'
               }}>
-                WHAT LINFAFLOW IS NOT
+                WHAT SONNUS IS NOT
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
-                  'A "miracle flush" promising overnight weight loss or instant fixes',
-                  'A replacement for healthy lifestyle habits like hydration and walking',
-                  'A harsh diuretic or stimulant-packed cleanser',
-                  'A complicated stack requiring 10 different pills'
+                  'A heavy prescription sedative designed to "knock you out"',
+                  'A high-dose single-melatonin mega-dose supplement',
+                  'A harsh pharmaceutical treatment for insomnia',
+                  'A complicated stack requiring 10 different supplement bottles'
                 ].map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '14.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
                     <span style={{ color: '#E53E3E', fontWeight: 900, fontSize: '16px', lineHeight: '1', flexShrink: 0, marginTop: '2px' }}>✕</span>
@@ -1933,7 +1948,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 15 — UGC SOCIAL PROOF BANNER (SLIMSODA MATCH: NO OUTER CARD & ENLARGED 1:1 IMAGE) */}
+        {/* 15 — UGC SOCIAL PROOF BANNER */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{
             display: 'grid',
@@ -1943,7 +1958,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             width: '100%',
             boxSizing: 'border-box'
           }}>
-            {/* Left Column: Customer Collage Graphic (1:1 ENLARGED IMAGE) */}
+            {/* Left Column: 1:1 ENLARGED IMAGE */}
             <div style={{
               borderRadius: '24px',
               overflow: 'hidden',
@@ -1955,8 +1970,8 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               boxSizing: 'border-box'
             }}>
               <img 
-                src="/assets/listicle/linfaflow/rev-07.jpg" 
-                alt="Real LinfaFlow Customers"
+                src="/assets/listicle/sonnus/sonnus_ugc_collage.jpg" 
+                alt="Real Sonnus Customers"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -1966,7 +1981,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                   borderRadius: '24px'
                 }}
                 onError={(e) => {
-                  e.target.src = "/assets/pdp/linfaflow/rev-07.jpg";
+                  e.target.src = "/assets/listicle/sonnus/gallery-3.png";
                 }}
               />
             </div>
@@ -1996,7 +2011,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 marginBottom: '16px',
                 lineHeight: '1.2'
               }}>
-                WHY PEOPLE CHOOSE LINFAFLOW®
+                WHY PEOPLE CHOOSE SONNUS®
               </h2>
 
               <p style={{
@@ -2005,7 +2020,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 color: 'var(--color-secondary)',
                 marginBottom: '24px'
               }}>
-                One simple dropper of LinfaFlow® in water each day — that is the entire protocol. No swallowing multiple pills, no complicated schedules, no synthetic fillers. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
+                Two delicious Wild Berry gummies of Sonnus® each evening — that is the entire protocol. No swallowing multiple pills, no complicated stacks, no caffeine. People are discovering how easy consistency becomes when wellness fits seamlessly into real life. Try it risk-free with our 90-Day Guarantee.
               </p>
 
               <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -2032,7 +2047,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                     boxSizing: 'border-box'
                   }}
                 >
-                  <span>SEE LINFAFLOW BUNDLES</span>
+                  <span>SEE SONNUS BUNDLES</span>
                   <ArrowRight size={16} />
                 </a>
               </div>
@@ -2042,7 +2057,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-        {/* 16 — REAL CUSTOMER EXPERIENCES (DESKTOP LEFT IMAGE + STARS ABOVE TITLE / MOBILE UNTOUCHED) */}
+        {/* 16 — REAL CUSTOMER EXPERIENCES */}
         <section id="reviews-section" style={{ marginBottom: '56px' }}>
           <style>{`
             .review-card-item {
@@ -2055,6 +2070,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               flex-direction: row;
               gap: 24px;
               align-items: flex-start;
+              margin-bottom: 20px;
             }
             .review-photo-wrapper {
               width: 140px;
@@ -2100,183 +2116,82 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               fontFamily: 'var(--font-brand-display)',
               fontSize: '32px',
               color: 'var(--color-primary)',
-              marginTop: '6px'
+              margin: '4px 0 0'
             }}>
-              WHAT PEOPLE ARE SAYING
+              WHAT REAL CUSTOMERS VALUE
             </h2>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[
               {
-                id: 1,
-                author: 'Maria S.',
-                initials: 'MS',
+                name: 'Sarah M.',
                 stars: 5,
-                title: 'SO EASY TO ADD TO MY MORNING',
-                body: 'The liquid format makes this so much easier for me than remembering several different supplements.',
-                verified: true,
-                img: '/assets/listicle/linfaflow/rev-01.jpg'
+                title: '"IT\'S BECOME MY SIGNAL TO START WINDING DOWN."',
+                body: 'The gummies are simple to take and I\'ve made them part of the point in my evening when I stop working and start getting ready for bed.',
+                photo: '/assets/listicle/sonnus/imagem-2.jpg'
               },
               {
-                id: 2,
-                author: 'Laura K.',
-                initials: 'LK',
+                name: 'David R.',
                 stars: 5,
-                title: 'I LIKE HOW STRAIGHTFORWARD IT IS',
-                body: 'Four clearly listed botanicals and a dropper. I wanted something simple and this fits naturally into my routine.',
-                verified: true,
-                img: '/assets/listicle/linfaflow/rev-02.jpg'
+                title: '"I WANTED MORE THAN JUST MELATONIN."',
+                body: 'The ingredient list is what caught my attention. I like having a broader nighttime formula in one product rather than taking multiple supplements.',
+                photo: '/assets/listicle/sonnus/imagem-3.jpg'
               },
               {
-                id: 3,
-                author: 'Carla M.',
-                initials: 'CM',
+                name: 'Elena K.',
                 stars: 5,
-                title: 'NO MORE COMPLICATED SUPPLEMENT STACK',
-                body: 'I already focus on walking and hydration, so adding LinfaFlow to my routine was easy.',
-                verified: true,
-                img: '/assets/listicle/linfaflow/rev-03.jpg'
+                title: '"TWO GUMMIES AND DONE."',
+                body: 'No powders, no handful of capsules. It\'s exactly the kind of routine I can actually keep up with night after night.',
+                photo: '/assets/listicle/sonnus/imagem-5.jpg'
               },
               {
-                id: 4,
-                author: 'Patricia D.',
-                initials: 'PD',
+                name: 'Marcus P.',
                 stars: 5,
-                title: 'THE DROPPER FORMAT SOLD ME',
-                body: 'I\'ve never been great at remembering pills. This takes seconds.',
-                verified: true,
-                img: '/assets/listicle/linfaflow/rev-04.jpg'
+                title: '"THE FLAVOR MAKES IT EASY."',
+                body: 'The Wild Berry gummies taste great and fit naturally into my evening routine right after brushing my teeth.',
+                photo: '/assets/listicle/sonnus/imagem-7.jpg'
               }
-            ].map((rev) => (
-              <div key={rev.id} className="review-card-item">
-                {/* PHOTO ON LEFT ON DESKTOP / BOTTOM ON MOBILE */}
-                {rev.img && (
-                  <div className="review-photo-wrapper">
-                    <img
-                      src={rev.img}
-                      alt={`${rev.author} Routine Photo`}
-                      className="review-photo-img"
-                      onError={(e) => {
-                        e.target.src = "/assets/pdp/linfaflow/rev-0" + rev.id + ".jpg";
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* REVIEW TEXT CONTENT */}
-                <div style={{ flex: 1, width: '100%', order: 1 }}>
-                  {/* AUTHOR ROW */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <div
-                      style={{
-                        width: '32px',
-                        height: '32px',
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(39, 174, 96, 0.12)',
-                        color: '#27AE60',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '12px',
-                        fontWeight: 900,
-                        flexShrink: 0
-                      }}
-                    >
-                      {rev.initials}
-                    </div>
-
-                    <span style={{ fontSize: '15px', fontWeight: 800, color: '#141210' }}>
-                      {rev.author}
-                    </span>
-
-                    <span style={{ fontSize: '11px', color: '#27AE60', fontWeight: 700, backgroundColor: 'rgba(39, 174, 96, 0.08)', padding: '2px 8px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <CheckCircle2 size={12} /> Verified Buyer
-                    </span>
-                  </div>
-
-                  {/* 5 STARS (ABOVE TITLE) */}
-                  <div style={{ display: 'flex', gap: '3px', marginBottom: '8px' }}>
-                    {[...Array(rev.stars)].map((_, s) => (
-                      <Star key={s} size={15} fill="#F59E0B" style={{ color: '#F59E0B' }} />
+            ].map((rev, idx) => (
+              <div key={idx} className="review-card-item">
+                <div className="review-photo-wrapper">
+                  <img 
+                    src={rev.photo} 
+                    alt={rev.name} 
+                    className="review-photo-img" 
+                    onError={(e) => {
+                      e.target.src = "/assets/listicle/sonnus/gallery-2.png";
+                    }}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', color: '#F59E0B', gap: '2px', marginBottom: '6px' }}>
+                    {[...Array(rev.stars)].map((_, i) => (
+                      <Star key={i} size={15} fill="#F59E0B" />
                     ))}
                   </div>
-
-                  {/* TITLE */}
-                  <h3 style={{ fontSize: '15.5px', fontWeight: 900, color: '#141210', margin: '0 0 6px', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
-                    "{rev.title}"
-                  </h3>
-
-                  {/* BODY */}
-                  <p style={{ fontSize: '14.5px', color: '#444', lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
-                    "{rev.body}"
+                  <div style={{ fontSize: '17px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '6px' }}>
+                    {rev.title}
+                  </div>
+                  <p style={{ fontSize: '14.5px', lineHeight: '1.6', color: 'var(--color-secondary)', marginBottom: '12px' }}>
+                    {rev.body}
                   </p>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--color-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <CheckCircle2 size={14} style={{ color: '#27AE60' }} /> Verified Buyer — {rev.name}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 17 — MID-FUNNEL DARK BANNER CTA */}
-        <section style={{
-          backgroundColor: '#1B2613',
-          color: '#FFFFFF',
-          borderRadius: 'var(--radius-lg)',
-          padding: '40px 28px',
-          textAlign: 'center',
-          marginBottom: '56px'
-        }}>
-          <h2 style={{
-            fontFamily: 'var(--font-brand-display)',
-            fontSize: '30px',
-            color: '#FFFFFF',
-            marginBottom: '12px'
-          }}>
-            A SIMPLER ROUTINE STARTS WITH ONE SMALL STEP.
-          </h2>
-          <p style={{ fontSize: '16px', color: '#A0AEC0', maxWidth: '560px', margin: '0 auto 28px' }}>
-            Discover the full LinfaFlow formula, botanical details and today's available bundles.
-          </p>
+        <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
 
-          <a 
-            href={CHECKOUT_URL}
-            onClick={handleGoToCheckout}
-            style={{
-              backgroundColor: '#27AE60',
-              color: '#FFFFFF',
-              border: 'none',
-              padding: '12px 20px',
-              borderRadius: '12px',
-              fontWeight: 800,
-              fontSize: '13.5px',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px',
-              marginBottom: '16px',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              maxWidth: '100%',
-              boxSizing: 'border-box'
-            }}
-          >
-            <span>SEE LINFAFLOW OPTIONS</span>
-            <ArrowRight size={15} />
-          </a>
-
-          <div style={{ fontSize: '13px', color: '#718096', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-            <span>90-Day Money-Back Guarantee</span>
-            <span>•</span>
-            <span>Secure Checkout</span>
-          </div>
-        </section>
-
-        {/* 18 — OFFER PREVIEW */}
+        {/* 17 — OFFER PREVIEW */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '36px' }}>
             <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', marginBottom: '6px' }}>
-              TODAY'S LINFAFLOW OFFER
+              TODAY'S SONNUS OFFER
             </div>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -2325,15 +2240,15 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               <div>
                 <div style={{ height: '130px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <img
-                    src="/assets/listicle/linfaflow/bundle-1.png"
-                    alt="LinfaFlow Starter Bundle"
+                    src="/assets/listicle/sonnus/bundle-1.png"
+                    alt="Sonnus Starter Bundle"
                     style={{ maxHeight: '100%', maxWidth: '85%', objectFit: 'contain', filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.12))' }}
                   />
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-muted)', letterSpacing: '1px', marginBottom: '4px' }}>STARTER</div>
                 <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>BUY 1 + GET 1 FREE</div>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#27AE60', marginBottom: '8px' }}>$34.75 / bottle ($69.50 total)</div>
-                <p style={{ fontSize: '13px', color: 'var(--color-secondary)', marginBottom: '20px', lineHeight: '1.4' }}>Ideal for starting your liquid routine.</p>
+                <p style={{ fontSize: '13px', color: 'var(--color-secondary)', marginBottom: '20px', lineHeight: '1.4' }}>Ideal for starting your nighttime routine.</p>
               </div>
               <a 
                 href={CHECKOUT_URL}
@@ -2387,8 +2302,8 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               <div>
                 <div style={{ height: '130px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', marginTop: '6px' }}>
                   <img
-                    src="/assets/listicle/linfaflow/bundle-2.png"
-                    alt="LinfaFlow 4-Bottle Bundle"
+                    src="/assets/listicle/sonnus/bundle-2.png"
+                    alt="Sonnus 4-Bottle Bundle"
                     style={{ maxHeight: '100%', maxWidth: '90%', objectFit: 'contain', filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.12))' }}
                   />
                 </div>
@@ -2420,7 +2335,7 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
             {/* BEST VALUE (6 BOTTLES - BUY 3 GET 3) */}
             <div style={{
               backgroundColor: '#FFFFFF',
-              border: '2px solid #27AE60',
+              border: '2.5px solid #27AE60',
               borderRadius: '18px',
               padding: '28px 20px',
               textAlign: 'center',
@@ -2432,8 +2347,8 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
               <div>
                 <div style={{ height: '130px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <img
-                    src="/assets/listicle/linfaflow/bundle-3.png"
-                    alt="LinfaFlow 6-Bottle Bundle"
+                    src="/assets/listicle/sonnus/bundle-3.png"
+                    alt="Sonnus 6-Bottle Bundle"
                     style={{ maxHeight: '100%', maxWidth: '90%', objectFit: 'contain', filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.12))' }}
                   />
                 </div>
@@ -2461,98 +2376,94 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 GET THE BEST VALUE →
               </a>
             </div>
-
           </div>
         </section>
 
-        {/* 19 — FAQ ACCORDION SECTION */}
+        <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '48px 0' }} />
+
+        {/* 18 — FAQ ACCORDION SECTION */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+              FREQUENTLY ASKED QUESTIONS
+            </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
-              fontSize: '30px',
+              fontSize: '32px',
               color: 'var(--color-primary)',
-              marginBottom: '8px'
+              margin: '4px 0 0'
             }}>
-              FREQUENTLY ASKED QUESTIONS
+              QUESTIONS ABOUT SONNUS®?
             </h2>
-            <p style={{ fontSize: '15px', color: 'var(--color-muted)' }}>
-              Everything you need to know about LinfaFlow®.
-            </p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
               {
-                q: 'WHAT EXACTLY IS LINFAFLOW®?',
-                a: 'LinfaFlow is a liquid dietary supplement featuring four botanical extracts — Cleavers, Stillingia Root, Red Clover Blossom and Prickly Ash Bark — formulated around lymphatic wellness, normal fluid balance and healthy circulation as part of a balanced lifestyle.'
+                q: 'WHAT EXACTLY IS SONNUS®?',
+                a: 'Sonnus is a nighttime dietary supplement in Wild Berry gummy form featuring 10 ingredients selected around relaxation, nighttime wellness and healthy sleep support.'
               },
               {
-                q: 'HOW DO I USE LINFAFLOW®?',
-                a: 'Use LinfaFlow according to the serving directions printed on the product label. The liquid dropper format is designed to make it simple to incorporate into an everyday routine.'
+                q: 'HOW DO I TAKE IT?',
+                a: 'Take 2 gummies approximately 30 minutes before bedtime, according to the current product directions.'
               },
               {
-                q: 'WHY A LIQUID DROPPER?',
-                a: 'Convenience! The format eliminates the need for large capsules, mixing powders, or maintaining a complicated supplement schedule.'
+                q: 'DOES SONNUS CONTAIN MELATONIN?',
+                a: 'Yes. Sonnus contains 0.9 mg of melatonin per serving as part of its broader multi-ingredient formula.'
               },
               {
-                q: 'IS LINFAFLOW A HARSH CLEANSE?',
-                a: 'No. LinfaFlow is positioned as a daily botanical dietary supplement rather than a harsh cleanse or quick "flush."'
+                q: 'WHY DOES SONNUS CONTAIN ONLY 0.9 MG OF MELATONIN?',
+                a: 'Because the formula is not built around melatonin alone. Melatonin is one component of a 10-ingredient nighttime formula designed to support a balanced evening routine.'
               },
               {
-                q: 'IS LINFAFLOW A DIURETIC DRUG?',
-                a: 'LinfaFlow is a dietary supplement and is not positioned as an OTC or prescription diuretic medication. Persistent or unexplained swelling should be evaluated by a qualified healthcare professional.'
+                q: 'IS SONNUS A SLEEPING PILL?',
+                a: 'No. Sonnus is a dietary supplement. It is not a prescription sleeping medication, nor an OTC drug, and is not intended to treat insomnia or any medical condition.'
               },
               {
-                q: 'DOES LINFAFLOW CONTAIN CAFFEINE?',
-                a: 'No. The current formula is 100% caffeine- and stimulant-free.'
+                q: 'WILL IT KNOCK ME OUT OR MAKE ME GROGGY?',
+                a: 'Sonnus is not designed as a heavy sedative. It is formulated to support a calm transition into rest as part of a consistent nighttime routine.'
               },
               {
-                q: 'HOW DOES THE 90-DAY MONEY-BACK GUARANTEE WORK?',
-                a: 'Eligible LinfaFlow purchases are protected by a 90-Day Money-Back Guarantee. Use it according to directions and if you decide it isn\'t right for you, contact support according to our refund policy.'
+                q: 'WHAT IF SONNUS ISN\'T RIGHT FOR ME?',
+                a: 'Eligible purchases are protected by our 90-Day Money-Back Guarantee according to our refund-policy terms.'
               }
-            ].map((faq, index) => (
+            ].map((faq, idx) => (
               <div 
-                key={index}
+                key={idx} 
                 style={{
-                  backgroundColor: 'var(--bg-card)',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
                   border: '1px solid var(--color-border)',
-                  borderRadius: 'var(--radius-md)',
                   overflow: 'hidden'
                 }}
               >
                 <button
-                  onClick={() => toggleFaq(index)}
+                  onClick={() => toggleFaq(idx)}
                   style={{
                     width: '100%',
-                    padding: '18px 20px',
+                    padding: '16px 20px',
+                    textAlign: 'left',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    fontSize: '16px',
-                    fontWeight: 700,
+                    fontWeight: 800,
+                    fontSize: '15px',
                     color: 'var(--color-primary)'
                   }}
                 >
                   <span>{faq.q}</span>
-                  {openFaqIndex === index ? (
-                    <ChevronUp size={20} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  ) : (
-                    <ChevronDown size={20} style={{ color: 'var(--color-muted)', flexShrink: 0 }} />
-                  )}
+                  {openFaqIndex === idx ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
-                {openFaqIndex === index && (
+                {openFaqIndex === idx && (
                   <div style={{
-                    padding: '0 20px 20px',
-                    fontSize: '14.5px',
-                    lineHeight: '1.6',
+                    padding: '0 20px 16px 20px',
+                    fontSize: '14px',
                     color: 'var(--color-secondary)',
-                    borderTop: '1px solid var(--color-border)',
-                    paddingTop: '16px'
+                    lineHeight: 1.6,
+                    borderTop: '1px solid #F1F5F9'
                   }}>
                     {faq.a}
                   </div>
@@ -2562,26 +2473,26 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
           </div>
         </section>
 
-        {/* FINAL CALL TO ACTION FOOTER BANNER (NO CARD BOX) */}
-        <div style={{
-          textAlign: 'center',
-          padding: '24px 0',
-          marginBottom: '40px'
+        {/* 19 — FINAL CTA FOOTER (NO HEAVY BACKGROUND BOX, EXACT TRUST SEALS STYLING) */}
+        <section style={{
+          padding: '36px 16px 20px',
+          textAlign: 'center'
         }}>
-          <h3 style={{
+          <h2 style={{
             fontFamily: 'var(--font-brand-display)',
-            fontSize: '28px',
+            fontSize: 'clamp(24px, 4vw, 36px)',
+            fontWeight: 800,
             color: 'var(--color-primary)',
-            marginBottom: '12px',
-            lineHeight: '1.2'
+            margin: '0 0 12px 0'
           }}>
-            FOUR BOTANICALS. ONE DROPPER. ONE SIMPLE DAILY RITUAL.
-          </h3>
-          <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', marginBottom: '24px', maxWidth: '560px', marginInline: 'auto', lineHeight: '1.55' }}>
-            Support lymphatic wellness, normal fluid balance and healthy circulation without adding another complicated routine.
+            YOUR NIGHT DESERVES MORE THAN JUST MORE MELATONIN.
+          </h2>
+          <p style={{ fontSize: '16px', color: 'var(--color-secondary)', maxWidth: '600px', margin: '0 auto 24px', fontWeight: 500 }}>
+            Give it a better routine with 10 nighttime-support ingredients in two delicious Wild Berry gummies.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
+          {/* Centered CTA Button */}
+          <div style={{ marginBottom: '24px' }}>
             <a
               href={CHECKOUT_URL}
               onClick={handleGoToCheckout}
@@ -2589,79 +2500,49 @@ export function LinfaflowListicle({ onNavHome, onSelectProduct }) {
                 backgroundColor: '#27AE60',
                 color: '#FFFFFF',
                 border: 'none',
-                padding: '14px 28px',
-                borderRadius: '12px',
-                fontWeight: 800,
-                fontSize: '14.5px',
+                padding: '16px 32px',
+                borderRadius: '14px',
+                fontSize: '16px',
+                fontWeight: 900,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
                 textDecoration: 'none',
+                boxShadow: '0 8px 24px rgba(39, 174, 96, 0.3)',
                 whiteSpace: 'nowrap',
                 maxWidth: '100%',
-                boxSizing: 'border-box',
-                boxShadow: '0 6px 20px rgba(39, 174, 96, 0.3)'
+                boxSizing: 'border-box'
               }}
             >
-              <span>CHOOSE MY LINFAFLOW® BUNDLE</span>
-              <ArrowRight size={16} style={{ flexShrink: 0 }} />
+              <span>CHOOSE MY SONNUS® BUNDLE</span>
+              <ArrowRight size={18} />
             </a>
           </div>
 
-          {/* TRUST BADGES PHRASE (EXACT USER SPECIFICATION) */}
+          {/* EXACT TRUST SEALS FORMATTING AS INSTRUCTED */}
           <div style={{
-            fontFamily: "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontSize: '12px',
             fontWeight: 600,
             color: '#4B6833',
-            display: 'flex',
-            alignItems: 'center',
+            gap: '16px',
             justifyContent: 'center',
             flexWrap: 'wrap',
-            gap: '16px',
-            maxWidth: '750px',
-            margin: '0 auto',
-            lineHeight: '1.6'
+            display: 'flex',
+            alignItems: 'center',
+            lineHeight: 1.5
           }}>
             <span>✓ 90-Day Money-Back Guarantee</span>
             <span>✓ Free U.S. Shipping on Qualifying Bundles</span>
             <span>✓ Secure Checkout</span>
           </div>
-        </div>
+        </section>
 
       </div>
-
-      {/* SCROLL TO TOP FLOATING BUTTON */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            backgroundColor: '#1B2613',
-            color: '#FFFFFF',
-            border: '1px solid #27AE60',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-            zIndex: 99
-          }}
-          aria-label="Scroll to top"
-        >
-          <ChevronUp size={24} />
-        </button>
-      )}
-
     </div>
   );
 }
 
-export default LinfaflowListicle;
+export default SonnusListicle;

@@ -19,6 +19,7 @@ import { SalesNotificationPopups } from './components/common/SalesNotificationPo
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SlimSodaListicle } from './components/listicle/slimsoda/SlimSodaListicle';
 import { LinfaflowListicle } from './components/listicle/linfaflow/linfaflowListicle';
+import { SonnusListicle } from './components/listicle/sonnus/SonnusListicle';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
@@ -31,8 +32,11 @@ export function App() {
     if (rawPathname.includes('listicle/linfaflow') || rawPathname.includes('listicle-linfaflow')) {
       return 'listicle-linfaflow';
     }
+    if (rawPathname.includes('listicle/sonnus') || rawPathname.includes('listicle-sonnus')) {
+      return 'listicle-sonnus';
+    }
 
-    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda / ?listicle=linfaflow
+    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda / ?listicle=linfaflow / ?listicle=sonnus
     const params = new URLSearchParams(window.location.search);
     const rawQuery = (params.get('product') || params.get('p') || params.get('listicle') || '').trim().toLowerCase();
     if (rawQuery) {
@@ -42,13 +46,16 @@ export function App() {
       if (rawQuery.includes('linfaflow') && (params.get('listicle') || rawQuery.includes('listicle'))) {
         return 'listicle-linfaflow';
       }
+      if (rawQuery.includes('sonnus') && (params.get('listicle') || rawQuery.includes('listicle'))) {
+        return 'listicle-sonnus';
+      }
       const cleanQuery = rawQuery.replace(/\/$/, '').split('/')[0];
       if (PDP_DATA[cleanQuery]) {
         return cleanQuery;
       }
     }
 
-    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda or #listicle/linfaflow
+    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda or #listicle/linfaflow or #listicle/sonnus
     const rawHash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
     if (rawHash) {
       if (rawHash.includes('listicle/slimsoda') || rawHash.includes('listicle-slimsoda')) {
@@ -56,6 +63,9 @@ export function App() {
       }
       if (rawHash.includes('listicle/linfaflow') || rawHash.includes('listicle-linfaflow')) {
         return 'listicle-linfaflow';
+      }
+      if (rawHash.includes('listicle/sonnus') || rawHash.includes('listicle-sonnus')) {
+        return 'listicle-sonnus';
       }
       const cleanHash = rawHash.trim().split('/')[0];
       if (PDP_DATA[cleanHash]) {
@@ -71,6 +81,7 @@ export function App() {
       if (cleanPath === 'listicle') {
         if (parts[1] === 'slimsoda') return 'listicle-slimsoda';
         if (parts[1] === 'linfaflow') return 'listicle-linfaflow';
+        if (parts[1] === 'sonnus') return 'listicle-sonnus';
       }
       if (PDP_DATA[cleanPath]) {
         return cleanPath;
@@ -105,6 +116,11 @@ export function App() {
       window.history.pushState(null, '', '/listicle/linfaflow');
       return;
     }
+    if (id === 'listicle-sonnus' || id === 'listicle/sonnus') {
+      setActiveProductId('listicle-sonnus');
+      window.history.pushState(null, '', '/listicle/sonnus');
+      return;
+    }
     const cleanId = id.split('/')[0];
     if (PDP_DATA[cleanId]) {
       setActiveProductId(cleanId);
@@ -127,7 +143,9 @@ export function App() {
       ? PDP_DATA.slimsoda?.disclaimer 
       : activeProductId === 'listicle-linfaflow'
         ? PDP_DATA.linfaflow?.disclaimer
-        : null;
+        : activeProductId === 'listicle-sonnus'
+          ? PDP_DATA.sonnus?.disclaimer
+          : null;
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
@@ -151,6 +169,10 @@ export function App() {
       ) : activeProductId === 'listicle-linfaflow' ? (
         <ErrorBoundary>
           <LinfaflowListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
+        </ErrorBoundary>
+      ) : activeProductId === 'listicle-sonnus' ? (
+        <ErrorBoundary>
+          <SonnusListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
         </ErrorBoundary>
       ) : isProductPage ? (
         <ErrorBoundary>
