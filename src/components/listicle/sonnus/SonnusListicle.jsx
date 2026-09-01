@@ -278,9 +278,6 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             src="/assets/listicle/sonnus/sonnus_hero_routine.jpg" 
             alt="Sonnus Nighttime Gummies Routine" 
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            onError={(e) => {
-              e.target.src = "/assets/listicle/sonnus/gallery-1.png";
-            }}
           />
         </div>
 
@@ -293,7 +290,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: 1.3
           }}>
-            SHOULD AN ENTIRE NIGHTTIME ROUTINE REALLY REVOLVE AROUND ONE INGREDIENT?
+            Should an Entire Nighttime Routine Really Revolve Around One Ingredient?
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
@@ -322,7 +319,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '24px'
             }}>
               <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '20px', color: '#27AE60', fontWeight: 700 }}>
-                CHEW. UNWIND. REST.
+                Chew. Unwind. Rest.
               </div>
             </div>
 
@@ -374,7 +371,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            YOUR NIGHT STARTS BEFORE YOUR HEAD HITS THE PILLOW
+            Your Night Starts Before Your Head Hits the Pillow
           </h2>
 
           {/* PRODUCT HIGHLIGHT IMAGE FOR REASON #1 */}
@@ -414,7 +411,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '20px'
             }}>
               <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '10px' }}>
-                CREATING A CLEAR EVENING TRANSITION:
+                Creating a Clear Evening Transition:
               </h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontWeight: 600 }}>
@@ -442,7 +439,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               marginBottom: '24px'
             }}>
               <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '20px', color: '#27AE60', fontWeight: 700 }}>
-                GIVE YOUR NIGHT A CLEAR BEGINNING.
+                Give Your Night a Clear Beginning.
               </div>
             </div>
           </div>
@@ -473,7 +470,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            SONNUS DOESN'T BUILD THE ENTIRE FORMULA AROUND MELATONIN
+            Sonnus Doesn't Build the Entire Formula Around Melatonin
           </h2>
 
           {/* PRODUCT HIGHLIGHT IMAGE FOR REASON #2 */}
@@ -505,7 +502,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               Melatonin matters. It is a hormone naturally produced by the body and involved in normal sleep-wake timing. But Sonnus uses a different formula philosophy:
             </p>
             <p style={{ marginBottom: '16px', fontWeight: 700, color: 'var(--color-primary)' }}>
-              MELATONIN IS PART OF THE NIGHTTIME STORY — NOT THE ENTIRE STORY.
+              Melatonin is Part of the Nighttime Story — Not the Entire Story.
             </p>
             <p style={{ marginBottom: '24px' }}>
               Sonnus contains just <strong>0.9 mg of melatonin per serving</strong> as part of a broader 10-ingredient blend. Instead of relying on a single high-dose ingredient, the formula includes nutrients, amino acids and botanical compounds selected around nighttime wellness.
@@ -519,8 +516,8 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               textAlign: 'center',
               marginBottom: '24px'
             }}>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '8px' }}>
-                MORE INGREDIENT STRATEGY. LESS DEPENDENCE ON ONE NUMBER.
+              <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '18px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '8px' }}>
+                More Ingredient Strategy. Less Dependence on One Number.
               </div>
               <p style={{ fontSize: '14px', color: 'var(--color-secondary)', margin: 0 }}>
                 0.9 mg Melatonin + Magnesium + L-Theanine + GABA + 5-HTP + Apigenin + Lemon Balm + B Vitamins.
@@ -554,7 +551,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            TEN NIGHTTIME-SUPPORT INGREDIENTS. NOT TEN SEPARATE BOTTLES.
+            Ten Nighttime-Support Ingredients. Not Ten Separate Bottles.
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)', marginBottom: '28px' }}>
@@ -603,10 +600,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      MINERAL FOUNDATION
+                      Mineral Foundation
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      MAGNESIUM
+                      Magnesium
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
                       (Essential Mineral)
@@ -679,10 +676,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      TEA LEAF AMINO ACID
+                      Tea Leaf Amino Acid
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      L-THEANINE
+                      L-Theanine
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
                       (Camellia sinensis extract)
@@ -755,7 +752,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      NEUROTRANSMITTER PATHWAYS
+                      Neurotransmitter Pathways
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
                       GABA & 5-HTP
@@ -831,10 +828,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>
-                      EVENING BOTANICALS
+                      Evening Botanicals
                     </div>
                     <h3 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
-                      APIGENIN & LEMON BALM
+                      Apigenin & Lemon Balm
                     </h3>
                     <div style={{ fontSize: '12px', color: 'var(--color-muted)', fontStyle: 'italic' }}>
                       (Chamomile & Melissa officinalis)
@@ -901,7 +898,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            THE FORMULA IS BUILT AROUND MULTIPLE PARTS OF NIGHTTIME WELLNESS
+            The Formula is Built Around Multiple Parts of Nighttime Wellness
           </h2>
 
           {/* IMAGE FOR REASON #4 */}
@@ -942,22 +939,22 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             {/* 4-STEP RITUAL CARDS */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px', marginBottom: '24px' }}>
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>01 — CHEW</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>01 — Chew</div>
                 <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Take two Wild Berry gummies approx. 30 minutes before bedtime.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>02 — UNWIND</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>02 — Unwind</div>
                 <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Dim the lights, lower stimulation, and put work away.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>03 — REST</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>03 — Rest</div>
                 <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Let your body transition naturally into a calmer evening environment.</div>
               </div>
 
               <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '18px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>04 — REPEAT</div>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60', marginBottom: '4px' }}>04 — Repeat</div>
                 <div style={{ fontSize: '13px', color: 'var(--color-secondary)' }}>Build a consistent nightly signal you can actually stick with.</div>
               </div>
             </div>
@@ -989,7 +986,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            IT CHALLENGES THE "MORE MELATONIN MUST BE BETTER" MINDSET
+            It Challenges the "More Melatonin Must Be Better" Mindset
           </h2>
 
           {/* IMAGE FOR REASON #5 */}
@@ -1038,10 +1035,9 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 color: 'var(--color-primary)',
                 letterSpacing: '0.5px',
                 marginBottom: '14px',
-                textAlign: 'center',
-                textTransform: 'uppercase'
+                textAlign: 'center'
               }}>
-                SONNUS® REMOVES ROUTINE FRICTION:
+                Sonnus® Removes Routine Friction:
               </div>
               <div style={{
                 display: 'grid',
@@ -1061,7 +1057,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>0.9 MG MELATONIN</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>0.9 mg Melatonin</span>
                 </div>
 
                 <div style={{
@@ -1077,7 +1073,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO HARSH POWDERS</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>No Harsh Powders</span>
                 </div>
 
                 <div style={{
@@ -1093,7 +1089,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO CAFFEINE</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>No Caffeine</span>
                 </div>
 
                 <div style={{
@@ -1109,7 +1105,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
                 }}>
                   <CheckCircle2 size={15} style={{ color: '#27AE60', flexShrink: 0 }} />
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>NO STIMULANTS</span>
+                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>No Stimulants</span>
                 </div>
               </div>
             </div>
@@ -1141,7 +1137,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '20px',
             lineHeight: '1.2'
           }}>
-            TWO GUMMIES MAKE THE ROUTINE ALMOST IMPOSSIBLE TO OVERCOMPLICATE
+            Two Gummies Make the Bedtime Ritual Impossible to Forget
           </h2>
 
           <div style={{ fontSize: '17px', lineHeight: '1.7', color: 'var(--color-secondary)' }}>
@@ -1178,7 +1174,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    CONSISTENT SCHEDULE
+                    Consistent Schedule
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
                     Going to bed around the same time signals your body to wind down naturally.
@@ -1212,7 +1208,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    DARKER & COOLER ROOM
+                    Darker & Cooler Room
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
                     Lower light and comfortable room temperatures encourage restful surroundings.
@@ -1246,7 +1242,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 </div>
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#27AE60', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                    NIGHTLY GUMMY RITUAL
+                    Nightly Gummy Ritual
                   </div>
                   <div style={{ fontSize: '13.5px', color: 'var(--color-secondary)', lineHeight: '1.5' }}>
                     Two Wild Berry gummies provide 30 seconds of delicious wind-down routine.
@@ -1267,7 +1263,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               letterSpacing: '0.3px',
               lineHeight: '1.4'
             }}>
-              IT DOESN'T NEED TO BECOME THE ENTIRE NIGHT. IT JUST NEEDS TO BECOME ONE CONSISTENT PART OF IT.
+              It doesn't need to become the entire night. It just needs to become one consistent part of it.
             </div>
           </div>
         </section>
@@ -1297,7 +1293,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             marginBottom: '28px',
             lineHeight: '1.2'
           }}>
-            YOU GET 90 DAYS TO DECIDE WHETHER IT DESERVES A PLACE ON YOUR NIGHTSTAND
+            You Get 90 Days to Decide Whether It Deserves a Place on Your Nightstand
           </h2>
 
           <div style={{
@@ -1348,11 +1344,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 backgroundColor: 'rgba(39, 174, 96, 0.1)',
                 padding: '6px 16px',
                 borderRadius: '999px',
-                textTransform: 'uppercase',
                 display: 'inline-block',
                 marginBottom: '12px'
               }}>
-                RISK-FREE GUARANTEE
+                Risk-Free Guarantee
               </div>
 
               <h3 style={{
@@ -1363,7 +1358,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 marginBottom: '12px',
                 lineHeight: '1.2'
               }}>
-                90 DAYS TO DECIDE
+                90 Days to Decide
               </h3>
 
               <p style={{
@@ -1503,11 +1498,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               padding: '4px 14px',
               borderRadius: '999px',
               letterSpacing: '1.2px',
-              textTransform: 'uppercase',
               display: 'inline-block',
               marginBottom: '8px'
             }}>
-              INTERACTIVE BUYER'S CHECKLIST
+              Interactive Buyer's Checklist
             </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -1517,7 +1511,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               margin: '4px 0 0',
               lineHeight: '1.25'
             }}>
-              BEFORE BUYING ANY NIGHTTIME GUMMY, ASK THESE 6 QUESTIONS:
+              Before Buying Any Nighttime Gummy, Ask These 6 Questions:
             </h2>
             <p style={{ fontSize: '13px', color: 'var(--color-muted)', marginTop: '6px' }}>
               Click through the tabs below to inspect our standards step-by-step:
@@ -1544,12 +1538,12 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
           {/* TAB SELECTOR STRIP — EXACT 3X2 GRID ON DESKTOP */}
           <div className="buyer-tab-grid">
             {[
-              { num: '01', title: 'MELATONIN' },
-              { num: '02', title: 'FORMULA' },
-              { num: '03', title: 'ROUTINE' },
-              { num: '04', title: 'STIMULANTS' },
-              { num: '05', title: 'STACK' },
-              { num: '06', title: 'GUARANTEE' }
+              { num: '01', title: 'Melatonin' },
+              { num: '02', title: 'Formula' },
+              { num: '03', title: 'Routine' },
+              { num: '04', title: 'Stimulants' },
+              { num: '05', title: 'Stack' },
+              { num: '06', title: 'Guarantee' }
             ].map((item, idx) => {
               const isActive = activeBuyerTab === idx;
               return (
@@ -1600,12 +1594,12 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
           {/* ACTIVE FEATURED SPOTLIGHT CARD */}
           {(() => {
             const list = [
-              { num: '01', title: 'MELATONIN DOSE', q: '1. Is the entire product built around high-dose melatonin alone?', a: 'Sonnus isn\'t. Melatonin (0.9 mg) is just one component of a 10-ingredient nighttime formula.' },
-              { num: '02', title: 'FORMULA COMPLETENESS', q: '2. Does it include complementary nighttime ingredients?', a: 'Yes. Magnesium, L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, B6, and B2 work together.' },
-              { num: '03', title: 'EASY ROUTINE', q: '3. Is the routine simple and easy to stick with?', a: 'Two Wild Berry gummies approximately 30 minutes before bedtime. Chew, unwind, and rest.' },
-              { num: '04', title: 'STIMULANT-FREE', q: '4. Is it completely free of caffeine and stimulants?', a: '100% caffeine-free and free of harsh stimulants or habit-forming sedatives.' },
-              { num: '05', title: 'REDUCES FRICTION', q: '5. Does it eliminate the need for 5 separate bottles?', a: 'Sonnus replaces supplement stack clutter with 1 simple 2-gummy nightly ritual.' },
-              { num: '06', title: 'RISK-FREE TRIAL', q: '6. Do you have time to decide if you like it?', a: 'Eligible Sonnus purchases include a 90-Day Money-Back Guarantee.' }
+              { num: '01', title: 'Melatonin Dose', q: '1. Is the entire product built around high-dose melatonin alone?', a: 'Sonnus isn\'t. Melatonin (0.9 mg) is just one component of a 10-ingredient nighttime formula.' },
+              { num: '02', title: 'Formula Completeness', q: '2. Does it include complementary nighttime ingredients?', a: 'Yes. Magnesium, L-Theanine, GABA, 5-HTP, Apigenin, Lemon Balm, B6, and B2 work together.' },
+              { num: '03', title: 'Easy Routine', q: '3. Is the routine simple and easy to stick with?', a: 'Two Wild Berry gummies approximately 30 minutes before bedtime. Chew, unwind, and rest.' },
+              { num: '04', title: 'Stimulant-Free', q: '4. Is it completely free of caffeine and stimulants?', a: '100% caffeine-free and free of harsh stimulants or habit-forming sedatives.' },
+              { num: '05', title: 'Reduces Friction', q: '5. Does it eliminate the need for 5 separate bottles?', a: 'Sonnus replaces supplement stack clutter with 1 simple 2-gummy nightly ritual.' },
+              { num: '06', title: 'Risk-Free Trial', q: '6. Do you have time to decide if you like it?', a: 'Eligible Sonnus purchases include a 90-Day Money-Back Guarantee.' }
             ];
             const activeItem = list[activeBuyerTab];
             return (
@@ -1666,7 +1660,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
                     <ShieldCheck size={16} style={{ color: '#27AE60', flexShrink: 0 }} />
-                    <strong style={{ color: '#27AE60', fontSize: '11px', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
+                    <strong style={{ color: '#27AE60', fontSize: '11px', letterSpacing: '0.8px' }}>
                       THE SONNUS® STANDARD
                     </strong>
                   </div>
@@ -1737,13 +1731,13 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
         {/* 12 — CONVENIENCE VS BUYING INGREDIENTS SEPARATELY */}
         <section style={{ marginBottom: '56px', textAlign: 'center', backgroundColor: 'var(--bg-card)', padding: '32px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
           <h3 style={{ fontFamily: 'var(--font-brand-display)', fontSize: '24px', color: 'var(--color-primary)', marginBottom: '12px' }}>
-            "CAN'T I JUST BUY THESE INGREDIENTS SEPARATELY?"
+            "Can't I Just Buy These Ingredients Separately?"
           </h3>
           <p style={{ fontSize: '15.5px', color: 'var(--color-secondary)', maxWidth: '680px', margin: '0 auto 20px', lineHeight: '1.6', textAlign: 'left' }}>
             Of course! But then you've recreated the exact problem Sonnus was designed to solve: buying 10 separate bottles, managing multiple labels, and cluttering your nightstand. The real value proposition is <strong>CONVENIENCE</strong>: Ten nighttime-support ingredients brought together into a single 2-gummy nightly ritual.
           </p>
-          <div style={{ fontSize: '18px', fontWeight: 800, color: '#27AE60' }}>
-            TEN INGREDIENTS. TWO GUMMIES. DONE.
+          <div style={{ fontFamily: 'var(--font-brand-display)', fontSize: '18px', fontWeight: 800, color: '#27AE60' }}>
+            Ten Ingredients. Two Gummies. Done.
           </div>
         </section>
 
@@ -1757,8 +1751,8 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
           boxShadow: '0 12px 40px rgba(0,0,0,0.05)'
         }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
-              THE NIGHTTIME FORMULA
+            <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', marginBottom: '6px' }}>
+              The Nighttime Formula
             </div>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -1766,7 +1760,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               marginBottom: '12px'
             }}>
-              MEET SONNUS®
+              Meet Sonnus®
             </h2>
             <p style={{ fontSize: '16px', fontWeight: 600, color: 'var(--color-secondary)' }}>
               Ten nighttime ingredients. Two Wild Berry gummies. One simple routine.
@@ -1787,7 +1781,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 alt="Sonnus Bottle" 
                 style={{ width: '100%', height: 'auto', maxHeight: '380px', objectFit: 'contain', borderRadius: 'var(--radius-md)', display: 'block' }}
                 onError={(e) => {
-                  e.target.src = "/public/sonnus/images/gallery-1.png";
+                  e.target.src = "/assets/listicle/sonnus/gallery-1.png";
                 }}
               />
             </div>
@@ -1857,7 +1851,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               marginBottom: '4px'
             }}>
-              WHAT SONNUS IS — AND WHAT IT ISN'T
+              What Sonnus Is — and What It Isn't
             </h2>
             <p style={{ fontSize: '14px', color: 'var(--color-muted)' }}>
               Transparency is our core standard.
@@ -1889,10 +1883,9 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 fontWeight: 900,
                 letterSpacing: '1.5px',
                 color: '#27AE60',
-                marginBottom: '16px',
-                textTransform: 'uppercase'
+                marginBottom: '16px'
               }}>
-                WHAT SONNUS IS
+                What Sonnus Is
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
@@ -1924,10 +1917,9 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 fontWeight: 900,
                 letterSpacing: '1.5px',
                 color: 'var(--color-muted)',
-                marginBottom: '16px',
-                textTransform: 'uppercase'
+                marginBottom: '16px'
               }}>
-                WHAT SONNUS IS NOT
+                What Sonnus Is Not
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {[
@@ -1996,11 +1988,10 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 backgroundColor: 'rgba(39, 174, 96, 0.1)',
                 padding: '5px 14px',
                 borderRadius: '999px',
-                textTransform: 'uppercase',
                 display: 'inline-block',
                 marginBottom: '14px'
               }}>
-                REAL ROUTINES. REAL REASONS.
+                Real Routines. Real Reasons.
               </div>
 
               <h2 style={{
@@ -2011,7 +2002,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                 marginBottom: '16px',
                 lineHeight: '1.2'
               }}>
-                WHY PEOPLE CHOOSE SONNUS®
+                Why People Choose Sonnus®
               </h2>
 
               <p style={{
@@ -2109,8 +2100,8 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
           `}</style>
 
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-              CUSTOMER REVIEWS
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px' }}>
+              Customer Reviews
             </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -2118,7 +2109,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               margin: '4px 0 0'
             }}>
-              WHAT REAL CUSTOMERS VALUE
+              What Real Customers Value
             </h2>
           </div>
 
@@ -2127,28 +2118,28 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               {
                 name: 'Sarah M.',
                 stars: 5,
-                title: '"IT\'S BECOME MY SIGNAL TO START WINDING DOWN."',
+                title: '"It\'s become my signal to start winding down."',
                 body: 'The gummies are simple to take and I\'ve made them part of the point in my evening when I stop working and start getting ready for bed.',
                 photo: '/assets/listicle/sonnus/imagem-2.jpg'
               },
               {
                 name: 'David R.',
                 stars: 5,
-                title: '"I WANTED MORE THAN JUST MELATONIN."',
+                title: '"I wanted more than just melatonin."',
                 body: 'The ingredient list is what caught my attention. I like having a broader nighttime formula in one product rather than taking multiple supplements.',
                 photo: '/assets/listicle/sonnus/imagem-3.jpg'
               },
               {
                 name: 'Elena K.',
                 stars: 5,
-                title: '"TWO GUMMIES AND DONE."',
+                title: '"Two gummies and done."',
                 body: 'No powders, no handful of capsules. It\'s exactly the kind of routine I can actually keep up with night after night.',
                 photo: '/assets/listicle/sonnus/imagem-5.jpg'
               },
               {
                 name: 'Marcus P.',
                 stars: 5,
-                title: '"THE FLAVOR MAKES IT EASY."',
+                title: '"The flavor makes it easy."',
                 body: 'The Wild Berry gummies taste great and fit naturally into my evening routine right after brushing my teeth.',
                 photo: '/assets/listicle/sonnus/imagem-7.jpg'
               }
@@ -2191,7 +2182,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
         <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '36px' }}>
             <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', marginBottom: '6px' }}>
-              TODAY'S SONNUS OFFER
+              Today's Sonnus Offer
             </div>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -2199,7 +2190,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               marginBottom: '8px'
             }}>
-              CHOOSE THE ROUTINE THAT FITS YOU
+              Choose the Routine That Fits You
             </h2>
             <p style={{ fontSize: '15px', color: 'var(--color-muted)' }}>
               The larger the bundle, the lower the cost per bottle.
@@ -2246,7 +2237,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   />
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--color-muted)', letterSpacing: '1px', marginBottom: '4px' }}>STARTER</div>
-                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>BUY 1 + GET 1 FREE</div>
+                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>Buy 1 + Get 1 Free</div>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#27AE60', marginBottom: '8px' }}>$34.75 / bottle ($69.50 total)</div>
                 <p style={{ fontSize: '13px', color: 'var(--color-secondary)', marginBottom: '20px', lineHeight: '1.4' }}>Ideal for starting your nighttime routine.</p>
               </div>
@@ -2308,7 +2299,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   />
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>4 BOTTLES TOTAL</div>
-                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>BUY 2 + GET 2 FREE</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>Buy 2 + Get 2 Free</div>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#27AE60', marginBottom: '8px' }}>$27.49 / bottle ($109.96 total)</div>
                 <p style={{ fontSize: '13px', color: 'var(--color-secondary)', marginBottom: '20px', lineHeight: '1.4' }}>Best balance for long-term consistency.</p>
               </div>
@@ -2353,7 +2344,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
                   />
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1px', marginBottom: '4px' }}>6 BOTTLES TOTAL</div>
-                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>BUY 3 + GET 3 FREE</div>
+                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>Buy 3 + Get 3 Free</div>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#27AE60', marginBottom: '8px' }}>ONLY $19.99 / BOTTLE ($119.94 total)</div>
                 <p style={{ fontSize: '13px', color: 'var(--color-secondary)', marginBottom: '20px', lineHeight: '1.4' }}>Lowest price per bottle + max long-term value.</p>
               </div>
@@ -2384,8 +2375,8 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
         {/* 18 — FAQ ACCORDION SECTION */}
         <section style={{ marginBottom: '56px' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-              FREQUENTLY ASKED QUESTIONS
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#27AE60', letterSpacing: '1.5px' }}>
+              Frequently Asked Questions
             </span>
             <h2 style={{
               fontFamily: 'var(--font-brand-display)',
@@ -2393,38 +2384,38 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
               color: 'var(--color-primary)',
               margin: '4px 0 0'
             }}>
-              QUESTIONS ABOUT SONNUS®?
+              Questions About Sonnus®?
             </h2>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
               {
-                q: 'WHAT EXACTLY IS SONNUS®?',
+                q: 'What exactly is Sonnus®?',
                 a: 'Sonnus is a nighttime dietary supplement in Wild Berry gummy form featuring 10 ingredients selected around relaxation, nighttime wellness and healthy sleep support.'
               },
               {
-                q: 'HOW DO I TAKE IT?',
+                q: 'How do I take it?',
                 a: 'Take 2 gummies approximately 30 minutes before bedtime, according to the current product directions.'
               },
               {
-                q: 'DOES SONNUS CONTAIN MELATONIN?',
+                q: 'Does Sonnus contain melatonin?',
                 a: 'Yes. Sonnus contains 0.9 mg of melatonin per serving as part of its broader multi-ingredient formula.'
               },
               {
-                q: 'WHY DOES SONNUS CONTAIN ONLY 0.9 MG OF MELATONIN?',
+                q: 'Why does Sonnus contain only 0.9 mg of melatonin?',
                 a: 'Because the formula is not built around melatonin alone. Melatonin is one component of a 10-ingredient nighttime formula designed to support a balanced evening routine.'
               },
               {
-                q: 'IS SONNUS A SLEEPING PILL?',
+                q: 'Is Sonnus a sleeping pill?',
                 a: 'No. Sonnus is a dietary supplement. It is not a prescription sleeping medication, nor an OTC drug, and is not intended to treat insomnia or any medical condition.'
               },
               {
-                q: 'WILL IT KNOCK ME OUT OR MAKE ME GROGGY?',
+                q: 'Will it knock me out or make me groggy?',
                 a: 'Sonnus is not designed as a heavy sedative. It is formulated to support a calm transition into rest as part of a consistent nighttime routine.'
               },
               {
-                q: 'WHAT IF SONNUS ISN\'T RIGHT FOR ME?',
+                q: 'What if Sonnus isn\'t right for me?',
                 a: 'Eligible purchases are protected by our 90-Day Money-Back Guarantee according to our refund-policy terms.'
               }
             ].map((faq, idx) => (
@@ -2473,7 +2464,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
           </div>
         </section>
 
-        {/* 19 — FINAL CTA FOOTER (NO HEAVY BACKGROUND BOX, EXACT TRUST SEALS STYLING) */}
+        {/* 19 — FINAL CTA FOOTER */}
         <section style={{
           padding: '36px 16px 20px',
           textAlign: 'center'
@@ -2485,7 +2476,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
             color: 'var(--color-primary)',
             margin: '0 0 12px 0'
           }}>
-            YOUR NIGHT DESERVES MORE THAN JUST MORE MELATONIN.
+            Your Night Deserves More Than Just More Melatonin.
           </h2>
           <p style={{ fontSize: '16px', color: 'var(--color-secondary)', maxWidth: '600px', margin: '0 auto 24px', fontWeight: 500 }}>
             Give it a better routine with 10 nighttime-support ingredients in two delicious Wild Berry gummies.
