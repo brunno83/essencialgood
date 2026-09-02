@@ -20,6 +20,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SlimSodaListicle } from './components/listicle/slimsoda/SlimSodaListicle';
 import { LinfaflowListicle } from './components/listicle/linfaflow/linfaflowListicle';
 import { SonnusListicle } from './components/listicle/sonnus/SonnusListicle';
+import { CrownedListicle } from './components/listicle/crowned/CrownedListicle';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
@@ -35,8 +36,11 @@ export function App() {
     if (rawPathname.includes('listicle/sonnus') || rawPathname.includes('listicle-sonnus')) {
       return 'listicle-sonnus';
     }
+    if (rawPathname.includes('listicle/crowned') || rawPathname.includes('listicle-crowned')) {
+      return 'listicle-crowned';
+    }
 
-    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda / ?listicle=linfaflow / ?listicle=sonnus
+    // 1. Check query string: ?product=slimsoda or ?listicle=slimsoda / ?listicle=linfaflow / ?listicle=sonnus / ?listicle=crowned
     const params = new URLSearchParams(window.location.search);
     const rawQuery = (params.get('product') || params.get('p') || params.get('listicle') || '').trim().toLowerCase();
     if (rawQuery) {
@@ -49,13 +53,16 @@ export function App() {
       if (rawQuery.includes('sonnus') && (params.get('listicle') || rawQuery.includes('listicle'))) {
         return 'listicle-sonnus';
       }
+      if (rawQuery.includes('crowned') && (params.get('listicle') || rawQuery.includes('listicle'))) {
+        return 'listicle-crowned';
+      }
       const cleanQuery = rawQuery.replace(/\/$/, '').split('/')[0];
       if (PDP_DATA[cleanQuery]) {
         return cleanQuery;
       }
     }
 
-    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda or #listicle/linfaflow or #listicle/sonnus
+    // 2. Check hash: #slimsoda or #/slimsoda or #listicle/slimsoda or #listicle/linfaflow or #listicle/sonnus or #listicle/crowned
     const rawHash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
     if (rawHash) {
       if (rawHash.includes('listicle/slimsoda') || rawHash.includes('listicle-slimsoda')) {
@@ -66,6 +73,9 @@ export function App() {
       }
       if (rawHash.includes('listicle/sonnus') || rawHash.includes('listicle-sonnus')) {
         return 'listicle-sonnus';
+      }
+      if (rawHash.includes('listicle/crowned') || rawHash.includes('listicle-crowned')) {
+        return 'listicle-crowned';
       }
       const cleanHash = rawHash.trim().split('/')[0];
       if (PDP_DATA[cleanHash]) {
@@ -82,6 +92,7 @@ export function App() {
         if (parts[1] === 'slimsoda') return 'listicle-slimsoda';
         if (parts[1] === 'linfaflow') return 'listicle-linfaflow';
         if (parts[1] === 'sonnus') return 'listicle-sonnus';
+        if (parts[1] === 'crowned') return 'listicle-crowned';
       }
       if (PDP_DATA[cleanPath]) {
         return cleanPath;
@@ -121,6 +132,11 @@ export function App() {
       window.history.pushState(null, '', '/listicle/sonnus');
       return;
     }
+    if (id === 'listicle-crowned' || id === 'listicle/crowned') {
+      setActiveProductId('listicle-crowned');
+      window.history.pushState(null, '', '/listicle/crowned');
+      return;
+    }
     const cleanId = id.split('/')[0];
     if (PDP_DATA[cleanId]) {
       setActiveProductId(cleanId);
@@ -145,7 +161,9 @@ export function App() {
         ? PDP_DATA.linfaflow?.disclaimer
         : activeProductId === 'listicle-sonnus'
           ? PDP_DATA.sonnus?.disclaimer
-          : null;
+          : activeProductId === 'listicle-crowned'
+            ? PDP_DATA.crowned?.disclaimer
+            : null;
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
@@ -173,6 +191,10 @@ export function App() {
       ) : activeProductId === 'listicle-sonnus' ? (
         <ErrorBoundary>
           <SonnusListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
+        </ErrorBoundary>
+      ) : activeProductId === 'listicle-crowned' ? (
+        <ErrorBoundary>
+          <CrownedListicle onSelectProduct={openProductPDP} onNavHome={backToHome} />
         </ErrorBoundary>
       ) : isProductPage ? (
         <ErrorBoundary>
