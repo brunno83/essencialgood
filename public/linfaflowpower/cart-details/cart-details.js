@@ -29,7 +29,19 @@
   }
 
   function getCheckoutUrl(item) {
-    return 'https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814';
+    var base = 'https://cc.linfaflow.com/dtcnew/checkout.php?hid=b2lkPW9mZl8wMDQyMzQ2JmFpZD1hZmYxOTgyODE0JnVpZD1ibF82NjY4MTEx&affid=aff1982814';
+    try {
+      var url = new URL(base);
+      var currentParams = new URLSearchParams(window.location.search);
+      currentParams.forEach(function(val, key) {
+        if (!url.searchParams.has(key)) {
+          url.searchParams.set(key, val);
+        }
+      });
+      return url.toString();
+    } catch(e) {
+      return base;
+    }
   }
       return item.checkout_url;
     }
