@@ -100,6 +100,14 @@ export function App() {
       if (cleanPath === 'adv-crowned') {
         return 'crowned';
       }
+      if (cleanPath === 'slimsodapower' || cleanPath === 'slimsodapowder') {
+        window.location.replace('/slimsodapower/index.html');
+        return null;
+      }
+      if (cleanPath === 'linfaflowpower') {
+        window.location.replace('/linfaflowpower/index.html');
+        return null;
+      }
     }
 
     return null;
