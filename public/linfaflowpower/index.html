@@ -437,6 +437,44 @@
     .lp-head .of-list li:last-child{border-bottom:none}
     .lp-head .of-ck{flex:0 0 auto;width:23px;height:23px;max-width:none;object-fit:contain;margin-top:-1px}
   </style>
+<style id="lf-mobile-cta-centering-fix">
+  /* Global Centering & Mobile Responsive Fix for CTA Buttons */
+  .custom_lp_button,
+  .add-to-cart-btn,
+  .custom_checkout_button,
+  .lf-spo__cta,
+  .nutrition-popup__cta,
+  .sticky-bar__button,
+  .sticky-cta,
+  .checkout_button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    word-break: normal !important;
+    line-height: 1.25 !important;
+  }
+
+  @media (max-width: 768px) {
+    .custom_lp_button,
+    .add-to-cart-btn,
+    .custom_checkout_button,
+    .lf-spo__cta,
+    .nutrition-popup__cta,
+    .sticky-bar__button,
+    .sticky-cta,
+    .checkout_button {
+      font-size: 15px !important;
+      padding: 14px 18px !important;
+      text-align: center !important;
+      justify-content: center !important;
+      align-items: center !important;
+      line-height: 1.25 !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+  }
+</style>
 </head>
 
 <body class="pdp_body" data-review-app="true">
