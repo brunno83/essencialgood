@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 export function RealTransformations({ productName = '', productId = '', accentColor }) {
   const pName = String(productName || '').toLowerCase();
@@ -8,8 +8,6 @@ export function RealTransformations({ productName = '', productId = '', accentCo
   const isLinfaFlow = pName.includes('linfa') || pId.includes('linfa') || href.includes('linfa');
   const isSlimSoda = pName.includes('slim') || pId.includes('slim') || href.includes('slim');
   const isCrowned = pName.includes('crown') || pId.includes('crown') || href.includes('crown');
-
-  const isSonnus = pName.includes('sonn') || pId.includes('sonn') || href.includes('sonn') || (!isLinfaFlow && !isSlimSoda && !isCrowned);
 
   const slimSodaImages = [
     { 
@@ -125,51 +123,6 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       badgeText: 'Verified Customer',
       headline: '“SIMPLE ENOUGH TO STAY CONSISTENT.”',
       feedback: 'I\'ve tried more complicated nighttime routines before. This is much easier for me to stick with.'
-    },
-    { 
-      id: 5, 
-      src: '/sonnus/images/imagem-5.jpg', 
-      alt: 'Sonnus Customer Routine 5',
-      name: 'Natalie P.',
-      badgeText: 'Verified Customer',
-      headline: '“A BETTER EVENING RITUAL.”',
-      feedback: 'Taking two gummies 30 minutes before bed has become my favorite way to signal that the day is done.'
-    },
-    { 
-      id: 6, 
-      src: '/sonnus/images/imagem-6.jpg', 
-      alt: 'Sonnus Customer Routine 6',
-      name: 'Grace L.',
-      badgeText: 'Verified Customer',
-      headline: '“WAKING UP FEELING REFRESHED.”',
-      feedback: 'I love waking up without that groggy feeling. Highly recommend adding this to your night.'
-    },
-    { 
-      id: 7, 
-      src: '/sonnus/images/imagem-7.jpg', 
-      alt: 'Sonnus Customer Routine 7',
-      name: 'David L.',
-      badgeText: 'Verified Customer',
-      headline: '“PERFECT FOR BUSY SCHEDULES.”',
-      feedback: 'Traveling constantly used to mess up my sleep routine. Sonnus made winding down on hotel nights effortless.'
-    },
-    { 
-      id: 8, 
-      src: '/sonnus/images/imagem-8.jpg', 
-      alt: 'Sonnus Customer Routine 8',
-      name: 'Julian K.',
-      badgeText: 'Verified Customer',
-      headline: '“GENTLE AND EFFECTIVE.”',
-      feedback: 'Great ingredient formula. It feels natural and gives my evening routine a clear ending.'
-    },
-    { 
-      id: 9, 
-      src: '/sonnus/images/imagem-9.jpg', 
-      alt: 'Sonnus Customer Routine 9',
-      name: 'Daniel S.',
-      badgeText: 'Verified Customer',
-      headline: '“NO COMPLICATED PROTOCOL.”',
-      feedback: 'Two gummies, turn off the screens, and unwind. Couldn\'t be simpler.'
     }
   ];
 
@@ -209,24 +162,6 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       badgeText: 'Verified Buyer',
       headline: '“EASY TO USE WITHOUT CHANGING MY ROUTINE.”',
       feedback: 'I still use my regular shampoo and styling products. Crowned is just one extra step, which makes it easy to stay consistent.'
-    },
-    { 
-      id: 5, 
-      src: '/crowned/images/03-result-05.webp', 
-      alt: 'Crowned Daily Scalp Care Routine',
-      name: 'Claire T.',
-      badgeText: 'Verified Buyer',
-      headline: '“MY SCALP FEELS MUCH BETTER CONDITIONED.”',
-      feedback: 'I noticed my hair looks fuller and my scalp feels great after consistent daily use.'
-    },
-    { 
-      id: 6, 
-      src: '/crowned/images/03-result-06.webp', 
-      alt: 'Crowned Daily Scalp Care Routine',
-      name: 'Sophia M.',
-      badgeText: 'Verified Buyer',
-      headline: '“NO HEAVY OIL FORMAT.”',
-      feedback: 'I wanted direct scalp care without weighing down my hair. Crowned absorbs fast and feels weightless.'
     }
   ];
 
@@ -238,13 +173,53 @@ export function RealTransformations({ productName = '', productId = '', accentCo
         ? slimSodaImages
         : sonnusCustomerPhotos;
 
+  const scrollRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+
   // Quadruplicate list to guarantee a 100% gapless infinite marquee track on all screen sizes
   const repeatList = [
     ...transformationItems, 
     ...transformationItems, 
     ...transformationItems, 
+    ...transformationItems,
+    ...transformationItems, 
     ...transformationItems
   ];
+
+  // Auto-scrolling marquee effect using requestAnimationFrame
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let animId;
+    const speed = 0.8; // px per frame
+
+    const step = () => {
+      if (!isPaused && el) {
+        el.scrollLeft += speed;
+        // If scroll reaches half way, reset to start seamlessly
+        if (el.scrollLeft >= (el.scrollWidth / 2)) {
+          el.scrollLeft = 0;
+        }
+      }
+      animId = requestAnimationFrame(step);
+    };
+
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [isPaused]);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+    }
+  };
 
   return (
     <section 
@@ -257,7 +232,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
         overflow: 'hidden'
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center', marginBottom: '36px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center', marginBottom: '28px' }}>
         <span 
           style={{ 
             fontSize: '12px', 
@@ -283,18 +258,77 @@ export function RealTransformations({ productName = '', productId = '', accentCo
           MADE TO FIT <span style={{ color: accentColor || '#3B4959' }}>REAL LIFE.</span>
         </h2>
         <p style={{ fontSize: '15px', color: '#666', fontWeight: 500, margin: 0 }}>
-          See how customers are making {productName || 'SONNUS®'} part of their everyday wellness routines.
+          See how customers are making {productName || 'SLIMSODA®'} part of their everyday routines.
         </p>
+
+        {/* Scroll Control Arrows */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '20px' }}>
+          <button
+            onClick={scrollLeft}
+            aria-label="Previous transformation"
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '50%',
+              backgroundColor: '#FAF7F2',
+              border: '1px solid #EFEAE1',
+              color: '#141210',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
+              transition: 'transform 0.2s ease, background-color 0.2s ease'
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <button
+            onClick={scrollRight}
+            aria-label="Next transformation"
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '50%',
+              backgroundColor: '#FAF7F2',
+              border: '1px solid #EFEAE1',
+              color: '#141210',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
+              transition: 'transform 0.2s ease, background-color 0.2s ease'
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      {/* Infinite Auto-Scrolling Track */}
+      {/* Auto-scrolling & Drag-scrollable container */}
       <div 
+        ref={scrollRef}
         className="transformations-carousel-container"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
         style={{
           width: '100%',
-          overflow: 'hidden',
+          overflowX: 'auto',
           position: 'relative',
-          padding: '10px 0'
+          padding: '10px 20px 20px 20px',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none'
         }}
       >
         <div 
@@ -302,9 +336,7 @@ export function RealTransformations({ productName = '', productId = '', accentCo
           style={{
             display: 'flex',
             gap: '24px',
-            width: 'max-content',
-            animation: 'infiniteScroll 52s linear infinite',
-            willChange: 'transform'
+            width: 'max-content'
           }}
         >
           {repeatList.map((item, idx) => (
@@ -396,13 +428,8 @@ export function RealTransformations({ productName = '', productId = '', accentCo
       </div>
 
       <style>{`
-        @keyframes infiniteScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .transformations-carousel-container:hover .transformations-track {
-          animation-play-state: paused;
+        .transformations-carousel-container::-webkit-scrollbar {
+          display: none;
         }
 
         @media (max-width: 640px) {
@@ -414,4 +441,3 @@ export function RealTransformations({ productName = '', productId = '', accentCo
     </section>
   );
 }
-

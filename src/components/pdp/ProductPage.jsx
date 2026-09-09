@@ -4,6 +4,12 @@ import { InlineBundleSelector } from './InlineBundleSelector';
 import { BundleSelector } from './BundleSelector';
 import { TrustStrip } from './TrustStrip';
 import { WhySlimSodaBlock } from './slimsoda/WhySlimSodaBlock';
+import { SlimSodaFourPillars } from './slimsoda/SlimSodaFourPillars';
+import { SlimSodaTargetDeepDives } from './slimsoda/SlimSodaTargetDeepDives';
+import { SlimSodaIngredients } from './slimsoda/SlimSodaIngredients';
+import { SlimSodaRoutine } from './slimsoda/SlimSodaRoutine';
+import { SlimSodaComparison } from './slimsoda/SlimSodaComparison';
+import { SlimSodaIsAndIsnt } from './slimsoda/SlimSodaIsAndIsnt';
 import { RealTransformations } from './RealTransformations';
 import { VideoReviewsSection } from './VideoReviewsSection';
 import { ProductBenefits } from './ProductBenefits';
@@ -36,6 +42,7 @@ export function ProductPage({ productData, onBackToHome }) {
     bundlesSection,
     trustStrip,
     whyBlock,
+    fourPillars,
     whyChoose,
     benefitsSection,
     howItWorks,
@@ -46,6 +53,8 @@ export function ProductPage({ productData, onBackToHome }) {
     faqSection,
     finalOffer
   } = productData || {};
+
+  const isSlimSoda = String(productData?.id || '').toLowerCase() === 'slimsoda';
 
   return (
     <div className="product-page" style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '125px' }}>
@@ -70,7 +79,7 @@ export function ProductPage({ productData, onBackToHome }) {
         </button>
       </div>
 
-      {/* 02 — HERO SECTION & HERO BUNDLE SELECTOR */}
+      {/* HERO SECTION & HERO BUNDLE SELECTOR */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '10px 20px 60px 20px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'start' }}>
           
@@ -135,59 +144,100 @@ export function ProductPage({ productData, onBackToHome }) {
         </div>
       </section>
 
-      {/* 03 — TRUST / CREDIBILITY BAR */}
+      {/* TRUST / CREDIBILITY BAR */}
       <TrustStrip trustStrip={trustStrip} accentColor={accentColor} />
 
-      {/* 04 — BLOCO EDITORIAL ("WHY LINFAFLOW / WHY SLIMSODA?") */}
-      <WhySlimSodaBlock whyBlock={whyBlock} accentColor={accentColor} />
+      {isSlimSoda ? (
+        <>
+          {/* 02 — WHAT DOES SLIMSODA ACTUALLY DO? */}
+          <SlimSodaFourPillars data={fourPillars} accentColor={accentColor} />
 
-      {/* 05 — SOCIAL PROOF / REAL-LIFE ROUTINES */}
-      <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+          {/* 03-07 — TARGET DEEP DIVES (Fat Burning, Metabolism, Appetite, Digestion, Why 4 Targets) */}
+          <SlimSodaTargetDeepDives accentColor={accentColor} />
 
-      {/* 05B — DEDICATED VIDEO REVIEWS (SONNUS) */}
-      <VideoReviewsSection productName={brand} accentColor={accentColor} />
+          {/* 08 — WHAT'S INSIDE? (Detailed Ingredients) */}
+          <SlimSodaIngredients accentColor={accentColor} />
 
-      {/* 06 — BENEFÍCIOS PRINCIPAIS */}
-      <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
+          {/* 09 — HOW SLIMSODA FITS INTO YOUR DAY */}
+          <SlimSodaRoutine accentColor={accentColor} />
 
-      {/* 07 — INGREDIENTES E FÓRMULA */}
-      <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
+          {/* 10 — SLIMSODA VS BASIC DIET-ONLY */}
+          <SlimSodaComparison accentColor={accentColor} />
 
-      {/* 08 — WHY PEOPLE CHOOSE (PRODUTO) */}
-      <WhyPeopleChooseSection whyChoose={whyChoose} accentColor={accentColor} />
+          {/* 11 — WHAT IT IS AND ISN'T */}
+          <SlimSodaIsAndIsnt accentColor={accentColor} />
 
-      {/* 09 — COMO FUNCIONA / MODO DE USO */}
-      <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
+          {/* 01 — FIRST OFFER BUNDLE SELECTOR (PDF Page 25: "Este bloco da oferta pode manter ele aqui e depois continuamos com a lp 12 — REAL CUSTOMERS") */}
+          <section 
+            id="first-bundles-section" 
+            style={{ 
+              backgroundColor: '#1B2613', 
+              padding: '40px 20px 60px 20px', 
+              borderTop: 'none',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
+            </div>
+          </section>
 
-      {/* 10 — TABELA COMPARATIVA */}
-      <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
+          {/* 12 — REAL CUSTOMERS */}
+          <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+          <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
 
-      {/* 11 — OS 3 BLOCOS DOS VALORES / KITS DE OFERTA */}
-      <section 
-        id="bundles-section" 
-        style={{ 
-          backgroundColor: '#1B2613', 
-          padding: '40px 20px 60px 20px', 
-          borderTop: 'none',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
-        }}
-      >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
-        </div>
-      </section>
+          {/* 13 — 90-DAY GUARANTEE */}
+          <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
 
-      {/* 12 — SELO & GARANTIA DE 90 DIAS */}
-      <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
+          {/* 14 — FAQ */}
+          <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
 
-      {/* 13 — AVALIAÇÕES & DEPOIMENTOS DE CLIENTES */}
-      <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
-
-      {/* 14 — FAQ (PERGUNTAS FREQUENTES) */}
-      <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
-
-      {/* 15 — BLOCO FINAL CTA */}
-      <FinalCTABlock finalOffer={finalOffer} brand={brand} accentColor={accentColor} />
+          {/* 15 — FINAL CLOSE & SECOND OFFER BUNDLE SELECTOR (PDF Page 30: "15 — FINAL CLOSE... repetir o bloco oferta novamente") */}
+          <FinalCTABlock finalOffer={finalOffer} brand={brand} accentColor={accentColor} />
+          <section 
+            id="bundles-section" 
+            style={{ 
+              backgroundColor: '#1B2613', 
+              padding: '0 20px 60px 20px', 
+              borderTop: 'none',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          {/* Default layout for non-SlimSoda products */}
+          <WhySlimSodaBlock whyBlock={whyBlock} accentColor={accentColor} />
+          <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+          <VideoReviewsSection productName={brand} accentColor={accentColor} />
+          <ProductBenefits benefitsSection={benefitsSection} accentColor={accentColor} />
+          <IngredientsSection ingredientsSection={ingredientsSection} accentColor={accentColor} />
+          <WhyPeopleChooseSection whyChoose={whyChoose} accentColor={accentColor} />
+          <HowItWorks howItWorks={howItWorks} accentColor={accentColor} />
+          <ComparisonTable comparisonSection={comparisonSection} accentColor={accentColor} />
+          <section 
+            id="bundles-section" 
+            style={{ 
+              backgroundColor: '#1B2613', 
+              padding: '40px 20px 60px 20px', 
+              borderTop: 'none',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+              <BundleSelector bundlesSection={bundlesSection} accentColor={accentColor} />
+            </div>
+          </section>
+          <GuaranteeSection guaranteeSection={guaranteeSection} accentColor={accentColor} />
+          <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
+          <ProductFAQ faqSection={faqSection} accentColor={accentColor} />
+          <FinalCTABlock finalOffer={finalOffer} brand={brand} accentColor={accentColor} />
+        </>
+      )}
     </div>
   );
 }
