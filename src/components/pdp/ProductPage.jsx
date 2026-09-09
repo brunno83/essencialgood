@@ -149,6 +149,9 @@ export function ProductPage({ productData, onBackToHome }) {
 
       {isSlimSoda ? (
         <>
+          {/* REAL TRANSFORMATIONS (Moved right below Hero) */}
+          <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+
           {/* 02 — WHAT DOES SLIMSODA ACTUALLY DO? */}
           <SlimSodaFourPillars data={fourPillars} accentColor={accentColor} />
 
@@ -167,7 +170,7 @@ export function ProductPage({ productData, onBackToHome }) {
           {/* 11 — WHAT IT IS AND ISN'T */}
           <SlimSodaIsAndIsnt accentColor={accentColor} />
 
-          {/* 01 — FIRST OFFER BUNDLE SELECTOR (PDF Page 25: "Este bloco da oferta pode manter ele aqui e depois continuamos com a lp 12 — REAL CUSTOMERS") */}
+          {/* 01 — FIRST OFFER BUNDLE SELECTOR (PDF Page 25) */}
           <section 
             id="first-bundles-section" 
             style={{ 
@@ -182,8 +185,7 @@ export function ProductPage({ productData, onBackToHome }) {
             </div>
           </section>
 
-          {/* 12 — REAL CUSTOMERS */}
-          <RealTransformations productName={brand} productId={productData?.id} accentColor={accentColor} />
+          {/* 12 — REAL CUSTOMERS (Written reviews) */}
           <CustomerReviews reviewsSection={reviewsSection} accentColor={accentColor} />
 
           {/* 13 — 90-DAY GUARANTEE */}
