@@ -1,5 +1,15 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/ADV-sonnus", "destination": "/adv-sonnus/", "permanent": true },
+    { "source": "/ADV-slimsoda", "destination": "/adv-slimsoda/", "permanent": true },
+    { "source": "/ADV-crowned", "destination": "/adv-crowned/", "permanent": true },
+    { "source": "/ADV-linfaflow", "destination": "/adv-linfaflow/", "permanent": true },
+    { "source": "/adv-sonnus", "destination": "/adv-sonnus/", "permanent": true },
+    { "source": "/adv-slimsoda", "destination": "/adv-slimsoda/", "permanent": true },
+    { "source": "/adv-crowned", "destination": "/adv-crowned/", "permanent": true },
+    { "source": "/adv-linfaflow", "destination": "/adv-linfaflow/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/ADV-sonnus/:path*", "destination": "/adv-sonnus/:path*" },
     { "source": "/ADV-slimsoda/:path*", "destination": "/adv-slimsoda/:path*" },
