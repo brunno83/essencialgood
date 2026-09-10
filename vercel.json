@@ -8,7 +8,10 @@
     { "source": "/adv-sonnus", "destination": "/adv-sonnus/", "permanent": true },
     { "source": "/adv-slimsoda", "destination": "/adv-slimsoda/", "permanent": true },
     { "source": "/adv-crowned", "destination": "/adv-crowned/", "permanent": true },
-    { "source": "/adv-linfaflow", "destination": "/adv-linfaflow/", "permanent": true }
+    { "source": "/adv-linfaflow", "destination": "/adv-linfaflow/", "permanent": true },
+    { "source": "/crownedpower", "destination": "/crownedpower/", "permanent": true },
+    { "source": "/CROWNEDpower", "destination": "/crownedpower/", "permanent": true },
+    { "source": "/Crownedpower", "destination": "/crownedpower/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/ADV-sonnus/:path*", "destination": "/adv-sonnus/:path*" },
@@ -46,6 +49,10 @@
     { "source": "/crowned/images/:path*", "destination": "/crowned/images/:path*" },
     { "source": "/linfaflow/images/:path*", "destination": "/linfaflow/images/:path*" },
     { "source": "/sonnus/images/:path*", "destination": "/sonnus/images/:path*" },
+    { "source": "/crownedpower/fonts/:path*", "destination": "/crownedpower/fonts/:path*" },
+    { "source": "/crownedpower/images/:path*", "destination": "/crownedpower/images/:path*" },
+    { "source": "/crownedpower", "destination": "/crownedpower/index.html" },
+    { "source": "/crownedpower/:path*", "destination": "/crownedpower/:path*" },
     { "source": "/slimsodapower/assets/:path*", "destination": "/slimsodapower/assets/:path*" },
     { "source": "/slimsodapower", "destination": "/slimsodapower/index.html" },
     { "source": "/slimsodapower/:path*", "destination": "/slimsodapower/:path*" },
