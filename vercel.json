@@ -1,77 +1,303 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/ADV-sonnus", "destination": "/adv-sonnus/", "permanent": true },
-    { "source": "/ADV-slimsoda", "destination": "/adv-slimsoda/", "permanent": true },
-    { "source": "/ADV-crowned", "destination": "/adv-crowned/", "permanent": true },
-    { "source": "/ADV-linfaflow", "destination": "/adv-linfaflow/", "permanent": true },
-    { "source": "/adv-sonnus", "destination": "/adv-sonnus/", "permanent": true },
-    { "source": "/adv-slimsoda", "destination": "/adv-slimsoda/", "permanent": true },
-    { "source": "/adv-crowned", "destination": "/adv-crowned/", "permanent": true },
-    { "source": "/adv-linfaflow", "destination": "/adv-linfaflow/", "permanent": true },
-    { "source": "/crownedpower", "destination": "/crownedpower/", "permanent": true },
-    { "source": "/CROWNEDpower", "destination": "/crownedpower/", "permanent": true },
-    { "source": "/Crownedpower", "destination": "/crownedpower/", "permanent": true }
+    {
+      "source": "/ADV-memoflow",
+      "destination": "/adv-memoflow/",
+      "permanent": true
+    },
+    {
+      "source": "/adv-memoflow",
+      "destination": "/adv-memoflow/",
+      "permanent": true
+    },
+    {
+      "source": "/memoflow-adv",
+      "destination": "/adv-memoflow/",
+      "permanent": true
+    },
+    {
+      "source": "/memoflowpower",
+      "destination": "/memoflowpower/",
+      "permanent": true
+    },
+    {
+      "source": "/MEMOFLOWpower",
+      "destination": "/memoflowpower/",
+      "permanent": true
+    },
+    {
+      "source": "/Memoflowpower",
+      "destination": "/memoflowpower/",
+      "permanent": true
+    },
+    {
+      "source": "/memoflow-pdp",
+      "destination": "/memoflowpower/",
+      "permanent": true
+    },
+    {
+      "source": "/ADV-sonnus",
+      "destination": "/adv-sonnus/",
+      "permanent": true
+    },
+    {
+      "source": "/ADV-slimsoda",
+      "destination": "/adv-slimsoda/",
+      "permanent": true
+    },
+    {
+      "source": "/ADV-crowned",
+      "destination": "/adv-crowned/",
+      "permanent": true
+    },
+    {
+      "source": "/ADV-linfaflow",
+      "destination": "/adv-linfaflow/",
+      "permanent": true
+    },
+    {
+      "source": "/adv-sonnus",
+      "destination": "/adv-sonnus/",
+      "permanent": true
+    },
+    {
+      "source": "/adv-slimsoda",
+      "destination": "/adv-slimsoda/",
+      "permanent": true
+    },
+    {
+      "source": "/adv-crowned",
+      "destination": "/adv-crowned/",
+      "permanent": true
+    },
+    {
+      "source": "/adv-linfaflow",
+      "destination": "/adv-linfaflow/",
+      "permanent": true
+    },
+    {
+      "source": "/crownedpower",
+      "destination": "/crownedpower/",
+      "permanent": true
+    },
+    {
+      "source": "/CROWNEDpower",
+      "destination": "/crownedpower/",
+      "permanent": true
+    },
+    {
+      "source": "/Crownedpower",
+      "destination": "/crownedpower/",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/ADV-sonnus/:path*", "destination": "/adv-sonnus/:path*" },
-    { "source": "/ADV-slimsoda/:path*", "destination": "/adv-slimsoda/:path*" },
-    { "source": "/ADV-crowned/:path*", "destination": "/adv-crowned/:path*" },
-    { "source": "/ADV-linfaflow/:path*", "destination": "/adv-linfaflow/:path*" },
+    {
+      "source": "/ADV-sonnus/:path*",
+      "destination": "/adv-sonnus/:path*"
+    },
+    {
+      "source": "/ADV-slimsoda/:path*",
+      "destination": "/adv-slimsoda/:path*"
+    },
+    {
+      "source": "/ADV-crowned/:path*",
+      "destination": "/adv-crowned/:path*"
+    },
+    {
+      "source": "/ADV-linfaflow/:path*",
+      "destination": "/adv-linfaflow/:path*"
+    },
     {
       "source": "/:path*",
       "has": [
-        { "type": "host", "value": "sonnus.essencialgood.com" }
+        {
+          "type": "host",
+          "value": "sonnus.essencialgood.com"
+        }
       ],
       "destination": "/adv-sonnus/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        { "type": "host", "value": "slimsoda.essencialgood.com" }
+        {
+          "type": "host",
+          "value": "slimsoda.essencialgood.com"
+        }
       ],
       "destination": "/adv-slimsoda/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        { "type": "host", "value": "crowned.essencialgood.com" }
+        {
+          "type": "host",
+          "value": "crowned.essencialgood.com"
+        }
       ],
       "destination": "/adv-crowned/:path*"
     },
     {
       "source": "/:path*",
       "has": [
-        { "type": "host", "value": "linfaflow.essencialgood.com" }
+        {
+          "type": "host",
+          "value": "linfaflow.essencialgood.com"
+        }
       ],
       "destination": "/adv-linfaflow/:path*"
     },
-    { "source": "/crowned/images/:path*", "destination": "/crowned/images/:path*" },
-    { "source": "/linfaflow/images/:path*", "destination": "/linfaflow/images/:path*" },
-    { "source": "/sonnus/images/:path*", "destination": "/sonnus/images/:path*" },
-    { "source": "/crownedpower/fonts/:path*", "destination": "/crownedpower/fonts/:path*" },
-    { "source": "/crownedpower/images/:path*", "destination": "/crownedpower/images/:path*" },
-    { "source": "/crownedpower", "destination": "/crownedpower/index.html" },
-    { "source": "/crownedpower/:path*", "destination": "/crownedpower/:path*" },
-    { "source": "/slimsodapower/assets/:path*", "destination": "/slimsodapower/assets/:path*" },
-    { "source": "/slimsodapower", "destination": "/slimsodapower/index.html" },
-    { "source": "/slimsodapower/:path*", "destination": "/slimsodapower/:path*" },
-    { "source": "/linfaflowpower/assets/:path*", "destination": "/linfaflowpower/assets/:path*" },
-    { "source": "/linfaflowpower/cart-details/:path*", "destination": "/linfaflowpower/cart-details/:path*" },
-    { "source": "/linfaflowpower", "destination": "/linfaflowpower/index.html" },
-    { "source": "/linfaflowpower/:path*", "destination": "/linfaflowpower/:path*" },
-    { "source": "/sonnuspower", "destination": "/sonnuspower/index.html" },
-    { "source": "/sonnuspower/:path*", "destination": "/sonnuspower/:path*" },
-    { "source": "/slimsoda", "destination": "/index.html" },
-    { "source": "/slimsoda/:path*", "destination": "/index.html" },
-    { "source": "/listicle/slimsoda", "destination": "/index.html" },
-    { "source": "/listicle/slimsoda/:path*", "destination": "/index.html" },
-    { "source": "/linfaflow", "destination": "/index.html" },
-    { "source": "/linfaflow/:path*", "destination": "/index.html" },
-    { "source": "/sonnus", "destination": "/index.html" },
-    { "source": "/sonnus/:path*", "destination": "/index.html" },
-    { "source": "/crowned", "destination": "/index.html" },
-    { "source": "/crowned/:path*", "destination": "/index.html" },
-    { "source": "/:path*", "destination": "/index.html" }
+    {
+      "source": "/crowned/images/:path*",
+      "destination": "/crowned/images/:path*"
+    },
+    {
+      "source": "/linfaflow/images/:path*",
+      "destination": "/linfaflow/images/:path*"
+    },
+    {
+      "source": "/sonnus/images/:path*",
+      "destination": "/sonnus/images/:path*"
+    },
+    {
+      "source": "/crownedpower/fonts/:path*",
+      "destination": "/crownedpower/fonts/:path*"
+    },
+    {
+      "source": "/crownedpower/images/:path*",
+      "destination": "/crownedpower/images/:path*"
+    },
+    {
+      "source": "/crownedpower",
+      "destination": "/crownedpower/index.html"
+    },
+    {
+      "source": "/crownedpower/:path*",
+      "destination": "/crownedpower/:path*"
+    },
+    {
+      "source": "/slimsodapower/assets/:path*",
+      "destination": "/slimsodapower/assets/:path*"
+    },
+    {
+      "source": "/slimsodapower",
+      "destination": "/slimsodapower/index.html"
+    },
+    {
+      "source": "/slimsodapower/:path*",
+      "destination": "/slimsodapower/:path*"
+    },
+    {
+      "source": "/linfaflowpower/assets/:path*",
+      "destination": "/linfaflowpower/assets/:path*"
+    },
+    {
+      "source": "/linfaflowpower/cart-details/:path*",
+      "destination": "/linfaflowpower/cart-details/:path*"
+    },
+    {
+      "source": "/linfaflowpower",
+      "destination": "/linfaflowpower/index.html"
+    },
+    {
+      "source": "/linfaflowpower/:path*",
+      "destination": "/linfaflowpower/:path*"
+    },
+    {
+      "source": "/sonnuspower",
+      "destination": "/sonnuspower/index.html"
+    },
+    {
+      "source": "/sonnuspower/:path*",
+      "destination": "/sonnuspower/:path*"
+    },
+    {
+      "source": "/slimsoda",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/slimsoda/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/slimsoda",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/slimsoda/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/linfaflow",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/linfaflow/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sonnus",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sonnus/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/crowned",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/crowned/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ADV-memoflow/:path*",
+      "destination": "/adv-memoflow/:path*"
+    },
+    {
+      "source": "/memoflow-adv/:path*",
+      "destination": "/adv-memoflow/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "memoflow.essencialgood.com"
+        }
+      ],
+      "destination": "/adv-memoflow/:path*"
+    },
+    {
+      "source": "/memoflowpower/images/:path*",
+      "destination": "/memoflowpower/images/:path*"
+    },
+    {
+      "source": "/memoflowpower/_next/:path*",
+      "destination": "/memoflowpower/_next/:path*"
+    },
+    {
+      "source": "/memoflowpower",
+      "destination": "/memoflowpower/index.html"
+    },
+    {
+      "source": "/memoflowpower/:path*",
+      "destination": "/memoflowpower/:path*"
+    },
+    {
+      "source": "/memoflow-pdp",
+      "destination": "/memoflowpower/index.html"
+    },
+    {
+      "source": "/memoflow-pdp/:path*",
+      "destination": "/memoflowpower/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
   ]
 }
