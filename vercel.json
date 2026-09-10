@@ -60,6 +60,8 @@
     { "source": "/linfaflowpower/cart-details/:path*", "destination": "/linfaflowpower/cart-details/:path*" },
     { "source": "/linfaflowpower", "destination": "/linfaflowpower/index.html" },
     { "source": "/linfaflowpower/:path*", "destination": "/linfaflowpower/:path*" },
+    { "source": "/sonnuspower", "destination": "/sonnuspower/index.html" },
+    { "source": "/sonnuspower/:path*", "destination": "/sonnuspower/:path*" },
     { "source": "/slimsoda", "destination": "/index.html" },
     { "source": "/slimsoda/:path*", "destination": "/index.html" },
     { "source": "/listicle/slimsoda", "destination": "/index.html" },
