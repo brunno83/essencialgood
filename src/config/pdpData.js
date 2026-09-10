@@ -81,7 +81,7 @@ export const PDP_DATA = {
           savings: 'Save $69.50',
           perks: ['✓ FREE SHIPPING', '✓ 90-DAY GUARANTEE', '✓ NO AUTO-SHIP'],
           ctaText: 'START TODAY →',
-          checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
+          checkoutUrl: 'https://cc.slimsodapowder.com/dtcnew-whop/checkout.php?hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF83Nzg0OTU4&affid=aff1982814&hcid=17890802184685h632pv8'
         },
         {
           id: 'most-popular',
@@ -99,7 +99,7 @@ export const PDP_DATA = {
           bonusText: '✓ Save More + Free Shipping',
           perks: ['✓ SAVE MORE', '✓ FREE SHIPPING', '✓ 90-DAY GUARANTEE'],
           ctaText: 'GET 4 BOTTLES →',
-          checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
+          checkoutUrl: 'https://cc.slimsodapowder.com/dtcnew-whop/checkout.php?hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF83Nzg0OTU4&affid=aff1982814&hcid=17890802184685h632pv8'
         },
         {
           id: 'best-value',
@@ -117,7 +117,7 @@ export const PDP_DATA = {
           bonusText: '✓ Lowest Price Per Bottle',
           perks: ['✓ LOWEST PRICE PER BOTTLE', '✓ FREE SHIPPING', '✓ 90-DAY GUARANTEE'],
           ctaText: 'GET THE BEST VALUE →',
-          checkoutUrl: 'https://cc.slimsodapowder.com/v2/checkout.php?&hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF8zOTkwNjcy&affid=aff1982814'
+          checkoutUrl: 'https://cc.slimsodapowder.com/dtcnew-whop/checkout.php?hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF83Nzg0OTU4&affid=aff1982814&hcid=17890802184685h632pv8'
         }
       ]
     },
