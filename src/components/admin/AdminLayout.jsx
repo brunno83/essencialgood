@@ -2,14 +2,28 @@ import React, { useState } from 'react';
 import { LayoutDashboard, MessageSquare, LogOut, Menu, X, Shield, Users } from 'lucide-react';
 import './AdminStyles.css';
 
-export function AdminLayout({ adminProfile, user, onSignOut, children }) {
-  const [activeTab, setActiveTab] = useState('dashboard');
+export function AdminLayout({
+  adminProfile,
+  user,
+  onSignOut,
+  activeTab = 'dashboard',
+  onSelectTab,
+  unreadCount = 0,
+  children,
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const userName = adminProfile?.full_name || user?.email || 'Administrador';
   const userRole = adminProfile?.role === 'admin' ? 'Administrador' : 'Agente';
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
+  const handleNavClick = (tab) => {
+    if (typeof onSelectTab === 'function') {
+      onSelectTab(tab);
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="admin-root">
@@ -37,23 +51,23 @@ export function AdminLayout({ adminProfile, user, onSignOut, children }) {
           <nav className="admin-sidebar-nav">
             <button
               className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('dashboard');
-                setMobileMenuOpen(false);
-              }}
+              onClick={() => handleNavClick('dashboard')}
             >
               <LayoutDashboard size={18} />
               <span>Dashboard</span>
             </button>
 
             <button
-              className="admin-nav-item disabled"
-              title="Módulo de conversas em tempo real (Próxima etapa)"
-              disabled
+              className={`admin-nav-item ${activeTab === 'conversations' ? 'active' : ''}`}
+              onClick={() => handleNavClick('conversations')}
             >
               <MessageSquare size={18} />
               <span>Conversas</span>
-              <span className="admin-nav-badge-soon">Etapa 2B</span>
+              {unreadCount > 0 && (
+                <span className="admin-nav-badge-unread">
+                  {unreadCount > 99 ? '99+' : unreadCount}
+                </span>
+              )}
             </button>
           </nav>
 
@@ -89,7 +103,7 @@ export function AdminLayout({ adminProfile, user, onSignOut, children }) {
             </button>
 
             <h2 className="admin-header-title">
-              {activeTab === 'dashboard' ? 'Visão Geral' : 'Conversas'}
+              {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
             </h2>
 
             <div style={{ width: '24px' }} />

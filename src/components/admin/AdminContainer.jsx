@@ -3,12 +3,80 @@ import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { AdminLogin } from './AdminLogin';
 import { AdminLayout } from './AdminLayout';
 import { AdminDashboard } from './AdminDashboard';
+import { AdminConversations } from './AdminConversations';
 import './AdminStyles.css';
 
 export function AdminContainer() {
   const [user, setUser] = useState(null);
   const [adminProfile, setAdminProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState(() => {
+    const p = window.location.pathname.toLowerCase();
+    return p.includes('/admin/conversations') ? 'conversations' : 'dashboard';
+  });
+  const [globalUnreadCount, setGlobalUnreadCount] = useState(0);
+
+  // Escuta popstate para suportar botões voltar/avançar do navegador
+  useEffect(() => {
+    const handlePopState = () => {
+      const p = window.location.pathname.toLowerCase();
+      if (p.includes('/admin/conversations')) {
+        setActiveTab('conversations');
+      } else {
+        setActiveTab('dashboard');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleSelectTab = (tab) => {
+    setActiveTab(tab);
+    const newPath = tab === 'conversations' ? '/admin/conversations' : '/admin';
+    if (window.location.pathname !== newPath) {
+      window.history.pushState(null, '', newPath);
+    }
+  };
+
+  // Busca mensagens não lidas enviadas por visitantes para o badge da sidebar
+  const fetchGlobalUnreadCount = useCallback(async () => {
+    if (!isSupabaseConfigured || !supabase) return;
+    try {
+      const { count, error } = await supabase
+        .from('messages')
+        .select('*', { count: 'exact', head: true })
+        .eq('sender_type', 'visitor')
+        .is('read_at', null);
+
+      if (!error && count !== null) {
+        setGlobalUnreadCount(count);
+      }
+    } catch (e) {
+      console.warn('[AdminContainer] Erro ao buscar contagem global de não lidas:', e);
+    }
+  }, []);
+
+  // Escuta mensagens novas em tempo real para atualizar o badge da sidebar
+  useEffect(() => {
+    if (!isSupabaseConfigured || !supabase) return;
+
+    fetchGlobalUnreadCount();
+
+    const channel = supabase
+      .channel('admin-global-badge')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'messages' },
+        () => {
+          fetchGlobalUnreadCount();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      if (supabase) supabase.removeChannel(channel);
+    };
+  }, [fetchGlobalUnreadCount]);
 
   // Consulta tabela admin_profiles para verificar se o usuário é admin ou agent
   const validateAdminProfile = useCallback(async (currentUser) => {
@@ -128,10 +196,21 @@ export function AdminContainer() {
     return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
   }
 
-  // 3. Se estiver autenticado e autorizado, exibe AdminLayout com o Dashboard
+  // 3. Se estiver autenticado e autorizado, exibe AdminLayout com o conteúdo da aba ativa
   return (
-    <AdminLayout adminProfile={adminProfile} user={user} onSignOut={handleSignOut}>
-      <AdminDashboard adminProfile={adminProfile} user={user} />
+    <AdminLayout
+      adminProfile={adminProfile}
+      user={user}
+      onSignOut={handleSignOut}
+      activeTab={activeTab}
+      onSelectTab={handleSelectTab}
+      unreadCount={globalUnreadCount}
+    >
+      {activeTab === 'conversations' ? (
+        <AdminConversations adminProfile={adminProfile} />
+      ) : (
+        <AdminDashboard adminProfile={adminProfile} user={user} />
+      )}
     </AdminLayout>
   );
 }
