@@ -93,12 +93,12 @@ BEGIN
 END;
 $$;
 
--- Concede execução somente a usuários autenticados (inclusive sessões anônimas Supabase Auth)
-REVOKE EXECUTE ON FUNCTION public.is_admin() FROM PUBLIC, anon;
-GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated;
+-- Concede execução a usuários autenticados e anônimos (necessário para avaliação de RLS pelo Postgres)
+REVOKE EXECUTE ON FUNCTION public.is_admin() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated, anon;
 
-REVOKE EXECUTE ON FUNCTION public.is_admin_or_agent() FROM PUBLIC, anon;
-GRANT EXECUTE ON FUNCTION public.is_admin_or_agent() TO authenticated;
+REVOKE EXECUTE ON FUNCTION public.is_admin_or_agent() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_admin_or_agent() TO authenticated, anon;
 
 -- 6. ATIVAÇÃO DE ROW LEVEL SECURITY (RLS)
 ALTER TABLE public.admin_profiles ENABLE ROW LEVEL SECURITY;
