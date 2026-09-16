@@ -214,6 +214,14 @@
       "destination": "/sonnuspower/:path*"
     },
     {
+      "source": "/admin",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin/index.html"
+    },
+    {
       "source": "/slimsoda",
       "destination": "/index.html"
     },
