@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Header } from './components/layout/Header';
 import { CinematicHero } from './components/home/CinematicHero';
 import { CountdownBanner } from './components/common/CountdownBanner';
@@ -23,6 +23,8 @@ import { SonnusListicle } from './components/listicle/sonnus/SonnusListicle';
 import { CrownedListicle } from './components/listicle/crowned/CrownedListicle';
 import { AdminContainer } from './components/admin/AdminContainer';
 import { PDP_DATA } from './config/pdpData';
+
+const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
 export function App() {
   const getProductFromLocation = () => {
@@ -269,6 +271,11 @@ export function App() {
 
       {/* RECENT SALES POPUP TOASTS (WORKS ACROSS HOME AND PRODUCT PAGES) */}
       <SalesNotificationPopups onSelectProduct={openProductPDP} />
+
+      {/* CHATWIDGET PÚBLICO EM TEMPO REAL */}
+      <Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
     </div>
   );
 }
