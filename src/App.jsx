@@ -21,12 +21,18 @@ import { SlimSodaListicle } from './components/listicle/slimsoda/SlimSodaListicl
 import { LinfaflowListicle } from './components/listicle/linfaflow/linfaflowListicle';
 import { SonnusListicle } from './components/listicle/sonnus/SonnusListicle';
 import { CrownedListicle } from './components/listicle/crowned/CrownedListicle';
+import { AdminContainer } from './components/admin/AdminContainer';
 import { PDP_DATA } from './config/pdpData';
 
 export function App() {
   const getProductFromLocation = () => {
-    // 0. Check Listicle routes in pathname
+    // 0. Check admin route in pathname
     const rawPathname = window.location.pathname.toLowerCase().replace(/\/$/, '');
+    if (rawPathname === '/admin' || rawPathname.startsWith('/admin')) {
+      return 'admin';
+    }
+
+    // Check Listicle routes in pathname
     if (rawPathname.includes('listicle/slimsoda') || rawPathname.includes('listicle-slimsoda')) {
       return 'listicle-slimsoda';
     }
@@ -172,6 +178,15 @@ export function App() {
           : activeProductId === 'listicle-crowned'
             ? PDP_DATA.crowned?.disclaimer
             : null;
+
+  // If route is /admin, render AdminContainer directly without public layout
+  if (activeProductId === 'admin') {
+    return (
+      <ErrorBoundary>
+        <AdminContainer onNavHome={backToHome} />
+      </ErrorBoundary>
+    );
+  }
 
   return (
     <div className="essencial-good-app" style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh' }}>
