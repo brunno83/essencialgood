@@ -13,7 +13,7 @@ if (!fs.existsSync(indexPath)) {
 }
 
 const htmlContent = fs.readFileSync(indexPath, 'utf8');
-const routes = ['slimsoda', 'linfaflow', 'sonnus', 'crowned', 'memoflow', 'listicle/slimsoda', 'listicle/linfaflow', 'listicle/sonnus', 'listicle/crowned', 'listicle/memoflow'];
+const routes = ['admin', 'admin/conversations', 'slimsoda', 'linfaflow', 'sonnus', 'crowned', 'memoflow', 'listicle/slimsoda', 'listicle/linfaflow', 'listicle/sonnus', 'listicle/crowned', 'listicle/memoflow'];
 
 routes.forEach(route => {
   const routeDir = path.join(distDir, route);
