@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
-import { getOrInitVisitorSession } from '../services/visitorAuthService';
+import { getOrInitVisitorSession, checkIsAdminProfile } from '../services/visitorAuthService';
 
 const CONV_STORAGE_KEY = 'essencialgood_visitor_active_conv_id';
 
@@ -8,6 +8,9 @@ export function useVisitorChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAdminUser, setIsAdminUser] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
   const [conversation, setConversation] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loadingMessages, setLoadingMessages] = useState(false);
@@ -19,18 +22,93 @@ export function useVisitorChat() {
   const realChannelRef = useRef(null);
   const convChannelRef = useRef(null);
 
-  // 1. Marca mensagens como lidas
+  // 1. Validação inicial e contínua de sessão para saber se o usuário é Admin/Agent
+  useEffect(() => {
+    let isMounted = true;
+    if (!isSupabaseConfigured || !supabase) {
+      setCheckingAuth(false);
+      return;
+    }
+
+    const verifySession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!isMounted) return;
+
+        if (session?.user && !session.user.is_anonymous) {
+          const isAdmin = await checkIsAdminProfile(session.user);
+          if (!isMounted) return;
+
+          if (isAdmin) {
+            setIsAdminUser(true);
+            setUser(null);
+            setCheckingAuth(false);
+            return;
+          }
+        }
+
+        if (session?.user?.is_anonymous) {
+          setUser(session.user);
+        }
+
+        setIsAdminUser(false);
+      } catch (err) {
+        if (typeof window !== 'undefined' && import.meta.env.DEV) {
+          console.warn('[VisitorChat] Erro ao validar sessão inicial:', err);
+        }
+      } finally {
+        if (isMounted) setCheckingAuth(false);
+      }
+    };
+
+    verifySession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, currentSession) => {
+      if (!isMounted) return;
+
+      if (currentSession?.user && !currentSession.user.is_anonymous) {
+        const isAdmin = await checkIsAdminProfile(currentSession.user);
+        if (!isMounted) return;
+
+        if (isAdmin) {
+          setIsAdminUser(true);
+          setUser(null);
+          setIsOpen(false);
+          setCheckingAuth(false);
+          return;
+        }
+      }
+
+      if (currentSession?.user?.is_anonymous) {
+        setUser(currentSession.user);
+      } else if (!currentSession) {
+        setUser(null);
+      }
+
+      setIsAdminUser(false);
+      setCheckingAuth(false);
+    });
+
+    return () => {
+      isMounted = false;
+      subscription?.unsubscribe();
+    };
+  }, []);
+
+  // 2. Marca mensagens como lidas
   const markAsRead = useCallback(async (convId) => {
     if (!convId || !supabase) return;
     try {
       await supabase.rpc('mark_messages_as_read', { p_conversation_id: convId });
       setUnreadCount(0);
     } catch (err) {
-      console.warn('[VisitorChat] Erro ao marcar mensagens como lidas:', err);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.warn('[VisitorChat] Erro ao marcar mensagens como lidas:', err);
+      }
     }
   }, []);
 
-  // 2. Busca histórico de mensagens
+  // 3. Busca histórico de mensagens
   const fetchMessages = useCallback(async (convId) => {
     if (!convId || !supabase) return;
     setLoadingMessages(true);
@@ -46,32 +124,31 @@ export function useVisitorChat() {
 
       setMessages(data || []);
 
-      // Contar não lidas enviadas pela equipe
       const unread = (data || []).filter(
         (m) => m.sender_type !== 'visitor' && !m.read_at
       ).length;
 
       setUnreadCount(unread);
 
-      // Se o chat estiver aberto, marcar como lidas imediatamente
       if (isOpen && unread > 0) {
         await markAsRead(convId);
       }
     } catch (err) {
-      console.error('[VisitorChat] Erro ao buscar mensagens:', err);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.error('[VisitorChat] Erro ao buscar mensagens:', err);
+      }
       setError('Não foi possível carregar as mensagens. Tente novamente.');
     } finally {
       setLoadingMessages(false);
     }
   }, [isOpen, markAsRead]);
 
-  // 3. Gerencia inscrições de Tempo Real para a conversa
+  // 4. Gerencia inscrições de Tempo Real
   useEffect(() => {
     if (!conversation?.id || !supabase) return;
 
     const convId = conversation.id;
 
-    // Remover canais anteriores se existirem
     if (realChannelRef.current) {
       supabase.removeChannel(realChannelRef.current);
       realChannelRef.current = null;
@@ -81,7 +158,6 @@ export function useVisitorChat() {
       convChannelRef.current = null;
     }
 
-    // Inscrever em novas mensagens da conversa
     const msgChannel = supabase
       .channel(`visitor-msgs:${convId}`)
       .on(
@@ -101,7 +177,6 @@ export function useVisitorChat() {
             return [...prev, newMsg];
           });
 
-          // Se a mensagem for da equipe
           if (newMsg.sender_type !== 'visitor') {
             if (isOpen) {
               await markAsRead(convId);
@@ -115,7 +190,6 @@ export function useVisitorChat() {
 
     realChannelRef.current = msgChannel;
 
-    // Inscrever em alterações da própria conversa (ex: status mudando para closed)
     const convChannel = supabase
       .channel(`visitor-conv:${convId}`)
       .on(
@@ -149,10 +223,10 @@ export function useVisitorChat() {
     };
   }, [conversation?.id, isOpen, markAsRead]);
 
-  // 4. Carrega sessão e conversa ativa ao abrir o widget
+  // 5. Carrega sessão e conversa ativa ao abrir o widget
   const initVisitorChat = useCallback(async () => {
-    if (!isSupabaseConfigured || !supabase) {
-      setError('Serviço de chat temporariamente indisponível.');
+    if (!isSupabaseConfigured || !supabase || isAdminUser) {
+      setError(isAdminUser ? 'Atendimento desativado para perfil administrativo.' : 'Serviço temporariamente indisponível.');
       return;
     }
 
@@ -160,14 +234,21 @@ export function useVisitorChat() {
     setError(null);
 
     try {
-      const { user: authUser, error: authErr } = await getOrInitVisitorSession();
+      const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession();
+
+      if (isAdmin) {
+        setIsAdminUser(true);
+        setUser(null);
+        setError('Atendimento desativado para perfil administrativo.');
+        return;
+      }
+
       if (authErr || !authUser) {
         throw authErr || new Error('Não foi possível iniciar sessão de visitante.');
       }
 
       setUser(authUser);
 
-      // Verificar conversa salva em cache ou consultar no Supabase
       const cachedConvId = localStorage.getItem(CONV_STORAGE_KEY);
       let activeConv = null;
 
@@ -193,7 +274,7 @@ export function useVisitorChat() {
           .limit(1)
           .maybeSingle();
 
-        if (fetchErr) {
+        if (fetchErr && typeof window !== 'undefined' && import.meta.env.DEV) {
           console.warn('[VisitorChat] Erro ao buscar conversa ativa:', fetchErr.message);
         }
 
@@ -210,15 +291,17 @@ export function useVisitorChat() {
         setConversation(null);
       }
     } catch (err) {
-      console.error('[VisitorChat] Erro ao inicializar chat:', err);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.error('[VisitorChat] Erro ao inicializar chat:', err);
+      }
       setError('Erro de conexão ao carregar o chat.');
     } finally {
       setConnecting(false);
     }
-  }, [fetchMessages]);
+  }, [fetchMessages, isAdminUser]);
 
-  // Alterna visibilidade do widget
   const toggleOpen = useCallback(() => {
+    if (isAdminUser) return;
     setIsOpen((prev) => {
       const nextState = !prev;
       if (nextState && !user) {
@@ -228,10 +311,13 @@ export function useVisitorChat() {
       }
       return nextState;
     });
-  }, [user, conversation?.id, initVisitorChat, markAsRead]);
+  }, [user, conversation?.id, initVisitorChat, markAsRead, isAdminUser]);
 
-  // 5. Inicia uma nova conversa (envia nome, e-mail e primeira mensagem)
+  // 6. Inicia uma nova conversa
   const startConversation = async ({ name, email, initialMessage }) => {
+    if (isAdminUser) {
+      return { error: 'O perfil administrativo não pode enviar mensagens como visitante.' };
+    }
     if (!initialMessage || !initialMessage.trim()) {
       return { error: 'Mensagem inicial é obrigatória.' };
     }
@@ -243,10 +329,13 @@ export function useVisitorChat() {
     setSendError(null);
 
     try {
-      // Garante sessão anônima
       let currentSessionUser = user;
       if (!currentSessionUser) {
-        const { user: authUser, error: authErr } = await getOrInitVisitorSession();
+        const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession();
+        if (isAdmin) {
+          setIsAdminUser(true);
+          return { error: 'O perfil administrativo não pode enviar mensagens como visitante.' };
+        }
         if (authErr || !authUser) {
           throw authErr || new Error('Sessão não disponível.');
         }
@@ -256,7 +345,6 @@ export function useVisitorChat() {
 
       let activeConv = conversation;
 
-      // Se ainda não tiver conversa ativa criada
       if (!activeConv || activeConv.status === 'closed') {
         const { data: newConv, error: createConvErr } = await supabase
           .from('conversations')
@@ -272,7 +360,6 @@ export function useVisitorChat() {
           .single();
 
         if (createConvErr) {
-          // Trata eventual concorrência caso já exista conversa aberta
           if (createConvErr.code === '23505') {
             const { data: existing } = await supabase
               .from('conversations')
@@ -297,7 +384,6 @@ export function useVisitorChat() {
         localStorage.setItem(CONV_STORAGE_KEY, activeConv.id);
       }
 
-      // Envia a primeira mensagem
       const { data: newMsg, error: msgErr } = await supabase
         .from('messages')
         .insert([
@@ -314,7 +400,15 @@ export function useVisitorChat() {
       setMessages([newMsg]);
       return { conversation: activeConv, message: newMsg, error: null };
     } catch (err) {
-      console.error('[VisitorChat] Erro ao iniciar conversa:', err);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.error('[VisitorChat Technical Error Diagnosis]', {
+          code: err?.code || err?.status || null,
+          message: err?.message || String(err),
+          details: err?.details || null,
+          hint: err?.hint || null,
+          name: err?.name || null,
+        });
+      }
       const errorMsg = 'Falha ao enviar a mensagem. Tente novamente.';
       setSendError(errorMsg);
       return { error: errorMsg };
@@ -323,8 +417,9 @@ export function useVisitorChat() {
     }
   };
 
-  // 6. Envia mensagem subsequente
+  // 7. Envia mensagem subsequente
   const sendMessage = async (content) => {
+    if (isAdminUser) return { error: 'Mensagem bloqueada para admin.' };
     if (!content || !content.trim()) return { error: 'Mensagem vazia.' };
     if (!conversation || conversation.status === 'closed') {
       return { error: 'Esta conversa foi encerrada.' };
@@ -359,7 +454,9 @@ export function useVisitorChat() {
 
       return { message: newMsg, error: null };
     } catch (err) {
-      console.error('[VisitorChat] Erro ao enviar mensagem:', err);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.error('[VisitorChat] Erro ao enviar mensagem:', err);
+      }
       const errorMsg = 'Não foi possível enviar a mensagem. Verifique sua conexão e tente novamente.';
       setSendError(errorMsg);
       return { error: errorMsg };
@@ -368,7 +465,6 @@ export function useVisitorChat() {
     }
   };
 
-  // 7. Reseta conversa ativa local para permitir iniciar nova conversa
   const resetForNewConversation = useCallback(() => {
     setConversation(null);
     setMessages([]);
@@ -380,6 +476,8 @@ export function useVisitorChat() {
     toggleOpen,
     connecting,
     user,
+    isAdminUser,
+    checkingAuth,
     conversation,
     messages,
     loadingMessages,

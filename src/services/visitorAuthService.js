@@ -3,11 +3,44 @@ import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 let signInPromise = null;
 
 /**
+ * Verifica se um usuário possui perfil de admin ou agent cadastrado em admin_profiles.
+ *
+ * @param {import('@supabase/supabase-js').User} user
+ * @returns {Promise<boolean>}
+ */
+export async function checkIsAdminProfile(user) {
+  if (!user || user.is_anonymous || !supabase || !isSupabaseConfigured) {
+    return false;
+  }
+  try {
+    const { data: profile, error } = await supabase
+      .from('admin_profiles')
+      .select('role')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (error) {
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.warn('[VisitorAuth] Erro ao consultar admin_profiles:', error.message);
+      }
+      return false;
+    }
+
+    return Boolean(profile && (profile.role === 'admin' || profile.role === 'agent'));
+  } catch (err) {
+    if (typeof window !== 'undefined' && import.meta.env.DEV) {
+      console.warn('[VisitorAuth] Exceção ao validar perfil administrativo:', err);
+    }
+    return false;
+  }
+}
+
+/**
  * Serviço de Autenticação Anônima para Visitantes.
  * Garante sessão Supabase Anônima persistida via auth.uid().
- * NÃO cria sessão anônima na rota /admin ou se o usuário já estiver logado.
+ * NÃO cria nem substitui sessão anônima se o usuário for um Administrador ou Agente.
  *
- * @returns {Promise<{ user: import('@supabase/supabase-js').User|null, session: import('@supabase/supabase-js').Session|null, error: Error|null }>}
+ * @returns {Promise<{ user: import('@supabase/supabase-js').User|null, session: import('@supabase/supabase-js').Session|null, isAdmin?: boolean, error: Error|null }>}
  */
 export async function getOrInitVisitorSession() {
   if (!isSupabaseConfigured || !supabase) {
@@ -25,11 +58,24 @@ export async function getOrInitVisitorSession() {
     // 1. Verifica se já existe uma sessão ativa (seja anônima ou autenticada)
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-    if (sessionError) {
+    if (sessionError && typeof window !== 'undefined' && import.meta.env.DEV) {
       console.warn('[VisitorAuth] Erro ao verificar sessão existente:', sessionError.message);
     }
 
     if (session?.user) {
+      // Se for um usuário comum/admin (não anônimo), verifica se possui perfil de equipe
+      if (!session.user.is_anonymous) {
+        const isAdmin = await checkIsAdminProfile(session.user);
+        if (isAdmin) {
+          // NUNCA encerra nem substitui a sessão admin! Retorna indicando que é perfil admin.
+          return {
+            user: null,
+            session: null,
+            isAdmin: true,
+            error: new Error('Sessão administrativa ativa. O ChatWidget do visitante está desativado para administradores.'),
+          };
+        }
+      }
       return { user: session.user, session, error: null };
     }
 
@@ -43,12 +89,16 @@ export async function getOrInitVisitorSession() {
       try {
         const { data, error } = await supabase.auth.signInAnonymously();
         if (error) {
-          console.warn('[VisitorAuth] signInAnonymously não concluído:', error.message);
+          if (typeof window !== 'undefined' && import.meta.env.DEV) {
+            console.warn('[VisitorAuth] signInAnonymously não concluído:', error.message);
+          }
           return { user: null, session: null, error };
         }
         return { user: data.user, session: data.session, error: null };
       } catch (err) {
-        console.error('[VisitorAuth] Exceção em signInAnonymously:', err);
+        if (typeof window !== 'undefined' && import.meta.env.DEV) {
+          console.error('[VisitorAuth] Exceção em signInAnonymously:', err);
+        }
         return { user: null, session: null, error: err };
       } finally {
         signInPromise = null;
@@ -57,23 +107,28 @@ export async function getOrInitVisitorSession() {
 
     return await signInPromise;
   } catch (err) {
-    console.error('[VisitorAuth] Erro no visitorAuthService:', err);
+    if (typeof window !== 'undefined' && import.meta.env.DEV) {
+      console.error('[VisitorAuth] Erro no visitorAuthService:', err);
+    }
     return { user: null, session: null, error: err };
   }
 }
 
 /**
  * Busca a conversa ativa do visitante ou cria uma nova de forma idempotente.
- * Impede a criação de múltiplas conversas abertas simultâneas.
  */
 export async function getOrCreateVisitorConversation() {
-  const { user, error: authError } = await getOrInitVisitorSession();
+  const { user, isAdmin, error: authError } = await getOrInitVisitorSession();
+
+  if (isAdmin) {
+    return { conversation: null, error: new Error('Atendimento bloqueado para perfil administrativo.') };
+  }
+
   if (authError || !user) {
     return { conversation: null, error: authError || new Error('Visitante não autenticado') };
   }
 
   try {
-    // 1. Verifica se o visitante já tem uma conversa ativa ('open' ou 'pending')
     const { data: existing, error: fetchError } = await supabase
       .from('conversations')
       .select('*')
@@ -81,7 +136,7 @@ export async function getOrCreateVisitorConversation() {
       .in('status', ['open', 'pending'])
       .maybeSingle();
 
-    if (fetchError) {
+    if (fetchError && typeof window !== 'undefined' && import.meta.env.DEV) {
       console.warn('[VisitorAuth] Erro ao consultar conversa ativa:', fetchError.message);
     }
 
@@ -89,7 +144,6 @@ export async function getOrCreateVisitorConversation() {
       return { conversation: existing, error: null };
     }
 
-    // 2. Cria nova conversa (o trigger BEFORE INSERT no Postgres garante visitor_id = auth.uid())
     const { data: newConv, error: createError } = await supabase
       .from('conversations')
       .insert([{ visitor_id: user.id }])
@@ -97,13 +151,17 @@ export async function getOrCreateVisitorConversation() {
       .single();
 
     if (createError) {
-      console.error('[VisitorAuth] Erro ao criar conversa:', createError.message);
+      if (typeof window !== 'undefined' && import.meta.env.DEV) {
+        console.error('[VisitorAuth] Erro ao criar conversa:', createError.message);
+      }
       return { conversation: null, error: createError };
     }
 
     return { conversation: newConv, error: null };
   } catch (err) {
-    console.error('[VisitorAuth] Exceção em getOrCreateVisitorConversation:', err);
+    if (typeof window !== 'undefined' && import.meta.env.DEV) {
+      console.error('[VisitorAuth] Exceção em getOrCreateVisitorConversation:', err);
+    }
     return { conversation: null, error: err };
   }
 }

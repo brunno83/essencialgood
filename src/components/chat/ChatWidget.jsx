@@ -20,9 +20,16 @@ export function ChatWidget() {
     sendMessage,
     retryFetchMessages,
     resetForNewConversation,
+    isAdminUser,
+    checkingAuth,
   } = useVisitorChat();
 
-  // Regra 2: Nunca renderizar o widget em qualquer rota /admin ou /admin/*
+  // 1. Não renderizar enquanto valida autenticação inicial ou se for perfil administrativo
+  if (checkingAuth || isAdminUser) {
+    return null;
+  }
+
+  // 2. Não renderizar em qualquer rota /admin ou /admin/*
   if (typeof window !== 'undefined') {
     const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, '');
     if (currentPath === '/admin' || currentPath.startsWith('/admin/')) {
