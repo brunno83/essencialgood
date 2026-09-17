@@ -246,6 +246,38 @@
       "destination": "/index.html"
     },
     {
+      "source": "/listicle/linfaflow",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/linfaflow/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/sonnus",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/sonnus/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/crowned",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/crowned/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/memoflow",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/listicle/memoflow/:path*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/linfaflow",
       "destination": "/index.html"
     },
