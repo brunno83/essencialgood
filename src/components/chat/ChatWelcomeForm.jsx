@@ -35,7 +35,13 @@ export function ChatWelcomeForm({ onSubmit, sending, error }) {
   return (
     <div className="chat-welcome-form-container">
       <div className="chat-welcome-header">
-        <div className="chat-welcome-icon">💬</div>
+        <div className="chat-welcome-icon">
+          <img
+            src="/assets/brand/essencial-good-symbol.png"
+            alt="Essencial Good"
+            className="chat-welcome-symbol-img"
+          />
+        </div>
         <h3 className="chat-welcome-title">Fale com a Essencial Good</h3>
         <p className="chat-welcome-subtitle">
           Preencha os campos abaixo para iniciar seu atendimento ao vivo com nossa equipe.

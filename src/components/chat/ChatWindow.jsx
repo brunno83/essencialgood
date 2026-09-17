@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Loader2, MessageSquare } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
 import { ChatWelcomeForm } from './ChatWelcomeForm';
 import { ChatMessageList } from './ChatMessageList';
 import { ChatComposer } from './ChatComposer';
@@ -28,7 +28,11 @@ export function ChatWindow({
       <div className="chat-window-header">
         <div className="chat-header-info">
           <div className="chat-header-avatar">
-            <MessageSquare size={18} />
+            <img
+              src="/assets/brand/essencial-good-symbol.png"
+              alt="Essencial Good"
+              className="chat-header-symbol-img"
+            />
           </div>
           <div>
             <h3 className="chat-header-title">Essencial Good</h3>

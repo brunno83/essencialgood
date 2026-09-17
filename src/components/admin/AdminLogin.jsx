@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
-import { ShieldCheck, Mail, Lock, Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
 import './AdminStyles.css';
 
 export function AdminLogin({ onLoginSuccess }) {
@@ -21,7 +21,7 @@ export function AdminLogin({ onLoginSuccess }) {
     }
 
     if (!isSupabaseConfigured || !supabase) {
-      setErrorMessage('O serviço do Supabase não está configurado. Verifique o arquivo .env.local.');
+      setErrorMessage('O serviço do Supabase não está configurado. Verifique a configuração.');
       return;
     }
 
@@ -91,17 +91,18 @@ export function AdminLogin({ onLoginSuccess }) {
     <div className="admin-login-container">
       <div className="admin-login-card">
         <div className="admin-login-header">
-          <div className="admin-login-badge">
-            <ShieldCheck size={14} />
-            Área Restrita
-          </div>
+          <img
+            src="/assets/brand/essencial-good-logo.png"
+            alt="Essencial Good"
+            className="admin-login-logo"
+          />
           <h1 className="admin-login-title">Painel Administrativo</h1>
-          <p className="admin-login-subtitle">Acesse com suas credenciais de equipe Essencial Good</p>
+          <p className="admin-login-subtitle">Acesse com suas credenciais de atendimento</p>
         </div>
 
         {errorMessage && (
           <div className="admin-alert-error" style={{ marginBottom: '20px' }}>
-            <AlertCircle size={18} style={{ shrink: 0 }} />
+            <AlertCircle size={18} style={{ flexShrink: 0 }} />
             <span>{errorMessage}</span>
           </div>
         )}

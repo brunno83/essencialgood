@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
 import { ChatWindow } from './ChatWindow';
 import './ChatStyles.css';
@@ -57,7 +57,7 @@ export function ChatWidget() {
         />
       )}
 
-      {/* BOTÃO FLUTUANTE DO WIDGET */}
+      {/* BOTÃO FLUTUANTE DO WIDGET COM SÍMBOLO OFICIAL */}
       <button
         className={`chat-widget-button ${isOpen ? 'active' : ''}`}
         onClick={toggleOpen}
@@ -67,7 +67,11 @@ export function ChatWidget() {
         {isOpen ? (
           <X size={24} className="chat-button-icon" />
         ) : (
-          <MessageSquare size={24} className="chat-button-icon" />
+          <img
+            src="/assets/brand/essencial-good-symbol.png"
+            alt="Essencial Good"
+            className="chat-button-symbol"
+          />
         )}
 
         {/* BADGE DE NÃO LIDAS */}

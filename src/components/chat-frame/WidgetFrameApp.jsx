@@ -289,7 +289,15 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
           onClick={() => toggleOpen('floating_widget_button_click')}
           aria-label={isOpen ? 'Fechar atendimento' : 'Abrir atendimento'}
         >
-          {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
+          {isOpen ? (
+            <X size={24} className="chat-button-icon" />
+          ) : (
+            <img
+              src="/assets/brand/essencial-good-symbol.png"
+              alt="Essencial Good"
+              className="chat-button-symbol"
+            />
+          )}
           {!isOpen && unreadCount > 0 && (
             <span className="chat-widget-badge">
               {unreadCount > 99 ? '99+' : unreadCount}

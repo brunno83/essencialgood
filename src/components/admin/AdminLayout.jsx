@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, MessageSquare, LogOut, Menu, X, Shield, Users } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, LogOut, Menu, X, Users } from 'lucide-react';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -32,11 +32,11 @@ export function AdminLayout({
         <aside className={`admin-sidebar ${mobileMenuOpen ? 'open' : ''}`}>
           <div className="admin-sidebar-brand">
             <div className="admin-brand-logo">
-              <Shield size={24} style={{ color: '#10b981' }} />
-              <div>
-                <div className="admin-brand-title">Essencial Good</div>
-                <div className="admin-brand-subtitle">Painel de Atendimento</div>
-              </div>
+              <img
+                src="/assets/brand/essencial-good-logo.png"
+                alt="Essencial Good"
+                className="admin-sidebar-logo-img"
+              />
             </div>
             <button
               className="admin-mobile-toggle"
@@ -102,9 +102,17 @@ export function AdminLayout({
               <Menu size={22} />
             </button>
 
-            <h2 className="admin-header-title">
-              {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
-            </h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img
+                src="/assets/brand/essencial-good-symbol.png"
+                alt="Essencial Good"
+                className="admin-sidebar-symbol-img"
+                style={{ display: mobileMenuOpen ? 'none' : 'block' }}
+              />
+              <h2 className="admin-header-title">
+                {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
+              </h2>
+            </div>
 
             <div style={{ width: '24px' }} />
           </header>
