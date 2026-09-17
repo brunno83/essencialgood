@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { getOrInitVisitorSession, checkIsAdminProfile } from '../services/visitorAuthService';
 import { getConversationSourceInfo } from '../lib/conversationSource';
+import { debugLog, isChatDebug } from '../lib/chatDebug';
 
 const CONV_STORAGE_KEY = 'essencialgood_visitor_active_conv_id';
 
@@ -25,6 +26,18 @@ export function useVisitorChat(options = {}) {
 
   const realChannelRef = useRef(null);
   const convChannelRef = useRef(null);
+
+  // Wrapper centralizado de alteração de estado isOpen para diagnóstico de transições
+  const setChatOpen = useCallback((nextStateOrFn, reason) => {
+    setIsOpen((prev) => {
+      const nextState = typeof nextStateOrFn === 'function' ? nextStateOrFn(prev) : nextStateOrFn;
+      debugLog('useVisitorChat', `TRANSITION isOpen: ${prev} -> ${nextState}`, {
+        reason: reason || 'unspecified',
+        stack: isChatDebug() ? new Error().stack : undefined,
+      });
+      return nextState;
+    });
+  }, []);
 
   // 1. Validação inicial e contínua de sessão para saber se o usuário é Admin/Agent
   useEffect(() => {
@@ -67,8 +80,10 @@ export function useVisitorChat(options = {}) {
 
     verifySession();
 
-    const { data: { subscription } } = activeSupabase.auth.onAuthStateChange(async (_event, currentSession) => {
+    const { data: { subscription } } = activeSupabase.auth.onAuthStateChange(async (event, currentSession) => {
       if (!isMounted) return;
+
+      debugLog('useVisitorChat', 'onAuthStateChange event fired', { event, userId: currentSession?.user?.id, isAnonymous: currentSession?.user?.is_anonymous });
 
       if (currentSession?.user && !currentSession.user.is_anonymous) {
         const isAdmin = await checkIsAdminProfile(currentSession.user, activeSupabase);
@@ -77,7 +92,7 @@ export function useVisitorChat(options = {}) {
         if (isAdmin) {
           setIsAdminUser(true);
           setUser(null);
-          setIsOpen(false);
+          setChatOpen(false, 'auth_on_state_change_admin_detected');
           setCheckingAuth(false);
           return;
         }
@@ -97,7 +112,7 @@ export function useVisitorChat(options = {}) {
       isMounted = false;
       subscription?.unsubscribe();
     };
-  }, [activeSupabase]);
+  }, [activeSupabase, setChatOpen]);
 
   // 2. Marca mensagens como lidas
   const markAsRead = useCallback(async (convId) => {
@@ -304,18 +319,23 @@ export function useVisitorChat(options = {}) {
     }
   }, [activeSupabase, fetchMessages, isAdminUser]);
 
-  const toggleOpen = useCallback(() => {
-    if (isAdminUser) return;
-    setIsOpen((prev) => {
+  const toggleOpen = useCallback((customReason) => {
+    if (isAdminUser) {
+      debugLog('useVisitorChat', 'toggleOpen rejected - user is admin');
+      return;
+    }
+    const reason = typeof customReason === 'string' ? customReason : 'toggleOpen_user_click';
+    setChatOpen((prev) => {
       const nextState = !prev;
+      debugLog('useVisitorChat', `toggleOpen called: ${prev} -> ${nextState}`, { reason });
       if (nextState && !user) {
         initVisitorChat();
       } else if (nextState && conversation?.id) {
         markAsRead(conversation.id);
       }
       return nextState;
-    });
-  }, [user, conversation?.id, initVisitorChat, markAsRead, isAdminUser]);
+    }, reason);
+  }, [user, conversation?.id, initVisitorChat, markAsRead, isAdminUser, setChatOpen]);
 
   // 6. Inicia uma nova conversa
   const startConversation = async ({ name, email, initialMessage }) => {
@@ -485,6 +505,7 @@ export function useVisitorChat(options = {}) {
   return {
     isOpen,
     toggleOpen,
+    setChatOpen,
     connecting,
     user,
     isAdminUser,

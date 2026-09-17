@@ -10,6 +10,17 @@
   }
   window.__ESSENCIAL_CHAT_LOADER_INITIALIZED__ = true;
 
+  var isDebug = (window.location.search || '').indexOf('chat_debug=1') !== -1;
+  var loaderInstanceId = Math.random().toString(36).substring(2, 7);
+
+  function logLoader(action, details) {
+    if (!isDebug) return;
+    var t = typeof performance !== 'undefined' ? performance.now().toFixed(2) : '0';
+    console.log('[CHAT_DEBUG][' + t + 'ms][LOADER:' + loaderInstanceId + '] ' + action, details || {});
+  }
+
+  logLoader('Loader script executed');
+
   // Busca a tag do script atual para extrair data-product
   var scriptTag =
     document.currentScript ||
@@ -27,6 +38,9 @@
     : 'https://www.essencialgood.com';
 
   var frameUrl = WIDGET_ORIGIN + '/widget-frame';
+  if (isDebug) {
+    frameUrl += '?chat_debug=1';
+  }
 
   // Sanitiza dados da página hospedeira (sem query params e sem PII)
   function getSanitizedHostMetadata() {
@@ -76,6 +90,8 @@
     container.style.transition = 'width 0.25s ease, height 0.25s ease, bottom 0.25s ease, right 0.25s ease';
     container.style.pointerEvents = 'none';
 
+    logLoader('Container created', { width: '80px', height: '80px' });
+
     var iframe = document.createElement('iframe');
     iframe.id = 'essencial-chat-iframe';
     iframe.title = 'Suporte ao Vivo - Essencial Good';
@@ -87,11 +103,15 @@
     iframe.style.pointerEvents = 'auto';
     iframe.setAttribute('allowtransparency', 'true');
 
+    logLoader('Iframe created', { src: frameUrl });
+
     container.appendChild(iframe);
 
     // Redimensionamento dinâmico baseado em postMessage
     function setWidgetDimensions(isOpen) {
       var isMobile = window.innerWidth <= 640;
+      var prevWidth = container.style.width;
+      var prevHeight = container.style.height;
 
       if (!isOpen) {
         container.style.width = '80px';
@@ -113,6 +133,15 @@
           container.style.right = '16px';
         }
       }
+
+      logLoader('Container dimensions updated', {
+        isOpen: isOpen,
+        isMobile: isMobile,
+        prevWidth: prevWidth,
+        prevHeight: prevHeight,
+        newWidth: container.style.width,
+        newHeight: container.style.height,
+      });
     }
 
     var initAttempts = 0;
@@ -120,6 +149,7 @@
 
     function stopInitLoop() {
       if (initInterval) {
+        logLoader('Retry loop stopped', { attemptsExecuted: initAttempts });
         clearInterval(initInterval);
         initInterval = null;
       }
@@ -127,6 +157,7 @@
 
     function sendInitPayload() {
       if (iframe.contentWindow) {
+        logLoader('INIT sent to iframe', { attempt: initAttempts + 1 });
         iframe.contentWindow.postMessage(
           {
             type: 'ESSENCIAL_CHAT_INIT',
@@ -138,12 +169,17 @@
     }
 
     function startInitLoop() {
-      if (initInterval) return;
+      if (initInterval) {
+        logLoader('startInitLoop called while loop already running - ignored');
+        return;
+      }
+      logLoader('Retry loop started');
       sendInitPayload();
       initAttempts = 0;
       initInterval = setInterval(function () {
         initAttempts++;
         if (initAttempts >= 15) {
+          logLoader('Retry loop reached maximum 15 attempts - stopping');
           stopInitLoop();
         } else {
           sendInitPayload();
@@ -152,6 +188,7 @@
     }
 
     iframe.onload = function () {
+      logLoader('Iframe onload event fired');
       startInitLoop();
     };
 
@@ -168,31 +205,38 @@
       var data = event.data;
       if (!data || typeof data !== 'object') return;
 
+      logLoader('Message received from iframe', { type: data.type });
+
       switch (data.type) {
         case 'ESSENCIAL_CHAT_READY':
+          logLoader('READY received from iframe');
           sendInitPayload();
           break;
 
         case 'ESSENCIAL_CHAT_ACK':
+          logLoader('ACK received from iframe - stopping retries');
           stopInitLoop();
           break;
 
         case 'ESSENCIAL_CHAT_OPEN':
+          logLoader('OPEN received from iframe');
           stopInitLoop();
           setWidgetDimensions(true);
           break;
 
         case 'ESSENCIAL_CHAT_CLOSE':
+          logLoader('CLOSE received from iframe');
           stopInitLoop();
           setWidgetDimensions(false);
           break;
 
         case 'ESSENCIAL_CHAT_UNREAD':
+          logLoader('UNREAD received from iframe', { count: data.payload ? data.payload.count : 0 });
           stopInitLoop();
-          // Notificação de não lidas recebida
           break;
 
         case 'ESSENCIAL_CHAT_ERROR':
+          logLoader('ERROR received from iframe');
           stopInitLoop();
           container.style.display = 'none';
           break;
@@ -200,13 +244,28 @@
     }
 
     window.addEventListener('message', handleMessage);
+    logLoader('Message listener added to window');
+
+    if (isDebug) {
+      window.addEventListener('resize', function () {
+        logLoader('Host window resize event', { innerWidth: window.innerWidth, innerHeight: window.innerHeight });
+      });
+      document.addEventListener('pointerdown', function (e) {
+        logLoader('Host document pointerdown event', {
+          targetTagName: e.target ? e.target.tagName : null,
+          targetId: e.target ? e.target.id : null,
+        });
+      });
+    }
 
     // Injeta no DOM quando a página estiver pronta
     if (document.body) {
       document.body.appendChild(container);
+      logLoader('Container appended to body');
     } else {
       document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(container);
+        logLoader('Container appended to body on DOMContentLoaded');
       });
     }
   }
