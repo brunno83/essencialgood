@@ -197,6 +197,7 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
   const {
     isOpen,
     toggleOpen,
+    setChatOpen,
     connecting,
     conversation,
     messages,
@@ -214,12 +215,45 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
     sourceOverride: sourceMetadata,
   });
 
+  const isInitialMountRef = useRef(true);
+
+  // Listener para estado de inicialização vindo do loader (ESSENCIAL_CHAT_STATE)
   useEffect(() => {
+    const handleStateMessage = (event) => {
+      if (!isAllowedParentOrigin(event.origin)) return;
+      const data = event.data;
+      if (!data || typeof data !== 'object') return;
+
+      if (data.type === MSG_TYPES.STATE && data.payload) {
+        const loaderIsOpen = Boolean(data.payload.isOpen);
+        debugLog('WidgetFrameChatInner', 'STATE message received from parent loader', { loaderIsOpen, currentIsOpen: isOpen });
+        if (loaderIsOpen !== isOpen) {
+          setChatOpen(loaderIsOpen, 'loader_state_sync');
+        }
+      }
+    };
+
+    window.addEventListener('message', handleStateMessage);
+    return () => window.removeEventListener('message', handleStateMessage);
+  }, [isOpen, setChatOpen]);
+
+  // Comunicação de OPEN/CLOSE para o loader
+  // Regra: NÃO enviar CLOSE na montagem inicial quando isOpen é false por padrão.
+  useEffect(() => {
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      if (isOpen) {
+        debugLog('WidgetFrameChatInner', 'OPEN sent to parent (initial mount open)', { parentOrigin });
+        postToParent(MSG_TYPES.OPEN, {}, parentOrigin);
+      }
+      return;
+    }
+
     if (isOpen) {
-      debugLog('WidgetFrameChatInner', 'OPEN sent to parent', { parentOrigin });
+      debugLog('WidgetFrameChatInner', 'OPEN sent to parent (explicit state change)', { parentOrigin });
       postToParent(MSG_TYPES.OPEN, {}, parentOrigin);
     } else {
-      debugLog('WidgetFrameChatInner', 'CLOSE sent to parent', { parentOrigin });
+      debugLog('WidgetFrameChatInner', 'CLOSE sent to parent (explicit state change)', { parentOrigin });
       postToParent(MSG_TYPES.CLOSE, {}, parentOrigin);
     }
   }, [isOpen, parentOrigin]);
