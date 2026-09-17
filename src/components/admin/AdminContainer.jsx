@@ -4,6 +4,7 @@ import { AdminLogin } from './AdminLogin';
 import { AdminLayout } from './AdminLayout';
 import { AdminDashboard } from './AdminDashboard';
 import { AdminConversations } from './AdminConversations';
+import { AdminChatSettings } from './AdminChatSettings';
 import './AdminStyles.css';
 
 export function AdminContainer() {
@@ -12,7 +13,9 @@ export function AdminContainer() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(() => {
     const p = window.location.pathname.toLowerCase();
-    return p.includes('/admin/conversations') ? 'conversations' : 'dashboard';
+    if (p.includes('/admin/conversations')) return 'conversations';
+    if (p.includes('/admin/settings')) return 'settings';
+    return 'dashboard';
   });
   const [globalUnreadCount, setGlobalUnreadCount] = useState(0);
 
@@ -30,6 +33,8 @@ export function AdminContainer() {
       const p = window.location.pathname.toLowerCase();
       if (p.includes('/admin/conversations')) {
         setActiveTab('conversations');
+      } else if (p.includes('/admin/settings')) {
+        setActiveTab('settings');
       } else {
         setActiveTab('dashboard');
       }
@@ -40,7 +45,7 @@ export function AdminContainer() {
 
   const handleSelectTab = (tab) => {
     setActiveTab(tab);
-    const newPath = tab === 'conversations' ? '/admin/conversations' : '/admin';
+    const newPath = tab === 'conversations' ? '/admin/conversations' : tab === 'settings' ? '/admin/settings' : '/admin';
     if (window.location.pathname !== newPath) {
       window.history.pushState(null, '', newPath);
     }
@@ -110,7 +115,6 @@ export function AdminContainer() {
         setAdminProfile(profile);
         return profile;
       } else {
-        // Usuário autenticado no Auth mas sem perfil administrativo: desloga imediatamente
         console.warn('[AdminContainer] Usuário sem perfil de admin/agent. Deslogando...');
         await supabase.auth.signOut();
         setAdminProfile(null);
@@ -131,7 +135,6 @@ export function AdminContainer() {
       return;
     }
 
-    // 1. Carrega sessão inicial sem acionar login anônimo
     supabase.auth.getSession().then(async ({ data: { session: initialSession } }) => {
       if (!isMounted) return;
 
@@ -150,7 +153,6 @@ export function AdminContainer() {
       if (isMounted) setLoading(false);
     });
 
-    // 2. Escuta mudanças na autenticação
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, currentSession) => {
       if (!isMounted) return;
 
@@ -187,7 +189,6 @@ export function AdminContainer() {
     setAdminProfile(profile);
   };
 
-  // 1. Tela de Carregamento Inicial
   if (loading) {
     return (
       <div className="admin-loading-screen">
@@ -197,14 +198,12 @@ export function AdminContainer() {
     );
   }
 
-  // 2. Se não houver sessão autorizada ou perfil válido, exibe Login
   const isAuthenticatedAdmin = Boolean(user && !user.is_anonymous && adminProfile);
 
   if (!isAuthenticatedAdmin) {
     return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
   }
 
-  // 3. Se estiver autenticado e autorizado, exibe AdminLayout com o conteúdo da aba ativa
   return (
     <AdminLayout
       adminProfile={adminProfile}
@@ -216,6 +215,8 @@ export function AdminContainer() {
     >
       {activeTab === 'conversations' ? (
         <AdminConversations adminProfile={adminProfile} />
+      ) : activeTab === 'settings' ? (
+        <AdminChatSettings adminProfile={adminProfile} />
       ) : (
         <AdminDashboard adminProfile={adminProfile} user={user} onSelectTab={handleSelectTab} />
       )}

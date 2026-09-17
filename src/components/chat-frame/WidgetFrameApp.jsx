@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getWidgetSupabaseClient, sanitizeProductKey } from './widgetSupabaseClient';
 import { isAllowedParentOrigin, MSG_TYPES, postToParent } from './widgetMessaging';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
+import { useChatSettings } from '../../hooks/useChatSettings';
 import { ChatWindow } from '../chat/ChatWindow';
-import { MessageSquare, X } from 'lucide-react';
 import { debugLog, incrementDebugCount, isChatDebug } from '../../lib/chatDebug';
 import '../chat/ChatStyles.css';
 import './WidgetFrameStyles.css';
@@ -199,6 +199,8 @@ export function WidgetFrameApp() {
 }
 
 function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) {
+  const { settings } = useChatSettings();
+
   useEffect(() => {
     const innerMountCount = incrementDebugCount('widgetFrameChatInnerMounts');
     debugLog('WidgetFrameChatInner', 'Mount', { innerMountCount });
@@ -256,7 +258,6 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
   }, [isOpen, setChatOpen]);
 
   // Comunicação de OPEN/CLOSE para o loader
-  // Regra: NÃO enviar CLOSE na montagem inicial quando isOpen é false por padrão.
   useEffect(() => {
     if (isInitialMountRef.current) {
       isInitialMountRef.current = false;
@@ -280,6 +281,11 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
     postToParent(MSG_TYPES.UNREAD, { count: unreadCount }, parentOrigin);
   }, [unreadCount, parentOrigin]);
 
+  // Se o admin desativou o chat
+  if (settings && settings.is_enabled === false) {
+    return null;
+  }
+
   return (
     <div className="widget-frame-container">
       <div className="chat-widget-root">
@@ -298,6 +304,7 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
             onSendMessage={sendMessage}
             onRetryMessages={retryFetchMessages}
             onStartNewConversation={resetForNewConversation}
+            settings={settings}
           />
         )}
 
@@ -305,13 +312,18 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
           <button
             className="chat-widget-button"
             onClick={() => toggleOpen('floating_widget_button_click')}
-            aria-label="Abrir atendimento"
+            aria-label="Open live support"
+            title={settings?.header_title || 'Chat with Essencial Good'}
           >
             <div className="chat-button-symbol-wrapper">
               <img
-                src="/assets/Brand/essencial-good-symbol.png"
-                alt="Essencial Good"
+                src={settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png'}
+                alt={settings?.header_title || 'Essencial Good'}
                 className="chat-button-symbol"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/assets/Brand/essencial-good-symbol.png';
+                }}
               />
             </div>
             {unreadCount > 0 && (

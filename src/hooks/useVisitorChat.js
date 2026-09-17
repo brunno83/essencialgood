@@ -357,15 +357,15 @@ export function useVisitorChat(options = {}) {
   }, [user, checkingAuth, conversation?.id, initVisitorChat, markAsRead, isAdminUser, setChatOpen]);
 
   // 6. Inicia uma nova conversa
-  const startConversation = async ({ name, email, initialMessage }) => {
+  const startConversation = async ({ name, email, phone, countryCode, dialCode, initialMessage }) => {
     if (isAdminUser) {
       return { error: 'O perfil administrativo não pode enviar mensagens como visitante.' };
     }
     if (!initialMessage || !initialMessage.trim()) {
-      return { error: 'Mensagem inicial é obrigatória.' };
+      return { error: 'Initial message is required.' };
     }
     if (!name || !name.trim()) {
-      return { error: 'Por favor, informe seu nome.' };
+      return { error: 'Please provide your name.' };
     }
 
     setSending(true);
@@ -398,6 +398,9 @@ export function useVisitorChat(options = {}) {
               visitor_id: currentSessionUser.id,
               visitor_name: name.trim(),
               visitor_email: email && email.trim() ? email.trim() : null,
+              visitor_phone: phone && phone.trim() ? phone.trim() : null,
+              visitor_country_code: countryCode || 'US',
+              visitor_dial_code: dialCode || '+1',
               status: 'open',
               source_url: sourceInfo.source_url,
               source_path: sourceInfo.source_path,

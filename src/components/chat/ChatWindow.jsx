@@ -18,26 +18,35 @@ export function ChatWindow({
   onSendMessage,
   onRetryMessages,
   onStartNewConversation,
+  settings,
 }) {
   const isClosed = conversation?.status === 'closed';
   const isBooting = connecting || checkingAuth;
 
+  const headerTitle = settings?.header_title || 'Essencial Good';
+  const headerSubtitle = settings?.header_subtitle || 'Live Support';
+  const avatarUrl = settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png';
+
   return (
-    <div className="chat-window-container" role="dialog" aria-label="Janela de Atendimento Essencial Good">
+    <div className="chat-window-container" role="dialog" aria-label="Essencial Good Live Support Window">
       {/* CABEÇALHO */}
       <div className="chat-window-header">
         <div className="chat-header-info">
           <div className="chat-header-avatar">
             <img
-              src="/assets/Brand/essencial-good-symbol.png"
-              alt="Essencial Good"
+              src={avatarUrl}
+              alt={headerTitle}
               className="chat-header-symbol-img"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/assets/Brand/essencial-good-symbol.png';
+              }}
             />
           </div>
           <div>
-            <h3 className="chat-header-title">Essencial Good</h3>
+            <h3 className="chat-header-title">{headerTitle}</h3>
             <span className="chat-header-status">
-              <span className="chat-status-dot" /> Atendimento Ao Vivo
+              <span className="chat-status-dot" /> {headerSubtitle}
             </span>
           </div>
         </div>
@@ -45,7 +54,7 @@ export function ChatWindow({
         <button
           className="chat-close-btn"
           onClick={onClose}
-          aria-label="Fechar janela de atendimento"
+          aria-label="Close live support window"
         >
           <X size={20} />
         </button>
@@ -56,13 +65,14 @@ export function ChatWindow({
         {isBooting ? (
           <div className="chat-window-connecting">
             <Loader2 size={32} className="chat-spinner" />
-            <p>Conectando ao atendimento...</p>
+            <p>Connecting to support...</p>
           </div>
         ) : !conversation ? (
           <ChatWelcomeForm
             onSubmit={onStartConversation}
             sending={sending}
             error={sendError || error}
+            settings={settings}
           />
         ) : (
           <>
@@ -73,6 +83,7 @@ export function ChatWindow({
               conversationStatus={conversation.status}
               onRetry={onRetryMessages}
               onStartNewConversation={onStartNewConversation}
+              agentName={settings?.agent_name}
             />
             <ChatComposer
               onSendMessage={onSendMessage}

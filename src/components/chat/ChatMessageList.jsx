@@ -8,6 +8,7 @@ export function ChatMessageList({
   conversationStatus,
   onRetry,
   onStartNewConversation,
+  agentName = 'Essencial Good Team',
 }) {
   const messagesEndRef = useRef(null);
   const containerRef = useRef(null);
@@ -43,19 +44,19 @@ export function ChatMessageList({
       {loading ? (
         <div className="chat-loading-state">
           <Loader2 size={24} className="chat-spinner" />
-          <span>Carregando mensagens...</span>
+          <span>Loading messages...</span>
         </div>
       ) : error ? (
         <div className="chat-error-state">
           <AlertCircle size={20} />
           <span>{error}</span>
           <button className="chat-retry-btn" onClick={onRetry}>
-            <RefreshCw size={14} /> Tentar novamente
+            <RefreshCw size={14} /> Try again
           </button>
         </div>
       ) : messages.length === 0 ? (
         <div className="chat-empty-state">
-          <p>Nenhuma mensagem trocada ainda.</p>
+          <p>No messages yet.</p>
         </div>
       ) : (
         messages.map((msg) => {
@@ -69,11 +70,10 @@ export function ChatMessageList({
               <div className="chat-msg-bubble">
                 {!isVisitor && (
                   <div className="chat-msg-sender-name">
-                    Equipe Essencial Good
+                    {agentName}
                   </div>
                 )}
 
-                {/* TEXTO PURO SEM DANGEROUSLYSETINNERHTML */}
                 <div className="chat-msg-content">{msg.content}</div>
 
                 <div className="chat-msg-time">{formatTime(msg.created_at)}</div>
@@ -87,9 +87,9 @@ export function ChatMessageList({
       {isClosed && (
         <div className="chat-closed-notice">
           <Lock size={16} />
-          <span>Esta conversa foi encerrada pelo atendimento.</span>
+          <span>This chat session has been closed.</span>
           <button className="chat-new-conv-btn" onClick={onStartNewConversation}>
-            Iniciar nova conversa
+            Start new chat
           </button>
         </div>
       )}

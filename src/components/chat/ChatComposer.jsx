@@ -33,7 +33,7 @@ export function ChatComposer({ onSendMessage, sending, disabled, sendError }) {
       <div className="chat-composer-input-row">
         <textarea
           className="chat-composer-textarea"
-          placeholder={disabled ? 'Conversa encerrada...' : 'Digite sua mensagem...'}
+          placeholder={disabled ? 'Chat closed...' : 'Type a message...'}
           rows={1}
           value={text}
           onChange={(e) => {
@@ -49,8 +49,8 @@ export function ChatComposer({ onSendMessage, sending, disabled, sendError }) {
           className="chat-composer-send-btn"
           onClick={handleSend}
           disabled={sending || disabled || !text.trim()}
-          title="Enviar mensagem"
-          aria-label="Enviar mensagem"
+          title="Send message"
+          aria-label="Send message"
         >
           {sending ? (
             <Loader2 size={18} className="chat-spinner" />
@@ -61,7 +61,7 @@ export function ChatComposer({ onSendMessage, sending, disabled, sendError }) {
       </div>
 
       <div className="chat-composer-footer">
-        <span className="chat-composer-hint">Enter envia • Shift + Enter pula linha</span>
+        <span className="chat-composer-hint">Enter to send • Shift + Enter for new line</span>
         <span className="chat-composer-count">{text.length}/4000</span>
       </div>
     </div>

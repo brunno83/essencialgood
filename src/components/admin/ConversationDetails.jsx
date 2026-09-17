@@ -141,6 +141,22 @@ export function ConversationDetails({
           </div>
 
           <div className="conv-details-row">
+            <span className="conv-details-label">Telefone:</span>
+            <span className="conv-details-value">
+              {conversation.visitor_phone ? (
+                <>
+                  {conversation.visitor_phone}{' '}
+                  <span style={{ fontSize: '11px', color: '#64748B' }}>
+                    ({conversation.visitor_country_code || 'US'})
+                  </span>
+                </>
+              ) : (
+                'Não informado'
+              )}
+            </span>
+          </div>
+
+          <div className="conv-details-row">
             <span className="conv-details-label">ID do Visitante:</span>
             <span className="conv-details-value code">
               {conversation.visitor_id ? conversation.visitor_id.slice(0, 13) + '...' : 'N/A'}

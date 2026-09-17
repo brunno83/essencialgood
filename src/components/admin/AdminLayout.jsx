@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, MessageSquare, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Settings, LogOut, Menu, X } from 'lucide-react';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -69,9 +69,19 @@ export function AdminLayout({
                 </span>
               )}
             </button>
+
+            {adminProfile?.role === 'admin' && (
+              <button
+                className={`admin-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+                onClick={() => handleNavClick('settings')}
+              >
+                <Settings size={18} />
+                <span>Configurações</span>
+              </button>
+            )}
           </nav>
 
-          {/* User Footer Profile Redesenhado (Etapa 5B) */}
+          {/* User Footer Profile */}
           <div className="admin-sidebar-user">
             <div className="admin-user-info">
               <span className="admin-user-name" title={userName}>{userName}</span>
@@ -102,7 +112,11 @@ export function AdminLayout({
             </button>
 
             <h2 className="admin-header-title">
-              {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
+              {activeTab === 'dashboard'
+                ? 'Visão Geral'
+                : activeTab === 'conversations'
+                ? 'Central de Atendimento'
+                : 'Configurações do Chat'}
             </h2>
 
             <div style={{ width: '24px' }} />
