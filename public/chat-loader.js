@@ -224,8 +224,8 @@
           host.style.height = '672px';
           host.style.maxHeight = 'calc(100vh - 24px)';
           host.style.maxWidth = 'calc(100vw - 24px)';
-          host.style.bottom = '12px';
-          host.style.right = '12px';
+          host.style.bottom = '6px';
+          host.style.right = '6px';
         }
       }
 
