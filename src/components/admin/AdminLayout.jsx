@@ -33,7 +33,7 @@ export function AdminLayout({
           <div className="admin-sidebar-brand">
             <div className="admin-brand-logo">
               <img
-                src="/assets/brand/essencial-good-logo.png"
+                src="/assets/Brand/essencial-good-logo.png"
                 alt="Essencial Good"
                 className="admin-sidebar-logo-img"
               />
@@ -104,7 +104,7 @@ export function AdminLayout({
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <img
-                src="/assets/brand/essencial-good-symbol.png"
+                src="/assets/Brand/essencial-good-symbol.png"
                 alt="Essencial Good"
                 className="admin-sidebar-symbol-img"
                 style={{ display: mobileMenuOpen ? 'none' : 'block' }}

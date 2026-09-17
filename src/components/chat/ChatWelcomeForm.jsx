@@ -37,7 +37,7 @@ export function ChatWelcomeForm({ onSubmit, sending, error }) {
       <div className="chat-welcome-header">
         <div className="chat-welcome-icon">
           <img
-            src="/assets/brand/essencial-good-symbol.png"
+            src="/assets/Brand/essencial-good-symbol.png"
             alt="Essencial Good"
             className="chat-welcome-symbol-img"
           />

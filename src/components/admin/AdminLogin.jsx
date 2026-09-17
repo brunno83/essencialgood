@@ -92,7 +92,7 @@ export function AdminLogin({ onLoginSuccess }) {
       <div className="admin-login-card">
         <div className="admin-login-header">
           <img
-            src="/assets/brand/essencial-good-logo.png"
+            src="/assets/Brand/essencial-good-logo.png"
             alt="Essencial Good"
             className="admin-login-logo"
           />

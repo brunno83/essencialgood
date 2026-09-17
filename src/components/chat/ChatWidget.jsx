@@ -68,7 +68,7 @@ export function ChatWidget() {
           <X size={24} className="chat-button-icon" />
         ) : (
           <img
-            src="/assets/brand/essencial-good-symbol.png"
+            src="/assets/Brand/essencial-good-symbol.png"
             alt="Essencial Good"
             className="chat-button-symbol"
           />

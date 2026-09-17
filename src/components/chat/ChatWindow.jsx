@@ -29,7 +29,7 @@ export function ChatWindow({
         <div className="chat-header-info">
           <div className="chat-header-avatar">
             <img
-              src="/assets/brand/essencial-good-symbol.png"
+              src="/assets/Brand/essencial-good-symbol.png"
               alt="Essencial Good"
               className="chat-header-symbol-img"
             />
