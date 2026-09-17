@@ -13,17 +13,22 @@ export function WidgetFrameApp() {
   const [sourceMetadata, setSourceMetadata] = useState(null);
   const [supabaseClient, setSupabaseClient] = useState(null);
 
-  // Aplica classe de isolamento de scroll apenas enquanto a rota /widget-frame estiver ativa
+  // Aplica classe de isolamento de scroll e transparência enquanto a rota /widget-frame estiver ativa
   useEffect(() => {
+    document.documentElement.classList.add('widget-frame-html');
     document.body.classList.add('widget-frame-body');
     return () => {
+      document.documentElement.classList.remove('widget-frame-html');
       document.body.classList.remove('widget-frame-body');
     };
   }, []);
 
-  // 1. Escuta a mensagem ESSENCIAL_CHAT_INIT e envia ESSENCIAL_CHAT_READY no mount
+  // Handshake estrito: apenas inicializa ao receber mensagem ESSENCIAL_CHAT_INIT válida da janela pai
   useEffect(() => {
+    // Se não estiver rodando dentro de um iframe (ex: abertura direta de /widget-frame), não faz nada
     if (typeof window === 'undefined' || window.parent === window) return;
+
+    let mounted = true;
 
     const handleMessage = (event) => {
       const origin = event.origin;
@@ -42,46 +47,59 @@ export function WidgetFrameApp() {
           return;
         }
 
-        setParentOrigin(origin);
-        setSourceMetadata({
-          source_url: payload.sourceUrl || null,
-          source_path: payload.sourcePath || null,
-          source_host: payload.sourceHost || null,
-          source_title: payload.sourceTitle || null,
-          source_product: payload.sourceProduct || 'institucional',
-        });
-        setSupabaseClient(client);
-        setInitialized(true);
+        if (mounted) {
+          setParentOrigin(origin);
+          setSourceMetadata({
+            source_url: payload.sourceUrl || null,
+            source_path: payload.sourcePath || null,
+            source_host: payload.sourceHost || null,
+            source_title: payload.sourceTitle || null,
+            source_product: payload.sourceProduct || 'institucional',
+          });
+          setSupabaseClient(client);
+          setInitialized(true);
+        }
+
+        // Responde com ACK para confirmar a inicialização bem-sucedida à página pai
+        postToParent(MSG_TYPES.READY, { acknowledged: true }, origin);
       }
     };
 
     window.addEventListener('message', handleMessage);
 
-    // Tenta enviar o evento READY para o pai
-    let targetOrigin = null;
-    try {
-      if (document.referrer) {
-        const refUrl = new URL(document.referrer);
-        if (isAllowedParentOrigin(refUrl.origin)) {
-          targetOrigin = refUrl.origin;
+    // Envia o sinal READY inicial exclusivamente para a janela pai em origens validadas
+    const sendReadySignal = () => {
+      const candidateOrigins = new Set();
+      try {
+        if (document.referrer) {
+          const refUrl = new URL(document.referrer);
+          if (isAllowedParentOrigin(refUrl.origin)) {
+            candidateOrigins.add(refUrl.origin);
+          }
         }
+      } catch (e) {}
+
+      if (isAllowedParentOrigin(window.location.origin)) {
+        candidateOrigins.add(window.location.origin);
       }
-    } catch (e) {}
+      if (isAllowedParentOrigin('https://www.essencialgood.com')) {
+        candidateOrigins.add('https://www.essencialgood.com');
+      }
 
-    if (!targetOrigin && import.meta.env.DEV) {
-      targetOrigin = window.location.origin;
-    }
+      candidateOrigins.forEach((org) => {
+        postToParent(MSG_TYPES.READY, {}, org);
+      });
+    };
 
-    if (targetOrigin) {
-      postToParent(MSG_TYPES.READY, {}, targetOrigin);
-    }
+    sendReadySignal();
 
     return () => {
+      mounted = false;
       window.removeEventListener('message', handleMessage);
     };
   }, []);
 
-  // Sem handshake válido, não renderiza chat nem acessa o banco
+  // Sem handshake INIT válido recebido, não inicializa cliente, nem sessão, nem renderiza o chat
   if (!initialized || !supabaseClient || !parentOrigin) {
     return <div className="widget-frame-container" style={{ background: 'transparent' }} />;
   }

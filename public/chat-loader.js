@@ -115,6 +115,16 @@
       }
     }
 
+    var initAttempts = 0;
+    var initInterval = null;
+
+    function stopInitLoop() {
+      if (initInterval) {
+        clearInterval(initInterval);
+        initInterval = null;
+      }
+    }
+
     function sendInitPayload() {
       if (iframe.contentWindow) {
         iframe.contentWindow.postMessage(
@@ -127,8 +137,21 @@
       }
     }
 
-    iframe.onload = function () {
+    function startInitLoop() {
+      stopInitLoop();
       sendInitPayload();
+      initAttempts = 0;
+      initInterval = setInterval(function () {
+        initAttempts++;
+        sendInitPayload();
+        if (initAttempts >= 15) {
+          stopInitLoop();
+        }
+      }, 300);
+    }
+
+    iframe.onload = function () {
+      startInitLoop();
     };
 
     // Listener para Handshake postMessage
@@ -147,21 +170,28 @@
       switch (data.type) {
         case 'ESSENCIAL_CHAT_READY':
           sendInitPayload();
+          if (data.payload && data.payload.acknowledged) {
+            stopInitLoop();
+          }
           break;
 
         case 'ESSENCIAL_CHAT_OPEN':
+          stopInitLoop();
           setWidgetDimensions(true);
           break;
 
         case 'ESSENCIAL_CHAT_CLOSE':
+          stopInitLoop();
           setWidgetDimensions(false);
           break;
 
         case 'ESSENCIAL_CHAT_UNREAD':
+          stopInitLoop();
           // Notificação de não lidas recebida
           break;
 
         case 'ESSENCIAL_CHAT_ERROR':
+          stopInitLoop();
           container.style.display = 'none';
           break;
       }

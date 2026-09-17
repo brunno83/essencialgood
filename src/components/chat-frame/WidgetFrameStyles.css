@@ -1,19 +1,21 @@
 /* Estilos específicos para a rota /widget-frame dentro do Iframe */
+html.widget-frame-html,
 body.widget-frame-body,
 body.widget-frame-body #root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   background: transparent !important;
-  overflow: hidden;
+  background-color: transparent !important;
+  overflow: hidden !important;
 }
 
 .widget-frame-container {
   width: 100%;
   height: 100%;
   position: relative;
-  background: transparent;
+  background: transparent !important;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -35,10 +37,11 @@ body.widget-frame-body #root {
 }
 
 .widget-frame-container .chat-widget-button {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  z-index: 10;
+  position: absolute !important;
+  bottom: 11px !important;
+  right: 11px !important;
+  margin: 0 !important;
+  z-index: 10 !important;
 }
 
 .widget-frame-container .chat-window {
