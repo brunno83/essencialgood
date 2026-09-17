@@ -1,5 +1,10 @@
 import React from 'react';
-import { User, Mail, Calendar, Clock, UserCheck, Shield, ChevronRight } from 'lucide-react';
+import { User, Calendar, Clock, UserCheck, Shield, Globe, ExternalLink } from 'lucide-react';
+import {
+  getConversationSourceType,
+  formatProductDisplayName,
+  isAllowedSourceUrl,
+} from '../../lib/conversationSource';
 
 export function ConversationDetails({
   conversation,
@@ -15,6 +20,10 @@ export function ConversationDetails({
     : null;
 
   const isAssignedToMe = conversation.assigned_admin_id === adminProfile?.id;
+
+  const sourceType = getConversationSourceType(conversation);
+  const productDisplayName = formatProductDisplayName(conversation.source_product);
+  const canOpenLink = isAllowedSourceUrl(conversation.source_url);
 
   const formatDate = (isoString) => {
     if (!isoString) return 'N/A';
@@ -75,6 +84,76 @@ export function ConversationDetails({
             <span className="conv-details-value code">
               {conversation.visitor_id ? conversation.visitor_id.slice(0, 13) + '...' : 'N/A'}
             </span>
+          </div>
+        </div>
+
+        {/* Card de Origem da Conversa */}
+        <div className="conv-details-card">
+          <div className="conv-details-card-title">
+            <Globe size={16} />
+            <span>Origem do Atendimento</span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Produto:</span>
+            <span className="conv-details-value highlight">
+              {productDisplayName}
+            </span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Tipo de Página:</span>
+            <span className="conv-details-value">
+              {sourceType}
+            </span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Título da Página:</span>
+            <span className="conv-details-value" style={{ wordBreak: 'break-word' }}>
+              {conversation.source_title || 'Não identificado'}
+            </span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Domínio / Host:</span>
+            <span className="conv-details-value code">
+              {conversation.source_host || 'Não identificado'}
+            </span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Caminho / Rota:</span>
+            <span className="conv-details-value code" style={{ wordBreak: 'break-all' }}>
+              {conversation.source_path || 'Não identificado'}
+            </span>
+          </div>
+
+          <div className="conv-assign-actions" style={{ marginTop: '8px' }}>
+            {canOpenLink ? (
+              <a
+                href={conversation.source_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="conv-btn-secondary"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  textDecoration: 'none',
+                  justifyContent: 'center',
+                  width: '100%',
+                }}
+              >
+                <ExternalLink size={14} /> Abrir página de origem
+              </a>
+            ) : (
+              <span style={{ fontSize: '11px', color: '#6b7280', fontStyle: 'italic' }}>
+                {conversation.source_url
+                  ? `URL externa/restrita: ${conversation.source_url}`
+                  : 'Link de origem indisponível'}
+              </span>
+            )}
           </div>
         </div>
 

@@ -8,12 +8,13 @@ let signInPromise = null;
  * @param {import('@supabase/supabase-js').User} user
  * @returns {Promise<boolean>}
  */
-export async function checkIsAdminProfile(user) {
-  if (!user || user.is_anonymous || !supabase || !isSupabaseConfigured) {
+export async function checkIsAdminProfile(user, customSupabaseClient) {
+  const activeSupabase = customSupabaseClient || supabase;
+  if (!user || user.is_anonymous || !activeSupabase || !isSupabaseConfigured) {
     return false;
   }
   try {
-    const { data: profile, error } = await supabase
+    const { data: profile, error } = await activeSupabase
       .from('admin_profiles')
       .select('role')
       .eq('id', user.id)
@@ -40,23 +41,26 @@ export async function checkIsAdminProfile(user) {
  * Garante sessão Supabase Anônima persistida via auth.uid().
  * NÃO cria nem substitui sessão anônima se o usuário for um Administrador ou Agente.
  *
+ * @param {Object} [customSupabaseClient]
  * @returns {Promise<{ user: import('@supabase/supabase-js').User|null, session: import('@supabase/supabase-js').Session|null, isAdmin?: boolean, error: Error|null }>}
  */
-export async function getOrInitVisitorSession() {
-  if (!isSupabaseConfigured || !supabase) {
+export async function getOrInitVisitorSession(customSupabaseClient) {
+  const activeSupabase = customSupabaseClient || supabase;
+
+  if (!isSupabaseConfigured || !activeSupabase) {
     return { user: null, session: null, error: new Error('Supabase não configurado') };
   }
 
   // Evita criar sessão anônima se a rota atual for do painel administrativo
   const currentPath = window.location.pathname.toLowerCase();
   if (currentPath.startsWith('/admin')) {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await activeSupabase.auth.getSession();
     return { user: session?.user ?? null, session: session ?? null, error: null };
   }
 
   try {
     // 1. Verifica se já existe uma sessão ativa (seja anônima ou autenticada)
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    const { data: { session }, error: sessionError } = await activeSupabase.auth.getSession();
 
     if (sessionError && typeof window !== 'undefined' && import.meta.env.DEV) {
       console.warn('[VisitorAuth] Erro ao verificar sessão existente:', sessionError.message);
@@ -65,7 +69,7 @@ export async function getOrInitVisitorSession() {
     if (session?.user) {
       // Se for um usuário comum/admin (não anônimo), verifica se possui perfil de equipe
       if (!session.user.is_anonymous) {
-        const isAdmin = await checkIsAdminProfile(session.user);
+        const isAdmin = await checkIsAdminProfile(session.user, activeSupabase);
         if (isAdmin) {
           // NUNCA encerra nem substitui a sessão admin! Retorna indicando que é perfil admin.
           return {
@@ -87,7 +91,7 @@ export async function getOrInitVisitorSession() {
     // 3. Executa login anônimo para visitante público
     signInPromise = (async () => {
       try {
-        const { data, error } = await supabase.auth.signInAnonymously();
+        const { data, error } = await activeSupabase.auth.signInAnonymously();
         if (error) {
           if (typeof window !== 'undefined' && import.meta.env.DEV) {
             console.warn('[VisitorAuth] signInAnonymously não concluído:', error.message);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, MessageSquare, User, AlertCircle, RefreshCw } from 'lucide-react';
+import { getConversationSourceType, formatProductDisplayName } from '../../lib/conversationSource';
 
 export function ConversationList({
   conversations,
@@ -124,6 +125,8 @@ export function ConversationList({
 
             const isSelected = selectedId === conv.id;
             const hasUnread = conv.unreadCount > 0;
+            const sourceType = getConversationSourceType(conv);
+            const productDisplayName = formatProductDisplayName(conv.source_product);
 
             return (
               <div
@@ -146,6 +149,16 @@ export function ConversationList({
                       {conv.visitor_email || `ID: ${conv.visitor_id?.slice(0, 8)}...`}
                     </span>
                     {getStatusBadge(conv.status)}
+                  </div>
+
+                  {/* Linha de Origem e Produto */}
+                  <div className="conv-badges-wrap" style={{ display: 'flex', gap: '4px', marginTop: '2px', flexWrap: 'wrap' }}>
+                    <span className="conv-badge conv-badge-product">
+                      {productDisplayName}
+                    </span>
+                    <span className="conv-badge conv-badge-source-type">
+                      {sourceType}
+                    </span>
                   </div>
 
                   {conv.lastMessage && (

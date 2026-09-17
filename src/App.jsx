@@ -22,16 +22,20 @@ import { LinfaflowListicle } from './components/listicle/linfaflow/linfaflowList
 import { SonnusListicle } from './components/listicle/sonnus/SonnusListicle';
 import { CrownedListicle } from './components/listicle/crowned/CrownedListicle';
 import { AdminContainer } from './components/admin/AdminContainer';
+import { WidgetFrameApp } from './components/chat-frame/WidgetFrameApp';
 import { PDP_DATA } from './config/pdpData';
 
 const ChatWidget = lazy(() => import('./components/chat/ChatWidget'));
 
 export function App() {
   const getProductFromLocation = () => {
-    // 0. Check admin route in pathname
+    // 0. Check admin and widget-frame routes in pathname
     const rawPathname = window.location.pathname.toLowerCase().replace(/\/$/, '');
     if (rawPathname === '/admin' || rawPathname.startsWith('/admin')) {
       return 'admin';
+    }
+    if (rawPathname === '/widget-frame' || rawPathname.startsWith('/widget-frame')) {
+      return 'widget-frame';
     }
 
     // Check Listicle routes in pathname
@@ -186,6 +190,15 @@ export function App() {
     return (
       <ErrorBoundary>
         <AdminContainer onNavHome={backToHome} />
+      </ErrorBoundary>
+    );
+  }
+
+  // If route is /widget-frame, render WidgetFrameApp directly without public layout
+  if (activeProductId === 'widget-frame') {
+    return (
+      <ErrorBoundary>
+        <WidgetFrameApp />
       </ErrorBoundary>
     );
   }

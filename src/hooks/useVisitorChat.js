@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { getOrInitVisitorSession, checkIsAdminProfile } from '../services/visitorAuthService';
+import { getConversationSourceInfo } from '../lib/conversationSource';
 
 const CONV_STORAGE_KEY = 'essencialgood_visitor_active_conv_id';
 
-export function useVisitorChat() {
+export function useVisitorChat(options = {}) {
+  const activeSupabase = options.client || supabase;
+  const sourceOverride = options.sourceOverride || null;
+
   const [isOpen, setIsOpen] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [user, setUser] = useState(null);
@@ -25,18 +29,18 @@ export function useVisitorChat() {
   // 1. Validação inicial e contínua de sessão para saber se o usuário é Admin/Agent
   useEffect(() => {
     let isMounted = true;
-    if (!isSupabaseConfigured || !supabase) {
+    if (!isSupabaseConfigured || !activeSupabase) {
       setCheckingAuth(false);
       return;
     }
 
     const verifySession = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await activeSupabase.auth.getSession();
         if (!isMounted) return;
 
         if (session?.user && !session.user.is_anonymous) {
-          const isAdmin = await checkIsAdminProfile(session.user);
+          const isAdmin = await checkIsAdminProfile(session.user, activeSupabase);
           if (!isMounted) return;
 
           if (isAdmin) {
@@ -63,11 +67,11 @@ export function useVisitorChat() {
 
     verifySession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, currentSession) => {
+    const { data: { subscription } } = activeSupabase.auth.onAuthStateChange(async (_event, currentSession) => {
       if (!isMounted) return;
 
       if (currentSession?.user && !currentSession.user.is_anonymous) {
-        const isAdmin = await checkIsAdminProfile(currentSession.user);
+        const isAdmin = await checkIsAdminProfile(currentSession.user, activeSupabase);
         if (!isMounted) return;
 
         if (isAdmin) {
@@ -93,28 +97,28 @@ export function useVisitorChat() {
       isMounted = false;
       subscription?.unsubscribe();
     };
-  }, []);
+  }, [activeSupabase]);
 
   // 2. Marca mensagens como lidas
   const markAsRead = useCallback(async (convId) => {
-    if (!convId || !supabase) return;
+    if (!convId || !activeSupabase) return;
     try {
-      await supabase.rpc('mark_messages_as_read', { p_conversation_id: convId });
+      await activeSupabase.rpc('mark_messages_as_read', { p_conversation_id: convId });
       setUnreadCount(0);
     } catch (err) {
       if (typeof window !== 'undefined' && import.meta.env.DEV) {
         console.warn('[VisitorChat] Erro ao marcar mensagens como lidas:', err);
       }
     }
-  }, []);
+  }, [activeSupabase]);
 
   // 3. Busca histórico de mensagens
   const fetchMessages = useCallback(async (convId) => {
-    if (!convId || !supabase) return;
+    if (!convId || !activeSupabase) return;
     setLoadingMessages(true);
     setError(null);
     try {
-      const { data, error: fetchErr } = await supabase
+      const { data, error: fetchErr } = await activeSupabase
         .from('messages')
         .select('*')
         .eq('conversation_id', convId)
@@ -141,24 +145,24 @@ export function useVisitorChat() {
     } finally {
       setLoadingMessages(false);
     }
-  }, [isOpen, markAsRead]);
+  }, [activeSupabase, isOpen, markAsRead]);
 
   // 4. Gerencia inscrições de Tempo Real
   useEffect(() => {
-    if (!conversation?.id || !supabase) return;
+    if (!conversation?.id || !activeSupabase) return;
 
     const convId = conversation.id;
 
     if (realChannelRef.current) {
-      supabase.removeChannel(realChannelRef.current);
+      activeSupabase.removeChannel(realChannelRef.current);
       realChannelRef.current = null;
     }
     if (convChannelRef.current) {
-      supabase.removeChannel(convChannelRef.current);
+      activeSupabase.removeChannel(convChannelRef.current);
       convChannelRef.current = null;
     }
 
-    const msgChannel = supabase
+    const msgChannel = activeSupabase
       .channel(`visitor-msgs:${convId}`)
       .on(
         'postgres_changes',
@@ -190,7 +194,7 @@ export function useVisitorChat() {
 
     realChannelRef.current = msgChannel;
 
-    const convChannel = supabase
+    const convChannel = activeSupabase
       .channel(`visitor-conv:${convId}`)
       .on(
         'postgres_changes',
@@ -213,19 +217,19 @@ export function useVisitorChat() {
 
     return () => {
       if (realChannelRef.current) {
-        supabase.removeChannel(realChannelRef.current);
+        activeSupabase.removeChannel(realChannelRef.current);
         realChannelRef.current = null;
       }
       if (convChannelRef.current) {
-        supabase.removeChannel(convChannelRef.current);
+        activeSupabase.removeChannel(convChannelRef.current);
         convChannelRef.current = null;
       }
     };
-  }, [conversation?.id, isOpen, markAsRead]);
+  }, [activeSupabase, conversation?.id, isOpen, markAsRead]);
 
   // 5. Carrega sessão e conversa ativa ao abrir o widget
   const initVisitorChat = useCallback(async () => {
-    if (!isSupabaseConfigured || !supabase || isAdminUser) {
+    if (!isSupabaseConfigured || !activeSupabase || isAdminUser) {
       setError(isAdminUser ? 'Atendimento desativado para perfil administrativo.' : 'Serviço temporariamente indisponível.');
       return;
     }
@@ -234,7 +238,7 @@ export function useVisitorChat() {
     setError(null);
 
     try {
-      const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession();
+      const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession(activeSupabase);
 
       if (isAdmin) {
         setIsAdminUser(true);
@@ -253,7 +257,7 @@ export function useVisitorChat() {
       let activeConv = null;
 
       if (cachedConvId) {
-        const { data: cachedData } = await supabase
+        const { data: cachedData } = await activeSupabase
           .from('conversations')
           .select('*')
           .eq('id', cachedConvId)
@@ -265,7 +269,7 @@ export function useVisitorChat() {
       }
 
       if (!activeConv) {
-        const { data: existing, error: fetchErr } = await supabase
+        const { data: existing, error: fetchErr } = await activeSupabase
           .from('conversations')
           .select('*')
           .eq('visitor_id', authUser.id)
@@ -298,7 +302,7 @@ export function useVisitorChat() {
     } finally {
       setConnecting(false);
     }
-  }, [fetchMessages, isAdminUser]);
+  }, [activeSupabase, fetchMessages, isAdminUser]);
 
   const toggleOpen = useCallback(() => {
     if (isAdminUser) return;
@@ -331,7 +335,7 @@ export function useVisitorChat() {
     try {
       let currentSessionUser = user;
       if (!currentSessionUser) {
-        const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession();
+        const { user: authUser, isAdmin, error: authErr } = await getOrInitVisitorSession(activeSupabase);
         if (isAdmin) {
           setIsAdminUser(true);
           return { error: 'O perfil administrativo não pode enviar mensagens como visitante.' };
@@ -346,7 +350,9 @@ export function useVisitorChat() {
       let activeConv = conversation;
 
       if (!activeConv || activeConv.status === 'closed') {
-        const { data: newConv, error: createConvErr } = await supabase
+        const sourceInfo = sourceOverride || getConversationSourceInfo();
+
+        const { data: newConv, error: createConvErr } = await activeSupabase
           .from('conversations')
           .insert([
             {
@@ -354,6 +360,11 @@ export function useVisitorChat() {
               visitor_name: name.trim(),
               visitor_email: email && email.trim() ? email.trim() : null,
               status: 'open',
+              source_url: sourceInfo.source_url,
+              source_path: sourceInfo.source_path,
+              source_host: sourceInfo.source_host,
+              source_title: sourceInfo.source_title,
+              source_product: sourceInfo.source_product,
             },
           ])
           .select()
@@ -361,7 +372,7 @@ export function useVisitorChat() {
 
         if (createConvErr) {
           if (createConvErr.code === '23505') {
-            const { data: existing } = await supabase
+            const { data: existing } = await activeSupabase
               .from('conversations')
               .select('*')
               .eq('visitor_id', currentSessionUser.id)
@@ -384,7 +395,7 @@ export function useVisitorChat() {
         localStorage.setItem(CONV_STORAGE_KEY, activeConv.id);
       }
 
-      const { data: newMsg, error: msgErr } = await supabase
+      const { data: newMsg, error: msgErr } = await activeSupabase
         .from('messages')
         .insert([
           {
@@ -434,7 +445,7 @@ export function useVisitorChat() {
     setSendError(null);
 
     try {
-      const { data: newMsg, error: msgErr } = await supabase
+      const { data: newMsg, error: msgErr } = await activeSupabase
         .from('messages')
         .insert([
           {

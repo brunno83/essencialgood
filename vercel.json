@@ -94,6 +94,14 @@
   ],
   "rewrites": [
     {
+      "source": "/widget-frame",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/widget-frame/:path*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/ADV-sonnus/:path*",
       "destination": "/adv-sonnus/:path*"
     },
@@ -346,6 +354,26 @@
     {
       "source": "/:path*",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/widget-frame",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://essencialgood.com https://*.essencialgood.com;"
+        }
+      ]
+    },
+    {
+      "source": "/widget-frame/:path*",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://essencialgood.com https://*.essencialgood.com;"
+        }
+      ]
     }
   ]
 }
