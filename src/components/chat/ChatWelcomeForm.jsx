@@ -53,8 +53,8 @@ export function ChatWelcomeForm({ onSubmit, sending, error, settings }) {
       name: name.trim(),
       email: email.trim(),
       phone: formattedE164,
-      countryCode: phoneData.countryCode,
-      dialCode: phoneData.dialCode,
+      countryCode: formattedE164 ? phoneData.countryCode : null,
+      dialCode: formattedE164 ? phoneData.dialCode : null,
       initialMessage: initialMessage.trim(),
     });
 

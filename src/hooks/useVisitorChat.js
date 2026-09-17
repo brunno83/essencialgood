@@ -386,6 +386,10 @@ export function useVisitorChat(options = {}) {
         setUser(authUser);
       }
 
+      const phoneVal = phone && phone.trim() ? phone.trim() : null;
+      const countryVal = phoneVal ? (countryCode || 'US') : null;
+      const dialVal = phoneVal ? (dialCode || '+1') : null;
+
       let activeConv = conversation;
 
       if (!activeConv || activeConv.status === 'closed') {
@@ -398,9 +402,9 @@ export function useVisitorChat(options = {}) {
               visitor_id: currentSessionUser.id,
               visitor_name: name.trim(),
               visitor_email: email && email.trim() ? email.trim() : null,
-              visitor_phone: phone && phone.trim() ? phone.trim() : null,
-              visitor_country_code: countryCode || 'US',
-              visitor_dial_code: dialCode || '+1',
+              visitor_phone: phoneVal,
+              visitor_country_code: countryVal,
+              visitor_dial_code: dialVal,
               status: 'open',
               source_url: sourceInfo.source_url,
               source_path: sourceInfo.source_path,
@@ -422,7 +426,20 @@ export function useVisitorChat(options = {}) {
               .maybeSingle();
 
             if (existing) {
-              activeConv = existing;
+              const { data: updatedExisting } = await activeSupabase
+                .from('conversations')
+                .update({
+                  visitor_name: name.trim(),
+                  visitor_email: email && email.trim() ? email.trim() : null,
+                  visitor_phone: phoneVal,
+                  visitor_country_code: countryVal,
+                  visitor_dial_code: dialVal,
+                })
+                .eq('id', existing.id)
+                .select()
+                .single();
+
+              activeConv = updatedExisting || existing;
             } else {
               throw createConvErr;
             }
@@ -435,6 +452,25 @@ export function useVisitorChat(options = {}) {
 
         setConversation(activeConv);
         localStorage.setItem(CONV_STORAGE_KEY, activeConv.id);
+      } else {
+        // Se já havia uma conversa ativa no estado local, atualiza os dados do visitante nela
+        const { data: updatedConv } = await activeSupabase
+          .from('conversations')
+          .update({
+            visitor_name: name.trim(),
+            visitor_email: email && email.trim() ? email.trim() : null,
+            visitor_phone: phoneVal,
+            visitor_country_code: countryVal,
+            visitor_dial_code: dialVal,
+          })
+          .eq('id', activeConv.id)
+          .select()
+          .single();
+
+        if (updatedConv) {
+          activeConv = updatedConv;
+          setConversation(updatedConv);
+        }
       }
 
       const { data: newMsg, error: msgErr } = await activeSupabase

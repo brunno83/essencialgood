@@ -145,9 +145,9 @@ export function ConversationDetails({
             <span className="conv-details-value">
               {conversation.visitor_phone ? (
                 <>
-                  {conversation.visitor_phone}{' '}
-                  <span style={{ fontSize: '11px', color: '#64748B' }}>
-                    ({conversation.visitor_country_code || 'US'})
+                  <strong style={{ color: '#0F172A' }}>{conversation.visitor_phone}</strong>{' '}
+                  <span style={{ fontSize: '11px', color: '#64748B', fontWeight: '500' }}>
+                    ({conversation.visitor_country_code || 'US'} • {conversation.visitor_dial_code || '+1'})
                   </span>
                 </>
               ) : (
