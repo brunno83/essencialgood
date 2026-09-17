@@ -298,7 +298,7 @@ export function AdminChatSettings({ adminProfile }) {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: '32px', alignItems: 'start' }}>
+      <div className="admin-settings-grid">
         {/* FORMULÁRIO DE CONFIGURAÇÕES (PT-BR) */}
         <form onSubmit={handleSave} className="admin-settings-card" style={{ background: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <h2 style={{ fontSize: '16px', fontWeight: '600', color: '#0F172A', borderBottom: '1px solid #F1F5F9', paddingBottom: '12px', margin: 0 }}>
@@ -548,7 +548,7 @@ export function AdminChatSettings({ adminProfile }) {
         </form>
 
         {/* PRÉ-VISUALIZAÇÃO AO VIVO 100% VISUAL (SEM EFEITOS COLATERAIS) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="admin-settings-preview-col">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h3 style={{ fontSize: '14px', fontWeight: '600', color: '#475569', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Pré-visualização Ao Vivo (Visual Preview)
@@ -558,7 +558,7 @@ export function AdminChatSettings({ adminProfile }) {
             </span>
           </div>
 
-          <div style={{ background: '#EAE6DF', padding: '16px', borderRadius: '16px', border: '1px solid #CBD5E1', minHeight: '580px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className="admin-settings-preview-box">
             <div style={{ width: '100%', maxWidth: '380px' }}>
               <PureVisualChatWindowPreview settings={formState} />
             </div>
