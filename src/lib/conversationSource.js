@@ -95,19 +95,28 @@ export function getConversationSourceType(conv) {
     return 'Origem não identificada';
   }
 
-  const path = (conv.source_path || '').toLowerCase();
-  const product = (conv.source_product || '').toLowerCase();
+  const rawPath = (conv.source_path || '').toLowerCase().trim();
+  const product = (conv.source_product || '').toLowerCase().trim();
+  const cleanPath = rawPath.endsWith('/') && rawPath.length > 1 ? rawPath.slice(0, -1) : rawPath;
 
-  if (path.includes('/listicle/')) return 'Listicle';
-  if (path.includes('/adv-')) return 'Advertorial';
-  if (path.includes('power')) return 'Power Page';
+  if (cleanPath.includes('/listicle/')) {
+    return 'Listicle';
+  }
+
+  if (cleanPath.includes('/adv-') || cleanPath.startsWith('/adv-')) {
+    return 'Advertorial';
+  }
+
+  if (cleanPath.includes('power')) {
+    return 'Power Page';
+  }
 
   const pdpPaths = ['/slimsoda', '/linfaflow', '/sonnus', '/crowned', '/memoflow'];
-  if (pdpPaths.some((pdp) => path === pdp || path === pdp + '/')) {
+  if (pdpPaths.includes(cleanPath)) {
     return 'Página de Produto';
   }
 
-  if (product === 'institucional' || path === '/' || path === '') {
+  if (product === 'institucional' || cleanPath === '' || cleanPath === '/') {
     return 'Institucional';
   }
 

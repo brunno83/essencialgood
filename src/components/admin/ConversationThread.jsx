@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Shield } from 'lucide-react';
+import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Shield, Info } from 'lucide-react';
 
 export function ConversationThread({
   conversation,
@@ -10,6 +10,7 @@ export function ConversationThread({
   sendError,
   onSendMessage,
   onBackToList,
+  onShowDetails,
   onReopenConversation,
   adminProfilesMap,
 }) {
@@ -20,10 +21,13 @@ export function ConversationThread({
 
   const isClosed = conversation?.status === 'closed';
 
-  // Rola para o final da lista de mensagens se o usuário não tiver rolado para cima
+  // Rola para o final da lista de mensagens isoladamente sem mover a página pai
   const scrollToBottom = (force = false) => {
-    if ((!userScrolledUp || force) && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if ((!userScrolledUp || force) && threadContainerRef.current) {
+      threadContainerRef.current.scrollTo({
+        top: threadContainerRef.current.scrollHeight,
+        behavior: force ? 'auto' : 'smooth',
+      });
     }
   };
 
@@ -91,6 +95,17 @@ export function ConversationThread({
             </span>
           </div>
         </div>
+
+        {onShowDetails && (
+          <button
+            className="conv-mobile-info-btn"
+            onClick={onShowDetails}
+            aria-label="Ver detalhes da conversa"
+            title="Detalhes do Atendimento"
+          >
+            <Info size={20} />
+          </button>
+        )}
       </div>
 
       {/* Mensagem de Erro de Carregamento */}

@@ -46,6 +46,14 @@ export function AdminConversations({ adminProfile }) {
     setMobileView('list');
   };
 
+  const handleShowDetails = () => {
+    setMobileView('details');
+  };
+
+  const handleBackToThread = () => {
+    setMobileView('thread');
+  };
+
   const handleReopenConversation = async () => {
     if (!selectedConversation) return;
     const { error: err } = await updateConversationStatus(selectedConversation.id, 'open');
@@ -56,7 +64,7 @@ export function AdminConversations({ adminProfile }) {
 
   return (
     <div className="admin-conversations-root">
-      <div className={`conv-layout-grid ${mobileView === 'thread' ? 'mobile-thread-active' : ''}`}>
+      <div className={`conv-layout-grid mobile-view-${mobileView}`}>
         {/* Painel da Esquerda: Lista de Conversas */}
         <div className="conv-col-list">
           <ConversationList
@@ -76,7 +84,7 @@ export function AdminConversations({ adminProfile }) {
         {/* Painel Central e Direito: Thread + Detalhes */}
         <div className="conv-col-main">
           {selectedConversation ? (
-            <div className="conv-main-flex">
+            <div className={`conv-main-flex mobile-subview-${mobileView}`}>
               <ConversationThread
                 conversation={selectedConversation}
                 messages={messages}
@@ -86,6 +94,7 @@ export function AdminConversations({ adminProfile }) {
                 sendError={sendError}
                 onSendMessage={sendMessage}
                 onBackToList={handleBackToList}
+                onShowDetails={handleShowDetails}
                 onReopenConversation={handleReopenConversation}
                 adminProfilesMap={adminProfilesMap}
               />
@@ -94,6 +103,7 @@ export function AdminConversations({ adminProfile }) {
                 conversation={selectedConversation}
                 adminProfile={adminProfile}
                 adminProfilesMap={adminProfilesMap}
+                onBackToThread={handleBackToThread}
                 onUpdateStatus={async (id, newStatus) => {
                   const { error: err } = await updateConversationStatus(id, newStatus);
                   if (!err) {

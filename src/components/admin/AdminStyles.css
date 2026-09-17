@@ -1,7 +1,10 @@
 /* Admin Core Design System & Layout Styles */
 
 .admin-root {
-  min-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: 100%;
+  overflow: hidden;
   background-color: #0b0f19;
   color: #f3f4f6;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -11,7 +14,7 @@
 
 /* Loading Screen */
 .admin-loading-screen {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +44,7 @@
 
 /* Login Screen */
 .admin-login-container {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,11 +217,16 @@
 /* Layout Core (Sidebar + Content) */
 .admin-layout {
   display: flex;
-  min-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .admin-sidebar {
   width: 260px;
+  height: 100dvh;
   background: #111827;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
@@ -367,20 +375,25 @@
   margin-left: 260px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .admin-header-bar {
   height: 64px;
+  min-height: 64px;
+  max-height: 64px;
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
-  position: sticky;
-  top: 0;
+  padding: 0 24px;
+  flex-shrink: 0;
   z-index: 30;
 }
 
@@ -401,10 +414,13 @@
 }
 
 .admin-content-padding {
-  padding: 32px;
+  padding: 20px 24px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* Dashboard Specifics */
@@ -530,19 +546,28 @@
    CONVERSATIONS MODULE STYLES (WhatsApp Web Inspired Layout)
    ========================================================================== */
 
+/* ==========================================================================
+   CONVERSATIONS MODULE STYLES (WhatsApp Web Inspired Layout)
+   ========================================================================== */
+
 .admin-conversations-root {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 128px);
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .conv-layout-grid {
   display: grid;
   grid-template-columns: 340px 1fr;
-  gap: 20px;
+  gap: 16px;
   height: 100%;
   flex: 1;
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -553,6 +578,9 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -560,6 +588,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .conv-list-header {
@@ -568,6 +598,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .conv-search-box {
@@ -626,7 +657,11 @@
 
 .conv-list-items {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
 }
@@ -781,21 +816,25 @@
   margin: 0;
 }
 
-/* Coluna 2: Thread + Detalhes */
+/* Coluna 2 e 3: Main Flex (Thread + Detalhes) */
 .conv-col-main {
   background: #111827;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .conv-main-flex {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 300px;
   height: 100%;
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -820,18 +859,24 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: 0;
   min-width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
 }
 
 .conv-thread-header {
   height: 60px;
+  min-height: 60px;
+  max-height: 60px;
   padding: 0 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   background: rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .conv-mobile-back-btn {
@@ -841,6 +886,21 @@
   color: #ffffff;
   cursor: pointer;
   padding: 4px;
+}
+
+.conv-mobile-info-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+
+.conv-mobile-info-btn:hover {
+  color: #10b981;
 }
 
 .conv-thread-header-info {
@@ -874,8 +934,12 @@
 
 .conv-thread-messages {
   flex: 1;
+  min-height: 0;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -969,6 +1033,7 @@
   gap: 12px;
   font-size: 13px;
   color: #9ca3af;
+  flex-shrink: 0;
 }
 
 .conv-btn-reopen {
@@ -989,6 +1054,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .conv-input-row {
@@ -1044,15 +1110,22 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
+  min-width: 0;
   background: #0f172a;
+  overflow: hidden;
 }
 
 .conv-details-header {
   height: 60px;
+  min-height: 60px;
+  max-height: 60px;
   padding: 0 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .conv-details-title {
@@ -1064,11 +1137,15 @@
 
 .conv-details-body {
   flex: 1;
+  min-height: 0;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .conv-details-card {
@@ -1157,8 +1234,54 @@
   cursor: pointer;
 }
 
+/* Scrollbars discretas e elegantes para o Admin */
+.conv-list-items::-webkit-scrollbar,
+.conv-thread-messages::-webkit-scrollbar,
+.conv-details-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.conv-list-items::-webkit-scrollbar-track,
+.conv-thread-messages::-webkit-scrollbar-track,
+.conv-details-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.conv-list-items::-webkit-scrollbar-thumb,
+.conv-thread-messages::-webkit-scrollbar-thumb,
+.conv-details-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+}
+
+.conv-list-items::-webkit-scrollbar-thumb:hover,
+.conv-thread-messages::-webkit-scrollbar-thumb:hover,
+.conv-details-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.5);
+}
+
 /* Responsividade Mobile */
 @media (max-width: 1024px) {
+  .admin-main-wrapper {
+    margin-left: 0;
+    width: 100%;
+    height: 100dvh;
+  }
+
+  .admin-content-padding {
+    padding: 12px;
+  }
+
+  .conv-mobile-info-btn {
+    display: block;
+  }
+
+  .conv-mobile-back-btn {
+    display: block;
+  }
+
   .conv-layout-grid {
     grid-template-columns: 1fr;
   }
@@ -1167,23 +1290,38 @@
     grid-template-columns: 1fr;
   }
 
-  .conv-details-panel {
+  /* Visibilidade de telas no mobile */
+  .conv-layout-grid.mobile-view-list .conv-col-list {
+    display: flex;
+  }
+
+  .conv-layout-grid.mobile-view-list .conv-col-main {
     display: none;
   }
 
-  .conv-mobile-back-btn {
-    display: block;
-  }
-
-  .conv-layout-grid .conv-col-main {
+  .conv-layout-grid.mobile-view-thread .conv-col-list,
+  .conv-layout-grid.mobile-view-details .conv-col-list {
     display: none;
   }
 
-  .conv-layout-grid.mobile-thread-active .conv-col-list {
+  .conv-layout-grid.mobile-view-thread .conv-col-main,
+  .conv-layout-grid.mobile-view-details .conv-col-main {
+    display: flex;
+  }
+
+  .conv-main-flex.mobile-subview-thread .conv-thread-panel {
+    display: flex;
+  }
+
+  .conv-main-flex.mobile-subview-thread .conv-details-panel {
     display: none;
   }
 
-  .conv-layout-grid.mobile-thread-active .conv-col-main {
+  .conv-main-flex.mobile-subview-details .conv-thread-panel {
+    display: none;
+  }
+
+  .conv-main-flex.mobile-subview-details .conv-details-panel {
     display: flex;
   }
 }

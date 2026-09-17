@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Calendar, Clock, UserCheck, Shield, Globe, ExternalLink } from 'lucide-react';
+import { User, Calendar, Clock, UserCheck, Shield, Globe, ExternalLink, ArrowLeft } from 'lucide-react';
 import {
   getConversationSourceType,
   formatProductDisplayName,
@@ -12,6 +12,7 @@ export function ConversationDetails({
   adminProfilesMap,
   onUpdateStatus,
   onUpdateAssignment,
+  onBackToThread,
 }) {
   if (!conversation) return null;
 
@@ -54,6 +55,15 @@ export function ConversationDetails({
   return (
     <div className="conv-details-panel">
       <div className="conv-details-header">
+        {onBackToThread && (
+          <button
+            className="conv-mobile-back-btn"
+            onClick={onBackToThread}
+            aria-label="Voltar para a conversa"
+          >
+            <ArrowLeft size={20} />
+          </button>
+        )}
         <h4 className="conv-details-title">Detalhes do Atendimento</h4>
       </div>
 

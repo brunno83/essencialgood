@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Search, MessageSquare, User, AlertCircle, RefreshCw } from 'lucide-react';
 import { getConversationSourceType, formatProductDisplayName } from '../../lib/conversationSource';
 
@@ -14,6 +14,14 @@ export function ConversationList({
   onSearchChange,
   onRetry,
 }) {
+  const listContainerRef = useRef(null);
+
+  // Garante que ao mudar filtro ou busca, o scroll da lista volta para o topo
+  useEffect(() => {
+    if (listContainerRef.current) {
+      listContainerRef.current.scrollTop = 0;
+    }
+  }, [filterStatus, searchQuery]);
   const formatTime = (isoString) => {
     if (!isoString) return '';
     const date = new Date(isoString);
@@ -95,7 +103,7 @@ export function ConversationList({
       )}
 
       {/* Lista de Conversas / Skeleton Loading */}
-      <div className="conv-list-items">
+      <div className="conv-list-items" ref={listContainerRef}>
         {loading ? (
           Array.from({ length: 5 }).map((_, idx) => (
             <div key={idx} className="conv-skeleton-item">
