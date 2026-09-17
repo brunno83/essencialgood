@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Search, MessageSquare, User, AlertCircle, RefreshCw, Archive } from 'lucide-react';
+import { Search, MessageSquare, User, AlertCircle, RefreshCw, Archive, Filter } from 'lucide-react';
 import { getConversationSourceType, formatProductDisplayName } from '../../lib/conversationSource';
 
 export function ConversationList({
@@ -52,7 +52,7 @@ export function ConversationList({
 
   return (
     <div className="conv-list-panel">
-      {/* Busca e Filtros Header */}
+      {/* Busca e Seletor de Filtros (Etapa 5B) */}
       <div className="conv-list-header">
         <div className="conv-search-box">
           <Search size={16} className="conv-search-icon" />
@@ -65,42 +65,25 @@ export function ConversationList({
           />
         </div>
 
-        {/* Abas de Filtro */}
-        <div className="conv-filter-tabs">
-          <button
-            className={`conv-tab ${filterStatus === 'all' ? 'active' : ''}`}
-            onClick={() => onFilterChange('all')}
+        {/* Dropdown Compacto e Profissional de Filtro */}
+        <div className="conv-filter-select-wrapper">
+          <Filter size={15} className="conv-filter-select-icon" />
+          <select
+            className="conv-filter-select"
+            value={filterStatus}
+            onChange={(e) => onFilterChange(e.target.value)}
+            aria-label="Filtrar conversas por status"
           >
-            Todas
-          </button>
-          <button
-            className={`conv-tab ${filterStatus === 'open' ? 'active' : ''}`}
-            onClick={() => onFilterChange('open')}
-          >
-            Abertas
-          </button>
-          <button
-            className={`conv-tab ${filterStatus === 'pending' ? 'active' : ''}`}
-            onClick={() => onFilterChange('pending')}
-          >
-            Pendentes
-          </button>
-          <button
-            className={`conv-tab ${filterStatus === 'closed' ? 'active' : ''}`}
-            onClick={() => onFilterChange('closed')}
-          >
-            Encerradas
-          </button>
-          <button
-            className={`conv-tab ${filterStatus === 'archived' ? 'active' : ''}`}
-            onClick={() => onFilterChange('archived')}
-          >
-            Arquivadas
-          </button>
+            <option value="all">Todas as Conversas</option>
+            <option value="open">Abertas</option>
+            <option value="pending">Pendentes</option>
+            <option value="closed">Encerradas</option>
+            <option value="archived">Arquivadas</option>
+          </select>
         </div>
       </div>
 
-      {/* Mensagem de Erro com Tentar Novamente */}
+      {/* Mensagem de Erro */}
       {error && (
         <div className="conv-list-error">
           <AlertCircle size={18} />
@@ -163,23 +146,6 @@ export function ConversationList({
                     <span className="conv-item-time">{formatTime(conv.archived_at || conv.last_message_at)}</span>
                   </div>
 
-                  <div className="conv-item-sub">
-                    <span className="conv-item-email">
-                      {conv.visitor_email || `ID: ${conv.visitor_id?.slice(0, 8)}...`}
-                    </span>
-                    {getStatusBadge(conv)}
-                  </div>
-
-                  {/* Linha de Origem e Produto */}
-                  <div className="conv-badges-wrap" style={{ display: 'flex', gap: '4px', marginTop: '2px', flexWrap: 'wrap' }}>
-                    <span className="conv-badge conv-badge-product">
-                      {productDisplayName}
-                    </span>
-                    <span className="conv-badge conv-badge-source-type">
-                      {sourceType}
-                    </span>
-                  </div>
-
                   {conv.lastMessage && (
                     <div className="conv-item-preview">
                       <span className="conv-preview-sender">
@@ -188,6 +154,16 @@ export function ConversationList({
                       {conv.lastMessage.content}
                     </div>
                   )}
+
+                  <div className="conv-badges-wrap">
+                    <span className="conv-badge conv-badge-product">
+                      {productDisplayName}
+                    </span>
+                    <span className="conv-badge conv-badge-source-type">
+                      {sourceType}
+                    </span>
+                    {getStatusBadge(conv)}
+                  </div>
                 </div>
 
                 {hasUnread && (

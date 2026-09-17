@@ -38,7 +38,7 @@ export function AdminDashboard({ adminProfile, user }) {
 
       if (pendingErr) throw pendingErr;
 
-      // 3. Consulta mensagens não lidas enviadas por visitantes (sender_type = 'visitor' AND read_at IS NULL)
+      // 3. Consulta mensagens não lidas enviadas por visitantes
       const { count: unreadCount, error: unreadErr } = await supabase
         .from('messages')
         .select('*', { count: 'exact', head: true })
@@ -68,89 +68,92 @@ export function AdminDashboard({ adminProfile, user }) {
 
   return (
     <div className="admin-dashboard-root">
-      {/* Boas-Vindas */}
-      <div className="admin-welcome-box">
-        <h1 className="admin-greeting-text">Olá, {userName}!</h1>
-        <p className="admin-subtitle-text">
-          Acompanhe os indicadores em tempo real das conversas e atendimentos.
-        </p>
-      </div>
-
-      {error && (
-        <div className="admin-alert-error" style={{ marginBottom: '24px' }}>
-          <AlertCircle size={18} />
-          <span>{error}</span>
-          <button
-            onClick={fetchMetrics}
-            style={{
-              marginLeft: 'auto',
-              background: 'none',
-              border: 'none',
-              color: '#ffffff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '12px',
-            }}
-          >
-            <RefreshCw size={14} /> Tentar Novamente
-          </button>
-        </div>
-      )}
-
-      {/* Grid de Métricas Reais */}
-      <div className="admin-metrics-grid">
-        {/* Card 1: Conversas Abertas */}
-        <div className="admin-metric-card">
-          <div className="admin-metric-data">
-            <span className="admin-metric-value">
-              {loading ? '...' : metrics.openConversations}
-            </span>
-            <span className="admin-metric-label">Conversas Abertas</span>
-          </div>
-          <div className="admin-metric-icon-box admin-metric-icon-open">
-            <MessageSquare size={24} />
-          </div>
-        </div>
-
-        {/* Card 2: Conversas Pendentes */}
-        <div className="admin-metric-card">
-          <div className="admin-metric-data">
-            <span className="admin-metric-value">
-              {loading ? '...' : metrics.pendingConversations}
-            </span>
-            <span className="admin-metric-label">Conversas Pendentes</span>
-          </div>
-          <div className="admin-metric-icon-box admin-metric-icon-pending">
-            <Clock size={24} />
-          </div>
-        </div>
-
-        {/* Card 3: Mensagens Não Lidas de Visitantes */}
-        <div className="admin-metric-card">
-          <div className="admin-metric-data">
-            <span className="admin-metric-value">
-              {loading ? '...' : metrics.unreadMessages}
-            </span>
-            <span className="admin-metric-label">Mensagens Não Lidas</span>
-          </div>
-          <div className="admin-metric-icon-box admin-metric-icon-unread">
-            <Inbox size={24} />
-          </div>
-        </div>
-      </div>
-
-      {/* Estado Vazio ou Informativo */}
-      {!loading && metrics.openConversations === 0 && metrics.pendingConversations === 0 && (
-        <div className="admin-empty-section">
-          <MessageSquare size={40} className="admin-empty-icon" />
-          <h3 className="admin-empty-title">Nenhuma conversa ativa no momento</h3>
-          <p className="admin-empty-desc">
-            Quando os visitantes iniciarem um atendimento através do chat público, os dados aparecerão automaticamente aqui.
+      <div className="admin-dashboard-container">
+        {/* Boas-Vindas */}
+        <div className="admin-welcome-box">
+          <h1 className="admin-greeting-text">Olá, {userName}!</h1>
+          <p className="admin-subtitle-text">
+            Acompanhe os indicadores em tempo real das conversas e atendimentos.
           </p>
         </div>
-      )}
+
+        {error && (
+          <div className="admin-alert-error" style={{ marginBottom: '24px' }}>
+            <AlertCircle size={18} />
+            <span>{error}</span>
+            <button
+              onClick={fetchMetrics}
+              style={{
+                marginLeft: 'auto',
+                background: 'none',
+                border: 'none',
+                color: '#C53030',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}
+            >
+              <RefreshCw size={14} /> Tentar Novamente
+            </button>
+          </div>
+        )}
+
+        {/* Grid de Métricas Reais com Proporção Equilibrada */}
+        <div className="admin-metrics-grid">
+          {/* Card 1: Conversas Abertas */}
+          <div className="admin-metric-card">
+            <div className="admin-metric-data">
+              <span className="admin-metric-value">
+                {loading ? '...' : metrics.openConversations}
+              </span>
+              <span className="admin-metric-label">Conversas Abertas</span>
+            </div>
+            <div className="admin-metric-icon-box admin-metric-icon-open">
+              <MessageSquare size={22} />
+            </div>
+          </div>
+
+          {/* Card 2: Conversas Pendentes */}
+          <div className="admin-metric-card">
+            <div className="admin-metric-data">
+              <span className="admin-metric-value">
+                {loading ? '...' : metrics.pendingConversations}
+              </span>
+              <span className="admin-metric-label">Conversas Pendentes</span>
+            </div>
+            <div className="admin-metric-icon-box admin-metric-icon-pending">
+              <Clock size={22} />
+            </div>
+          </div>
+
+          {/* Card 3: Mensagens Não Lidas de Visitantes */}
+          <div className="admin-metric-card">
+            <div className="admin-metric-data">
+              <span className="admin-metric-value">
+                {loading ? '...' : metrics.unreadMessages}
+              </span>
+              <span className="admin-metric-label">Mensagens Não Lidas</span>
+            </div>
+            <div className="admin-metric-icon-box admin-metric-icon-unread">
+              <Inbox size={22} />
+            </div>
+          </div>
+        </div>
+
+        {/* Estado Vazio Informativo */}
+        {!loading && metrics.openConversations === 0 && metrics.pendingConversations === 0 && (
+          <div className="admin-empty-section">
+            <MessageSquare size={38} className="admin-empty-icon" />
+            <h3 className="admin-empty-title">Nenhuma conversa ativa no momento</h3>
+            <p className="admin-empty-desc">
+              Quando os visitantes iniciarem um atendimento através do chat público, os dados aparecerão automaticamente aqui.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

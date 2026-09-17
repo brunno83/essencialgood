@@ -188,9 +188,13 @@ export function AdminConversations({ adminProfile }) {
             </div>
           ) : (
             <div className="conv-no-selection">
-              <MessageSquare size={48} className="conv-no-selection-icon" />
-              <h3>Selecione um atendimento</h3>
-              <p>Escolha uma conversa na lista à esquerda para visualizar o histórico de mensagens e responder ao visitante.</p>
+              <img
+                src="/assets/Brand/essencial-good-symbol.png"
+                alt="Essencial Good"
+                className="conv-no-selection-symbol"
+              />
+              <h3 className="conv-no-selection-title">Selecione uma conversa</h3>
+              <p className="conv-no-selection-desc">Escolha um atendimento na lista ao lado para visualizar o histórico de mensagens e responder ao visitante.</p>
             </div>
           )}
         </div>

@@ -119,11 +119,11 @@ export function ConversationDetails({
       </div>
 
       <div className="conv-details-body">
-        {/* Card do Visitante */}
-        <div className="conv-details-card">
-          <div className="conv-details-card-title">
+        {/* Seção 1: Visitante */}
+        <div className="conv-details-section">
+          <div className="conv-details-section-title">
             <User size={16} />
-            <span>Informações do Visitante</span>
+            <span>Visitante</span>
           </div>
 
           <div className="conv-details-row">
@@ -148,9 +148,9 @@ export function ConversationDetails({
           </div>
         </div>
 
-        {/* Card de Origem da Conversa */}
-        <div className="conv-details-card">
-          <div className="conv-details-card-title">
+        {/* Seção 2: Origem */}
+        <div className="conv-details-section">
+          <div className="conv-details-section-title">
             <Globe size={16} />
             <span>Origem do Atendimento</span>
           </div>
@@ -190,7 +190,7 @@ export function ConversationDetails({
             </span>
           </div>
 
-          <div className="conv-assign-actions" style={{ marginTop: '8px' }}>
+          <div style={{ marginTop: '4px' }}>
             {canOpenLink ? (
               <a
                 href={conversation.source_url}
@@ -209,7 +209,7 @@ export function ConversationDetails({
                 <ExternalLink size={14} /> Abrir página de origem
               </a>
             ) : (
-              <span style={{ fontSize: '11px', color: '#6b7280', fontStyle: 'italic' }}>
+              <span style={{ fontSize: '11px', color: 'var(--eg-text-muted)', fontStyle: 'italic' }}>
                 {conversation.source_url
                   ? `URL externa/restrita: ${conversation.source_url}`
                   : 'Link de origem indisponível'}
@@ -218,11 +218,90 @@ export function ConversationDetails({
           </div>
         </div>
 
-        {/* CARD DE AÇÕES DA CONVERSA (Arquivar / Restaurar / Excluir) */}
-        <div className="conv-details-card actions-card">
-          <div className="conv-details-card-title">
+        {/* Seção 3: Atendimento e Status */}
+        <div className="conv-details-section">
+          <div className="conv-details-section-title">
+            <Clock size={16} />
+            <span>Atendimento</span>
+          </div>
+
+          <div className="conv-details-row">
+            <label htmlFor="status-select" className="conv-details-label">Alterar Status:</label>
+            <select
+              id="status-select"
+              className="conv-select"
+              value={conversation.status}
+              onChange={handleStatusChange}
+              disabled={isArchived}
+            >
+              <option value="open">Aberta (Em Andamento)</option>
+              <option value="pending">Pendente (Aguardando Resposta)</option>
+              <option value="closed">Encerrada (Concluída)</option>
+            </select>
+          </div>
+
+          <div className="conv-details-row" style={{ marginTop: '6px' }}>
+            <span className="conv-details-label">Atribuído a:</span>
+            <span className="conv-details-value highlight">
+              {assignedProfile
+                ? `${assignedProfile.full_name} (${assignedProfile.role})`
+                : 'Nenhum atendente'}
+            </span>
+          </div>
+
+          <div style={{ marginTop: '4px' }}>
+            {!isAssignedToMe ? (
+              <button className="conv-btn-secondary" onClick={handleAssignToMe} disabled={isArchived}>
+                <Shield size={14} /> Atribuir a Mim
+              </button>
+            ) : (
+              <button className="conv-btn-danger-outline" onClick={handleUnassign} disabled={isArchived}>
+                Remover Minha Atribuição
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Seção 4: Histórico de Datas */}
+        <div className="conv-details-section">
+          <div className="conv-details-section-title">
+            <Calendar size={16} />
+            <span>Histórico de Datas</span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Início:</span>
+            <span className="conv-details-value">{formatDate(conversation.created_at)}</span>
+          </div>
+
+          <div className="conv-details-row">
+            <span className="conv-details-label">Última Atividade:</span>
+            <span className="conv-details-value">{formatDate(conversation.last_message_at)}</span>
+          </div>
+
+          {isArchived && (
+            <>
+              <div className="conv-details-row">
+                <span className="conv-details-label">Arquivada em:</span>
+                <span className="conv-details-value highlight">
+                  {formatDate(conversation.archived_at)}
+                </span>
+              </div>
+              <div className="conv-details-row">
+                <span className="conv-details-label">Arquivada por:</span>
+                <span className="conv-details-value">
+                  {archivedByProfile ? archivedByProfile.full_name : 'Sistema/Equipe'}
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Seção 5: Ações da conversa (Sem Amarelo) */}
+        <div className="conv-details-section">
+          <div className="conv-details-section-title">
             <Archive size={16} />
-            <span>Ações e Gestão</span>
+            <span>Ações da conversa</span>
           </div>
 
           <div className="conv-actions-button-stack">
@@ -255,93 +334,6 @@ export function ConversationDetails({
               </button>
             )}
           </div>
-        </div>
-
-        {/* Status Operacional */}
-        <div className="conv-details-card">
-          <div className="conv-details-card-title">
-            <Clock size={16} />
-            <span>Status da Conversa</span>
-          </div>
-
-          <div className="conv-details-group">
-            <label htmlFor="status-select" className="conv-details-label">Alterar Status:</label>
-            <select
-              id="status-select"
-              className="conv-select"
-              value={conversation.status}
-              onChange={handleStatusChange}
-              disabled={isArchived}
-            >
-              <option value="open">Aberta (Em Andamento)</option>
-              <option value="pending">Pendente (Aguardando Resposta)</option>
-              <option value="closed">Encerrada (Concluída)</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Atribuição de Atendente */}
-        <div className="conv-details-card">
-          <div className="conv-details-card-title">
-            <UserCheck size={16} />
-            <span>Atendente Atribuído</span>
-          </div>
-
-          <div className="conv-details-row">
-            <span className="conv-details-label">Atribuído a:</span>
-            <span className="conv-details-value highlight">
-              {assignedProfile
-                ? `${assignedProfile.full_name} (${assignedProfile.role})`
-                : 'Nenhum atendente'}
-            </span>
-          </div>
-
-          <div className="conv-assign-actions">
-            {!isAssignedToMe ? (
-              <button className="conv-btn-secondary" onClick={handleAssignToMe} disabled={isArchived}>
-                <Shield size={14} /> Atribuir a Mim
-              </button>
-            ) : (
-              <button className="conv-btn-danger-outline" onClick={handleUnassign} disabled={isArchived}>
-                Remover Minha Atribuição
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Datas e Registros */}
-        <div className="conv-details-card">
-          <div className="conv-details-card-title">
-            <Calendar size={16} />
-            <span>Histórico de Datas</span>
-          </div>
-
-          <div className="conv-details-row">
-            <span className="conv-details-label">Início:</span>
-            <span className="conv-details-value">{formatDate(conversation.created_at)}</span>
-          </div>
-
-          <div className="conv-details-row">
-            <span className="conv-details-label">Última Atividade:</span>
-            <span className="conv-details-value">{formatDate(conversation.last_message_at)}</span>
-          </div>
-
-          {isArchived && (
-            <>
-              <div className="conv-details-row">
-                <span className="conv-details-label">Arquivada em:</span>
-                <span className="conv-details-value highlight" style={{ color: '#f59e0b' }}>
-                  {formatDate(conversation.archived_at)}
-                </span>
-              </div>
-              <div className="conv-details-row">
-                <span className="conv-details-label">Arquivada por:</span>
-                <span className="conv-details-value">
-                  {archivedByProfile ? archivedByProfile.full_name : 'Sistema/Equipe'}
-                </span>
-              </div>
-            </>
-          )}
         </div>
       </div>
 

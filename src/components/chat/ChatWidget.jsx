@@ -1,5 +1,4 @@
 import React from 'react';
-import { X } from 'lucide-react';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
 import { ChatWindow } from './ChatWindow';
 import './ChatStyles.css';
@@ -57,30 +56,30 @@ export function ChatWidget() {
         />
       )}
 
-      {/* BOTÃO FLUTUANTE DO WIDGET COM SÍMBOLO OFICIAL */}
-      <button
-        className={`chat-widget-button ${isOpen ? 'active' : ''}`}
-        onClick={toggleOpen}
-        aria-label={isOpen ? 'Fechar janela de atendimento' : 'Abrir atendimento ao vivo'}
-        title={isOpen ? 'Fechar atendimento' : 'Fale com a Essencial Good'}
-      >
-        {isOpen ? (
-          <X size={24} className="chat-button-icon" />
-        ) : (
-          <img
-            src="/assets/Brand/essencial-good-symbol.png"
-            alt="Essencial Good"
-            className="chat-button-symbol"
-          />
-        )}
+      {/* BOTÃO FLUTUANTE DO WIDGET (OCULTO QUANDO ABERTO - ETAPA 5B) */}
+      {!isOpen && (
+        <button
+          className="chat-widget-button"
+          onClick={toggleOpen}
+          aria-label="Abrir atendimento ao vivo"
+          title="Fale com a Essencial Good"
+        >
+          <div className="chat-button-symbol-wrapper">
+            <img
+              src="/assets/Brand/essencial-good-symbol.png"
+              alt="Essencial Good"
+              className="chat-button-symbol"
+            />
+          </div>
 
-        {/* BADGE DE NÃO LIDAS */}
-        {!isOpen && unreadCount > 0 && (
-          <span className="chat-widget-badge" aria-label={`${unreadCount} novas mensagens`}>
-            {unreadCount > 99 ? '99+' : unreadCount}
-          </span>
-        )}
-      </button>
+          {/* BADGE DE NÃO LIDAS */}
+          {unreadCount > 0 && (
+            <span className="chat-widget-badge" aria-label={`${unreadCount} novas mensagens`}>
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
+          )}
+        </button>
+      )}
     </div>
   );
 }

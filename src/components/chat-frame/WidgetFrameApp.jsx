@@ -284,26 +284,26 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
           />
         )}
 
-        <button
-          className={`chat-widget-button ${isOpen ? 'active' : ''}`}
-          onClick={() => toggleOpen('floating_widget_button_click')}
-          aria-label={isOpen ? 'Fechar atendimento' : 'Abrir atendimento'}
-        >
-          {isOpen ? (
-            <X size={24} className="chat-button-icon" />
-          ) : (
-            <img
-              src="/assets/Brand/essencial-good-symbol.png"
-              alt="Essencial Good"
-              className="chat-button-symbol"
-            />
-          )}
-          {!isOpen && unreadCount > 0 && (
-            <span className="chat-widget-badge">
-              {unreadCount > 99 ? '99+' : unreadCount}
-            </span>
-          )}
-        </button>
+        {!isOpen && (
+          <button
+            className="chat-widget-button"
+            onClick={() => toggleOpen('floating_widget_button_click')}
+            aria-label="Abrir atendimento"
+          >
+            <div className="chat-button-symbol-wrapper">
+              <img
+                src="/assets/Brand/essencial-good-symbol.png"
+                alt="Essencial Good"
+                className="chat-button-symbol"
+              />
+            </div>
+            {unreadCount > 0 && (
+              <span className="chat-widget-badge">
+                {unreadCount > 99 ? '99+' : unreadCount}
+              </span>
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

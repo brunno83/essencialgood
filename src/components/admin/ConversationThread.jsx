@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Shield, Info, Archive, RotateCcw } from 'lucide-react';
+import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Info, Archive, RotateCcw } from 'lucide-react';
 
 export function ConversationThread({
   conversation,
@@ -23,7 +23,6 @@ export function ConversationThread({
   const isClosed = conversation?.status === 'closed';
   const isArchived = Boolean(conversation?.archived_at);
 
-  // Rola para o final da lista de mensagens isoladamente sem mover a página pai
   const scrollToBottom = (force = false) => {
     if ((!userScrolledUp || force) && threadContainerRef.current) {
       threadContainerRef.current.scrollTo({
@@ -37,7 +36,6 @@ export function ConversationThread({
     scrollToBottom();
   }, [messages]);
 
-  // Monitora o scroll para evitar forçar a rolagem quando o atendente está lendo o histórico
   const handleScroll = () => {
     if (!threadContainerRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = threadContainerRef.current;
@@ -131,8 +129,12 @@ export function ConversationThread({
           </div>
         ) : messages.length === 0 ? (
           <div className="conv-thread-empty">
-            <Shield size={32} style={{ color: '#4b5563' }} />
-            <p>Nenhuma mensagem trocada nesta conversa ainda.</p>
+            <img
+              src="/assets/Brand/essencial-good-symbol.png"
+              alt="Essencial Good"
+              className="conv-no-selection-symbol"
+            />
+            <p className="conv-no-selection-desc">Nenhuma mensagem trocada nesta conversa ainda.</p>
           </div>
         ) : (
           messages.map((msg) => {

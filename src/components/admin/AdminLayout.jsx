@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, MessageSquare, LogOut, Menu, X, Users } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, LogOut, Menu, X } from 'lucide-react';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -13,7 +13,7 @@ export function AdminLayout({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const userName = adminProfile?.full_name || user?.email || 'Administrador';
+  const userName = adminProfile?.full_name || user?.email?.split('@')[0] || 'Administrador';
   const userRole = adminProfile?.role === 'admin' ? 'Administrador' : 'Agente';
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -71,22 +71,21 @@ export function AdminLayout({
             </button>
           </nav>
 
-          {/* User Footer Profile */}
+          {/* User Footer Profile Redesenhado (Etapa 5B) */}
           <div className="admin-sidebar-user">
             <div className="admin-user-info">
               <span className="admin-user-name" title={userName}>{userName}</span>
-              <span className="admin-user-role">
-                <Users size={12} /> {userRole}
-              </span>
+              <span className="admin-user-role">{userRole}</span>
             </div>
 
             <button
-              className="admin-btn-logout"
+              className="admin-btn-logout-text"
               onClick={onSignOut}
               title="Encerrar sessão"
               aria-label="Sair do painel"
             >
-              <LogOut size={16} />
+              <LogOut size={15} />
+              <span>Sair</span>
             </button>
           </div>
         </aside>
@@ -102,17 +101,9 @@ export function AdminLayout({
               <Menu size={22} />
             </button>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img
-                src="/assets/Brand/essencial-good-symbol.png"
-                alt="Essencial Good"
-                className="admin-sidebar-symbol-img"
-                style={{ display: mobileMenuOpen ? 'none' : 'block' }}
-              />
-              <h2 className="admin-header-title">
-                {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
-              </h2>
-            </div>
+            <h2 className="admin-header-title">
+              {activeTab === 'dashboard' ? 'Visão Geral' : 'Central de Atendimento'}
+            </h2>
 
             <div style={{ width: '24px' }} />
           </header>
