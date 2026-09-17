@@ -7,6 +7,7 @@ import { ChatComposer } from './ChatComposer';
 export function ChatWindow({
   onClose,
   connecting,
+  checkingAuth,
   conversation,
   messages,
   loadingMessages,
@@ -19,6 +20,7 @@ export function ChatWindow({
   onStartNewConversation,
 }) {
   const isClosed = conversation?.status === 'closed';
+  const isBooting = connecting || checkingAuth;
 
   return (
     <div className="chat-window-container" role="dialog" aria-label="Janela de Atendimento Essencial Good">
@@ -47,7 +49,7 @@ export function ChatWindow({
 
       {/* CORPO DA JANELA */}
       <div className="chat-window-body">
-        {connecting ? (
+        {isBooting ? (
           <div className="chat-window-connecting">
             <Loader2 size={32} className="chat-spinner" />
             <p>Conectando ao atendimento...</p>

@@ -242,12 +242,18 @@ export function useVisitorChat(options = {}) {
     };
   }, [activeSupabase, conversation?.id, isOpen, markAsRead]);
 
+  const initializingRef = useRef(false);
+
   // 5. Carrega sessão e conversa ativa ao abrir o widget
   const initVisitorChat = useCallback(async () => {
     if (!isSupabaseConfigured || !activeSupabase || isAdminUser) {
       setError(isAdminUser ? 'Atendimento desativado para perfil administrativo.' : 'Serviço temporariamente indisponível.');
+      setConnecting(false);
       return;
     }
+
+    if (initializingRef.current) return;
+    initializingRef.current = true;
 
     setConnecting(true);
     setError(null);
@@ -315,6 +321,7 @@ export function useVisitorChat(options = {}) {
       }
       setError('Erro de conexão ao carregar o chat.');
     } finally {
+      initializingRef.current = false;
       setConnecting(false);
     }
   }, [activeSupabase, fetchMessages, isAdminUser]);
@@ -328,14 +335,17 @@ export function useVisitorChat(options = {}) {
     setChatOpen((prev) => {
       const nextState = !prev;
       debugLog('useVisitorChat', `toggleOpen called: ${prev} -> ${nextState}`, { reason });
-      if (nextState && !user) {
-        initVisitorChat();
-      } else if (nextState && conversation?.id) {
-        markAsRead(conversation.id);
+      if (nextState) {
+        if (!user || checkingAuth) {
+          setConnecting(true);
+          initVisitorChat();
+        } else if (conversation?.id) {
+          markAsRead(conversation.id);
+        }
       }
       return nextState;
     }, reason);
-  }, [user, conversation?.id, initVisitorChat, markAsRead, isAdminUser, setChatOpen]);
+  }, [user, checkingAuth, conversation?.id, initVisitorChat, markAsRead, isAdminUser, setChatOpen]);
 
   // 6. Inicia uma nova conversa
   const startConversation = async ({ name, email, initialMessage }) => {

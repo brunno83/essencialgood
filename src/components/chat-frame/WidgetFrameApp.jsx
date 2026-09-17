@@ -199,6 +199,7 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
     toggleOpen,
     setChatOpen,
     connecting,
+    checkingAuth,
     conversation,
     messages,
     loadingMessages,
@@ -269,6 +270,7 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
           <ChatWindow
             onClose={() => toggleOpen('header_close_button_click')}
             connecting={connecting}
+            checkingAuth={checkingAuth}
             conversation={conversation}
             messages={messages}
             loadingMessages={loadingMessages}
