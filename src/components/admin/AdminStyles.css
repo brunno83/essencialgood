@@ -486,13 +486,33 @@ body.admin-active-body {
 }
 
 .admin-content-padding {
-  padding: 24px 28px;
+  padding: 24px 28px 36px 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 0;
   min-width: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Scrollbar Discreta e Elegante para a Área de Conteúdo do Admin */
+.admin-content-padding::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-content-padding::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-content-padding::-webkit-scrollbar-thumb {
+  background: var(--eg-border-strong);
+  border-radius: 4px;
+}
+
+.admin-content-padding::-webkit-scrollbar-thumb:hover {
+  background: var(--eg-color-primary);
 }
 
 /* ==========================================================================
