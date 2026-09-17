@@ -44,6 +44,14 @@ body.widget-frame-body #root {
   margin: 0 !important;
   z-index: 10 !important;
   pointer-events: auto !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.widget-frame-container .chat-widget-button::before,
+.widget-frame-container .chat-widget-button::after {
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 /* MODO DESKTOP (Ativo quando html.widget-frame-desktop presente OU quando não estiver em mobile) */
@@ -64,7 +72,8 @@ html:not(.widget-frame-mobile) .widget-frame-container .chat-window {
   background: var(--eg-chat-bg, #F8F5ED) !important;
   opacity: 1 !important;
   border: var(--eg-chat-border, 2px solid rgba(75, 104, 51, 0.55)) !important;
-  box-shadow: var(--eg-chat-shadow, 0 28px 72px rgba(20, 30, 14, 0.28), 0 8px 24px rgba(20, 30, 14, 0.18)) !important;
+  box-shadow: none !important;
+  filter: none !important;
   z-index: 20 !important;
   overflow: hidden !important;
   isolation: isolate !important;
