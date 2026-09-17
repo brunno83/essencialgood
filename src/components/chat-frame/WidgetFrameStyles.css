@@ -46,46 +46,52 @@ body.widget-frame-body #root {
   pointer-events: auto !important;
 }
 
-.widget-frame-container .chat-window-container,
-.widget-frame-container .chat-window {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  width: 396px;
-  height: 636px;
-  max-width: calc(100% - 36px);
-  max-height: calc(100% - 36px);
-  border-radius: var(--eg-chat-radius, 28px);
+/* MODO DESKTOP (Ativo quando html.widget-frame-desktop presente OU quando não estiver em mobile) */
+html.widget-frame-desktop .widget-frame-container .chat-window-container,
+html.widget-frame-desktop .widget-frame-container .chat-window,
+html:not(.widget-frame-mobile) .widget-frame-container .chat-window-container,
+html:not(.widget-frame-mobile) .widget-frame-container .chat-window {
+  position: absolute !important;
+  bottom: 18px !important;
+  right: 18px !important;
+  top: auto !important;
+  left: auto !important;
+  width: 396px !important;
+  height: 636px !important;
+  max-width: calc(100% - 36px) !important;
+  max-height: calc(100% - 36px) !important;
+  border-radius: var(--eg-chat-radius, 28px) !important;
   background: var(--eg-chat-bg, #F8F5ED) !important;
   opacity: 1 !important;
   border: var(--eg-chat-border, 2px solid rgba(75, 104, 51, 0.55)) !important;
   box-shadow: var(--eg-chat-shadow, 0 28px 72px rgba(20, 30, 14, 0.28), 0 8px 24px rgba(20, 30, 14, 0.18)) !important;
-  z-index: 20;
-  overflow: hidden;
-  isolation: isolate;
+  z-index: 20 !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
   pointer-events: auto !important;
+  margin: 0 !important;
 }
 
-@media (max-width: 640px) {
-  .widget-frame-container {
-    padding: 0 !important;
-    pointer-events: none !important;
-  }
-  .widget-frame-container .chat-window-container,
-  .widget-frame-container .chat-window {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100vw !important;
-    height: 100dvh !important;
-    max-width: 100vw !important;
-    max-height: 100dvh !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    pointer-events: auto !important;
-  }
+/* MODO MOBILE (Ativo exclusivamente quando html.widget-frame-mobile for transmitido pelo host) */
+html.widget-frame-mobile .widget-frame-container {
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+html.widget-frame-mobile .widget-frame-container .chat-window-container,
+html.widget-frame-mobile .widget-frame-container .chat-window {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
 }

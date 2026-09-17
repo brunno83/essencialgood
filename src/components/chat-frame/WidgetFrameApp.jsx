@@ -8,6 +8,15 @@ import { debugLog, incrementDebugCount, isChatDebug } from '../../lib/chatDebug'
 import '../chat/ChatStyles.css';
 import './WidgetFrameStyles.css';
 
+export function applyViewportMode(mode) {
+  if (typeof document === 'undefined') return;
+  const isMobile = mode === 'mobile';
+  document.documentElement.classList.toggle('widget-frame-mobile', isMobile);
+  document.documentElement.classList.toggle('widget-frame-desktop', !isMobile);
+  document.body.classList.toggle('widget-frame-mobile', isMobile);
+  document.body.classList.toggle('widget-frame-desktop', !isMobile);
+}
+
 export function WidgetFrameApp() {
   const [initialized, setInitialized] = useState(false);
   const [parentOrigin, setParentOrigin] = useState(null);
@@ -82,8 +91,12 @@ export function WidgetFrameApp() {
         const rawProduct = payload.sourceProduct || 'institucional';
         const cleanProduct = sanitizeProductKey(rawProduct);
         const fingerprint = `${origin}:${cleanProduct}:${payload.sourceUrl || ''}`;
+        const rawViewport = payload.viewportMode || 'desktop';
+        const viewportMode = rawViewport === 'mobile' ? 'mobile' : 'desktop';
 
-        debugLog('WidgetFrameApp', 'INIT received', { origin, product: cleanProduct, fingerprint });
+        applyViewportMode(viewportMode);
+
+        debugLog('WidgetFrameApp', 'INIT received', { origin, product: cleanProduct, fingerprint, viewportMode });
 
         // 1. Caso 1: Já inicializado com o mesmo fingerprint (INIT duplicado)
         if (initializedRef.current && fingerprintRef.current === fingerprint) {
@@ -227,6 +240,10 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
 
       if (data.type === MSG_TYPES.STATE && data.payload) {
         const loaderIsOpen = Boolean(data.payload.isOpen);
+        if (data.payload.viewportMode) {
+          const vMode = data.payload.viewportMode === 'mobile' ? 'mobile' : 'desktop';
+          applyViewportMode(vMode);
+        }
         debugLog('WidgetFrameChatInner', 'STATE message received from parent loader', { loaderIsOpen, currentIsOpen: isOpen });
         if (loaderIsOpen !== isOpen) {
           setChatOpen(loaderIsOpen, 'loader_state_sync');

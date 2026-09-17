@@ -91,6 +91,7 @@
       sourceHost: host.slice(0, 253),
       sourceTitle: title,
       sourceProduct: product.slice(0, 100),
+      viewportMode: isMobileViewport() ? 'mobile' : 'desktop',
     };
   }
 
@@ -265,11 +266,14 @@
 
     function sendStateSync() {
       if (iframe.contentWindow) {
-        logLoader('STATE sync sent to iframe', { isOpen: chatIsOpen });
+        logLoader('STATE sync sent to iframe', { isOpen: chatIsOpen, viewportMode: isMobileViewport() ? 'mobile' : 'desktop' });
         iframe.contentWindow.postMessage(
           {
             type: 'ESSENCIAL_CHAT_STATE',
-            payload: { isOpen: chatIsOpen },
+            payload: {
+              isOpen: chatIsOpen,
+              viewportMode: isMobileViewport() ? 'mobile' : 'desktop',
+            },
           },
           WIDGET_ORIGIN
         );
@@ -363,11 +367,17 @@
     window.addEventListener('message', handleMessage);
     logLoader('Message listener added to window');
 
-    // Recalcula dimensões apenas quando o viewport da página hospedeira realmente mudar
-    mobileMedia.addEventListener('change', function () {
+    function handleViewportChange() {
       logLoader('Host viewport breakpoint change', { isMobile: isMobileViewport() });
       setWidgetDimensions(chatIsOpen);
-    });
+      sendStateSync();
+    }
+
+    if (mobileMedia.addEventListener) {
+      mobileMedia.addEventListener('change', handleViewportChange);
+    } else if (mobileMedia.addListener) {
+      mobileMedia.addListener(handleViewportChange);
+    }
 
     if (isDebug) {
       window.addEventListener('resize', function () {
