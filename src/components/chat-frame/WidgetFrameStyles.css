@@ -21,6 +21,7 @@ body.widget-frame-body #root {
   justify-content: flex-end;
   align-items: flex-end;
   box-sizing: border-box;
+  padding: 12px;
 }
 
 .widget-frame-container .chat-widget-root {
@@ -46,17 +47,36 @@ body.widget-frame-body #root {
 
 .widget-frame-container .chat-window-container,
 .widget-frame-container .chat-window {
-  position: absolute;
+  position: relative;
   bottom: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+  width: 396px;
+  height: 636px;
   max-width: 100%;
   max-height: 100%;
   border-radius: 16px;
-  background: #FFFFFF !important;
+  background: #FFFDF9 !important;
   opacity: 1 !important;
-  border: 1px solid #DDD9CF;
-  box-shadow: 0 12px 36px rgba(28, 40, 19, 0.16);
+  border: 1px solid rgba(75, 104, 51, 0.28);
+  box-shadow:
+    0 24px 64px rgba(28, 40, 19, 0.22),
+    0 6px 20px rgba(28, 40, 19, 0.12);
   z-index: 20;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .widget-frame-container {
+    padding: 0 !important;
+  }
+  .widget-frame-container .chat-window-container,
+  .widget-frame-container .chat-window {
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: 100vw !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
 }

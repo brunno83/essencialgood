@@ -111,16 +111,18 @@
    ------------------------------------------ */
 .chat-window-container {
   position: fixed;
-  bottom: max(92px, calc(env(safe-area-inset-bottom, 24px) + 68px));
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
   right: 24px;
-  width: 380px;
-  height: 560px;
-  max-height: calc(100vh - 120px);
-  background: #FFFFFF !important;
+  width: 396px;
+  height: 636px;
+  max-height: calc(100vh - 48px);
+  background: #FFFDF9 !important;
   opacity: 1 !important;
-  border: 1px solid #DDD9CF;
+  border: 1px solid rgba(75, 104, 51, 0.28);
   border-radius: 16px;
-  box-shadow: 0 12px 36px rgba(28, 40, 19, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 24px 64px rgba(28, 40, 19, 0.22),
+    0 6px 20px rgba(28, 40, 19, 0.12);
   z-index: 99998;
   display: flex;
   flex-direction: column;
@@ -224,14 +226,14 @@
 }
 
 /* ------------------------------------------
-   CORPO DA JANELA (SÓLIDO)
+   CORPO DA JANELA (SÓLIDO #FFFDF9)
    ------------------------------------------ */
 .chat-window-body {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #FFFFFF !important;
+  background: #FFFDF9 !important;
   opacity: 1 !important;
 }
 
@@ -244,11 +246,11 @@
   gap: 12px;
   color: #596252;
   font-size: 13px;
-  background: #FFFFFF !important;
+  background: #FFFDF9 !important;
 }
 
 /* ------------------------------------------
-   FORMULÁRIO DE BOAS-VINDAS (COMPACTO E ACCESSIBLE CTA)
+   FORMULÁRIO DE BOAS-VINDAS
    ------------------------------------------ */
 .chat-welcome-form-container {
   flex: 1;
@@ -257,7 +259,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: #FFFFFF !important;
+  background: #FFFDF9 !important;
   opacity: 1 !important;
 }
 

@@ -217,7 +217,7 @@ export function AdminContainer() {
       {activeTab === 'conversations' ? (
         <AdminConversations adminProfile={adminProfile} />
       ) : (
-        <AdminDashboard adminProfile={adminProfile} user={user} />
+        <AdminDashboard adminProfile={adminProfile} user={user} onSelectTab={handleSelectTab} />
       )}
     </AdminLayout>
   );

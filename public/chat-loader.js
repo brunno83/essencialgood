@@ -220,12 +220,12 @@
           host.style.bottom = '0px';
           host.style.right = '0px';
         } else {
-          host.style.width = '400px';
-          host.style.height = '640px';
-          host.style.maxHeight = 'calc(100vh - 32px)';
-          host.style.maxWidth = 'calc(100vw - 32px)';
-          host.style.bottom = '16px';
-          host.style.right = '16px';
+          host.style.width = '424px';
+          host.style.height = '664px';
+          host.style.maxHeight = 'calc(100vh - 24px)';
+          host.style.maxWidth = 'calc(100vw - 24px)';
+          host.style.bottom = '12px';
+          host.style.right = '12px';
         }
       }
 
