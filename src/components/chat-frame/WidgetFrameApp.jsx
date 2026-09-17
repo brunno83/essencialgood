@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { getWidgetSupabaseClient } from './widgetSupabaseClient';
+import React, { useState, useEffect, useRef } from 'react';
+import { getWidgetSupabaseClient, sanitizeProductKey } from './widgetSupabaseClient';
 import { isAllowedParentOrigin, MSG_TYPES, postToParent } from './widgetMessaging';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
 import { ChatWindow } from '../chat/ChatWindow';
@@ -13,6 +13,12 @@ export function WidgetFrameApp() {
   const [sourceMetadata, setSourceMetadata] = useState(null);
   const [supabaseClient, setSupabaseClient] = useState(null);
 
+  const initializedRef = useRef(false);
+  const clientRef = useRef(null);
+  const fingerprintRef = useRef(null);
+  const sourceMetadataRef = useRef(null);
+  const parentOriginRef = useRef(null);
+
   // Aplica classe de isolamento de scroll e transparência enquanto a rota /widget-frame estiver ativa
   useEffect(() => {
     document.documentElement.classList.add('widget-frame-html');
@@ -23,7 +29,7 @@ export function WidgetFrameApp() {
     };
   }, []);
 
-  // Handshake estrito: apenas inicializa ao receber mensagem ESSENCIAL_CHAT_INIT válida da janela pai
+  // Handshake estrito & idempotente: inicializa cliente Supabase UMA ÚNICA VEZ ao receber o primeiro INIT válido
   useEffect(() => {
     // Se não estiver rodando dentro de um iframe (ex: abertura direta de /widget-frame), não faz nada
     if (typeof window === 'undefined' || window.parent === window) return;
@@ -39,29 +45,72 @@ export function WidgetFrameApp() {
 
       if (data.type === MSG_TYPES.INIT) {
         const payload = data.payload || {};
-        const product = payload.sourceProduct || 'institucional';
+        const rawProduct = payload.sourceProduct || 'institucional';
+        const cleanProduct = sanitizeProductKey(rawProduct);
+        const fingerprint = `${origin}:${cleanProduct}:${payload.sourceUrl || ''}`;
 
-        const client = getWidgetSupabaseClient(product);
+        if (import.meta.env.DEV) {
+          console.log('[WidgetHandshake] INIT received:', { origin, product: cleanProduct, fingerprint });
+        }
+
+        // 1. Caso 1: Já inicializado com o mesmo fingerprint (INIT duplicado)
+        if (initializedRef.current && fingerprintRef.current === fingerprint) {
+          if (import.meta.env.DEV) {
+            console.log('[WidgetHandshake] Duplicate INIT received, sending ACK and returning without state update.');
+          }
+          // Apenas re-envia ACK e não altera nenhum estado React para não causar re-render ou reset de chat
+          postToParent(MSG_TYPES.ACK, { acknowledged: true, product: cleanProduct }, origin);
+          return;
+        }
+
+        // 2. Caso 2: Já inicializado com fingerprint diferente (mudança indevida de origem/produto no meio da sessão)
+        if (initializedRef.current && fingerprintRef.current !== fingerprint) {
+          if (import.meta.env.DEV) {
+            console.warn('[WidgetHandshake] Conflict: Received INIT with different fingerprint after initialization. Ignoring.', {
+              existing: fingerprintRef.current,
+              new: fingerprint,
+            });
+          }
+          return;
+        }
+
+        // 3. Caso 3: Primeira inicialização válida
+        const client = getWidgetSupabaseClient(cleanProduct);
         if (!client) {
           postToParent(MSG_TYPES.ERROR, { message: 'Erro ao inicializar Supabase no iframe' }, origin);
           return;
         }
 
+        if (import.meta.env.DEV) {
+          console.log('[WidgetHandshake] First valid INIT accepted, creating client & marking initialized.');
+        }
+
+        initializedRef.current = true;
+        fingerprintRef.current = fingerprint;
+        clientRef.current = client;
+
+        const metadata = {
+          source_url: payload.sourceUrl || null,
+          source_path: payload.sourcePath || null,
+          source_host: payload.sourceHost || null,
+          source_title: payload.sourceTitle || null,
+          source_product: cleanProduct,
+        };
+        sourceMetadataRef.current = metadata;
+        parentOriginRef.current = origin;
+
         if (mounted) {
           setParentOrigin(origin);
-          setSourceMetadata({
-            source_url: payload.sourceUrl || null,
-            source_path: payload.sourcePath || null,
-            source_host: payload.sourceHost || null,
-            source_title: payload.sourceTitle || null,
-            source_product: payload.sourceProduct || 'institucional',
-          });
+          setSourceMetadata(metadata);
           setSupabaseClient(client);
           setInitialized(true);
         }
 
-        // Responde com ACK para confirmar a inicialização bem-sucedida à página pai
-        postToParent(MSG_TYPES.READY, { acknowledged: true }, origin);
+        // Envia ACK explícito informando à página pai que a inicialização foi concluída com sucesso
+        if (import.meta.env.DEV) {
+          console.log('[WidgetHandshake] ACK sent to origin:', origin);
+        }
+        postToParent(MSG_TYPES.ACK, { acknowledged: true, product: cleanProduct }, origin);
       }
     };
 
@@ -87,6 +136,9 @@ export function WidgetFrameApp() {
       }
 
       candidateOrigins.forEach((org) => {
+        if (import.meta.env.DEV) {
+          console.log('[WidgetHandshake] READY sent to target origin:', org);
+        }
         postToParent(MSG_TYPES.READY, {}, org);
       });
     };
@@ -114,6 +166,17 @@ export function WidgetFrameApp() {
 }
 
 function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) {
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log('[WidgetHandshake] WidgetFrameChatInner mounted');
+    }
+    return () => {
+      if (import.meta.env.DEV) {
+        console.log('[WidgetHandshake] WidgetFrameChatInner unmounted');
+      }
+    };
+  }, []);
+
   const {
     isOpen,
     toggleOpen,
@@ -137,8 +200,14 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
   // Avisa a página hospedeira sobre abertura/fechamento do chat para redimensionar a caixa do Iframe
   useEffect(() => {
     if (isOpen) {
+      if (import.meta.env.DEV) {
+        console.log('[WidgetHandshake] OPEN sent to parent:', parentOrigin);
+      }
       postToParent(MSG_TYPES.OPEN, {}, parentOrigin);
     } else {
+      if (import.meta.env.DEV) {
+        console.log('[WidgetHandshake] CLOSE sent to parent:', parentOrigin);
+      }
       postToParent(MSG_TYPES.CLOSE, {}, parentOrigin);
     }
   }, [isOpen, parentOrigin]);

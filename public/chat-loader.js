@@ -138,14 +138,15 @@
     }
 
     function startInitLoop() {
-      stopInitLoop();
+      if (initInterval) return;
       sendInitPayload();
       initAttempts = 0;
       initInterval = setInterval(function () {
         initAttempts++;
-        sendInitPayload();
         if (initAttempts >= 15) {
           stopInitLoop();
+        } else {
+          sendInitPayload();
         }
       }, 300);
     }
@@ -170,9 +171,10 @@
       switch (data.type) {
         case 'ESSENCIAL_CHAT_READY':
           sendInitPayload();
-          if (data.payload && data.payload.acknowledged) {
-            stopInitLoop();
-          }
+          break;
+
+        case 'ESSENCIAL_CHAT_ACK':
+          stopInitLoop();
           break;
 
         case 'ESSENCIAL_CHAT_OPEN':
