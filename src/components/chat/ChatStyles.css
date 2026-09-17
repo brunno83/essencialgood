@@ -106,6 +106,14 @@
   box-shadow: 0 2px 6px rgba(197, 48, 48, 0.4);
 }
 
+:root {
+  --eg-chat-radius: 28px;
+  --eg-chat-border: 2px solid rgba(75, 104, 51, 0.55);
+  --eg-chat-bg: #F8F5ED;
+  --eg-chat-shadow: 0 28px 72px rgba(20, 30, 14, 0.28), 0 8px 24px rgba(20, 30, 14, 0.18);
+  --eg-chat-header-bg: #4B6833;
+}
+
 /* ------------------------------------------
    JANELA FLUTUANTE DO CHAT (DESKTOP - MOLDURA E CONTRASTE REFORÇADO)
    ------------------------------------------ */
@@ -116,13 +124,11 @@
   width: 396px;
   height: 636px;
   max-height: calc(100vh - 48px);
-  background: #F8F5ED !important;
+  background: var(--eg-chat-bg, #F8F5ED) !important;
   opacity: 1 !important;
-  border: 2px solid rgba(75, 104, 51, 0.55) !important;
-  border-radius: 28px;
-  box-shadow:
-    0 28px 72px rgba(20, 30, 14, 0.28),
-    0 8px 24px rgba(20, 30, 14, 0.18) !important;
+  border: var(--eg-chat-border, 2px solid rgba(75, 104, 51, 0.55)) !important;
+  border-radius: var(--eg-chat-radius, 28px);
+  box-shadow: var(--eg-chat-shadow, 0 28px 72px rgba(20, 30, 14, 0.28), 0 8px 24px rgba(20, 30, 14, 0.18)) !important;
   z-index: 99998;
   display: flex;
   flex-direction: column;
