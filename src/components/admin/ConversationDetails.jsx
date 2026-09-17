@@ -1,10 +1,12 @@
-import React from 'react';
-import { User, Calendar, Clock, UserCheck, Shield, Globe, ExternalLink, ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, Calendar, Clock, UserCheck, Shield, Globe, ExternalLink, ArrowLeft, Archive, RotateCcw, Trash2 } from 'lucide-react';
 import {
   getConversationSourceType,
   formatProductDisplayName,
   isAllowedSourceUrl,
 } from '../../lib/conversationSource';
+import ArchiveConversationModal from './ArchiveConversationModal';
+import DeleteConversationModal from './DeleteConversationModal';
 
 export function ConversationDetails({
   conversation,
@@ -12,16 +14,31 @@ export function ConversationDetails({
   adminProfilesMap,
   onUpdateStatus,
   onUpdateAssignment,
+  onArchiveConversation,
+  onRestoreConversation,
+  onDeleteConversation,
   onBackToThread,
 }) {
+  const [showArchiveModal, setShowArchiveModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState(null);
+
   if (!conversation) return null;
+
+  const isAdmin = adminProfile?.role === 'admin';
+  const isArchived = Boolean(conversation.archived_at);
 
   const assignedProfile = conversation.assigned_admin_id
     ? adminProfilesMap[conversation.assigned_admin_id]
     : null;
 
-  const isAssignedToMe = conversation.assigned_admin_id === adminProfile?.id;
+  const archivedByProfile = conversation.archived_by
+    ? adminProfilesMap[conversation.archived_by]
+    : null;
 
+  const isAssignedToMe = conversation.assigned_admin_id === adminProfile?.id;
   const sourceType = getConversationSourceType(conversation);
   const productDisplayName = formatProductDisplayName(conversation.source_product);
   const canOpenLink = isAllowedSourceUrl(conversation.source_url);
@@ -50,6 +67,40 @@ export function ConversationDetails({
 
   const handleUnassign = () => {
     onUpdateAssignment(conversation.id, null);
+  };
+
+  const handleConfirmArchive = async () => {
+    setActionLoading(true);
+    setActionError(null);
+    const { error: err } = await onArchiveConversation(conversation.id);
+    setActionLoading(false);
+    if (err) {
+      setActionError(err);
+    } else {
+      setShowArchiveModal(false);
+    }
+  };
+
+  const handleConfirmRestore = async () => {
+    setActionLoading(true);
+    setActionError(null);
+    const { error: err } = await onRestoreConversation(conversation.id);
+    setActionLoading(false);
+    if (err) {
+      setActionError(err);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    setActionLoading(true);
+    setActionError(null);
+    const { error: err } = await onDeleteConversation(conversation.id);
+    setActionLoading(false);
+    if (err) {
+      setActionError(err);
+    } else {
+      setShowDeleteModal(false);
+    }
   };
 
   return (
@@ -167,6 +218,45 @@ export function ConversationDetails({
           </div>
         </div>
 
+        {/* CARD DE AÇÕES DA CONVERSA (Arquivar / Restaurar / Excluir) */}
+        <div className="conv-details-card actions-card">
+          <div className="conv-details-card-title">
+            <Archive size={16} />
+            <span>Ações e Gestão</span>
+          </div>
+
+          <div className="conv-actions-button-stack">
+            {!isArchived ? (
+              <button
+                className="conv-action-btn archive-btn"
+                onClick={() => setShowArchiveModal(true)}
+                disabled={actionLoading}
+              >
+                <Archive size={15} /> Arquivar Conversa
+              </button>
+            ) : (
+              <button
+                className="conv-action-btn restore-btn"
+                onClick={handleConfirmRestore}
+                disabled={actionLoading}
+              >
+                <RotateCcw size={15} /> Restaurar Conversa
+              </button>
+            )}
+
+            {/* Exclusão Permanente visível APENAS para Admin E quando a conversa já estiver arquivada */}
+            {isAdmin && isArchived && (
+              <button
+                className="conv-action-btn delete-btn"
+                onClick={() => setShowDeleteModal(true)}
+                disabled={actionLoading}
+              >
+                <Trash2 size={15} /> Excluir Permanentemente
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Status Operacional */}
         <div className="conv-details-card">
           <div className="conv-details-card-title">
@@ -181,6 +271,7 @@ export function ConversationDetails({
               className="conv-select"
               value={conversation.status}
               onChange={handleStatusChange}
+              disabled={isArchived}
             >
               <option value="open">Aberta (Em Andamento)</option>
               <option value="pending">Pendente (Aguardando Resposta)</option>
@@ -207,11 +298,11 @@ export function ConversationDetails({
 
           <div className="conv-assign-actions">
             {!isAssignedToMe ? (
-              <button className="conv-btn-secondary" onClick={handleAssignToMe}>
+              <button className="conv-btn-secondary" onClick={handleAssignToMe} disabled={isArchived}>
                 <Shield size={14} /> Atribuir a Mim
               </button>
             ) : (
-              <button className="conv-btn-danger-outline" onClick={handleUnassign}>
+              <button className="conv-btn-danger-outline" onClick={handleUnassign} disabled={isArchived}>
                 Remover Minha Atribuição
               </button>
             )}
@@ -234,8 +325,44 @@ export function ConversationDetails({
             <span className="conv-details-label">Última Atividade:</span>
             <span className="conv-details-value">{formatDate(conversation.last_message_at)}</span>
           </div>
+
+          {isArchived && (
+            <>
+              <div className="conv-details-row">
+                <span className="conv-details-label">Arquivada em:</span>
+                <span className="conv-details-value highlight" style={{ color: '#f59e0b' }}>
+                  {formatDate(conversation.archived_at)}
+                </span>
+              </div>
+              <div className="conv-details-row">
+                <span className="conv-details-label">Arquivada por:</span>
+                <span className="conv-details-value">
+                  {archivedByProfile ? archivedByProfile.full_name : 'Sistema/Equipe'}
+                </span>
+              </div>
+            </>
+          )}
         </div>
       </div>
+
+      {/* Modais */}
+      <ArchiveConversationModal
+        isOpen={showArchiveModal}
+        conversation={conversation}
+        onClose={() => setShowArchiveModal(false)}
+        onConfirm={handleConfirmArchive}
+        loading={actionLoading}
+        error={actionError}
+      />
+
+      <DeleteConversationModal
+        isOpen={showDeleteModal}
+        conversation={conversation}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+        loading={actionLoading}
+        error={actionError}
+      />
     </div>
   );
 }

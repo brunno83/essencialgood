@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Shield, Info } from 'lucide-react';
+import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Shield, Info, Archive, RotateCcw } from 'lucide-react';
 
 export function ConversationThread({
   conversation,
@@ -12,6 +12,7 @@ export function ConversationThread({
   onBackToList,
   onShowDetails,
   onReopenConversation,
+  onRestoreConversation,
   adminProfilesMap,
 }) {
   const [inputText, setInputText] = useState('');
@@ -20,6 +21,7 @@ export function ConversationThread({
   const [userScrolledUp, setUserScrolledUp] = useState(false);
 
   const isClosed = conversation?.status === 'closed';
+  const isArchived = Boolean(conversation?.archived_at);
 
   // Rola para o final da lista de mensagens isoladamente sem mover a página pai
   const scrollToBottom = (force = false) => {
@@ -52,7 +54,7 @@ export function ConversationThread({
 
   const handleSend = async () => {
     const text = inputText.trim();
-    if (!text || sending || isClosed) return;
+    if (!text || sending || isClosed || isArchived) return;
 
     const { error: err } = await onSendMessage(text);
     if (!err) {
@@ -156,7 +158,6 @@ export function ConversationThread({
                     </div>
                   )}
 
-                  {/* RENDERIZAÇÃO DE TEXTO PURO (SEM DANGEROUSLYSETINNERHTML) */}
                   <div className="conv-msg-text">{msg.content}</div>
 
                   <div className="conv-msg-meta">
@@ -179,8 +180,19 @@ export function ConversationThread({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* ALERTA SE A CONVERSA ESTIVER ENCERRADA */}
-      {isClosed ? (
+      {/* BANNER SE A CONVERSA ESTIVER ARQUIVADA */}
+      {isArchived ? (
+        <div className="conv-closed-banner archived">
+          <Archive size={18} />
+          <span>Esta conversa está arquivada. Restaure a conversa para enviar novas respostas.</span>
+          {onRestoreConversation && (
+            <button className="conv-btn-reopen" onClick={() => onRestoreConversation(conversation.id)}>
+              <RotateCcw size={14} /> Restaurar Conversa
+            </button>
+          )}
+        </div>
+      ) : isClosed ? (
+        /* ALERTA SE A CONVERSA ESTIVER ENCERRADA */
         <div className="conv-closed-banner">
           <Lock size={18} />
           <span>Esta conversa está encerrada. Reabra a conversa para enviar novas mensagens.</span>

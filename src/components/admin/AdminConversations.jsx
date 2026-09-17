@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAdminConversations } from '../../hooks/useAdminConversations';
 import { useConversationMessages } from '../../hooks/useConversationMessages';
 import { ConversationList } from './ConversationList';
@@ -9,7 +9,7 @@ import './AdminStyles.css';
 
 export function AdminConversations({ adminProfile }) {
   const [selectedConversation, setSelectedConversation] = useState(null);
-  const [mobileView, setMobileView] = useState('list'); // 'list' | 'thread'
+  const [mobileView, setMobileView] = useState('list'); // 'list' | 'thread' | 'details'
 
   const {
     conversations,
@@ -23,10 +23,38 @@ export function AdminConversations({ adminProfile }) {
     fetchConversations,
     updateConversationStatus,
     updateConversationAssignment,
+    archiveConversation,
+    restoreConversation,
+    deleteConversationPermanently,
     markLocalAsRead,
   } = useAdminConversations(adminProfile);
 
   const selectedId = selectedConversation?.id || null;
+
+  // Sincroniza estado de conversa selecionada caso ela tenha sido modificada, arquivada ou deletada por outro operador
+  useEffect(() => {
+    if (!selectedId) return;
+
+    const updatedInList = conversations.find(c => c.id === selectedId);
+
+    if (!updatedInList) {
+      // Se a conversa não está mais na lista atual (ex: foi deletada ou movida de aba pelo filtro ativo)
+      // Mantém a conversa em memória mas atualiza se necessário
+    } else {
+      setSelectedConversation(prev => {
+        if (!prev) return updatedInList;
+        // Atualiza campos como status, archived_at, assigned_admin_id se mudaram
+        if (
+          prev.status !== updatedInList.status ||
+          prev.archived_at !== updatedInList.archived_at ||
+          prev.assigned_admin_id !== updatedInList.assigned_admin_id
+        ) {
+          return { ...prev, ...updatedInList };
+        }
+        return prev;
+      });
+    }
+  }, [conversations, selectedId]);
 
   const {
     messages,
@@ -60,6 +88,42 @@ export function AdminConversations({ adminProfile }) {
     if (!err) {
       setSelectedConversation(prev => (prev ? { ...prev, status: 'open' } : null));
     }
+  };
+
+  const handleArchiveConversation = async (id) => {
+    const res = await archiveConversation(id);
+    if (!res.error) {
+      // Se estamos na aba normal (não arquivadas), limpa a seleção e volta para a lista
+      if (filterStatus !== 'archived') {
+        setSelectedConversation(null);
+        setMobileView('list');
+      } else {
+        setSelectedConversation(prev => (prev && prev.id === id ? { ...prev, archived_at: new Date().toISOString(), status: 'closed' } : prev));
+      }
+    }
+    return res;
+  };
+
+  const handleRestoreConversation = async (id) => {
+    const res = await restoreConversation(id);
+    if (!res.error) {
+      if (filterStatus === 'archived') {
+        setSelectedConversation(null);
+        setMobileView('list');
+      } else {
+        setSelectedConversation(prev => (prev && prev.id === id ? { ...prev, archived_at: null, archived_by: null } : prev));
+      }
+    }
+    return res;
+  };
+
+  const handleDeleteConversation = async (id) => {
+    const res = await deleteConversationPermanently(id);
+    if (!res.error) {
+      setSelectedConversation(null);
+      setMobileView('list');
+    }
+    return res;
   };
 
   return (
@@ -96,6 +160,7 @@ export function AdminConversations({ adminProfile }) {
                 onBackToList={handleBackToList}
                 onShowDetails={handleShowDetails}
                 onReopenConversation={handleReopenConversation}
+                onRestoreConversation={handleRestoreConversation}
                 adminProfilesMap={adminProfilesMap}
               />
 
@@ -116,6 +181,9 @@ export function AdminConversations({ adminProfile }) {
                     setSelectedConversation(prev => (prev ? { ...prev, assigned_admin_id: adminId } : null));
                   }
                 }}
+                onArchiveConversation={handleArchiveConversation}
+                onRestoreConversation={handleRestoreConversation}
+                onDeleteConversation={handleDeleteConversation}
               />
             </div>
           ) : (

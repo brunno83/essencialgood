@@ -284,8 +284,16 @@ export function useVisitorChat(options = {}) {
           .eq('id', cachedConvId)
           .maybeSingle();
 
-        if (cachedData && cachedData.visitor_id === authUser.id) {
+        const cachedConversationIsValid =
+          cachedData &&
+          cachedData.visitor_id === authUser.id &&
+          !cachedData.archived_at &&
+          ['open', 'pending'].includes(cachedData.status);
+
+        if (cachedConversationIsValid) {
           activeConv = cachedData;
+        } else {
+          localStorage.removeItem(CONV_STORAGE_KEY);
         }
       }
 
@@ -294,6 +302,7 @@ export function useVisitorChat(options = {}) {
           .from('conversations')
           .select('*')
           .eq('visitor_id', authUser.id)
+          .is('archived_at', null)
           .in('status', ['open', 'pending'])
           .order('created_at', { ascending: false })
           .limit(1)
@@ -495,6 +504,14 @@ export function useVisitorChat(options = {}) {
 
       return { message: newMsg, error: null };
     } catch (err) {
+      const isArchivedError = (err?.message || '').toLowerCase().includes('arquivada');
+      if (isArchivedError) {
+        localStorage.removeItem(CONV_STORAGE_KEY);
+        setConversation(null);
+        const userFriendlyMsg = 'Este atendimento foi finalizado. Você pode iniciar uma nova conversa.';
+        setSendError(userFriendlyMsg);
+        return { error: userFriendlyMsg };
+      }
       if (typeof window !== 'undefined' && import.meta.env.DEV) {
         console.error('[VisitorChat] Erro ao enviar mensagem:', err);
       }

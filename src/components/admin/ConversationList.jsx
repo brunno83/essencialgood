@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Search, MessageSquare, User, AlertCircle, RefreshCw } from 'lucide-react';
+import { Search, MessageSquare, User, AlertCircle, RefreshCw, Archive } from 'lucide-react';
 import { getConversationSourceType, formatProductDisplayName } from '../../lib/conversationSource';
 
 export function ConversationList({
@@ -16,12 +16,12 @@ export function ConversationList({
 }) {
   const listContainerRef = useRef(null);
 
-  // Garante que ao mudar filtro ou busca, o scroll da lista volta para o topo
   useEffect(() => {
     if (listContainerRef.current) {
       listContainerRef.current.scrollTop = 0;
     }
   }, [filterStatus, searchQuery]);
+
   const formatTime = (isoString) => {
     if (!isoString) return '';
     const date = new Date(isoString);
@@ -34,8 +34,11 @@ export function ConversationList({
     return date.toLocaleDateString([], { day: '2-digit', month: '2-digit' });
   };
 
-  const getStatusBadge = (status) => {
-    switch (status) {
+  const getStatusBadge = (conv) => {
+    if (conv.archived_at) {
+      return <span className="conv-badge conv-badge-archived"><Archive size={11} /> Arquivada</span>;
+    }
+    switch (conv.status) {
       case 'open':
         return <span className="conv-badge conv-badge-open">Aberta</span>;
       case 'pending':
@@ -43,7 +46,7 @@ export function ConversationList({
       case 'closed':
         return <span className="conv-badge conv-badge-closed">Encerrada</span>;
       default:
-        return <span className="conv-badge">{status}</span>;
+        return <span className="conv-badge">{conv.status}</span>;
     }
   };
 
@@ -88,6 +91,12 @@ export function ConversationList({
           >
             Encerradas
           </button>
+          <button
+            className={`conv-tab ${filterStatus === 'archived' ? 'active' : ''}`}
+            onClick={() => onFilterChange('archived')}
+          >
+            Arquivadas
+          </button>
         </div>
       </div>
 
@@ -119,7 +128,9 @@ export function ConversationList({
             <MessageSquare size={36} className="conv-empty-icon" />
             <h4 className="conv-empty-title">Nenhuma conversa encontrada</h4>
             <p className="conv-empty-text">
-              {searchQuery || filterStatus !== 'all'
+              {filterStatus === 'archived'
+                ? 'Nenhuma conversa arquivada no momento.'
+                : searchQuery || filterStatus !== 'all'
                 ? 'Nenhum resultado corresponde aos filtros aplicados.'
                 : 'Quando os visitantes enviarem mensagens pelo site público, as conversas aparecerão aqui.'}
             </p>
@@ -132,14 +143,14 @@ export function ConversationList({
               `Visitante #${conv.visitor_id ? conv.visitor_id.slice(0, 6) : 'anon'}`;
 
             const isSelected = selectedId === conv.id;
-            const hasUnread = conv.unreadCount > 0;
+            const hasUnread = conv.unreadCount > 0 && !conv.archived_at;
             const sourceType = getConversationSourceType(conv);
             const productDisplayName = formatProductDisplayName(conv.source_product);
 
             return (
               <div
                 key={conv.id}
-                className={`conv-item ${isSelected ? 'selected' : ''} ${hasUnread ? 'unread' : ''}`}
+                className={`conv-item ${isSelected ? 'selected' : ''} ${hasUnread ? 'unread' : ''} ${conv.archived_at ? 'archived' : ''}`}
                 onClick={() => onSelectConversation(conv)}
               >
                 <div className="conv-item-avatar">
@@ -149,14 +160,14 @@ export function ConversationList({
                 <div className="conv-item-content">
                   <div className="conv-item-top">
                     <span className="conv-item-name">{visitorDisplayName}</span>
-                    <span className="conv-item-time">{formatTime(conv.last_message_at)}</span>
+                    <span className="conv-item-time">{formatTime(conv.archived_at || conv.last_message_at)}</span>
                   </div>
 
                   <div className="conv-item-sub">
                     <span className="conv-item-email">
                       {conv.visitor_email || `ID: ${conv.visitor_id?.slice(0, 8)}...`}
                     </span>
-                    {getStatusBadge(conv.status)}
+                    {getStatusBadge(conv)}
                   </div>
 
                   {/* Linha de Origem e Produto */}

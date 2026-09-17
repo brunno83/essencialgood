@@ -5,10 +5,11 @@ export function useAdminConversations(adminProfile) {
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'open', 'pending', 'closed'
+  const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'open', 'pending', 'closed', 'archived'
   const [searchQuery, setSearchQuery] = useState('');
   const [totalUnreadCount, setTotalUnreadCount] = useState(0);
   const [adminProfilesMap, setAdminProfilesMap] = useState({});
+  const [actionLoading, setActionLoading] = useState({}); // { [convId_action]: boolean }
 
   const isMounted = useRef(true);
 
@@ -42,16 +43,20 @@ export function useAdminConversations(adminProfile) {
     setError(null);
 
     try {
-      // 1. Busca conversas ordenadas por atividade mais recente
-      const { data: convData, error: convErr } = await supabase
-        .from('conversations')
-        .select('*')
-        .order('last_message_at', { ascending: false })
-        .limit(50);
+      // 1. Seleciona conversas dependendo da aba (Arquivadas vs Ativas)
+      let query = supabase.from('conversations').select('*');
+
+      if (filterStatus === 'archived') {
+        query = query.not('archived_at', 'is', null).order('archived_at', { ascending: false });
+      } else {
+        query = query.is('archived_at', null).order('last_message_at', { ascending: false });
+      }
+
+      const { data: convData, error: convErr } = await query.limit(100);
 
       if (convErr) throw convErr;
 
-      // 2. Busca contagem de mensagens não lidas enviadas por visitantes
+      // 2. Busca contagem de mensagens não lidas apenas em conversas ativas
       const { data: unreadData, error: unreadErr } = await supabase
         .from('messages')
         .select('conversation_id')
@@ -60,23 +65,20 @@ export function useAdminConversations(adminProfile) {
 
       if (unreadErr) console.warn('[useAdminConversations] Erro ao contar não lidas:', unreadErr.message);
 
-      // Agrupa contagem por conversa
       const unreadMap = {};
       let totalUnread = 0;
 
       if (unreadData) {
         unreadData.forEach(m => {
           unreadMap[m.conversation_id] = (unreadMap[m.conversation_id] || 0) + 1;
-          totalUnread += 1;
         });
       }
 
-      // 3. Busca a prévia da última mensagem para cada conversa
+      // 3. Busca prévias das últimas mensagens
       const conversationIds = (convData || []).map(c => c.id);
       const lastMessageMap = {};
 
       if (conversationIds.length > 0) {
-        // Busca a última mensagem enviada em cada conversa
         const { data: msgData } = await supabase
           .from('messages')
           .select('conversation_id, content, sender_type, created_at')
@@ -92,12 +94,18 @@ export function useAdminConversations(adminProfile) {
         }
       }
 
-      // 4. Monta a lista enriquecida de conversas
-      const enriched = (convData || []).map(conv => ({
-        ...conv,
-        unreadCount: unreadMap[conv.id] || 0,
-        lastMessage: lastMessageMap[conv.id] || null,
-      }));
+      // 4. Monta a lista enriquecida e calcula unread apenas para conversas ativas
+      const enriched = (convData || []).map(conv => {
+        const uCount = unreadMap[conv.id] || 0;
+        if (!conv.archived_at) {
+          totalUnread += uCount;
+        }
+        return {
+          ...conv,
+          unreadCount: uCount,
+          lastMessage: lastMessageMap[conv.id] || null,
+        };
+      });
 
       if (isMounted.current) {
         setConversations(enriched);
@@ -109,7 +117,7 @@ export function useAdminConversations(adminProfile) {
     } finally {
       if (isMounted.current) setLoading(false);
     }
-  }, []);
+  }, [filterStatus]);
 
   // Inscrição em Tempo Real (Supabase Realtime)
   useEffect(() => {
@@ -119,32 +127,25 @@ export function useAdminConversations(adminProfile) {
 
     if (!isSupabaseConfigured || !supabase) return;
 
-    // Canal Realtime para escutar mudanças na tabela conversations e messages
     const channel = supabase
       .channel('admin-conversations-channel')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'conversations' },
-        (payload) => {
+        () => {
           if (!isMounted.current) return;
-          console.log('[Realtime Conversations Payload]:', payload);
-          // Recarrega conversas para garantir sincronização do status e last_message_at
           fetchConversations();
         }
       )
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
-        (payload) => {
+        () => {
           if (!isMounted.current) return;
-          console.log('[Realtime Message Insert Payload]:', payload);
-          // Atualiza prévias e contadores de não lidas
           fetchConversations();
         }
       )
-      .subscribe((status) => {
-        console.log('[Realtime Subscription Status]:', status);
-      });
+      .subscribe();
 
     return () => {
       isMounted.current = false;
@@ -165,7 +166,6 @@ export function useAdminConversations(adminProfile) {
 
       if (err) throw err;
 
-      // Atualiza estado local imediatamente
       setConversations(prev =>
         prev.map(c => (c.id === conversationId ? { ...c, status: newStatus } : c))
       );
@@ -176,7 +176,7 @@ export function useAdminConversations(adminProfile) {
     }
   };
 
-  // Atribuir ou remover atribuição de conversa
+  // Atribuir conversa
   const updateConversationAssignment = async (conversationId, adminId) => {
     if (!supabase) return { error: new Error('Supabase não configurado') };
     try {
@@ -197,7 +197,90 @@ export function useAdminConversations(adminProfile) {
     }
   };
 
-  // Atualiza localmente a contagem de não lidas para 0 após RPC mark_messages_as_read
+  // RPC: Arquivar Conversa
+  const archiveConversation = async (conversationId) => {
+    if (!supabase) return { error: new Error('Supabase não configurado') };
+    const key = `${conversationId}_archive`;
+    setActionLoading(prev => ({ ...prev, [key]: true }));
+
+    try {
+      const { data, error: err } = await supabase.rpc('archive_conversation', {
+        p_conversation_id: conversationId,
+      });
+
+      if (err) throw err;
+
+      // Remove incrementalmente da aba atual de ativas se não estiver na aba 'archived'
+      if (filterStatus !== 'archived') {
+        setConversations(prev => prev.filter(c => c.id !== conversationId));
+      } else {
+        await fetchConversations();
+      }
+
+      return { data, error: null };
+    } catch (err) {
+      console.error('[useAdminConversations] Erro ao arquivar conversa:', err);
+      return { data: null, error: err?.message || 'Falha ao arquivar a conversa.' };
+    } finally {
+      setActionLoading(prev => ({ ...prev, [key]: false }));
+    }
+  };
+
+  // RPC: Restaurar Conversa Arquivada
+  const restoreConversation = async (conversationId) => {
+    if (!supabase) return { error: new Error('Supabase não configurado') };
+    const key = `${conversationId}_restore`;
+    setActionLoading(prev => ({ ...prev, [key]: true }));
+
+    try {
+      const { data, error: err } = await supabase.rpc('restore_conversation', {
+        p_conversation_id: conversationId,
+      });
+
+      if (err) throw err;
+
+      // Remove da lista da aba 'archived' se atualmente estiver vendo arquivadas
+      if (filterStatus === 'archived') {
+        setConversations(prev => prev.filter(c => c.id !== conversationId));
+      } else {
+        await fetchConversations();
+      }
+
+      return { data, error: null };
+    } catch (err) {
+      console.error('[useAdminConversations] Erro ao restaurar conversa:', err);
+      return { data: null, error: err?.message || 'Falha ao restaurar a conversa.' };
+    } finally {
+      setActionLoading(prev => ({ ...prev, [key]: false }));
+    }
+  };
+
+  // RPC: Excluir Conversa Permanentemente (Admin)
+  const deleteConversationPermanently = async (conversationId) => {
+    if (!supabase) return { error: new Error('Supabase não configurado') };
+    const key = `${conversationId}_delete`;
+    setActionLoading(prev => ({ ...prev, [key]: true }));
+
+    try {
+      const { data, error: err } = await supabase.rpc('delete_conversation_permanently', {
+        p_conversation_id: conversationId,
+      });
+
+      if (err) throw err;
+
+      // Remove da lista em qualquer aba
+      setConversations(prev => prev.filter(c => c.id !== conversationId));
+
+      return { data, error: null };
+    } catch (err) {
+      console.error('[useAdminConversations] Erro ao excluir conversa:', err);
+      return { data: null, error: err?.message || 'Falha ao excluir a conversa.' };
+    } finally {
+      setActionLoading(prev => ({ ...prev, [key]: false }));
+    }
+  };
+
+  // Atualiza localmente a contagem de não lidas
   const markLocalAsRead = useCallback((conversationId) => {
     setConversations(prev =>
       prev.map(c => {
@@ -211,12 +294,15 @@ export function useAdminConversations(adminProfile) {
     );
   }, []);
 
-  // Filtragem local por status e por busca textual (nome/email)
+  // Filtragem local
   const filteredConversations = conversations.filter(conv => {
     // 1. Filtro por status
-    if (filterStatus !== 'all' && conv.status !== filterStatus) {
-      return false;
+    if (filterStatus === 'archived') {
+      if (!conv.archived_at) return false;
+    } else if (filterStatus !== 'all') {
+      if (conv.status !== filterStatus || conv.archived_at) return false;
     }
+
     // 2. Filtro por texto
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
@@ -240,9 +326,13 @@ export function useAdminConversations(adminProfile) {
     setSearchQuery,
     totalUnreadCount,
     adminProfilesMap,
+    actionLoading,
     fetchConversations,
     updateConversationStatus,
     updateConversationAssignment,
+    archiveConversation,
+    restoreConversation,
+    deleteConversationPermanently,
     markLocalAsRead,
   };
 }
