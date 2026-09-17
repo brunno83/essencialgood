@@ -13,6 +13,14 @@ export function WidgetFrameApp() {
   const [sourceMetadata, setSourceMetadata] = useState(null);
   const [supabaseClient, setSupabaseClient] = useState(null);
 
+  // Aplica classe de isolamento de scroll apenas enquanto a rota /widget-frame estiver ativa
+  useEffect(() => {
+    document.body.classList.add('widget-frame-body');
+    return () => {
+      document.body.classList.remove('widget-frame-body');
+    };
+  }, []);
+
   // 1. Escuta a mensagem ESSENCIAL_CHAT_INIT e envia ESSENCIAL_CHAT_READY no mount
   useEffect(() => {
     if (typeof window === 'undefined' || window.parent === window) return;

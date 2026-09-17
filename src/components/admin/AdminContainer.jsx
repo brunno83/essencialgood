@@ -16,6 +16,14 @@ export function AdminContainer() {
   });
   const [globalUnreadCount, setGlobalUnreadCount] = useState(0);
 
+  // Aplica classe de isolamento de scroll apenas enquanto a rota /admin estiver ativa
+  useEffect(() => {
+    document.body.classList.add('admin-active-body');
+    return () => {
+      document.body.classList.remove('admin-active-body');
+    };
+  }, []);
+
   // Escuta popstate para suportar botões voltar/avançar do navegador
   useEffect(() => {
     const handlePopState = () => {

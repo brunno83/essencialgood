@@ -1,5 +1,6 @@
 /* Estilos específicos para a rota /widget-frame dentro do Iframe */
-html, body, #root {
+body.widget-frame-body,
+body.widget-frame-body #root {
   margin: 0;
   padding: 0;
   width: 100%;
