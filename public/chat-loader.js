@@ -1,6 +1,7 @@
 /**
  * Essencial Good - ChatWidget Standalone Loader
  * Loader leve em JavaScript puro para incorporação em páginas estáticas (Advertoriais e Power Pages)
+ * Encapsulado em Closed Shadow DOM para isolamento total contra scripts externos (UTMify, LiteSpeed, Elementor)
  */
 (function () {
   'use strict';
@@ -14,11 +15,13 @@
   var loaderInstanceId = Math.random().toString(36).substring(2, 7);
 
   var loaderCounters = {
-    creations: 0,
-    appendChilds: 0,
-    onloads: 0,
-    srcChanges: 0,
-    removalsOrReplaces: 0,
+    hostCreatedCount: 0,
+    shadowRootCreatedCount: 0,
+    iframeCreatedCount: 0,
+    iframeAppendCount: 0,
+    iframeOnloadCount: 0,
+    srcChangesCount: 0,
+    removalsOrReplacesCount: 0,
   };
 
   var chatIsOpen = false;
@@ -47,6 +50,7 @@
     ? window.location.origin
     : 'https://www.essencialgood.com';
 
+  // URL exata do iframe limpa (sem UTMs para evitar re-execução de scripts externos)
   var frameUrl = WIDGET_ORIGIN + '/widget-frame';
   if (isDebug) {
     frameUrl += '?chat_debug=1';
@@ -90,29 +94,57 @@
     };
   }
 
-  // Cria o elemento Iframe e o container flutuante
+  // Cria a infraestrutura do Shadow DOM e Iframe
   function createWidgetIframe() {
-    var container = document.createElement('div');
-    container.id = 'essencial-chat-loader-container';
-    
-    // Estilização estrita do container (sem animação de dimensões para evitar ResizeObserver layout thrashing)
-    container.style.position = 'fixed';
-    container.style.bottom = '16px';
-    container.style.right = '16px';
-    container.style.width = '80px';
-    container.style.height = '80px';
-    container.style.zIndex = '999999';
-    container.style.border = 'none';
-    container.style.background = 'transparent';
-    container.style.transition = 'none'; // REMOVIDO REDIMENSIONAMENTO ANIMADO EXTERNO
-    container.style.pointerEvents = 'none';
+    // 1. Elemento Host no document.body
+    var host = document.createElement('div');
+    host.id = 'essencial-good-chat-host';
+    loaderCounters.hostCreatedCount++;
 
-    logLoader('Container created', { width: '80px', height: '80px' });
+    host.style.position = 'fixed';
+    host.style.bottom = '16px';
+    host.style.right = '16px';
+    host.style.width = '80px';
+    host.style.height = '80px';
+    host.style.zIndex = '999999';
+    host.style.border = 'none';
+    host.style.background = 'transparent';
+    host.style.transition = 'none'; // Sem animações de dimensões no outer container
+    host.style.pointerEvents = 'none';
 
+    // Marcadores para exclusão de UTMify e otimizadores externos
+    host.setAttribute('data-no-utm', '1');
+    host.setAttribute('data-utmify-ignore', '1');
+    host.setAttribute('data-skip-utm', '1');
+    host.setAttribute('data-no-lazy', '1');
+
+    logLoader('Host element created in document.body', {
+      hostId: host.id,
+      hostCreatedCount: loaderCounters.hostCreatedCount,
+    });
+
+    // 2. Attach Closed Shadow DOM para isolamento de document.querySelectorAll('iframe')
+    var shadowRoot = host.attachShadow({ mode: 'closed' });
+    loaderCounters.shadowRootCreatedCount++;
+
+    logLoader('Closed Shadow DOM attached to host', {
+      shadowRootCreatedCount: loaderCounters.shadowRootCreatedCount,
+    });
+
+    // 3. Container interno dentro do Shadow DOM
+    var frameContainer = document.createElement('div');
+    frameContainer.id = 'essencial-chat-loader-container';
+    frameContainer.style.width = '100%';
+    frameContainer.style.height = '100%';
+    frameContainer.style.position = 'relative';
+    frameContainer.style.border = 'none';
+    frameContainer.style.background = 'transparent';
+    frameContainer.style.pointerEvents = 'none';
+
+    // 4. Elemento Iframe criado dentro do Shadow DOM
     var iframe = document.createElement('iframe');
-    loaderCounters.creations++;
+    loaderCounters.iframeCreatedCount++;
 
-    // Identificador estável e marcadores para excluir de otimizadores e lazy loaders
     iframe.id = 'essencial-good-chat-frame';
     iframe.title = 'Suporte ao Vivo - Essencial Good';
     iframe.style.width = '100%';
@@ -121,42 +153,44 @@
     iframe.style.background = 'transparent';
     iframe.style.pointerEvents = 'auto';
     iframe.setAttribute('allowtransparency', 'true');
-
-    // Atributos e classes explícitas para ignorar LiteSpeed, WP Rocket, Elementor e LazyLoad
     iframe.setAttribute('loading', 'eager');
-    iframe.className = 'no-lazy skip-lazy litespeed-no-lazy no-lazyload';
+    iframe.className = 'no-lazy skip-lazy litespeed-no-lazy no-lazyload no-utmify';
     iframe.setAttribute('data-no-lazy', '1');
     iframe.setAttribute('data-skip-lazy', '1');
     iframe.setAttribute('data-litespeed-no-lazy', '1');
     iframe.setAttribute('data-no-optimize', '1');
+    iframe.setAttribute('data-no-utm', '1');
+    iframe.setAttribute('data-utmify-ignore', '1');
 
-    // Atribuição de src ÚNICA no carregamento inicial
+    // Atribuição da URL exata uma única vez
     iframe.src = frameUrl;
 
-    logLoader('Iframe element created', {
-      id: iframe.id,
-      src: frameUrl,
-      creationsTotal: loaderCounters.creations,
+    logLoader('Iframe created inside Closed Shadow DOM', {
+      iframeId: iframe.id,
+      initialSrc: frameUrl,
+      iframeCreatedCount: loaderCounters.iframeCreatedCount,
     });
 
-    container.appendChild(iframe);
+    frameContainer.appendChild(iframe);
+    shadowRoot.appendChild(frameContainer);
+    loaderCounters.iframeAppendCount++;
 
-    // Instrumentação de MutationObserver quando ?chat_debug=1 ativo
+    // Instrumentação de MutationObserver (apenas se ?chat_debug=1 ativo)
     if (isDebug && typeof MutationObserver !== 'undefined') {
       var attrObserver = new MutationObserver(function (mutations) {
         mutations.forEach(function (m) {
           if (m.type === 'attributes') {
             if (m.attributeName === 'src') {
-              loaderCounters.srcChanges++;
+              loaderCounters.srcChangesCount++;
             }
             logLoader('MUTATION OBSERVED on iframe attribute', {
-              attributeName: m.attributeName,
-              oldValue: m.oldValue,
-              newValue: iframe.getAttribute(m.attributeName),
-              currentSrc: iframe.src,
+              attributeName: String(m.attributeName),
+              oldValue: String(m.oldValue || ''),
+              newValue: String(iframe.getAttribute(m.attributeName) || ''),
+              currentSrc: String(iframe.src || ''),
               isConnected: iframe.isConnected,
-              isSameElement: iframe === document.getElementById('essencial-good-chat-frame'),
-              stack: new Error().stack,
+              srcChangesCount: loaderCounters.srcChangesCount,
+              stack: new Error().stack ? String(new Error().stack) : 'N/A',
             });
           }
         });
@@ -166,60 +200,42 @@
         attributeOldValue: true,
         attributeFilter: ['src', 'data-src', 'loading', 'class', 'style'],
       });
-
-      var childObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (m) {
-          if (m.type === 'childList') {
-            m.removedNodes.forEach(function (node) {
-              if (node === iframe || (node.id && node.id === 'essencial-good-chat-frame')) {
-                loaderCounters.removalsOrReplaces++;
-                logLoader('WARNING: iframe removed from DOM', {
-                  removalsTotal: loaderCounters.removalsOrReplaces,
-                  isConnected: iframe.isConnected,
-                  stack: new Error().stack,
-                });
-              }
-            });
-          }
-        });
-      });
-      childObserver.observe(container, { childList: true });
     }
 
-    // Redimensionamento imediato sem transition CSS
+    // Redimensionamento imediato do host externo (sem animação CSS no container)
     function setWidgetDimensions(isOpen) {
       var isMobile = isMobileViewport();
-      var prevWidth = container.style.width;
-      var prevHeight = container.style.height;
+      var prevWidth = host.style.width;
+      var prevHeight = host.style.height;
 
       if (!isOpen) {
-        container.style.width = '80px';
-        container.style.height = '80px';
-        container.style.bottom = '16px';
-        container.style.right = '16px';
+        host.style.width = '80px';
+        host.style.height = '80px';
+        host.style.bottom = '16px';
+        host.style.right = '16px';
       } else {
         if (isMobile) {
-          container.style.width = '100vw';
-          container.style.height = '100vh';
-          container.style.bottom = '0px';
-          container.style.right = '0px';
+          host.style.width = '100vw';
+          host.style.height = '100vh';
+          host.style.bottom = '0px';
+          host.style.right = '0px';
         } else {
-          container.style.width = '400px';
-          container.style.height = '640px';
-          container.style.maxHeight = 'calc(100vh - 32px)';
-          container.style.maxWidth = 'calc(100vw - 32px)';
-          container.style.bottom = '16px';
-          container.style.right = '16px';
+          host.style.width = '400px';
+          host.style.height = '640px';
+          host.style.maxHeight = 'calc(100vh - 32px)';
+          host.style.maxWidth = 'calc(100vw - 32px)';
+          host.style.bottom = '16px';
+          host.style.right = '16px';
         }
       }
 
-      logLoader('Container dimensions updated immediately (no animation)', {
+      logLoader('Host dimensions updated immediately (no animation)', {
         isOpen: isOpen,
         isMobileViewport: isMobile,
         prevWidth: prevWidth,
         prevHeight: prevHeight,
-        newWidth: container.style.width,
-        newHeight: container.style.height,
+        newWidth: host.style.width,
+        newHeight: host.style.height,
       });
     }
 
@@ -280,11 +296,10 @@
     }
 
     iframe.onload = function () {
-      loaderCounters.onloads++;
+      loaderCounters.iframeOnloadCount++;
       logLoader('Iframe onload event fired', {
-        onloadCount: loaderCounters.onloads,
+        iframeOnloadCount: loaderCounters.iframeOnloadCount,
         isConnected: iframe.isConnected,
-        isSameElement: iframe === document.getElementById('essencial-good-chat-frame'),
         currentSrc: iframe.src,
       });
       startInitLoop();
@@ -340,7 +355,7 @@
         case 'ESSENCIAL_CHAT_ERROR':
           logLoader('ERROR received from iframe');
           stopInitLoop();
-          container.style.display = 'none';
+          host.style.display = 'none';
           break;
       }
     }
@@ -360,16 +375,14 @@
       });
     }
 
-    // Injeta no DOM quando a página estiver pronta
+    // Injeta o host no document.body quando a página estiver pronta
     if (document.body) {
-      document.body.appendChild(container);
-      loaderCounters.appendChilds++;
-      logLoader('Container appended to body', { appendChildsTotal: loaderCounters.appendChilds });
+      document.body.appendChild(host);
+      logLoader('Host element appended to document.body');
     } else {
       document.addEventListener('DOMContentLoaded', function () {
-        document.body.appendChild(container);
-        loaderCounters.appendChilds++;
-        logLoader('Container appended to body on DOMContentLoaded', { appendChildsTotal: loaderCounters.appendChilds });
+        document.body.appendChild(host);
+        logLoader('Host element appended to document.body on DOMContentLoaded');
       });
     }
   }
