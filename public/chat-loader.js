@@ -220,8 +220,8 @@
           host.style.bottom = '0px';
           host.style.right = '0px';
         } else {
-          host.style.width = '424px';
-          host.style.height = '664px';
+          host.style.width = '432px';
+          host.style.height = '672px';
           host.style.maxHeight = 'calc(100vh - 24px)';
           host.style.maxWidth = 'calc(100vw - 24px)';
           host.style.bottom = '12px';

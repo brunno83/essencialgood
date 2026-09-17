@@ -13,6 +13,14 @@ import {
 } from 'lucide-react';
 import './AdminStyles.css';
 
+const isDebugMode = typeof window !== 'undefined' && window.location.search.includes('admin_debug=1');
+
+function logDebug(queryName, details) {
+  if (isDebugMode) {
+    console.log(`[ADMIN_DEBUG][${queryName}]`, details);
+  }
+}
+
 export function AdminDashboard({ adminProfile, user, onSelectTab }) {
   const [metrics, setMetrics] = useState({
     openConversations: 0,
@@ -31,7 +39,7 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
   const [errorRecent, setErrorRecent] = useState(null);
   const [errorProducts, setErrorProducts] = useState(null);
 
-  // 1. Busca Métricas Gerais
+  // 1. Busca Métricas Gerais (Conversas em andamento, Pendentes, Não Lidas)
   const fetchMetrics = useCallback(async () => {
     if (!isSupabaseConfigured || !supabase) {
       setLoadingMetrics(false);
@@ -45,20 +53,24 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
       const [openRes, pendingRes, unreadRes] = await Promise.all([
         supabase
           .from('conversations')
-          .select('*', { count: 'exact', head: true })
-          .eq('status', 'open')
-          .eq('is_archived', false),
+          .select('id', { count: 'exact', head: true })
+          .in('status', ['open', 'pending'])
+          .is('archived_at', null),
         supabase
           .from('conversations')
-          .select('*', { count: 'exact', head: true })
+          .select('id', { count: 'exact', head: true })
           .eq('status', 'pending')
-          .eq('is_archived', false),
+          .is('archived_at', null),
         supabase
           .from('messages')
-          .select('*', { count: 'exact', head: true })
+          .select('id', { count: 'exact', head: true })
           .eq('sender_type', 'visitor')
           .is('read_at', null),
       ]);
+
+      logDebug('openRes', { status: openRes.status, count: openRes.count, error: openRes.error });
+      logDebug('pendingRes', { status: pendingRes.status, count: pendingRes.count, error: pendingRes.error });
+      logDebug('unreadRes', { status: unreadRes.status, count: unreadRes.count, error: unreadRes.error });
 
       if (openRes.error) throw openRes.error;
       if (pendingRes.error) throw pendingRes.error;
@@ -88,12 +100,14 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
     setErrorRecent(null);
 
     try {
-      const { data, error } = await supabase
+      const { data, error, status } = await supabase
         .from('conversations')
-        .select('id, visitor_name, visitor_email, status, source_product, source_path, last_message_at, is_archived')
-        .eq('is_archived', false)
-        .order('last_message_at', { ascending: false, nullsFirst: false })
+        .select('id, visitor_name, status, source_product, source_path, last_message_at')
+        .is('archived_at', null)
+        .order('last_message_at', { ascending: false })
         .limit(5);
+
+      logDebug('recentConversations', { status, count: data?.length, error });
 
       if (error) throw error;
       setRecentConversations(data || []);
@@ -117,42 +131,54 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
 
     try {
       const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-      const { data, error } = await supabase
-        .from('conversations')
-        .select('source_product')
-        .eq('is_archived', false)
-        .gte('created_at', thirtyDaysAgo);
+      const productKeys = [
+        { key: 'slimsoda', label: 'SlimSoda' },
+        { key: 'sonnus', label: 'Sonnus' },
+        { key: 'crowned', label: 'Crowned' },
+        { key: 'linfaflow', label: 'Linfaflow' },
+        { key: 'memoflow', label: 'Memoflow' },
+        { key: 'institucional', label: 'Institucional' },
+      ];
 
-      if (error) throw error;
+      const queries = productKeys.map((p) =>
+        supabase
+          .from('conversations')
+          .select('id', { count: 'exact', head: true })
+          .is('archived_at', null)
+          .gte('created_at', thirtyDaysAgo)
+          .eq('source_product', p.key)
+      );
 
-      const rows = data || [];
-      const total = rows.length;
-      setTotal30DaysCount(total);
+      const results = await Promise.allSettled(queries);
 
-      const counts = {};
-      rows.forEach((row) => {
-        const prodKey = (row.source_product || 'institucional').toLowerCase().trim();
-        counts[prodKey] = (counts[prodKey] || 0) + 1;
+      let totalCount = 0;
+      const statsList = [];
+
+      results.forEach((res, index) => {
+        const prod = productKeys[index];
+        if (res.status === 'fulfilled' && !res.value.error) {
+          const count = res.value.count ?? 0;
+          totalCount += count;
+          statsList.push({
+            key: prod.key,
+            label: prod.label,
+            count,
+          });
+          logDebug(`product_${prod.key}`, { count });
+        } else {
+          logDebug(`product_${prod.key}_error`, { error: res.reason || res.value?.error });
+        }
       });
 
-      const productLabelsMap = {
-        slimsoda: 'SlimSoda',
-        sonnus: 'Sonnus',
-        crowned: 'Crowned',
-        linfaflow: 'Linfaflow',
-        memoflow: 'Memoflow',
-        institucional: 'Institucional',
-      };
-
-      const sortedStats = Object.entries(counts)
-        .map(([key, count]) => {
-          const label = productLabelsMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
-          const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
-          return { key, label, count, percentage };
-        })
+      const statsWithPerc = statsList
+        .map((item) => ({
+          ...item,
+          percentage: totalCount > 0 ? Math.round((item.count / totalCount) * 100) : 0,
+        }))
         .sort((a, b) => b.count - a.count);
 
-      setProductStats(sortedStats);
+      setTotal30DaysCount(totalCount);
+      setProductStats(statsWithPerc);
     } catch (err) {
       console.error('[AdminDashboard] Erro ao carregar estatísticas por produto:', err);
       setErrorProducts('Falha ao carregar distribuição por produto.');
@@ -253,8 +279,13 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
           <div className="admin-alert-error" style={{ marginBottom: '20px' }}>
             <AlertCircle size={18} />
             <span>{errorMetrics}</span>
-            <button onClick={fetchMetrics} className="dash-retry-inline-btn">
-              <RefreshCw size={14} /> Tentar novamente
+            <button
+              onClick={fetchMetrics}
+              disabled={loadingMetrics}
+              className="dash-retry-inline-btn"
+            >
+              <RefreshCw size={14} className={loadingMetrics ? 'chat-spinner' : ''} />
+              Tentar novamente
             </button>
           </div>
         )}
@@ -346,8 +377,13 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
               <div className="admin-alert-error" style={{ margin: '16px 0' }}>
                 <AlertCircle size={16} />
                 <span>{errorRecent}</span>
-                <button onClick={fetchRecent} className="dash-retry-inline-btn">
-                  <RefreshCw size={13} /> Recarregar
+                <button
+                  onClick={fetchRecent}
+                  disabled={loadingRecent}
+                  className="dash-retry-inline-btn"
+                >
+                  <RefreshCw size={13} className={loadingRecent ? 'chat-spinner' : ''} />
+                  Recarregar
                 </button>
               </div>
             ) : loadingRecent ? (
@@ -381,7 +417,7 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
                     <div className="dash-item-main">
                       <div className="dash-item-top">
                         <span className="dash-item-name">
-                          {item.visitor_name || 'Visitante Sem Nome'}
+                          {item.visitor_name || 'Visitante'}
                         </span>
                         <span className="dash-item-time">
                           {formatTimeAgo(item.last_message_at)}
@@ -419,8 +455,13 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
               <div className="admin-alert-error" style={{ margin: '16px 0' }}>
                 <AlertCircle size={16} />
                 <span>{errorProducts}</span>
-                <button onClick={fetchProducts} className="dash-retry-inline-btn">
-                  <RefreshCw size={13} /> Recarregar
+                <button
+                  onClick={fetchProducts}
+                  disabled={loadingProducts}
+                  className="dash-retry-inline-btn"
+                >
+                  <RefreshCw size={13} className={loadingProducts ? 'chat-spinner' : ''} />
+                  Recarregar
                 </button>
               </div>
             ) : loadingProducts ? (

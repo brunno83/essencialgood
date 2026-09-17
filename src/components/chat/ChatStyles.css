@@ -107,7 +107,7 @@
 }
 
 /* ------------------------------------------
-   JANELA FLUTUANTE DO CHAT (DESKTOP - SUPERFÍCIE SÓLIDA)
+   JANELA FLUTUANTE DO CHAT (DESKTOP - MOLDURA E CONTRASTE REFORÇADO)
    ------------------------------------------ */
 .chat-window-container {
   position: fixed;
@@ -116,17 +116,18 @@
   width: 396px;
   height: 636px;
   max-height: calc(100vh - 48px);
-  background: #FFFDF9 !important;
+  background: #F8F5ED !important;
   opacity: 1 !important;
-  border: 1px solid rgba(75, 104, 51, 0.28);
+  border: 2px solid rgba(75, 104, 51, 0.55) !important;
   border-radius: 16px;
   box-shadow:
-    0 24px 64px rgba(28, 40, 19, 0.22),
-    0 6px 20px rgba(28, 40, 19, 0.12);
+    0 28px 72px rgba(20, 30, 14, 0.28),
+    0 8px 24px rgba(20, 30, 14, 0.18) !important;
   z-index: 99998;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  isolation: isolate;
   animation: chatWindowAppear 0.25s ease;
 }
 
@@ -226,14 +227,14 @@
 }
 
 /* ------------------------------------------
-   CORPO DA JANELA (SÓLIDO #FFFDF9)
+   CORPO DA JANELA (#F8F5ED)
    ------------------------------------------ */
 .chat-window-body {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #FFFDF9 !important;
+  background: #F8F5ED !important;
   opacity: 1 !important;
 }
 
@@ -246,7 +247,7 @@
   gap: 12px;
   color: #596252;
   font-size: 13px;
-  background: #FFFDF9 !important;
+  background: #F8F5ED !important;
 }
 
 /* ------------------------------------------
@@ -259,7 +260,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: #FFFDF9 !important;
+  background: #F8F5ED !important;
   opacity: 1 !important;
 }
 
@@ -348,21 +349,20 @@
 .chat-input,
 .chat-textarea {
   width: 100%;
-  background: #F7F7F3;
-  border: 1px solid #DDD9CF;
+  background: #FFFFFF !important;
+  border: 1px solid #DDD9CF !important;
   border-radius: 8px;
   padding: 9px 12px;
   color: #1C2813;
   font-size: 13px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .chat-input:focus,
 .chat-textarea:focus {
-  background: #FFFFFF;
-  border-color: #4B6833;
+  border-color: #4B6833 !important;
   box-shadow: 0 0 0 3px rgba(75, 104, 51, 0.15);
 }
 
@@ -416,9 +416,11 @@
 }
 
 .chat-submit-btn:disabled {
-  opacity: 0.55;
+  background: #EEE9DE !important;
+  color: #596252 !important;
+  opacity: 1 !important;
   cursor: not-allowed;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 /* ------------------------------------------
