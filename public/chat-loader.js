@@ -214,11 +214,15 @@
         host.style.height = '80px';
         host.style.bottom = '16px';
         host.style.right = '16px';
+        host.style.left = 'auto';
       } else {
         if (isMobile) {
           host.style.width = '100vw';
-          host.style.height = '100vh';
+          host.style.height = '85dvh';
+          host.style.maxHeight = '85dvh';
+          host.style.maxWidth = '100vw';
           host.style.bottom = '0px';
+          host.style.left = '0px';
           host.style.right = '0px';
         } else {
           host.style.width = '432px';
@@ -227,6 +231,7 @@
           host.style.maxWidth = 'calc(100vw - 24px)';
           host.style.bottom = '6px';
           host.style.right = '6px';
+          host.style.left = 'auto';
         }
       }
 

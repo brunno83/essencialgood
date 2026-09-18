@@ -90,17 +90,19 @@ html.widget-frame-mobile .widget-frame-container {
 html.widget-frame-mobile .widget-frame-container .chat-window-container,
 html.widget-frame-mobile .widget-frame-container .chat-window {
   position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  max-width: 100vw !important;
-  max-height: 100dvh !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  border: none !important;
+  top: auto !important;
+  bottom: max(12px, env(safe-area-inset-bottom, 12px)) !important;
+  left: 12px !important;
+  right: 12px !important;
+  width: calc(100vw - 24px) !important;
+  max-width: calc(100vw - 24px) !important;
+  height: auto !important;
+  max-height: 82dvh !important;
+  margin: 0 auto !important;
+  border-radius: 24px !important;
+  border: var(--eg-chat-border, 2px solid rgba(75, 104, 51, 0.55)) !important;
   box-shadow: none !important;
+  filter: none !important;
   pointer-events: auto !important;
+  overflow: hidden !important;
 }
