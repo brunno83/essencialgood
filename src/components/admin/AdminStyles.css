@@ -3493,25 +3493,6 @@ body.admin-active-body {
   border-color: var(--eg-color-primary, #3D5A37);
 }
 
-.admin-btn-action-open {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 8px;
-  color: var(--eg-text-muted, #5C6754);
-  background: #FAF8F5;
-  border: 1px solid var(--eg-border-subtle, #D4CEBE);
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.admin-btn-action-open:hover {
-  background: var(--eg-color-primary, #3D5A37);
-  color: #FFFFFF;
-  border-color: var(--eg-color-primary, #3D5A37);
-}
-
 /* Rodapé dos Cards Mobile */
 .lead-card-footer-actions {
   display: flex;
@@ -3534,19 +3515,6 @@ body.admin-active-body {
   border: 1px solid var(--eg-border-subtle, #D4CEBE);
   border-radius: 6px;
   cursor: pointer;
-  min-height: 44px;
-}
-
-.admin-btn-mobile-open {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 14px;
-  color: var(--eg-text-muted, #5C6754);
-  background: #FAF8F5;
-  border: 1px solid var(--eg-border-subtle, #D4CEBE);
-  border-radius: 6px;
-  text-decoration: none;
   min-height: 44px;
 }
 

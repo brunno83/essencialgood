@@ -15,7 +15,6 @@ import {
   AlertCircle,
   ShieldCheck,
   Link,
-  ExternalLink,
   AlertTriangle,
 } from 'lucide-react';
 import { useAdminCheckoutLeads } from '../../hooks/useAdminCheckoutLeads';
@@ -394,16 +393,6 @@ export function AdminCheckoutLeads() {
                                   </>
                                 )}
                               </button>
-
-                              <a
-                                href={item.checkout_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="admin-btn-action-open"
-                                title="Abrir checkout original em nova aba"
-                              >
-                                <ExternalLink size={13} />
-                              </a>
                             </div>
                           ) : (
                             <span className="lead-url-unavailable" title="A URL gravada não passou na allowlist estrita do produto.">
@@ -468,25 +457,13 @@ export function AdminCheckoutLeads() {
 
                     <div className="lead-card-footer-actions">
                       {isUrlValid ? (
-                        <>
-                          <button
-                            className="admin-btn-mobile-copy"
-                            onClick={() => handleCopyRecoveryLink(item.checkout_url, item.id, item.product, item.page_type)}
-                          >
-                            {copiedLinkId === item.id ? <Check size={14} /> : <Link size={14} />}
-                            <span>{copiedLinkId === item.id ? 'Link Copiado!' : 'Copiar Link de Recuperação'}</span>
-                          </button>
-
-                          <a
-                            href={item.checkout_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="admin-btn-mobile-open"
-                            title="Abrir checkout em nova aba"
-                          >
-                            <ExternalLink size={14} />
-                          </a>
-                        </>
+                        <button
+                          className="admin-btn-mobile-copy"
+                          onClick={() => handleCopyRecoveryLink(item.checkout_url, item.id, item.product, item.page_type)}
+                        >
+                          {copiedLinkId === item.id ? <Check size={14} /> : <Link size={14} />}
+                          <span>{copiedLinkId === item.id ? 'Link Copiado!' : 'Copiar Link de Recuperação'}</span>
+                        </button>
                       ) : (
                         <span className="lead-url-unavailable" title="A URL gravada não passou na allowlist estrita do produto.">
                           <AlertTriangle size={13} /> Link de recuperação indisponível
