@@ -11,6 +11,7 @@ import {
   Layers,
   User,
 } from 'lucide-react';
+import { LeadSourceDashboard } from './LeadSourceDashboard';
 import './AdminStyles.css';
 
 const isDebugMode = typeof window !== 'undefined' && window.location.search.includes('admin_debug=1');
@@ -503,6 +504,9 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
             )}
           </div>
         </section>
+
+        {/* Bloco Origem dos Leads */}
+        <LeadSourceDashboard />
       </div>
     </div>
   );
