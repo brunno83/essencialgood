@@ -13330,7 +13330,11 @@ fbq('track', 'PageView');
         e.preventDefault();
         var dest = getFinalCheckoutUrl();
         setTimeout(function() {
-          window.location.href = dest;
+          if (window.EssencialPreCheckout && typeof window.EssencialPreCheckout.open === 'function') {
+            window.EssencialPreCheckout.open(dest, { product: 'linfaflow', pageType: 'power' });
+          } else {
+            window.location.href = dest;
+          }
         }, 150);
       }, true);
     });
@@ -13348,6 +13352,7 @@ fbq('track', 'PageView');
 @media (max-width:914px){.custom-flex_two_ad>*{min-width:0;max-width:100%}}
 </style>
 <script src="https://www.essencialgood.com/chat-loader.js" data-product="linfaflow" defer></script>
+<script src="/precheckout-loader.js" data-product="linfaflow" data-page-type="power" defer></script>
 </body>
 
 </html>

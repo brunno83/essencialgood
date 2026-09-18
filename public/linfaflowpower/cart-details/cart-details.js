@@ -236,7 +236,12 @@
         var item = replaceWithSelected();
         var destUrl = getCheckoutUrl(item);
         if (destUrl) {
-          window.location.href = destUrl;
+          var targetWin = (window.parent && window.parent.EssencialPreCheckout) ? window.parent : window;
+          if (targetWin.EssencialPreCheckout && typeof targetWin.EssencialPreCheckout.open === 'function') {
+            targetWin.EssencialPreCheckout.open(destUrl, { product: 'linfaflow', pageType: 'power' });
+          } else {
+            window.location.href = destUrl;
+          }
         }
       }
     }, true);

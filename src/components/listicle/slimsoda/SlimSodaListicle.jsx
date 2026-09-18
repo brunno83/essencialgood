@@ -19,10 +19,12 @@ import {
   RefreshCw,
   Zap
 } from 'lucide-react';
+import { usePreCheckout } from '../../../hooks/usePreCheckout';
 
 const CHECKOUT_URL = "https://cc.slimsodapowder.com/dtcnew-whop/checkout.php?hid=b2lkPW9mZl81MDU4NzI1JmFpZD1hZmYxOTgyODE0JnVpZD1ibF83Nzg0OTU4&affid=aff1982814&hcid=17890802184685h632pv8";
 
 export function SlimSodaListicle({ onNavHome }) {
+  const { openPreCheckout } = usePreCheckout();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
@@ -49,7 +51,7 @@ export function SlimSodaListicle({ onNavHome }) {
 
   const handleGoToCheckout = (e) => {
     if (e) e.preventDefault();
-    window.location.href = CHECKOUT_URL;
+    openPreCheckout(CHECKOUT_URL, { product: 'slimsoda', pageType: 'listicle' });
   };
 
   const scrollToSection = (id) => {

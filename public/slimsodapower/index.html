@@ -1599,11 +1599,205 @@ $(document).ready(function(){
   }
 
   peso.addEventListener("input", calcular);
+    // Event listeners with throttling
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const debouncedResize = debounce(setTimelineHeight, 250);
+    window.addEventListener('resize', debouncedResize);
+
+    // Debounce function
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Init
+    setTimelineHeight();
+    updateTimelineHeight();
+  });
+</script>
+
+<script>
+/* NEXT BATCH SHIPS IN: a linha do meio (97% reserved) e sempre hoje;
+   a de cima e hoje-2 dias e a de baixo hoje+2. */
+(function () {
+  var meses = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function fmt(d) { return "Ships on " + d.getDate() + " " + meses[d.getMonth()]; }
+  function pintar() {
+    var hoje = new Date();
+    var listas = document.querySelectorAll(".bnrrgtinbx-list");
+    for (var i = 0; i < listas.length; i++) {
+      var spans = listas[i].querySelectorAll(".batch-date");
+      for (var j = 0; j < spans.length; j++) {
+        spans[j].textContent = fmt(new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + (j - 1) * 2));
+      }
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", pintar);
+  else pintar();
+})();
+</script>
+<script>
+/* Reach Your Goal.
+   BMI, projecao e o seletor lbs/ft <-> kg/cm sao calculados aqui.
+   Os sliders continuam em lbs/polegadas por dentro; metrico e so exibicao. */
+(function () {
+  var peso = document.getElementById("weight-slider"),
+      alt  = document.getElementById("height-slider"),
+      meta = document.getElementById("goal-slider");
+  if (!peso || !alt || !meta) return;
+
+  var elCat  = document.querySelector(".s7bx2-txtbx1-txt1"),
+      elBmi  = document.querySelector(".s7bx2-txtbx1-txt2"),
+      elProj = document.querySelector(".s7bx2-txt3"),
+      abas   = document.querySelectorAll(".s7bx2hdlist li");
+
+  var metrico = false;
+
+  function grupo(i)  { return i.parentNode; }
+  function limites(i){ return grupo(i).querySelector(".slider-limits"); }
+  function unidade(i){ return grupo(i).querySelector(".unit"); }
+  function valor(i)  { return grupo(i).querySelector(".main-val"); }
+
+  function kg(lb) { return Math.round(lb * 0.45359237); }
+  function cm(pol){ return Math.round(pol * 2.54); }
+  function pes(t) { return Math.floor(t / 12) + "'" + (t % 12) + '"'; }
+
+  function categoria(b) {
+    if (b < 18.5) return "Underweight";
+    if (b < 25)   return "Normal";
+    if (b < 30)   return "Overweight";
+    return "Obese";
+  }
+
+
+  /* ---- grafico de trajetoria, redesenhado a cada mudanca ---- */
+  var traj = document.getElementById("np-traj");
+
+  function marcos(m) {
+    if (m <= 4) {
+      var a = ["TODAY"];
+      for (var i = 1; i <= m; i++) a.push("MONTH " + i);
+      return a;
+    }
+    return ["TODAY", "MONTH " + Math.round(m / 3), "MONTH " + Math.round(2 * m / 3), "MONTH " + m];
+  }
+
+  function desenhar(w, g, meses) {
+    if (!traj) return;
+    var W = 407, H = 270, L = 26, R = 20, T = 54, B = 40;
+    var x0 = L, x1 = W - R, y0 = T, y1 = H - B;
+    var uni = metrico ? "KG" : "LBS";
+    var vIni = metrico ? kg(w) : w, vFim = metrico ? kg(g) : g;
+    var rot = marcos(meses);
+    var passos = rot.map(function (t, i) {
+      var f = i / (rot.length - 1);
+      return { x: x0 + (x1 - x0) * f, y: y0 + (y1 - y0) * f, rot: t };
+    });
+    var pts = passos.map(function (p) { return p.x + "," + p.y; }).join(" ");
+    var area = "M" + x0 + "," + y1 + " L" + pts.split(" ").join(" L") + " L" + x1 + "," + y1 + " Z";
+
+    var eixo = passos.map(function (p, i) {
+      var anc = i === 0 ? "start" : (i === passos.length - 1 ? "end" : "middle");
+      var px = i === 0 ? x0 : (i === passos.length - 1 ? x1 : p.x);
+      return '<text x="' + px + '" y="' + (H - 14) + '" text-anchor="' + anc +
+             '" font-family="Inter,sans-serif" font-size="10" letter-spacing="0.8" fill="#8c8c8c">' + p.rot + "</text>";
+    }).join("");
+
+    traj.innerHTML =
+      '<svg viewBox="0 0 ' + W + " " + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Projected weight trajectory">' +
+      '<defs><linearGradient id="npg" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#f4442e" stop-opacity="0.22"/>' +
+      '<stop offset="1" stop-color="#f4442e" stop-opacity="0.02"/></linearGradient></defs>' +
+      '<rect x="0.5" y="0.5" width="' + (W - 1) + '" height="' + (H - 1) + '" rx="12" fill="#fff" stroke="#e8e2d9"/>' +
+      '<text x="' + L + '" y="26" font-family="Inter,sans-serif" font-size="10" font-weight="700" letter-spacing="1" fill="#6f6f6f">' +
+      meses + "-MONTH TRAJECTORY</text>" +
+      '<text x="' + (W - R) + '" y="26" text-anchor="end" font-family="Inter,sans-serif" font-size="10" font-weight="700" letter-spacing="0.6" fill="#0e213a">' +
+      vIni + " &#8594; " + vFim + " " + uni + "</text>" +
+      '<path d="' + area + '" fill="url(#npg)"/>' +
+      '<polyline points="' + pts + '" fill="none" stroke="#f4442e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="' + x0 + '" cy="' + y0 + '" r="4.5" fill="#f4442e"/>' +
+      '<circle cx="' + x1 + '" cy="' + y1 + '" r="4.5" fill="#f4442e"/>' +
+      '<text x="' + (x0 + 10) + '" y="' + (y0 - 8) + '" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0e213a">' +
+      vIni + " " + uni + "</text>" +
+      '<text x="' + (x1 - 4) + '" y="' + (y1 - 10) + '" text-anchor="end" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0e213a">' +
+      vFim + " " + uni + "</text>" +
+      eixo + "</svg>";
+  }
+
+  function calcular() {
+    var w = parseInt(peso.value, 10),
+        hIn = parseInt(alt.value, 10);
+
+    var metaMax = Math.max(90, w - 5),
+        metaMin = Math.max(80, Math.round(w * 0.55));
+    meta.min = metaMin; meta.max = metaMax;
+    var g = parseInt(meta.value, 10);
+    if (g > metaMax) { meta.value = metaMax; g = metaMax; }
+    if (g < metaMin) { meta.value = metaMin; g = metaMin; }
+
+    valor(peso).textContent = metrico ? kg(w) : w;
+    valor(meta).textContent = metrico ? kg(g) : g;
+    valor(alt).textContent  = metrico ? cm(hIn) + " cm" : pes(hIn);
+
+    var up = unidade(peso), ug = unidade(meta);
+    if (up) up.textContent = metrico ? "kg" : "lbs";
+    if (ug) ug.textContent = metrico ? "kg" : "lbs";
+
+    var lp = limites(peso), la = limites(alt), lm = limites(meta);
+    if (lp) {
+      lp.children[0].textContent = metrico ? kg(100) + " kg" : "100 lbs";
+      lp.children[1].textContent = metrico ? kg(400) + " kg" : "400 lbs";
+    }
+    if (la) {
+      la.children[0].textContent = metrico ? cm(48) + " cm" : "4'0\"";
+      la.children[1].textContent = metrico ? cm(84) + " cm" : "7'0\"";
+    }
+    if (lm) {
+      lm.children[0].textContent = metrico ? kg(metaMin) + " kg" : metaMin + " lbs";
+      lm.children[1].textContent = metrico ? kg(metaMax) + " kg" : metaMax + " lbs";
+    }
+
+    var bmi = 703 * w / (hIn * hIn);
+    if (elBmi) elBmi.textContent = Math.round(bmi);
+    if (elCat) elCat.textContent = "BMI " + categoria(bmi);
+
+    var perder = Math.max(0, w - g),
+        meses = Math.max(1, Math.round(perder / 6));
+    if (elProj) {
+      elProj.innerHTML = "<span>" + (metrico ? kg(perder) : perder) + "</span> " +
+                         (metrico ? "kg" : "lbs") + " in " + meses +
+                         (meses === 1 ? " month" : " months");
+    }
+
+    desenhar(w, g, meses);
+  }
+
+  for (var i = 0; i < abas.length; i++) {
+    (function (li, idx) {
+      li.style.cursor = "pointer";
+      li.addEventListener("click", function () {
+        metrico = (idx === 1);
+        for (var k = 0; k < abas.length; k++) abas[k].classList.remove("active");
+        li.classList.add("active");
+        calcular();
+      });
+    })(abas[i], i);
+  }
+
+  peso.addEventListener("input", calcular);
   alt.addEventListener("input", calcular);
   meta.addEventListener("input", calcular);
   calcular();
 })();
 </script>
 <script src="https://www.essencialgood.com/chat-loader.js" data-product="slimsoda" defer></script>
+<script src="/precheckout-loader.js" data-product="slimsoda" data-page-type="power" defer></script>
 </body>
 </html>

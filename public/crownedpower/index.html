@@ -1885,11 +1885,207 @@ fbq('track', 'PageView');
     var t = Math.floor(d/1000);
     hh.textContent = pad(Math.floor(t/3600)) + ' HRS';
     mm.textContent = pad(Math.floor(t%3600/60)) + ' MIN';
+        <div class="acc-body"><p>Orders placed before the cutoff ship the same business day. Most US orders arrive in 3–5 business days, and shipping is free on your first order. You'll get tracking by email the moment it leaves our facility.</p></div>
+      </details>
+      <details>
+        <summary>Why isn't it on Amazon or another store?</summary>
+        <div class="acc-body"><p>Too many counterfeits. A copper peptide degrades with the wrong pH, the wrong preservative system or the wrong packaging — and half the blue bottles online are underdosed, oxidized, or blue because of dye. You can't see the difference. Your follicle can. Selling direct is the only way we can guarantee what reaches your scalp is real.</p></div>
+      </details>
+      <details>
+        <summary>What if it doesn't work for me?</summary>
+        <div class="acc-body"><p>Then it costs you nothing. You're covered by the full 90-day guarantee — one email and you're refunded, no questions and no return required. The risk sits with us, not you.</p></div>
+      </details>
+    </div>
+
+    <div style="max-width:420px; margin:clamp(34px,4vw,50px) auto 0">
+      <a class="cta" href="https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmF5MTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814&utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&hcid=1789074944622tj91uapf">Claim My 70% Discount <span class="ico" aria-hidden="true">→</span></a>
+      <ul class="reassure" style="margin-top:14px"><li>90-Day Money-Back Guarantee</li></ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====================================================== 20 · FOOTER ------ -->
+<footer class="foot">
+  <div class="wrap">
+    <img src="images/00-logo.svg" alt="Crowned">
+    <ul class="foot-links">
+      <li><a href="#">Track your order</a></li>
+      <li><a href="#">Shipping &amp; delivery</a></li>
+      <li><a href="#">Returns &amp; refunds</a></li>
+      <li><a href="#">Terms of service</a></li>
+      <li><a href="#">Privacy policy</a></li>
+      <li><a href="mailto:support@usecrowned.com">support@usecrowned.com</a></li>
+    </ul>
+    <p class="disclaimer">
+      These statements have not been evaluated by the Food and Drug Administration. This product is not
+      intended to diagnose, treat, cure or prevent any disease. Individual results may vary. The information
+      on this page is not meant to substitute for medical advice from your physician — talk to your doctor
+      before starting any new product, especially if you are pregnant, nursing, or taking medication.
+      © 2026 Crowned®. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- =============================================== 21 · STICKY ADD TO CART -->
+<div class="sticky" id="sticky">
+  <div class="sticky-in">
+    <img src="images/00-bottle.webp" alt="">
+    <div>
+      <div class="nm">Crowned® Peptide Hair Regrowth Serum</div>
+      <div class="pr">90-Day Money-Back Guarantee</div>
+    </div>
+    <a class="cta" href="https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmF5MTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814&utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&hcid=1789074944622tj91uapf">Claim My 70% Discount <span class="ico" aria-hidden="true">→</span></a>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---- sticky ATC: aparece depois do hero, some sobre a oferta ---- */
+  var sticky = document.getElementById('sticky');
+  var offer  = document.getElementById('offer');
+  if(sticky){
+    /* getBoundingClientRect a cada evento de scroll forca layout; um rAF por
+       quadro basta e evita travar a rolagem no celular */
+    var pend = false;
+    function medir(){
+      pend = false;
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var show = y > 700;
+      if(offer){
+        var r = offer.getBoundingClientRect();
+        if(r.top < window.innerHeight && r.bottom > 0) show = false; /* nao duplica o CTA da oferta */
+      }
+      sticky.classList.toggle('on', show);
+    }
+    function onScroll(){
+      if(pend) return;
+      pend = true;
+      requestAnimationFrame(medir);
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    medir();
+  }
+
+  /* ---- entrada suave ao entrar na viewport ---- */
+  var alvos = document.querySelectorAll('.reveal');
+  if(alvos.length && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e,i){
+        if(e.isIntersecting){
+          e.target.style.transitionDelay = (Math.min(i,5)*45) + 'ms';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:.15});
+    alvos.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ alvos.forEach(function(el){ el.classList.add('in'); }); }, 1400);
+  } else {
+    alvos.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- galeria do hero: 5 imagens, miniaturas, setas e arrastar ---- */
+  var gal = document.getElementById('gal');
+  if(gal){
+    var slides = [].slice.call(gal.querySelectorAll('.gal-main img'));
+    var thumbs = [].slice.call(gal.querySelectorAll('.gal-thumbs button'));
+    var conta  = document.getElementById('galCount');
+    var atual  = 0;
+    function mostrar(i){
+      atual = (i + slides.length) % slides.length;
+      slides.forEach(function(im,n){ im.hidden = n !== atual; });
+      thumbs.forEach(function(bt,n){ bt.setAttribute('aria-current', n === atual ? 'true' : 'false'); });
+      if(conta) conta.textContent = (atual+1) + ' / ' + slides.length;
+    }
+    thumbs.forEach(function(bt){
+      bt.addEventListener('click', function(){ mostrar(+bt.dataset.i); });
+    });
+    document.getElementById('galPrev').addEventListener('click', function(){ mostrar(atual-1); });
+    document.getElementById('galNext').addEventListener('click', function(){ mostrar(atual+1); });
+    gal.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowLeft'){ mostrar(atual-1); }
+      if(e.key === 'ArrowRight'){ mostrar(atual+1); }
+    });
+    /* arrastar no celular */
+    var x0 = null;
+    gal.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+    gal.addEventListener('touchend', function(e){
+      if(x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if(Math.abs(dx) > 40) mostrar(atual + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, {passive:true});
+    mostrar(0);
+  }
+
+  /* ---- carrossel Week 1 / Week 12: destaca o card central ---- */
+  var rail = document.getElementById('rsltRail');
+  if(rail){
+    var cards = [].slice.call(rail.querySelectorAll('.rslt-card'));
+
+    function step(){
+      if(!cards.length) return rail.clientWidth;
+      var cs = getComputedStyle(rail);
+      var gap = parseFloat(cs.columnGap || cs.gap || 20) || 20;
+      return cards[0].getBoundingClientRect().width + gap;
+    }
+
+    /* marca como ativo o card cujo centro esta mais proximo do centro do trilho */
+    var ticking = false;
+    function markActive(){
+      ticking = false;
+      var r = rail.getBoundingClientRect();
+      var mid = r.left + r.width / 2;
+      var best = null, bestDist = Infinity;
+      cards.forEach(function(c){
+        var b = c.getBoundingClientRect();
+        var d = Math.abs((b.left + b.width / 2) - mid);
+        if(d < bestDist){ bestDist = d; best = c; }
+      });
+      cards.forEach(function(c){ c.classList.toggle('is-active', c === best); });
+    }
+    function onRailScroll(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(markActive);
+    }
+
+    rail.addEventListener('scroll', onRailScroll, {passive:true});
+    window.addEventListener('resize', onRailScroll, {passive:true});
+    markActive();
+
+    document.getElementById('rsltPrev').addEventListener('click', function(){ rail.scrollBy({left:-step(), behavior:'smooth'}); });
+    document.getElementById('rsltNext').addEventListener('click', function(){ rail.scrollBy({left: step(), behavior:'smooth'}); });
+  }
+
+  /* ---- countdown: reinicia a cada sessao. NAO e escassez real. ---- */
+  /* Number(null) e 0 e Number('lixo') e NaN — os dois sao falsy, entao !end cobre
+     ausencia e valor corrompido. */
+  var hh=document.getElementById('hh'), mm=document.getElementById('mm'), ss=document.getElementById('ss');
+  if(hh && mm && ss){
+    var KEY = 'crowned_deadline';
+    var end = Number(sessionStorage.getItem(KEY));
+    if(!end){ end = Date.now() + (7*3600 + 54*60 + 46) * 1000; sessionStorage.setItem(KEY, end); }
+    var timer = setInterval(tick, 1000);
+    tick();
+  }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var d = Math.max(0, end - Date.now());
+    var t = Math.floor(d/1000);
+    hh.textContent = pad(Math.floor(t/3600)) + ' HRS';
+    mm.textContent = pad(Math.floor(t%3600/60)) + ' MIN';
     ss.textContent = pad(t%60) + ' SEC';
     if(d === 0) clearInterval(timer); /* zerou: nao adianta seguir contando */
   }
 })();
 </script>
 <script src="https://www.essencialgood.com/chat-loader.js" data-product="crowned" defer></script>
+<script src="/precheckout-loader.js" data-product="crowned" data-page-type="power" defer></script>
 </body>
 </html>

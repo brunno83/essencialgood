@@ -28,10 +28,12 @@ import {
   Smile,
   PackageCheck
 } from 'lucide-react';
+import { usePreCheckout } from '../../../hooks/usePreCheckout';
 
 const CHECKOUT_URL = "https://cc.usesonnus.com/checkout.php?hid=b2lkPW9mZl80MjQwNDIwJmFpZD1hZmYxOTgyODE0JnVpZD1ibF85MDY6ODgw&affid=aff1982814";
 
 export function SonnusListicle({ onNavHome, onSelectProduct }) {
+  const { openPreCheckout } = usePreCheckout();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeBuyerTab, setActiveBuyerTab] = useState(0);
@@ -54,7 +56,7 @@ export function SonnusListicle({ onNavHome, onSelectProduct }) {
 
   const handleGoToCheckout = (e) => {
     if (e) e.preventDefault();
-    window.location.href = CHECKOUT_URL;
+    openPreCheckout(CHECKOUT_URL, { product: 'sonnus', pageType: 'listicle' });
   };
 
   const scrollToSection = (id) => {

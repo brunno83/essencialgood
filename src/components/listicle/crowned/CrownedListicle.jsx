@@ -28,10 +28,12 @@ import {
   Feather,
   Crown
 } from 'lucide-react';
+import { usePreCheckout } from '../../../hooks/usePreCheckout';
 
 const CHECKOUT_URL = "https://cc.usecrowned.com/dtcnew/checkout.php?tier=3&package=3bottles&hid=b2lkPW9mZl82Mjc2NzA0JmFpZD1hZmYxOTgyODE0JnVpZD1ibF85ODQyODU3&affid=aff1982814";
 
 export function CrownedListicle({ onNavHome, onSelectProduct }) {
+  const { openPreCheckout } = usePreCheckout();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeBuyerTab, setActiveBuyerTab] = useState(0);
@@ -54,7 +56,7 @@ export function CrownedListicle({ onNavHome, onSelectProduct }) {
 
   const handleGoToCheckout = (e) => {
     if (e) e.preventDefault();
-    window.location.href = CHECKOUT_URL;
+    openPreCheckout(CHECKOUT_URL, { product: 'crowned', pageType: 'listicle' });
   };
 
   const scrollToSection = (id) => {

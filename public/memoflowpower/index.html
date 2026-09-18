@@ -29,7 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (txt.includes('BUY') || txt.includes('CLAIM') || txt.includes('SAVE') || txt.includes('ORDER')) {
             el.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.href = checkoutUrl;
+                if (window.EssencialPreCheckout && typeof window.EssencialPreCheckout.open === 'function') {
+                    window.EssencialPreCheckout.open(checkoutUrl, { product: 'memoflow', pageType: 'power' });
+                } else {
+                    window.location.href = checkoutUrl;
+                }
             });
         }
     });
@@ -87,4 +91,5 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 <script src="https://www.essencialgood.com/chat-loader.js" data-product="memoflow" defer></script>
+<script src="/precheckout-loader.js" data-product="memoflow" data-page-type="power" defer></script>
 </body></html>
