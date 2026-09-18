@@ -229,6 +229,38 @@ export function useAdminCheckoutLeads() {
     }
   };
 
+  // Exclusão individual de lead via RPC delete_checkout_lead_admin (exclusiva para perfil admin)
+  const deleteLead = async (leadId) => {
+    if (!isSupabaseConfigured || !supabase) {
+      throw new Error('Supabase não está configurado.');
+    }
+    if (!leadId) {
+      throw new Error('ID do lead é obrigatório.');
+    }
+
+    const { data, error: rpcError } = await supabase.rpc('delete_checkout_lead_admin', {
+      p_lead_id: leadId,
+    });
+
+    if (rpcError) {
+      throw new Error(rpcError.message || 'Erro ao excluir o lead.');
+    }
+
+    if (!data || !data.success) {
+      throw new Error(data?.error || 'Não foi possível excluir o lead.');
+    }
+
+    // Se era o único item de uma página que não é a primeira, recua para a página anterior
+    if (leads.length === 1 && page > 1) {
+      setPage((prev) => prev - 1);
+    } else {
+      // Recarrega os registros da página atual e atualiza os totais
+      await fetchLeads();
+    }
+
+    return data;
+  };
+
   return {
     page,
     setPage,
@@ -255,6 +287,7 @@ export function useAdminCheckoutLeads() {
     refetch: fetchLeads,
     resetFilters,
     exportCSV,
+    deleteLead,
   };
 }
 

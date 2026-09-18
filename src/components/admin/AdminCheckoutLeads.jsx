@@ -16,12 +16,15 @@ import {
   ShieldCheck,
   Link,
   AlertTriangle,
+  Trash2,
 } from 'lucide-react';
 import { useAdminCheckoutLeads } from '../../hooks/useAdminCheckoutLeads';
 import { isValidCheckoutUrl } from '../../lib/checkoutAllowlist';
 import './AdminStyles.css';
 
-export function AdminCheckoutLeads() {
+export function AdminCheckoutLeads({ adminProfile }) {
+  const isAdmin = adminProfile?.role === 'admin';
+
   const {
     page,
     setPage,
@@ -47,10 +50,17 @@ export function AdminCheckoutLeads() {
     refetch,
     resetFilters,
     exportCSV,
+    deleteLead,
   } = useAdminCheckoutLeads();
 
   const [copiedPhoneId, setCopiedPhoneId] = useState(null);
   const [copiedLinkId, setCopiedLinkId] = useState(null);
+
+  // Estados para modal de exclusão e feedback
+  const [leadToDelete, setLeadToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+  const [feedbackMessage, setFeedbackMessage] = useState(null);
 
   const handleCopyPhone = (phoneStr, id) => {
     if (!phoneStr) return;
@@ -64,6 +74,24 @@ export function AdminCheckoutLeads() {
     navigator.clipboard.writeText(checkoutUrl);
     setCopiedLinkId(id);
     setTimeout(() => setCopiedLinkId(null), 2000);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!leadToDelete || deleting) return;
+
+    setDeleting(true);
+    setDeleteError(null);
+
+    try {
+      await deleteLead(leadToDelete.id);
+      setLeadToDelete(null);
+      setFeedbackMessage('Lead excluído com sucesso');
+      setTimeout(() => setFeedbackMessage(null), 3500);
+    } catch (err) {
+      setDeleteError(err.message || 'Erro ao excluir o lead. Tente novamente.');
+    } finally {
+      setDeleting(false);
+    }
   };
 
   const formatDate = (isoStr) => {
@@ -116,6 +144,14 @@ export function AdminCheckoutLeads() {
 
   return (
     <div className="admin-leads-container">
+      {/* Toast de Feedback de Sucesso */}
+      {feedbackMessage && (
+        <div className="admin-leads-toast-success">
+          <Check size={16} />
+          <span>{feedbackMessage}</span>
+        </div>
+      )}
+
       {/* Cabeçalho Operacional Limpo */}
       <div className="admin-leads-header">
         <div>
@@ -309,7 +345,7 @@ export function AdminCheckoutLeads() {
                     <th>Produto</th>
                     <th>Tipo & Origem</th>
                     <th>Consentimento</th>
-                    <th style={{ textAlign: 'right' }}>Recuperação de Vendas</th>
+                    <th style={{ textAlign: 'right' }}>Ações / Recuperação</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -374,8 +410,8 @@ export function AdminCheckoutLeads() {
                         </td>
 
                         <td className="col-recovery" style={{ textAlign: 'right' }}>
-                          {isUrlValid ? (
-                            <div className="lead-recovery-actions">
+                          <div className="lead-recovery-actions">
+                            {isUrlValid ? (
                               <button
                                 className="admin-btn-action-copy"
                                 onClick={() => handleCopyRecoveryLink(item.checkout_url, item.id, item.product, item.page_type)}
@@ -393,12 +429,27 @@ export function AdminCheckoutLeads() {
                                   </>
                                 )}
                               </button>
-                            </div>
-                          ) : (
-                            <span className="lead-url-unavailable" title="A URL gravada não passou na allowlist estrita do produto.">
-                              <AlertTriangle size={12} /> Link de recuperação indisponível
-                            </span>
-                          )}
+                            ) : (
+                              <span className="lead-url-unavailable" title="A URL gravada não passou na allowlist estrita do produto.">
+                                <AlertTriangle size={12} /> Link indisponível
+                              </span>
+                            )}
+
+                            {isAdmin && (
+                              <button
+                                className="admin-btn-action-delete"
+                                onClick={() => {
+                                  setLeadToDelete(item);
+                                  setDeleteError(null);
+                                }}
+                                title="Excluir este lead permanentemente"
+                                aria-label="Excluir lead"
+                              >
+                                <Trash2 size={13} />
+                                <span>Excluir</span>
+                              </button>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     );
@@ -462,12 +513,27 @@ export function AdminCheckoutLeads() {
                           onClick={() => handleCopyRecoveryLink(item.checkout_url, item.id, item.product, item.page_type)}
                         >
                           {copiedLinkId === item.id ? <Check size={14} /> : <Link size={14} />}
-                          <span>{copiedLinkId === item.id ? 'Link Copiado!' : 'Copiar Link de Recuperação'}</span>
+                          <span>{copiedLinkId === item.id ? 'Link Copiado!' : 'Copiar Link'}</span>
                         </button>
                       ) : (
                         <span className="lead-url-unavailable" title="A URL gravada não passou na allowlist estrita do produto.">
-                          <AlertTriangle size={13} /> Link de recuperação indisponível
+                          <AlertTriangle size={13} /> Link indisponível
                         </span>
+                      )}
+
+                      {isAdmin && (
+                        <button
+                          className="admin-btn-mobile-delete"
+                          onClick={() => {
+                            setLeadToDelete(item);
+                            setDeleteError(null);
+                          }}
+                          title="Excluir este lead"
+                          aria-label="Excluir lead"
+                        >
+                          <Trash2 size={14} />
+                          <span>Excluir</span>
+                        </button>
                       )}
                     </div>
                   </div>
@@ -509,6 +575,68 @@ export function AdminCheckoutLeads() {
           </>
         )}
       </div>
+
+      {/* Modal de Confirmação de Exclusão */}
+      {leadToDelete && (
+        <div
+          className="admin-modal-overlay"
+          onClick={deleting ? undefined : () => { setLeadToDelete(null); setDeleteError(null); }}
+        >
+          <div
+            className="admin-modal-content delete-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="admin-modal-header">
+              <h3>Excluir lead?</h3>
+              <button
+                className="admin-modal-close"
+                onClick={() => { setLeadToDelete(null); setDeleteError(null); }}
+                disabled={deleting}
+                aria-label="Fechar"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="admin-modal-body">
+              <div className="delete-modal-info">
+                <div className="delete-lead-detail">
+                  <span className="delete-lead-name">{leadToDelete.name}</span>
+                  <span className="delete-lead-email">{leadToDelete.email}</span>
+                </div>
+                <p className="delete-modal-warning">
+                  <AlertTriangle size={15} />
+                  <span>Esta ação é permanente e não poderá ser desfeita.</span>
+                </p>
+              </div>
+
+              {deleteError && (
+                <div className="delete-modal-error">
+                  <AlertCircle size={15} />
+                  <span>{deleteError}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="admin-modal-footer delete-modal-footer">
+              <button
+                className="admin-btn-secondary"
+                onClick={() => { setLeadToDelete(null); setDeleteError(null); }}
+                disabled={deleting}
+              >
+                Cancelar
+              </button>
+              <button
+                className="admin-btn-danger"
+                onClick={handleConfirmDelete}
+                disabled={deleting}
+              >
+                {deleting ? 'Excluindo...' : 'Excluir lead'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
