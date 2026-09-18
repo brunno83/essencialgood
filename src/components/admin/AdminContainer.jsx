@@ -4,6 +4,7 @@ import { AdminLogin } from './AdminLogin';
 import { AdminLayout } from './AdminLayout';
 import { AdminDashboard } from './AdminDashboard';
 import { AdminConversations } from './AdminConversations';
+import { AdminCheckoutLeads } from './AdminCheckoutLeads';
 import { AdminChatSettings } from './AdminChatSettings';
 import './AdminStyles.css';
 
@@ -14,6 +15,7 @@ export function AdminContainer() {
   const [activeTab, setActiveTab] = useState(() => {
     const p = window.location.pathname.toLowerCase();
     if (p.includes('/admin/conversations')) return 'conversations';
+    if (p.includes('/admin/leads')) return 'leads';
     if (p.includes('/admin/settings')) return 'settings';
     return 'dashboard';
   });
@@ -33,6 +35,8 @@ export function AdminContainer() {
       const p = window.location.pathname.toLowerCase();
       if (p.includes('/admin/conversations')) {
         setActiveTab('conversations');
+      } else if (p.includes('/admin/leads')) {
+        setActiveTab('leads');
       } else if (p.includes('/admin/settings')) {
         setActiveTab('settings');
       } else {
@@ -45,7 +49,14 @@ export function AdminContainer() {
 
   const handleSelectTab = (tab) => {
     setActiveTab(tab);
-    const newPath = tab === 'conversations' ? '/admin/conversations' : tab === 'settings' ? '/admin/settings' : '/admin';
+    const newPath =
+      tab === 'conversations'
+        ? '/admin/conversations'
+        : tab === 'leads'
+        ? '/admin/leads'
+        : tab === 'settings'
+        ? '/admin/settings'
+        : '/admin';
     if (window.location.pathname !== newPath) {
       window.history.pushState(null, '', newPath);
     }
@@ -215,6 +226,8 @@ export function AdminContainer() {
     >
       {activeTab === 'conversations' ? (
         <AdminConversations adminProfile={adminProfile} />
+      ) : activeTab === 'leads' ? (
+        <AdminCheckoutLeads adminProfile={adminProfile} />
       ) : activeTab === 'settings' ? (
         <AdminChatSettings adminProfile={adminProfile} />
       ) : (

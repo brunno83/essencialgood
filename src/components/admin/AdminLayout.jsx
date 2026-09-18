@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, MessageSquare, Settings, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X } from 'lucide-react';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -70,6 +70,14 @@ export function AdminLayout({
               )}
             </button>
 
+            <button
+              className={`admin-nav-item ${activeTab === 'leads' ? 'active' : ''}`}
+              onClick={() => handleNavClick('leads')}
+            >
+              <Users size={18} />
+              <span>Leads</span>
+            </button>
+
             {adminProfile?.role === 'admin' && (
               <button
                 className={`admin-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
@@ -116,6 +124,8 @@ export function AdminLayout({
                 ? 'Visão Geral'
                 : activeTab === 'conversations'
                 ? 'Central de Atendimento'
+                : activeTab === 'leads'
+                ? 'Lista de Leads do Pré-checkout'
                 : 'Configurações do Chat'}
             </h2>
 
