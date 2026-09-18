@@ -114,9 +114,55 @@
     }
   }
 
-  // Configuração do Supabase via VITE vars se disponíveis ou globais da página
-  var SUPABASE_URL = window.__ESSENCIAL_SUPABASE_URL__ || 'https://esyrslhvxvwjkylljfxv.supabase.co';
-  var SUPABASE_ANON_KEY = window.__ESSENCIAL_SUPABASE_ANON_KEY__ || '';
+  // Carregamento dinâmico assíncrono da configuração pública (/precheckout-config.js)
+  var isConfigLoading = false;
+  var configCallbacks = [];
+
+  function ensureSupabaseConfig(callback) {
+    var url = window.__ESSENCIAL_SUPABASE_URL__;
+    var key = window.__ESSENCIAL_SUPABASE_ANON_KEY__;
+
+    if (url && key) {
+      callback({ url: url, anonKey: key });
+      return;
+    }
+
+    configCallbacks.push(callback);
+    if (isConfigLoading) return;
+    isConfigLoading = true;
+
+    var script = document.createElement('script');
+    script.src = '/precheckout-config.js';
+    script.async = true;
+
+    function notifyAll() {
+      var currentUrl = window.__ESSENCIAL_SUPABASE_URL__ || null;
+      var currentKey = window.__ESSENCIAL_SUPABASE_ANON_KEY__ || null;
+      var cbs = configCallbacks.slice();
+      configCallbacks = [];
+      cbs.forEach(function (cb) {
+        try {
+          cb({ url: currentUrl, anonKey: currentKey });
+        } catch (e) {
+          // silenciar erro em callback
+        }
+      });
+    }
+
+    script.onload = function () {
+      notifyAll();
+    };
+
+    script.onerror = function () {
+      console.warn('[PreCheckoutLoader] Não foi possível carregar /precheckout-config.js');
+      notifyAll();
+    };
+
+    (document.head || document.documentElement).appendChild(script);
+  }
+
+  // Iniciar pré-carregamento imediato da configuração pública
+  ensureSupabaseConfig(function () {});
 
   // Infraestrutura de UI do Modal Injetado no DOM
   var currentModalState = {
@@ -397,28 +443,38 @@
           safeRedirect(currentModalState.targetCheckoutUrl);
         }, 2500);
 
-        if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-          fetch(SUPABASE_URL + '/rest/v1/rpc/save_checkout_lead', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-            },
-            body: JSON.stringify(payload),
-          })
-            .then(function () {
-              clearTimeout(fallbackTimer);
-              safeRedirect(currentModalState.targetCheckoutUrl);
+        ensureSupabaseConfig(function (config) {
+          var targetUrl = (config && config.url) || window.__ESSENCIAL_SUPABASE_URL__;
+          var targetKey = (config && config.anonKey) || window.__ESSENCIAL_SUPABASE_ANON_KEY__;
+
+          if (targetUrl && targetKey) {
+            fetch(targetUrl + '/rest/v1/rpc/save_checkout_lead', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': targetKey,
+                'Authorization': 'Bearer ' + targetKey,
+              },
+              body: JSON.stringify(payload),
             })
-            .catch(function () {
-              clearTimeout(fallbackTimer);
-              safeRedirect(currentModalState.targetCheckoutUrl);
-            });
-        } else {
-          clearTimeout(fallbackTimer);
-          safeRedirect(currentModalState.targetCheckoutUrl);
-        }
+              .then(function (res) {
+                if (!res.ok) {
+                  console.warn('[PreCheckoutLoader] RPC responded with non-2xx status');
+                }
+                clearTimeout(fallbackTimer);
+                safeRedirect(currentModalState.targetCheckoutUrl);
+              })
+              .catch(function () {
+                console.warn('[PreCheckoutLoader] Lead submission fetch failed, executing fallback redirect');
+                clearTimeout(fallbackTimer);
+                safeRedirect(currentModalState.targetCheckoutUrl);
+              });
+          } else {
+            console.warn('[PreCheckoutLoader] Supabase credentials missing, executing fallback redirect');
+            clearTimeout(fallbackTimer);
+            safeRedirect(currentModalState.targetCheckoutUrl);
+          }
+        });
       };
     }
   }

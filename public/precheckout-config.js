@@ -1,0 +1,3 @@
+// ESSENCIAL GOOD - Configuração Pública do Pré-Checkout (Gerado Automaticamente)
+window.__ESSENCIAL_SUPABASE_URL__ = "https://axgpmpnipwyfirlplbjv.supabase.co";
+window.__ESSENCIAL_SUPABASE_ANON_KEY__ = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4Z3BtcG5pcHd5ZmlybHBsYmp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1OTMyMDMsImV4cCI6MjEwNTE2OTIwM30.m-ypxTv0JA_GPKidTsfdBrodeuXx6eQmaoqDENWGGzY";
