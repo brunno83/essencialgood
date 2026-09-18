@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X } from 'lucide-react';
+import { AdminInstallWidget } from './AdminPWAComponents';
 import './AdminStyles.css';
 
 export function AdminLayout({
+  children,
   adminProfile,
   user,
   onSignOut,
   activeTab = 'dashboard',
   onSelectTab,
   unreadCount = 0,
-  children,
+  pwaProps,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -91,6 +93,17 @@ export function AdminLayout({
 
           {/* User Footer Profile */}
           <div className="admin-sidebar-user">
+            {pwaProps && (
+              <div style={{ marginBottom: '10px' }}>
+                <AdminInstallWidget
+                  canInstall={pwaProps.canInstall}
+                  isIOS={pwaProps.isIOS}
+                  isStandalone={pwaProps.isStandalone}
+                  onInstall={pwaProps.installPWA}
+                />
+              </div>
+            )}
+
             <div className="admin-user-info">
               <span className="admin-user-name" title={userName}>{userName}</span>
               <span className="admin-user-role">{userRole}</span>

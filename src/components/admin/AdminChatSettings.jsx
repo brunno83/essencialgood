@@ -4,7 +4,9 @@ import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { Save, Loader2, CheckCircle2, AlertCircle, Upload, Trash2, ShieldAlert } from 'lucide-react';
 import PhoneInput from '../chat/PhoneInput';
 
-export function AdminChatSettings({ adminProfile }) {
+import { AdminInstallWidget } from './AdminPWAComponents';
+
+export function AdminChatSettings({ adminProfile, pwaProps }) {
   const isAdmin = adminProfile?.role === 'admin';
 
   const { settings, loading, error: fetchError, updateSettings } = useChatSettings();
@@ -546,6 +548,25 @@ export function AdminChatSettings({ adminProfile }) {
             </button>
           </div>
         </form>
+
+        {/* SEÇÃO DO APLICATIVO ADMINISTRATIVO (PWA) */}
+        {pwaProps && (
+          <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #E2E8F0' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#1E293B', margin: '0 0 6px' }}>
+              Aplicativo Administrativo (PWA)
+            </h3>
+            <p style={{ fontSize: '13px', color: '#64748B', margin: '0 0 16px', maxWidth: '520px' }}>
+              Instale o painel como um aplicativo no seu dispositivo móvel ou computador para acesso direto da Tela de Início em tela cheia (standalone).
+            </p>
+
+            <AdminInstallWidget
+              canInstall={pwaProps.canInstall}
+              isIOS={pwaProps.isIOS}
+              isStandalone={pwaProps.isStandalone}
+              onInstall={pwaProps.installPWA}
+            />
+          </div>
+        )}
 
         {/* PRÉ-VISUALIZAÇÃO AO VIVO 100% VISUAL (SEM EFEITOS COLATERAIS) */}
         <div className="admin-settings-preview-col">

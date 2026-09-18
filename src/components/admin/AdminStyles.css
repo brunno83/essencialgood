@@ -3695,3 +3695,197 @@ body.admin-active-body {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ============================================================================
+   SUPORTE A SAFE AREAS DE DISPOSITIVOS MÓVEIS (NOTCH / IOS / ANDROID)
+   ============================================================================ */
+.admin-layout-wrapper {
+  padding-top: max(0px, env(safe-area-inset-top));
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+}
+
+/* ============================================================================
+   ESTILOS DO PWA ADMINISTRATIVO (/admin)
+   ============================================================================ */
+
+/* Overlay de Segurança para Estado Offline */
+.admin-offline-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 248, 245, 0.98);
+  backdrop-filter: blur(8px);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.admin-offline-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--eg-border-subtle, #E4E0D7);
+  padding: 36px 28px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-offline-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #FEF2F2;
+  color: #DC2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid #FECACA;
+}
+
+.admin-offline-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--eg-text-main, #2E4829);
+  margin: 0 0 10px 0;
+}
+
+.admin-offline-message {
+  font-size: 14px;
+  color: var(--eg-text-muted, #5C6754);
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+/* Banner de Atualização Disponível */
+.admin-pwa-update-banner {
+  background: var(--eg-color-primary, #2E4829);
+  color: #FFFFFF;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.admin-pwa-update-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-pwa-update-banner button {
+  background: #FFFFFF;
+  color: var(--eg-color-primary, #2E4829);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-pwa-update-banner button:hover {
+  background: #FAF8F5;
+  transform: translateY(-1px);
+}
+
+/* Botões e Badges de Instalação */
+.admin-pwa-install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--eg-color-primary, #3D5A37);
+  background: #FAF8F5;
+  border: 1px solid var(--eg-border-subtle, #D4CEBE);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-pwa-install-btn:hover {
+  background: var(--eg-color-primary, #3D5A37);
+  color: #FFFFFF;
+  border-color: var(--eg-color-primary, #3D5A37);
+}
+
+.admin-pwa-installed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2D6A2E;
+  background: #EBF5E6;
+  border: 1px solid #C4E0B8;
+  border-radius: 20px;
+}
+
+/* Modal de Instruções para iOS (iPhone / iPad) */
+.ios-install-modal {
+  max-width: 460px;
+}
+
+.ios-install-intro {
+  font-size: 14px;
+  color: var(--eg-text-main, #2E4829);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.ios-install-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ios-install-steps li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FAF8F5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--eg-border-subtle, #E4E0D7);
+  font-size: 13.5px;
+  color: var(--eg-text-main, #2E4829);
+}
+
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--eg-color-primary, #3D5A37);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--eg-border-subtle, #D4CEBE);
+  flex-shrink: 0;
+}
+
+.ios-install-note {
+  font-size: 12.5px;
+  color: var(--eg-text-muted, #798372);
+  margin: 0;
+  line-height: 1.4;
+  font-style: italic;
+}

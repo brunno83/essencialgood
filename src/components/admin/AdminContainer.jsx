@@ -6,12 +6,26 @@ import { AdminDashboard } from './AdminDashboard';
 import { AdminConversations } from './AdminConversations';
 import { AdminCheckoutLeads } from './AdminCheckoutLeads';
 import { AdminChatSettings } from './AdminChatSettings';
+import { useAdminPWA } from '../../hooks/useAdminPWA';
+import { AdminOfflineOverlay, AdminUpdateBanner } from './AdminPWAComponents';
 import './AdminStyles.css';
 
 export function AdminContainer() {
   const [user, setUser] = useState(null);
   const [adminProfile, setAdminProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Hook PWA Exclusivo para a rota /admin
+  const {
+    canInstall,
+    isIOS,
+    isStandalone,
+    hasUpdate,
+    isOffline,
+    installPWA,
+    applyUpdate,
+  } = useAdminPWA();
+
   const [activeTab, setActiveTab] = useState(() => {
     const p = window.location.pathname.toLowerCase();
     if (p.includes('/admin/conversations')) return 'conversations';
@@ -21,11 +35,50 @@ export function AdminContainer() {
   });
   const [globalUnreadCount, setGlobalUnreadCount] = useState(0);
 
-  // Aplica classe de isolamento de scroll apenas enquanto a rota /admin estiver ativa
+  // Injeção de metadados PWA na <head> exclusivamente ao acessar o painel administrativo (/admin)
   useEffect(() => {
     document.body.classList.add('admin-active-body');
+
+    const linksToCleanup = [];
+
+    const ensureHeadLink = (rel, href, attributes = {}) => {
+      let link = document.querySelector(`link[rel="${rel}"][href="${href}"]`);
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = rel;
+        link.href = href;
+        Object.entries(attributes).forEach(([k, v]) => link.setAttribute(k, v));
+        document.head.appendChild(link);
+        linksToCleanup.push(link);
+      }
+    };
+
+    const ensureMetaTag = (name, content) => {
+      let meta = document.querySelector(`meta[name="${name}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = name;
+        meta.content = content;
+        document.head.appendChild(meta);
+        linksToCleanup.push(meta);
+      }
+    };
+
+    ensureHeadLink('manifest', '/manifest-admin.webmanifest');
+    ensureHeadLink('apple-touch-icon', '/assets/icons/apple-touch-icon-180x180.png', { sizes: '180x180' });
+    ensureMetaTag('apple-mobile-web-app-capable', 'yes');
+    ensureMetaTag('apple-mobile-web-app-status-bar-style', 'default');
+    ensureMetaTag('apple-mobile-web-app-title', 'Essencial Admin');
+    ensureMetaTag('mobile-web-app-capable', 'yes');
+    ensureMetaTag('theme-color', '#2E4829');
+
     return () => {
       document.body.classList.remove('admin-active-body');
+      linksToCleanup.forEach((elem) => {
+        if (elem && elem.parentNode) {
+          elem.parentNode.removeChild(elem);
+        }
+      });
     };
   }, []);
 
@@ -200,6 +253,10 @@ export function AdminContainer() {
     setAdminProfile(profile);
   };
 
+  if (isOffline) {
+    return <AdminOfflineOverlay />;
+  }
+
   if (loading) {
     return (
       <div className="admin-loading-screen">
@@ -216,24 +273,31 @@ export function AdminContainer() {
   }
 
   return (
-    <AdminLayout
-      adminProfile={adminProfile}
-      user={user}
-      onSignOut={handleSignOut}
-      activeTab={activeTab}
-      onSelectTab={handleSelectTab}
-      unreadCount={globalUnreadCount}
-    >
-      {activeTab === 'conversations' ? (
-        <AdminConversations adminProfile={adminProfile} />
-      ) : activeTab === 'leads' ? (
-        <AdminCheckoutLeads adminProfile={adminProfile} />
-      ) : activeTab === 'settings' ? (
-        <AdminChatSettings adminProfile={adminProfile} />
-      ) : (
-        <AdminDashboard adminProfile={adminProfile} user={user} onSelectTab={handleSelectTab} />
-      )}
-    </AdminLayout>
+    <div className="admin-layout-wrapper">
+      {hasUpdate && <AdminUpdateBanner onApplyUpdate={applyUpdate} />}
+      <AdminLayout
+        adminProfile={adminProfile}
+        user={user}
+        onSignOut={handleSignOut}
+        activeTab={activeTab}
+        onSelectTab={handleSelectTab}
+        unreadCount={globalUnreadCount}
+        pwaProps={{ canInstall, isIOS, isStandalone, installPWA }}
+      >
+        {activeTab === 'conversations' ? (
+          <AdminConversations adminProfile={adminProfile} />
+        ) : activeTab === 'leads' ? (
+          <AdminCheckoutLeads adminProfile={adminProfile} />
+        ) : activeTab === 'settings' ? (
+          <AdminChatSettings
+            adminProfile={adminProfile}
+            pwaProps={{ canInstall, isIOS, isStandalone, installPWA }}
+          />
+        ) : (
+          <AdminDashboard adminProfile={adminProfile} user={user} onSelectTab={handleSelectTab} />
+        )}
+      </AdminLayout>
+    </div>
   );
 }
 
