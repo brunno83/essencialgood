@@ -1,16 +1,5 @@
 import React from 'react';
-import {
-  PieChart,
-  Users,
-  MessageSquare,
-  FileText,
-  GitMerge,
-  RefreshCw,
-  AlertCircle,
-  Filter,
-  Info,
-  Calendar,
-} from 'lucide-react';
+import { RefreshCw, Users, AlertCircle } from 'lucide-react';
 import { useLeadSourceAnalytics } from '../../hooks/useLeadSourceAnalytics';
 
 export function LeadSourceDashboard() {
@@ -47,18 +36,13 @@ export function LeadSourceDashboard() {
 
   return (
     <div className="lead-source-section">
-      {/* Seção de Cabeçalho */}
+      {/* Cabeçalho Limpo */}
       <div className="lead-source-header">
         <div className="lead-source-header-title">
-          <div className="lead-source-icon-badge">
-            <PieChart size={20} />
-          </div>
-          <div>
-            <h2>Origem dos Leads</h2>
-            <p className="lead-source-subtitle">
-              Análise comparativa e deduplicação de captação entre Chat e Pré-checkout
-            </p>
-          </div>
+          <h2>Origem dos Leads</h2>
+          <p className="lead-source-subtitle">
+            Acompanhe como os leads chegam e identifique contatos presentes nos dois canais.
+          </p>
         </div>
 
         <button
@@ -67,18 +51,15 @@ export function LeadSourceDashboard() {
           className="dash-retry-inline-btn lead-source-refresh-btn"
           title="Atualizar dados"
         >
-          <RefreshCw size={14} className={loading ? 'chat-spinner' : ''} />
+          <RefreshCw size={13} className={loading ? 'chat-spinner' : ''} />
           <span>Atualizar</span>
         </button>
       </div>
 
-      {/* Barra de Filtros */}
-      <div className="lead-source-filters-bar">
-        <div className="lead-source-filter-group">
-          <label htmlFor="lead-source-preset">
-            <Calendar size={14} />
-            <span>Período:</span>
-          </label>
+      {/* Área de Filtros Limpa */}
+      <div className="lead-source-filters-grid">
+        <div className="lead-source-filter-item">
+          <label htmlFor="lead-source-preset">Período</label>
           <select
             id="lead-source-preset"
             value={preset}
@@ -92,33 +73,30 @@ export function LeadSourceDashboard() {
             <option value="90d">Últimos 90 dias</option>
             <option value="custom">Personalizado...</option>
           </select>
+
+          {preset === 'custom' && (
+            <div className="lead-source-custom-dates">
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="lead-source-date-input"
+                aria-label="Data inicial"
+              />
+              <span className="lead-source-date-sep">até</span>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="lead-source-date-input"
+                aria-label="Data final"
+              />
+            </div>
+          )}
         </div>
 
-        {preset === 'custom' && (
-          <div className="lead-source-custom-dates">
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="lead-source-date-input"
-              aria-label="Data inicial"
-            />
-            <span className="lead-source-date-sep">até</span>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="lead-source-date-input"
-              aria-label="Data final"
-            />
-          </div>
-        )}
-
-        <div className="lead-source-filter-group">
-          <label htmlFor="lead-source-product">
-            <Filter size={14} />
-            <span>Produto:</span>
-          </label>
+        <div className="lead-source-filter-item">
+          <label htmlFor="lead-source-product">Produto</label>
           <select
             id="lead-source-product"
             value={product}
@@ -134,11 +112,8 @@ export function LeadSourceDashboard() {
           </select>
         </div>
 
-        <div className="lead-source-filter-group">
-          <label htmlFor="lead-source-pagetype">
-            <Filter size={14} />
-            <span>Tipo de Página:</span>
-          </label>
+        <div className="lead-source-filter-item">
+          <label htmlFor="lead-source-pagetype">Tipo de Página</label>
           <select
             id="lead-source-pagetype"
             value={pageType}
@@ -157,7 +132,7 @@ export function LeadSourceDashboard() {
       {/* Exibição de Erro */}
       {error ? (
         <div className="admin-alert-error" style={{ margin: '16px 0' }}>
-          <AlertCircle size={18} />
+          <AlertCircle size={16} />
           <span>{error}</span>
           <button onClick={refetch} disabled={loading} className="dash-retry-inline-btn">
             <RefreshCw size={13} className={loading ? 'chat-spinner' : ''} />
@@ -178,7 +153,7 @@ export function LeadSourceDashboard() {
       ) : total === 0 ? (
         /* State Sem Registros */
         <div className="lead-source-empty-state">
-          <Users size={36} className="dash-empty-icon" />
+          <Users size={32} className="dash-empty-icon" />
           <h3>Nenhum lead encontrado</h3>
           <p>
             Não foram encontrados registros para o período e filtros selecionados. Tente alterar os
@@ -188,68 +163,48 @@ export function LeadSourceDashboard() {
       ) : (
         /* Conteúdo Principal do Dashboard */
         <div className="lead-source-content">
-          {/* Grid de 4 Cards KPI */}
+          {/* Grid de 4 Cards KPI Sóbrios */}
           <div className="lead-source-kpi-grid">
             {/* Card 1: Total Único */}
-            <div className="lead-source-kpi-card kpi-total">
-              <div className="kpi-icon-wrap">
-                <Users size={20} />
-              </div>
-              <div className="kpi-info">
-                <span className="kpi-label">Leads Únicos</span>
-                <strong className="kpi-value">{analytics.total_unique_leads}</strong>
-                <span className="kpi-subtext">Pessoas consolidadas</span>
-              </div>
+            <div className="lead-source-kpi-card">
+              <span className="kpi-label">Leads únicos</span>
+              <strong className="kpi-value">{analytics.total_unique_leads}</strong>
+              <span className="kpi-subtext">Contatos consolidados</span>
             </div>
 
             {/* Card 2: Chat */}
-            <div className="lead-source-kpi-card kpi-chat">
-              <div className="kpi-icon-wrap">
-                <MessageSquare size={20} />
-              </div>
-              <div className="kpi-info">
-                <span className="kpi-label">Leads do Chat</span>
-                <strong className="kpi-value">{analytics.total_chat_leads}</strong>
-                <span className="kpi-subtext">
-                  Alcance de {analytics.pct_chat_reach}% dos leads
-                </span>
-              </div>
+            <div className="lead-source-kpi-card">
+              <span className="kpi-label">Chat</span>
+              <strong className="kpi-value">{analytics.total_chat_leads}</strong>
+              <span className="kpi-subtext">
+                Contatos que iniciaram conversa ({analytics.pct_chat_reach}%)
+              </span>
             </div>
 
             {/* Card 3: Pré-checkout */}
-            <div className="lead-source-kpi-card kpi-checkout">
-              <div className="kpi-icon-wrap">
-                <FileText size={20} />
-              </div>
-              <div className="kpi-info">
-                <span className="kpi-label">Leads do Pré-checkout</span>
-                <strong className="kpi-value">{analytics.total_checkout_leads}</strong>
-                <span className="kpi-subtext">
-                  Alcance de {analytics.pct_checkout_reach}% dos leads
-                </span>
-              </div>
+            <div className="lead-source-kpi-card">
+              <span className="kpi-label">Pré-checkout</span>
+              <strong className="kpi-value">{analytics.total_checkout_leads}</strong>
+              <span className="kpi-subtext">
+                Contatos que preencheram formulário ({analytics.pct_checkout_reach}%)
+              </span>
             </div>
 
-            {/* Card 4: Ambas as origens */}
-            <div className="lead-source-kpi-card kpi-both">
-              <div className="kpi-icon-wrap">
-                <GitMerge size={20} />
-              </div>
-              <div className="kpi-info">
-                <span className="kpi-label">Chat + Pré-checkout</span>
-                <strong className="kpi-value">{analytics.both_sources_leads}</strong>
-                <span className="kpi-subtext">
-                  {analytics.pct_both_sources}% interagiu em ambos
-                </span>
-              </div>
+            {/* Card 4: Ambos os canais */}
+            <div className="lead-source-kpi-card">
+              <span className="kpi-label">Ambos os canais</span>
+              <strong className="kpi-value">{analytics.both_sources_leads}</strong>
+              <span className="kpi-subtext">
+                Contatos presentes nas duas origens ({analytics.pct_both_sources}%)
+              </span>
             </div>
           </div>
 
-          {/* Painel de Composição e Distribuição Visual */}
+          {/* Painel Único de Distribuição por Origem */}
           <div className="lead-source-composition-panel">
             <div className="lead-source-panel-title">
-              <h3>Composição da Origem dos Leads</h3>
-              <span className="lead-source-total-badge">Total: {total} leads únicos</span>
+              <h3>Distribuição por origem</h3>
+              <span className="lead-source-total-text">Total: {total} leads únicos</span>
             </div>
 
             {/* Barra Visual Segmentada */}
@@ -262,83 +217,65 @@ export function LeadSourceDashboard() {
                   className="seg-item seg-chat-only"
                   style={{ width: `${analytics.pct_chat_only}%` }}
                   title={`Somente Chat: ${analytics.chat_only_leads} (${analytics.pct_chat_only}%)`}
-                >
-                  {analytics.pct_chat_only >= 8 && `${analytics.pct_chat_only}%`}
-                </div>
+                />
               )}
               {analytics.pct_checkout_only > 0 && (
                 <div
                   className="seg-item seg-checkout-only"
                   style={{ width: `${analytics.pct_checkout_only}%` }}
-                  title={`Somente Formulário: ${analytics.checkout_only_leads} (${analytics.pct_checkout_only}%)`}
-                >
-                  {analytics.pct_checkout_only >= 8 && `${analytics.pct_checkout_only}%`}
-                </div>
+                  title={`Somente Pré-checkout: ${analytics.checkout_only_leads} (${analytics.pct_checkout_only}%)`}
+                />
               )}
               {analytics.pct_both_sources > 0 && (
                 <div
                   className="seg-item seg-both-sources"
                   style={{ width: `${analytics.pct_both_sources}%` }}
-                  title={`Chat + Formulário: ${analytics.both_sources_leads} (${analytics.pct_both_sources}%)`}
-                >
-                  {analytics.pct_both_sources >= 8 && `${analytics.pct_both_sources}%`}
-                </div>
+                  title={`Chat + Pré-checkout: ${analytics.both_sources_leads} (${analytics.pct_both_sources}%)`}
+                />
               )}
             </div>
 
-            {/* Legenda de Detalhamento da Composição */}
-            <div className="lead-source-legend-grid">
-              <div className="legend-card legend-chat-only">
-                <div className="legend-indicator dot-chat-only" />
-                <div className="legend-details">
-                  <span className="legend-title">Somente Chat</span>
-                  <div className="legend-metrics">
-                    <strong className="legend-count">{analytics.chat_only_leads}</strong>
-                    <span className="legend-pct">({analytics.pct_chat_only}%)</span>
+            {/* Legenda Compacta de 3 Colunas */}
+            <div className="lead-source-legend-compact">
+              <div className="legend-item">
+                <div className="legend-dot dot-chat-only" />
+                <div className="legend-info">
+                  <span className="legend-name">Somente Chat</span>
+                  <div className="legend-value-line">
+                    <strong className="legend-num">{analytics.chat_only_leads}</strong>
+                    <span className="legend-percent">({analytics.pct_chat_only}%)</span>
                   </div>
-                  <p className="legend-desc">Leads que conversaram via chat mas não usaram o formulário</p>
                 </div>
               </div>
 
-              <div className="legend-card legend-checkout-only">
-                <div className="legend-indicator dot-checkout-only" />
-                <div className="legend-details">
-                  <span className="legend-title">Somente Pré-checkout</span>
-                  <div className="legend-metrics">
-                    <strong className="legend-count">{analytics.checkout_only_leads}</strong>
-                    <span className="legend-pct">({analytics.pct_checkout_only}%)</span>
+              <div className="legend-item">
+                <div className="legend-dot dot-checkout-only" />
+                <div className="legend-info">
+                  <span className="legend-name">Somente Pré-checkout</span>
+                  <div className="legend-value-line">
+                    <strong className="legend-num">{analytics.checkout_only_leads}</strong>
+                    <span className="legend-percent">({analytics.pct_checkout_only}%)</span>
                   </div>
-                  <p className="legend-desc">Leads que preencheram o formulário sem abrir o chat</p>
                 </div>
               </div>
 
-              <div className="legend-card legend-both">
-                <div className="legend-indicator dot-both" />
-                <div className="legend-details">
-                  <span className="legend-title">Chat + Pré-checkout</span>
-                  <div className="legend-metrics">
-                    <strong className="legend-count">{analytics.both_sources_leads}</strong>
-                    <span className="legend-pct">({analytics.pct_both_sources}%)</span>
+              <div className="legend-item">
+                <div className="legend-dot dot-both" />
+                <div className="legend-info">
+                  <span className="legend-name">Chat + Pré-checkout</span>
+                  <div className="legend-value-line">
+                    <strong className="legend-num">{analytics.both_sources_leads}</strong>
+                    <span className="legend-percent">({analytics.pct_both_sources}%)</span>
                   </div>
-                  <p className="legend-desc">Leads identificados em ambos os canais de contato</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Nota Informativa sobre Deduplicação */}
-          <div className="lead-source-info-note">
-            <Info size={16} className="info-icon" />
-            <div>
-              <strong>Deduplicação Inteligente de Leads:</strong>
-              <p>
-                Os leads são consolidados via grafo de componentes conexos considerando Telefone
-                E.164, E-mail normalizado e Visitor ID. Um mesmo cliente que inicia pelo Chat e
-                depois preenche o Pré-checkout é contado como 1 único lead total, categorizado como
-                &quot;Chat + Pré-checkout&quot;.
-              </p>
-            </div>
-          </div>
+          {/* Nota Neutra sobre Deduplicação */}
+          <p className="lead-source-footnote">
+            Contatos com o mesmo telefone, e-mail ou identificação são contabilizados uma única vez.
+          </p>
         </div>
       )}
     </div>
