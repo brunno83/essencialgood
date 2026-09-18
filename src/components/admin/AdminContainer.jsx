@@ -37,12 +37,16 @@ export function AdminContainer() {
 
   // Injeção de metadados PWA na <head> exclusivamente ao acessar o painel administrativo (/admin)
   useEffect(() => {
+    const isAdminRoute = window.location.pathname.toLowerCase().startsWith('/admin');
+    if (!isAdminRoute) return;
+
     document.body.classList.add('admin-active-body');
 
     const linksToCleanup = [];
 
     const ensureHeadLink = (rel, href, attributes = {}) => {
-      let link = document.querySelector(`link[rel="${rel}"][href="${href}"]`);
+      let link = document.querySelector(`link[rel="${rel}"][sizes="${attributes.sizes || ''}"]`) ||
+                 document.querySelector(`link[rel="${rel}"][href="${href}"]`);
       if (!link) {
         link = document.createElement('link');
         link.rel = rel;
@@ -64,8 +68,10 @@ export function AdminContainer() {
       }
     };
 
+    const ADMIN_VERSION_TAG = 'eg-admin-v1.0.1';
+
     ensureHeadLink('manifest', '/manifest-admin.webmanifest');
-    ensureHeadLink('apple-touch-icon', '/assets/icons/apple-touch-icon-180x180.png', { sizes: '180x180' });
+    ensureHeadLink('apple-touch-icon', `/assets/icons/apple-touch-icon-180x180.png?v=${ADMIN_VERSION_TAG}`, { sizes: '180x180' });
     ensureMetaTag('apple-mobile-web-app-capable', 'yes');
     ensureMetaTag('apple-mobile-web-app-status-bar-style', 'default');
     ensureMetaTag('apple-mobile-web-app-title', 'Essencial Admin');
@@ -260,8 +266,16 @@ export function AdminContainer() {
   if (loading) {
     return (
       <div className="admin-loading-screen">
-        <div className="admin-spinner" />
-        <div className="admin-loading-text">Verificando credenciais e permissões...</div>
+        <div className="admin-loading-card">
+          <img
+            src="/assets/Brand/essencial-good-symbol.png"
+            alt="Essencial Good Logo"
+            className="admin-loading-logo"
+          />
+          <h2 className="admin-loading-title">Essencial Good Admin</h2>
+          <div className="admin-spinner" />
+          <div className="admin-loading-text">Verificando credenciais e permissões...</div>
+        </div>
       </div>
     );
   }
