@@ -419,7 +419,7 @@ assert(Array.isArray(vercelConfig.headers), 'Sessão headers configurada no verc
 
 // Função de simulação de matching conforme especificação de rotas da Vercel
 function matchVercelSource(source, pathname) {
-  if (source === '/:path*') return true;
+  if (source === '/(.*)' || source === '/:path*') return true;
   if (source === '/admin(.*)' && (pathname === '/admin' || pathname.startsWith('/admin/'))) return true;
   if (source === '/widget-frame(.*)' && (pathname === '/widget-frame' || pathname.startsWith('/widget-frame/'))) return true;
   if (source === '/((?!admin|widget-frame).*)') {
