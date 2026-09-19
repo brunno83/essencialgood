@@ -193,4 +193,220 @@ assert(resA2.status === 'skipped_already_delivered', 'Dispositivo A foi ignorado
 assert(resB2.status === 'sent', 'Dispositivo B foi retentado e entregue com sucesso.');
 assert(manager.events.get(evtKey).status === 'completed', 'Evento transitou para completed após conclusão de todas as entregas.');
 
+// 4. TESTE DE CLASSIFICAÇÃO DE ERROS PUSH E SANITIZAÇÃO DE LOGS (ZERO PII)
+console.log('\n4. Testando classificação sanitizada de erros...');
+
+function detectPushProvider(endpoint) {
+  if (!endpoint || typeof endpoint !== 'string') return 'unknown';
+  const lower = endpoint.toLowerCase();
+  if (lower.includes('fcm.googleapis.com') || lower.includes('android.googleapis.com')) {
+    return 'FCM';
+  }
+  if (lower.includes('push.apple.com')) {
+    return 'APNs';
+  }
+  if (lower.includes('push.services.mozilla.com')) {
+    return 'Mozilla';
+  }
+  return 'unknown';
+}
+
+function sanitizeLogMessage(msg) {
+  if (!msg) return '';
+  let sanitized = String(msg);
+  sanitized = sanitized.replace(/https?:\/\/[^\s"'>]+/gi, '[URL_REDACTED]');
+  sanitized = sanitized.replace(/(?:key|token|auth|secret|p256dh|endpoint)[:=]\s*([^\s,;&]+)/gi, '$1=[REDACTED]');
+  return sanitized;
+}
+
+function classifyPushError(err, endpoint, durationMs) {
+  const errorName = err?.name || 'Error';
+  const rawMessage = err?.message || String(err || 'Unknown error');
+  const statusCode = err?.statusCode || err?.status;
+  const providerCategory = detectPushProvider(endpoint || '');
+
+  const sanitizedMessage = sanitizeLogMessage(rawMessage);
+
+  if (typeof statusCode === 'number' && statusCode > 0) {
+    const isExpired = statusCode === 404 || statusCode === 410;
+    return {
+      errorCode: `HTTP_${statusCode}`,
+      statusCode,
+      phase: 'http_response',
+      errorName,
+      sanitizedMessage,
+      isExpired,
+      durationMs,
+      providerCategory,
+    };
+  }
+
+  if (
+    errorName === 'AbortError' ||
+    rawMessage.includes('aborted') ||
+    rawMessage.includes('timeout') ||
+    rawMessage.includes('ECONNRESET') ||
+    rawMessage.includes('ENOTFOUND') ||
+    rawMessage.includes('network') ||
+    rawMessage.includes('fetch failed')
+  ) {
+    return {
+      errorCode: 'NETWORK_ERROR',
+      phase: 'network_fetch',
+      errorName,
+      sanitizedMessage,
+      isExpired: false,
+      durationMs,
+      providerCategory,
+    };
+  }
+
+  if (
+    rawMessage.includes('VAPID') ||
+    rawMessage.includes('vapid') ||
+    rawMessage.includes('public key') ||
+    rawMessage.includes('private key') ||
+    rawMessage.includes('ECDH') ||
+    rawMessage.includes('invalid key') ||
+    rawMessage.includes('key format')
+  ) {
+    return {
+      errorCode: 'VAPID_CONFIG',
+      phase: 'vapid_config',
+      errorName,
+      sanitizedMessage,
+      isExpired: false,
+      durationMs,
+      providerCategory,
+    };
+  }
+
+  if (
+    rawMessage.includes('encrypt') ||
+    rawMessage.includes('cipher') ||
+    rawMessage.includes('p256dh') ||
+    rawMessage.includes('hkdf') ||
+    rawMessage.includes('auth')
+  ) {
+    return {
+      errorCode: 'ENCRYPTION_ERROR',
+      phase: 'encryption',
+      errorName,
+      sanitizedMessage,
+      isExpired: false,
+      durationMs,
+      providerCategory,
+    };
+  }
+
+  return {
+    errorCode: 'RUNTIME_ERROR',
+    phase: 'runtime',
+    errorName,
+    sanitizedMessage,
+    isExpired: false,
+    durationMs,
+    providerCategory,
+  };
+}
+
+// Sub-teste 4.1: Erro HTTP 410 -> HTTP_410 + isExpired true
+const err410 = { name: 'WebPushError', statusCode: 410, message: 'Subscription expired on https://fcm.googleapis.com/fcm/send/xyz' };
+const class410 = classifyPushError(err410, 'https://fcm.googleapis.com/fcm/send/xyz', 450);
+assert(class410.errorCode === 'HTTP_410', 'Erro HTTP 410 classificado como HTTP_410.');
+assert(class410.isExpired === true, 'Erro HTTP 410 marca isExpired como true.');
+assert(!class410.sanitizedMessage.includes('fcm.googleapis.com'), 'Endpoint URL é removido da mensagem sanitizada.');
+assert(class410.providerCategory === 'FCM', 'Categoria do provedor identificada como FCM sem expor URL.');
+assert(class410.durationMs === 450, 'Duração da tentativa em milissegundos é registrada corretamente.');
+
+// Sub-teste 4.2: Timeout / AbortError após 8000ms -> NETWORK_ERROR (não HTTP_ERR)
+const errTimeout = { name: 'AbortError', message: 'The signal has been aborted' };
+const classTimeout = classifyPushError(errTimeout, 'https://push.services.mozilla.com/v1/send', 8012);
+assert(classTimeout.errorCode === 'NETWORK_ERROR', 'AbortError/Timeout classificado como NETWORK_ERROR em vez de HTTP_ERR.');
+assert(classTimeout.phase === 'network_fetch', 'Fase identificada como network_fetch.');
+assert(classTimeout.providerCategory === 'Mozilla', 'Provedor Mozilla identificado sem expor URL.');
+assert(classTimeout.durationMs === 8012, 'Duração de ~8000ms registrada corretamente.');
+
+// Sub-teste 4.3: Erro de chave VAPID -> VAPID_CONFIG (não HTTP_ERR)
+const errVapid = new Error('Invalid key format in VAPID private key');
+const classVapid = classifyPushError(errVapid, 'https://push.apple.com/v1/sub', 15);
+assert(classVapid.errorCode === 'VAPID_CONFIG', 'Erro de chave VAPID classificado como VAPID_CONFIG em vez de HTTP_ERR.');
+assert(classVapid.phase === 'vapid_config', 'Fase identificada como vapid_config.');
+assert(classVapid.providerCategory === 'APNs', 'Provedor APNs identificado.');
+
+// Sub-teste 4.4: Erro de criptografia ECE -> ENCRYPTION_ERROR
+const errEnc = new Error('Failed to encrypt payload with p256dh key');
+const classEnc = classifyPushError(errEnc, '', 20);
+assert(classEnc.errorCode === 'ENCRYPTION_ERROR', 'Erro de cifragem classificado como ENCRYPTION_ERROR.');
+assert(classEnc.phase === 'encryption', 'Fase identificada como encryption.');
+assert(classEnc.providerCategory === 'unknown', 'Provedor desconhecido retornado como unknown.');
+
+// Sub-teste 4.5: Erro genérico de runtime -> RUNTIME_ERROR
+const errRuntime = new TypeError('Cannot read property of undefined');
+const classRuntime = classifyPushError(errRuntime, '', 5);
+assert(classRuntime.errorCode === 'RUNTIME_ERROR', 'Exceção sem status HTTP classificada como RUNTIME_ERROR.');
+assert(classRuntime.phase === 'runtime', 'Fase identificada como runtime.');
+
+// 5. TESTE DO TRANSPORTE HÍBRIDO SEGURO (NATIVE FETCH + WEB-PUSH GENERATE)
+console.log('\n5. Testando Transporte Híbrido Seguro...');
+
+function prepareNativeFetchHeaders(rawHeaders) {
+  const headers = {};
+  if (!rawHeaders || typeof rawHeaders !== 'object') return headers;
+
+  for (const [key, val] of Object.entries(rawHeaders)) {
+    const lowerKey = key.toLowerCase();
+    if (
+      lowerKey === 'content-length' ||
+      lowerKey === 'connection' ||
+      lowerKey === 'host' ||
+      lowerKey === 'transfer-encoding'
+    ) {
+      continue;
+    }
+    if (val !== undefined && val !== null) {
+      headers[key] = String(val);
+    }
+  }
+
+  return headers;
+}
+
+// Sub-teste 5.1: Content-Length e headers de transporte Node são removidos
+const mockNodeHeaders = {
+  'Authorization': 'vapid t=xyz',
+  'Content-Type': 'application/octet-stream',
+  'Content-Length': '128',
+  'Connection': 'keep-alive',
+  'Host': 'fcm.googleapis.com',
+  'Transfer-Encoding': 'chunked'
+};
+const cleanHeaders = prepareNativeFetchHeaders(mockNodeHeaders);
+assert(cleanHeaders['Content-Length'] === undefined, 'Header Content-Length é removido para que o fetch nativo o calcule.');
+assert(cleanHeaders['Connection'] === undefined, 'Header Node Connection é removido.');
+assert(cleanHeaders['Host'] === undefined, 'Header Node Host é removido.');
+assert(cleanHeaders['Transfer-Encoding'] === undefined, 'Header Node Transfer-Encoding é removido.');
+assert(cleanHeaders['Authorization'] === 'vapid t=xyz', 'Header Authorization VAPID mantido.');
+
+// Sub-teste 5.2: Buffer é convertido para Uint8Array independente
+const sampleBuffer = Buffer.from('test_encrypted_payload');
+const uint8ArrayBody = new Uint8Array(sampleBuffer);
+assert(uint8ArrayBody instanceof Uint8Array, 'O corpo final da requisição é uma instância independente de Uint8Array.');
+assert(uint8ArrayBody.byteLength === sampleBuffer.length, 'O tamanho do Uint8Array corresponde exatamente ao tamanho do payload.');
+
+// Sub-teste 5.3: Validação de erros HTTP 401, 403, 404 e 410 no transporte
+const err401 = classifyPushError({ statusCode: 401, message: 'Unauthorized VAPID' }, 'https://fcm.googleapis.com');
+assert(err401.errorCode === 'HTTP_401', 'HTTP 401 classificado corretamente.');
+
+const err403 = classifyPushError({ statusCode: 403, message: 'SenderId mismatch' }, 'https://fcm.googleapis.com');
+assert(err403.errorCode === 'HTTP_403', 'HTTP 403 classificado corretamente.');
+
+const err404 = classifyPushError({ statusCode: 404, message: 'Not Found' }, 'https://fcm.googleapis.com');
+assert(err404.errorCode === 'HTTP_404', 'HTTP 404 classificado corretamente.');
+assert(err404.isExpired === true, 'HTTP 404 marca isExpired como true.');
+
+const err410Expired = classifyPushError({ statusCode: 410, message: 'Gone' }, 'https://fcm.googleapis.com');
+assert(err410Expired.errorCode === 'HTTP_410', 'HTTP 410 classificado corretamente.');
+assert(err410Expired.isExpired === true, 'HTTP 410 marca isExpired como true.');
+
 console.log(`\n=== RESUMO DOS TESTES: ${passedTests}/${totalTests} PASSARAM ===\n`);

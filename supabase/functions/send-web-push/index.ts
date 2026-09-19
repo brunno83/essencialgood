@@ -3,6 +3,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 import webPush from "npm:web-push@3.6.7";
+import { sendWebPushNotification, classifyPushError } from "./web_push.ts";
 
 // Timing-safe string comparison to prevent timing attacks on webhook secret
 function timingSafeEqual(a: string, b: string): boolean {
@@ -258,97 +259,122 @@ serve(async (req: Request) => {
       }
 
       // Envia notificação para a inscrição
-      const pushSubscription = {
-        endpoint: sub.endpoint,
-        keys: {
-          p256dh: sub.p256dh,
-          auth: sub.auth_key,
-        },
-      };
-
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-        await webPush.sendNotification(pushSubscription, pushPayloadString, {
-          signal: controller.signal,
-          TTL: 86400,
+        const pushResult = await sendWebPushNotification({
+          subscription: {
+            endpoint: sub.endpoint,
+            keys: {
+              p256dh: sub.p256dh,
+              auth: sub.auth_key,
+            },
+          },
+          payload: pushPayloadString,
+          vapidDetails: {
+            subject: vapidSubject,
+            publicKey: vapidPublicKey,
+            privateKey: vapidPrivateKey,
+          },
+          ttl: 86400,
+          timeoutMs: 8000,
         });
-        clearTimeout(timeoutId);
 
-        sentCount++;
+        if (pushResult.success) {
+          sentCount++;
+          console.log(
+            `[WebPush Edge] Envio efetuado com sucesso: provider=${pushResult.providerCategory}, durationMs=${pushResult.durationMs}ms`
+          );
 
-        // Atualiza entrega como completed
-        await supabaseAdmin
-          .from("push_notification_deliveries")
-          .update({
-            status: "completed",
-            completed_at: new Date().toISOString(),
-            last_error_code: null,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("event_id", eventRecord.id)
-          .eq("subscription_id", sub.id);
-
-        // Atualiza estatísticas da subscription
-        await supabaseAdmin
-          .from("push_subscriptions")
-          .update({
-            last_success_at: new Date().toISOString(),
-            failed_count: 0,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", sub.id);
-      } catch (err: any) {
-        failedCount++;
-        const statusCode = err?.statusCode || err?.status;
-        const isExpired = statusCode === 404 || statusCode === 410;
-
-        if (isExpired) {
-          expiredCount++;
-          // Atualiza entrega como expired
+          // Atualiza entrega como completed
           await supabaseAdmin
             .from("push_notification_deliveries")
             .update({
-              status: "expired",
+              status: "completed",
               completed_at: new Date().toISOString(),
-              last_error_code: `HTTP_${statusCode}`,
+              last_error_code: null,
               updated_at: new Date().toISOString(),
             })
             .eq("event_id", eventRecord.id)
             .eq("subscription_id", sub.id);
 
-          // Desativa a subscription no banco
+          // Atualiza estatísticas da subscription
           await supabaseAdmin
             .from("push_subscriptions")
             .update({
-              enabled: false,
-              failed_count: (sub.failed_count || 0) + 1,
-              last_failure_at: new Date().toISOString(),
+              last_success_at: new Date().toISOString(),
+              failed_count: 0,
               updated_at: new Date().toISOString(),
             })
             .eq("id", sub.id);
         } else {
-          // Atualiza entrega como failed (para retentativa futura no reenvio do webhook)
-          await supabaseAdmin
-            .from("push_notification_deliveries")
-            .update({
-              status: "failed",
-              last_error_code: `HTTP_${statusCode || 'ERR'}`,
-              updated_at: new Date().toISOString(),
-            })
-            .eq("event_id", eventRecord.id)
-            .eq("subscription_id", sub.id);
+          failedCount++;
+          const classified = pushResult.classifiedError || classifyPushError(null, sub.endpoint, pushResult.durationMs);
 
-          await supabaseAdmin
-            .from("push_subscriptions")
-            .update({
-              failed_count: (sub.failed_count || 0) + 1,
-              last_failure_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
-            })
-            .eq("id", sub.id);
+          console.error(
+            `[WebPush Edge] Falha no envio: provider=${classified.providerCategory}, durationMs=${classified.durationMs}ms, phase=${classified.phase}, errorCode=${classified.errorCode}, errorName=${classified.errorName}, sanitizedMessage=${classified.sanitizedMessage}`
+          );
+
+          if (classified.isExpired) {
+            expiredCount++;
+            // Atualiza entrega como expired
+            await supabaseAdmin
+              .from("push_notification_deliveries")
+              .update({
+                status: "expired",
+                completed_at: new Date().toISOString(),
+                last_error_code: classified.errorCode,
+                updated_at: new Date().toISOString(),
+              })
+              .eq("event_id", eventRecord.id)
+              .eq("subscription_id", sub.id);
+
+            // Desativa a subscription no banco
+            await supabaseAdmin
+              .from("push_subscriptions")
+              .update({
+                enabled: false,
+                failed_count: (sub.failed_count || 0) + 1,
+                last_failure_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+              })
+              .eq("id", sub.id);
+          } else {
+            // Atualiza entrega como failed (para retentativa futura no reenvio do webhook)
+            await supabaseAdmin
+              .from("push_notification_deliveries")
+              .update({
+                status: "failed",
+                last_error_code: classified.errorCode,
+                updated_at: new Date().toISOString(),
+              })
+              .eq("event_id", eventRecord.id)
+              .eq("subscription_id", sub.id);
+
+            await supabaseAdmin
+              .from("push_subscriptions")
+              .update({
+                failed_count: (sub.failed_count || 0) + 1,
+                last_failure_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+              })
+              .eq("id", sub.id);
+          }
         }
+      } catch (err: any) {
+        failedCount++;
+        const classified = classifyPushError(err, sub.endpoint);
+        console.error(
+          `[WebPush Edge] Exceção inesperada: provider=${classified.providerCategory}, durationMs=${classified.durationMs || 0}ms, phase=${classified.phase}, errorCode=${classified.errorCode}, errorName=${classified.errorName}, sanitizedMessage=${classified.sanitizedMessage}`
+        );
+
+        await supabaseAdmin
+          .from("push_notification_deliveries")
+          .update({
+            status: "failed",
+            last_error_code: classified.errorCode,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("event_id", eventRecord.id)
+          .eq("subscription_id", sub.id);
       }
     }
 

@@ -13,6 +13,7 @@ const PRECACHE_ASSETS = [
   '/assets/icons/icon-512x512-maskable.png',
   '/assets/icons/apple-touch-icon-180x180.png',
   '/assets/icons/favicon-32x32.png',
+  '/assets/icons/notification-badge-v2-96x96.png',
   '/assets/Brand/essencial-good-logo.png',
   '/assets/Brand/essencial-good-symbol.png'
 ];
@@ -73,7 +74,7 @@ self.addEventListener('push', (event) => {
     const options = {
       body: payload.body || 'Nova notificação do painel.',
       icon: '/assets/icons/icon-192x192.png',
-      badge: '/assets/icons/favicon-32x32.png',
+      badge: '/assets/icons/notification-badge-v2-96x96.png',
       tag: payload.tag || `eg-admin-${eventType}`,
       renotify: true,
       data: {
