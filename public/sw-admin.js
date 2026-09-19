@@ -46,6 +46,85 @@ self.addEventListener('message', (event) => {
   }
 });
 
+/* ============================================================================
+   MANIPULADORES DE NOTIFICAÇÃO WEB PUSH E BADGES
+   ============================================================================ */
+
+// Evento Push: Recebe o payload genérico e exibe a notificação nativa
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  try {
+    const payload = event.data.json();
+    const eventType = payload.type;
+
+    // Permitir apenas tipos estritamente mapeados na arquitetura
+    if (eventType !== 'new_conversation' && eventType !== 'new_checkout_lead') {
+      console.warn('[SW Push] Tipo de evento não reconhecido:', eventType);
+      return;
+    }
+
+    // Mapeamento interno estrito de rota (bloqueia URLs externas ou arbitrárias)
+    const targetUrl = eventType === 'new_conversation'
+      ? '/admin/conversations'
+      : '/admin/leads';
+
+    const title = payload.title || 'Essencial Admin';
+    const options = {
+      body: payload.body || 'Nova notificação do painel.',
+      icon: '/assets/icons/icon-192x192.png',
+      badge: '/assets/icons/favicon-32x32.png',
+      tag: payload.tag || `eg-admin-${eventType}`,
+      renotify: true,
+      data: {
+        url: targetUrl,
+        type: eventType,
+      },
+    };
+
+    // Badging API com fallback seguro
+    if ('setAppBadge' in navigator && typeof navigator.setAppBadge === 'function') {
+      navigator.setAppBadge(1).catch(() => {});
+    }
+
+    event.waitUntil(self.registration.showNotification(title, options));
+  } catch (err) {
+    console.warn('[SW Push] Erro ao processar payload do push:', err);
+  }
+});
+
+// Evento NotificationClick: Foca janela existente ou abre nova rota administrativa
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  // Limpa o badge do ícone ao abrir a notificação
+  if ('clearAppBadge' in navigator && typeof navigator.clearAppBadge === 'function') {
+    navigator.clearAppBadge().catch(() => {});
+  }
+
+  const rawUrl = event.notification.data?.url || '/admin/';
+  // Restrição rigorosa: aceita apenas rotas administrativas permitidas
+  const allowedRoutes = ['/admin/conversations', '/admin/leads', '/admin/'];
+  const targetUrl = allowedRoutes.includes(rawUrl) ? rawUrl : '/admin/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        const clientUrl = new URL(client.url);
+        if (clientUrl.pathname.startsWith('/admin') && 'focus' in client) {
+          if ('navigate' in client && typeof client.navigate === 'function') {
+            client.navigate(targetUrl);
+          }
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
+});
+
 // Estratégia de Intercepção de Rede Segura e Estruturada
 self.addEventListener('fetch', (event) => {
   const req = event.request;

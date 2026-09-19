@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X, Bell } from 'lucide-react';
 import { AdminInstallWidget } from './AdminPWAComponents';
+import { AdminPushSettings } from './AdminPushSettings';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -14,6 +15,7 @@ export function AdminLayout({
   pwaProps,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showPushModal, setShowPushModal] = useState(false);
 
   const userName = adminProfile?.full_name || user?.email?.split('@')[0] || 'Administrador';
   const userRole = adminProfile?.role === 'admin' ? 'Administrador' : 'Agente';
@@ -29,6 +31,24 @@ export function AdminLayout({
 
   return (
     <div className="admin-root">
+      {showPushModal && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 11000, padding: '20px' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '12px', maxWidth: '600px', width: '100%', maxHeight: '90vh', overflowY: 'auto', position: 'relative', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}>
+            <button
+              type="button"
+              onClick={() => setShowPushModal(false)}
+              style={{ position: 'absolute', top: '16px', right: '16px', background: '#F1F5F9', border: 'none', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748B', zIndex: 1 }}
+              aria-label="Fechar modal"
+            >
+              <X size={18} />
+            </button>
+            <div style={{ padding: '8px' }}>
+              <AdminPushSettings />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="admin-layout">
         {/* Sidebar Navigation */}
         <aside className={`admin-sidebar ${mobileMenuOpen ? 'open' : ''}`}>
@@ -109,15 +129,28 @@ export function AdminLayout({
               <span className="admin-user-role">{userRole}</span>
             </div>
 
-            <button
-              className="admin-btn-logout-text"
-              onClick={onSignOut}
-              title="Encerrar sessão"
-              aria-label="Sair do painel"
-            >
-              <LogOut size={15} />
-              <span>Sair</span>
-            </button>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+              <button
+                className="admin-btn-logout-text"
+                onClick={() => setShowPushModal(true)}
+                title="Configurar Notificações Push"
+                aria-label="Alertas Push"
+                style={{ flex: 1, justifyContent: 'center' }}
+              >
+                <Bell size={15} />
+                <span>Alertas</span>
+              </button>
+              <button
+                className="admin-btn-logout-text"
+                onClick={onSignOut}
+                title="Encerrar sessão"
+                aria-label="Sair do painel"
+                style={{ flex: 1, justifyContent: 'center' }}
+              >
+                <LogOut size={15} />
+                <span>Sair</span>
+              </button>
+            </div>
           </div>
         </aside>
 

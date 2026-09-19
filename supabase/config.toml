@@ -1,0 +1,5 @@
+# Supabase Project Configuration for Essencial Good
+project_id = "essencialgood"
+
+[functions.send-web-push]
+verify_jwt = false

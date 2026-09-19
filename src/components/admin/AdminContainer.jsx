@@ -244,13 +244,62 @@ export function AdminContainer() {
     };
   }, [validateAdminProfile]);
 
-  const handleSignOut = async () => {
+  const [signOutError, setSignOutError] = useState(null);
+  const [pendingForceSignOut, setPendingForceSignOut] = useState(false);
+
+  const handleSignOut = async (force = false) => {
     setLoading(true);
-    if (supabase) {
-      await supabase.auth.signOut();
+    setSignOutError(null);
+
+    // 1. Tentar desativar inscrição de Web Push no dispositivo e no servidor antes do logout
+    if ('serviceWorker' in navigator && isSupabaseConfigured && supabase) {
+      try {
+        const registration = await navigator.serviceWorker.ready;
+        const pushSub = await registration.pushManager.getSubscription();
+
+        if (pushSub) {
+          const endpoint = pushSub.endpoint;
+          // Tenta remover via RPC no banco de dados primeiro
+          const { error: rpcErr } = await supabase.rpc('unregister_push_subscription', {
+            p_endpoint: endpoint,
+          });
+
+          if (rpcErr && !force) {
+            console.warn('[AdminSignOut] Falha na RPC ao desativar push:', rpcErr.message);
+            setSignOutError(`Não foi possível desativar as notificações no servidor (${rpcErr.message}).`);
+            setPendingForceSignOut(true);
+            setLoading(false);
+            return;
+          }
+
+          // Desativa inscrição no Service Worker do navegador
+          await pushSub.unsubscribe().catch((e) => console.warn('[AdminSignOut] Erro ao desativar localmente:', e));
+        }
+      } catch (err) {
+        console.warn('[AdminSignOut] Exceção ao processar desativação de push:', err);
+        if (!force) {
+          setSignOutError('Ocorreu um erro ao desativar as notificações push neste dispositivo.');
+          setPendingForceSignOut(true);
+          setLoading(false);
+          return;
+        }
+      }
     }
+
+    // Limpa Badging API
+    if ('clearAppBadge' in navigator && typeof navigator.clearAppBadge === 'function') {
+      navigator.clearAppBadge().catch(() => {});
+    }
+
+    // 2. Efetuar encerramento da sessão Supabase Auth
+    if (supabase) {
+      await supabase.auth.signOut().catch((e) => console.error('[AdminSignOut] Erro no signOut:', e));
+    }
+
     setUser(null);
     setAdminProfile(null);
+    setPendingForceSignOut(false);
+    setSignOutError(null);
     setLoading(false);
   };
 
@@ -288,6 +337,37 @@ export function AdminContainer() {
 
   return (
     <div className="admin-layout-wrapper">
+      {pendingForceSignOut && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 11000, padding: '20px' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '12px', padding: '24px', maxWidth: '420px', width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#991B1B', margin: '0 0 8px' }}>
+              Falha ao Desativar Notificações
+            </h3>
+            <p style={{ fontSize: '14px', color: '#475569', margin: '0 0 16px', lineHeight: '1.5' }}>
+              {signOutError || 'Não foi possível desativar as notificações no servidor.'}
+            </p>
+            <p style={{ fontSize: '12px', color: '#64748B', margin: '0 0 20px', background: '#FEF2F2', padding: '8px 12px', borderRadius: '6px' }}>
+              Aviso: Se você sair sem desativar, este dispositivo poderá continuar recebendo alertas até o encerramento remoto.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+              <button
+                type="button"
+                onClick={() => handleSignOut(false)}
+                style={{ background: '#F1F5F9', color: '#334155', border: '1px solid #CBD5E1', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                Tentar novamente
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSignOut(true)}
+                style={{ background: '#DC2626', color: '#FFFFFF', border: 'none', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}
+              >
+                Sair mesmo assim
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {hasUpdate && <AdminUpdateBanner onApplyUpdate={applyUpdate} />}
       <AdminLayout
         adminProfile={adminProfile}
