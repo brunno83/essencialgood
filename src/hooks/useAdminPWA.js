@@ -80,7 +80,7 @@ export function useAdminPWA() {
       navigator.serviceWorker.addEventListener('controllerchange', controllerChangeHandler);
     }
 
-    // 6. Captura do Evento beforeinstallprompt (Android / Chrome)
+    // 6. Captura do Evento beforeinstallprompt e appinstalled (Android / Chrome)
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
       if (!isInStandalone) {
@@ -89,13 +89,21 @@ export function useAdminPWA() {
       }
     };
 
+    const handleAppInstalled = () => {
+      setIsStandalone(true);
+      setCanInstall(false);
+      setDeferredPrompt(null);
+    };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
     // 7. Cleanup rigoroso de todos os event listeners
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
 
       if ('serviceWorker' in navigator && controllerChangeHandler) {
         navigator.serviceWorker.removeEventListener('controllerchange', controllerChangeHandler);

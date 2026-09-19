@@ -54,14 +54,9 @@ export function AdminUpdateBanner({ onApplyUpdate }) {
 export function AdminInstallWidget({ canInstall, isIOS, isStandalone, onInstall }) {
   const [showIOSModal, setShowIOSModal] = useState(false);
 
-  // Se o app já estiver rodando em modo standalone, oculta a opção de instalação
+  // Se o app já estiver rodando em modo standalone, não renderiza a opção de instalação
   if (isStandalone) {
-    return (
-      <div className="admin-pwa-installed-badge">
-        <CheckCircle2 size={15} />
-        <span>Aplicativo Instalado</span>
-      </div>
-    );
+    return null;
   }
 
   // Se não puder instalar nem for iOS, não exibe nada
@@ -73,23 +68,25 @@ export function AdminInstallWidget({ canInstall, isIOS, isStandalone, onInstall 
     <>
       {canInstall && (
         <button
-          className="admin-pwa-install-btn"
+          type="button"
+          className="admin-sidebar-action-btn admin-btn-install"
           onClick={onInstall}
           title="Instalar aplicativo administrativo no dispositivo"
         >
-          <Smartphone size={16} />
-          <span>Instalar aplicativo</span>
+          <Smartphone size={18} />
+          <span className="admin-action-label">Instalar aplicativo</span>
         </button>
       )}
 
       {isIOS && !canInstall && (
         <button
-          className="admin-pwa-install-btn"
+          type="button"
+          className="admin-sidebar-action-btn admin-btn-install"
           onClick={() => setShowIOSModal(true)}
           title="Instruções para adicionar à Tela de Início no iPhone"
         >
-          <Smartphone size={16} />
-          <span>Instalar no iPhone</span>
+          <Smartphone size={18} />
+          <span className="admin-action-label">Instalar no iPhone</span>
         </button>
       )}
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X, Bell } from 'lucide-react';
 import { AdminInstallWidget } from './AdminPWAComponents';
 import { AdminPushSettings } from './AdminPushSettings';
+import { useAdminPushNotifications } from '../../hooks/useAdminPushNotifications';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -16,7 +17,9 @@ export function AdminLayout({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showPushModal, setShowPushModal] = useState(false);
+  const { status: pushStatus } = useAdminPushNotifications();
 
+  const isPushActive = pushStatus === 'active_this_device';
   const userName = adminProfile?.full_name || user?.email?.split('@')[0] || 'Administrador';
   const userRole = adminProfile?.role === 'admin' ? 'Administrador' : 'Agente';
 
@@ -113,42 +116,47 @@ export function AdminLayout({
 
           {/* User Footer Profile */}
           <div className="admin-sidebar-user">
-            {pwaProps && (
-              <div style={{ marginBottom: '10px' }}>
+            <div className="admin-user-info">
+              <span className="admin-user-name" title={userName}>{userName}</span>
+              <span className="admin-user-role">{userRole}</span>
+            </div>
+
+            <div className="admin-sidebar-actions">
+              {pwaProps && (
                 <AdminInstallWidget
                   canInstall={pwaProps.canInstall}
                   isIOS={pwaProps.isIOS}
                   isStandalone={pwaProps.isStandalone}
                   onInstall={pwaProps.installPWA}
                 />
-              </div>
-            )}
+              )}
 
-            <div className="admin-user-info">
-              <span className="admin-user-name" title={userName}>{userName}</span>
-              <span className="admin-user-role">{userRole}</span>
-            </div>
-
-            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
               <button
-                className="admin-btn-logout-text"
+                type="button"
+                className="admin-sidebar-action-btn admin-btn-alerts"
                 onClick={() => setShowPushModal(true)}
                 title="Configurar Notificações Push"
                 aria-label="Alertas Push"
-                style={{ flex: 1, justifyContent: 'center' }}
               >
-                <Bell size={15} />
-                <span>Alertas</span>
+                <Bell size={18} />
+                <span className="admin-action-label">Alertas</span>
+                {isPushActive && (
+                  <span className="admin-push-active-badge">
+                    <span className="admin-push-active-dot" />
+                    Ativos
+                  </span>
+                )}
               </button>
+
               <button
-                className="admin-btn-logout-text"
+                type="button"
+                className="admin-sidebar-action-btn admin-btn-logout"
                 onClick={onSignOut}
                 title="Encerrar sessão"
                 aria-label="Sair do painel"
-                style={{ flex: 1, justifyContent: 'center' }}
               >
-                <LogOut size={15} />
-                <span>Sair</span>
+                <LogOut size={18} />
+                <span className="admin-action-label">Sair</span>
               </button>
             </div>
           </div>
