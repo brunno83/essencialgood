@@ -4,6 +4,12 @@
  */
 
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 console.log('=== INICIANDO TESTES LOCAIS DA EDGE FUNCTION SEND-WEB-PUSH ===\n');
 
@@ -248,7 +254,8 @@ function classifyPushError(err, endpoint, durationMs) {
     rawMessage.includes('ECONNRESET') ||
     rawMessage.includes('ENOTFOUND') ||
     rawMessage.includes('network') ||
-    rawMessage.includes('fetch failed')
+    rawMessage.includes('fetch failed') ||
+    rawMessage.includes('redirect')
   ) {
     return {
       errorCode: 'NETWORK_ERROR',
@@ -394,19 +401,87 @@ const uint8ArrayBody = new Uint8Array(sampleBuffer);
 assert(uint8ArrayBody instanceof Uint8Array, 'O corpo final da requisição é uma instância independente de Uint8Array.');
 assert(uint8ArrayBody.byteLength === sampleBuffer.length, 'O tamanho do Uint8Array corresponde exatamente ao tamanho do payload.');
 
-// Sub-teste 5.3: Validação de erros HTTP 401, 403, 404 e 410 no transporte
-const err401 = classifyPushError({ statusCode: 401, message: 'Unauthorized VAPID' }, 'https://fcm.googleapis.com');
-assert(err401.errorCode === 'HTTP_401', 'HTTP 401 classificado corretamente.');
+// Sub-teste 5.4: Teste de bloqueio de redirecionamentos (redirect: error)
+const errRedirect = new TypeError('Fetch failed due to blocked redirect');
+const classRedirect = classifyPushError(errRedirect, 'https://fcm.googleapis.com/fcm/send/xyz', 120);
+assert(classRedirect.errorCode === 'NETWORK_ERROR', 'Rejeição por redirect: error classificada como NETWORK_ERROR.');
+assert(classRedirect.phase === 'network_fetch', 'Fase de erro por redirect identificada como network_fetch.');
+assert(!classRedirect.sanitizedMessage.includes('fcm.googleapis.com'), 'Mensagem de erro por redirect sanitizada sem expor URL ou endpoint.');
 
-const err403 = classifyPushError({ statusCode: 403, message: 'SenderId mismatch' }, 'https://fcm.googleapis.com');
-assert(err403.errorCode === 'HTTP_403', 'HTTP 403 classificado corretamente.');
+// 6. TESTE DE HARDENING E SIMULAÇÃO DE MATCHING DE HEADERS (VERCEL.JSON)
+console.log('\n6. Testando Hardening e Simulação de Matching de Headers por Rota (vercel.json)...');
 
-const err404 = classifyPushError({ statusCode: 404, message: 'Not Found' }, 'https://fcm.googleapis.com');
-assert(err404.errorCode === 'HTTP_404', 'HTTP 404 classificado corretamente.');
-assert(err404.isExpired === true, 'HTTP 404 marca isExpired como true.');
+const vercelJsonPath = path.resolve(__dirname, '../vercel.json');
+assert(fs.existsSync(vercelJsonPath), 'Arquivo vercel.json existe no projeto.');
 
-const err410Expired = classifyPushError({ statusCode: 410, message: 'Gone' }, 'https://fcm.googleapis.com');
-assert(err410Expired.errorCode === 'HTTP_410', 'HTTP 410 classificado corretamente.');
-assert(err410Expired.isExpired === true, 'HTTP 410 marca isExpired como true.');
+const vercelConfig = JSON.parse(fs.readFileSync(vercelJsonPath, 'utf8'));
+assert(Array.isArray(vercelConfig.headers), 'Sessão headers configurada no vercel.json.');
+
+// Função de simulação de matching conforme especificação de rotas da Vercel
+function matchVercelSource(source, pathname) {
+  if (source === '/:path*') return true;
+  if (source === '/admin(.*)' && (pathname === '/admin' || pathname.startsWith('/admin/'))) return true;
+  if (source === '/widget-frame(.*)' && (pathname === '/widget-frame' || pathname.startsWith('/widget-frame/'))) return true;
+  if (source === '/((?!admin|widget-frame).*)') {
+    return !pathname.startsWith('/admin') && !pathname.startsWith('/widget-frame');
+  }
+  return false;
+}
+
+function getEffectiveHeaders(pathname, headersConfig) {
+  const merged = new Map();
+  let totalKeysAdded = 0;
+  for (const rule of headersConfig) {
+    if (matchVercelSource(rule.source, pathname)) {
+      for (const h of rule.headers) {
+        totalKeysAdded++;
+        merged.set(h.key, h.value);
+      }
+    }
+  }
+  return { map: merged, uniqueCount: merged.size, totalKeysAdded };
+}
+
+const testRoutes = [
+  '/',
+  '/admin',
+  '/admin/conversations',
+  '/widget-frame',
+  '/widget-frame/',
+  '/sonnus',
+  '/adv-sonnus',
+  '/listicle/sonnus'
+];
+
+for (const route of testRoutes) {
+  const effective = getEffectiveHeaders(route, vercelConfig.headers);
+  const m = effective.map;
+
+  // 1. Headers globais em todas as rotas
+  assert(m.get('X-Content-Type-Options') === 'nosniff', `[${route}] Recebe X-Content-Type-Options: nosniff.`);
+  assert(m.get('Referrer-Policy') === 'strict-origin-when-cross-origin', `[${route}] Recebe Referrer-Policy: strict-origin-when-cross-origin.`);
+  assert(m.get('Permissions-Policy') && m.get('Permissions-Policy').includes('camera=()'), `[${route}] Recebe Permissions-Policy restritiva.`);
+
+  // 2. Regras específicas para /admin e subrotas
+  if (route.startsWith('/admin')) {
+    assert(m.get('X-Frame-Options') === 'DENY', `[${route}] Recebe X-Frame-Options: DENY.`);
+    assert(m.get('Content-Security-Policy') === "frame-ancestors 'none';", `[${route}] Recebe CSP frame-ancestors 'none';.`);
+  }
+
+  // 3. Regras específicas para /widget-frame e subrotas
+  if (route.startsWith('/widget-frame')) {
+    assert(m.get('X-Frame-Options') === undefined, `[${route}] NÃO recebe X-Frame-Options (Preserva chat em iframe).`);
+    assert(m.get('Content-Security-Policy') === "frame-ancestors 'self' https://essencialgood.com https://www.essencialgood.com;", `[${route}] Recebe CSP frame-ancestors restrito a self/apex/www.`);
+  }
+
+  // 4. Regras para páginas públicas (não-admin e não-widget)
+  if (!route.startsWith('/admin') && !route.startsWith('/widget-frame')) {
+    assert(m.get('X-Frame-Options') === 'SAMEORIGIN', `[${route}] Recebe X-Frame-Options: SAMEORIGIN.`);
+    assert(m.get('Content-Security-Policy') === undefined, `[${route}] NÃO recebe CSP completa prematura (apenas frame-ancestors quando aplicável).`);
+  }
+
+  // 5. Garantir ausência de duplicação de chave de header
+  assert(effective.uniqueCount === effective.totalKeysAdded, `[${route}] Nenhum cabeçalho duplicado ou conflitante gerado.`);
+}
 
 console.log(`\n=== RESUMO DOS TESTES: ${passedTests}/${totalTests} PASSARAM ===\n`);

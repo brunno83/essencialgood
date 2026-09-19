@@ -100,7 +100,8 @@ export function classifyPushError(err: any, endpoint?: string, durationMs?: numb
     rawMessage.includes("ECONNRESET") ||
     rawMessage.includes("ENOTFOUND") ||
     rawMessage.includes("network") ||
-    rawMessage.includes("fetch failed")
+    rawMessage.includes("fetch failed") ||
+    rawMessage.includes("redirect")
   ) {
     return {
       errorCode: "NETWORK_ERROR",
@@ -253,7 +254,7 @@ export async function sendWebPushNotification(options: SendPushOptions): Promise
   // 3. Preparar headers sanitizados para fetch nativo (remove Content-Length e headers Node)
   const headers = prepareNativeFetchHeaders(requestDetails.headers);
 
-  // 4. Executar fetch nativo do Deno com AbortController (timeout 8000ms)
+  // 4. Executar fetch nativo do Deno com AbortController (timeout 8000ms) e bloqueio de redirecionamentos (redirect: error)
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -263,6 +264,7 @@ export async function sendWebPushNotification(options: SendPushOptions): Promise
       headers,
       body,
       signal: controller.signal,
+      redirect: "error",
     });
 
     clearTimeout(timeoutId);

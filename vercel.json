@@ -358,20 +358,50 @@
   ],
   "headers": [
     {
-      "source": "/widget-frame",
+      "source": "/:path*",
       "headers": [
         {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self' https://essencialgood.com https://*.essencialgood.com;"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
         }
       ]
     },
     {
-      "source": "/widget-frame/:path*",
+      "source": "/admin(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'none';"
+        }
+      ]
+    },
+    {
+      "source": "/widget-frame(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self' https://essencialgood.com https://*.essencialgood.com;"
+          "value": "frame-ancestors 'self' https://essencialgood.com https://www.essencialgood.com;"
+        }
+      ]
+    },
+    {
+      "source": "/((?!admin|widget-frame).*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
         }
       ]
     }
