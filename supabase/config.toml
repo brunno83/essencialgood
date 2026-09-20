@@ -3,3 +3,12 @@ project_id = "essencialgood"
 
 [functions.send-web-push]
 verify_jwt = false
+
+[functions.create-conversation]
+verify_jwt = true
+
+[functions.send-message]
+verify_jwt = true
+
+[functions.submit-lead]
+verify_jwt = false

@@ -31,4 +31,5 @@ dist-ssr
 # Scratch files
 scratch/
 scripts/reports/
+scripts/staging/runtime-local/
 supabase/.temp/
