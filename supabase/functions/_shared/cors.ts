@@ -22,11 +22,16 @@ export const DEV_ALLOWED_LOCAL_ORIGINS = [
 
 export function isAllowedCorsOrigin(origin: string, envString: string): boolean {
   if (!origin || typeof origin !== "string") return false;
+
+  // Rejeita origens nulas, com quebra de linha (CR/LF) ou caracteres nulos ANTES de qualquer trim
+  if (origin.includes("\0") || origin.includes("\r") || origin.includes("\n")) {
+    return false;
+  }
+
   const lowerOrigin = origin.toLowerCase().trim();
   const environment = envString.toLowerCase().trim();
 
-  // Rejeita origens nulas, malformadas ou com caracteres perigosos
-  if (lowerOrigin === "null" || lowerOrigin.includes("\0") || lowerOrigin.includes("\r") || lowerOrigin.includes("\n")) {
+  if (lowerOrigin === "null" || lowerOrigin.length === 0) {
     return false;
   }
 
@@ -74,7 +79,12 @@ export function getCorsHeaders(req?: Request): Record<string, string> {
     return headers;
   }
 
-  const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
+  const rawEnv = (typeof Deno !== "undefined" && Deno.env)
+    ? (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "")
+    : (typeof process !== "undefined" && process.env)
+      ? (process.env.DENO_ENV || process.env.ENVIRONMENT || "")
+      : "";
+  const environment = rawEnv.toLowerCase().trim();
 
   if (isAllowedCorsOrigin(origin, environment)) {
     headers["Access-Control-Allow-Origin"] = origin;
@@ -86,9 +96,14 @@ export function getCorsHeaders(req?: Request): Record<string, string> {
 
 export function handleCorsPreflight(req: Request): Response | null {
   const origin = req.headers.get("origin");
-  const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
+  const rawEnv = (typeof Deno !== "undefined" && Deno.env)
+    ? (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "")
+    : (typeof process !== "undefined" && process.env)
+      ? (process.env.DENO_ENV || process.env.ENVIRONMENT || "")
+      : "";
+  const environment = rawEnv.toLowerCase().trim();
 
-  // Se a origem estiver presente no cabeçalho, verifica se está na lista permitida
+  // 1. Se a origem estiver presente no cabeçalho, verifica se está na lista permitida do ambiente
   if (origin) {
     if (!isAllowedCorsOrigin(origin, environment)) {
       // Origem não autorizada: HTTP 403 imediato sem Access-Control-Allow-Origin, com Vary: Origin
@@ -105,12 +120,27 @@ export function handleCorsPreflight(req: Request): Response | null {
     }
   }
 
-  // Preflight OPTIONS para origem permitida ou ausente
+  // 2. Preflight OPTIONS para origem permitida ou ausente
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
       headers: getCorsHeaders(req),
     });
+  }
+
+  // 3. Requisições de negócio (POST, etc.): Requerem OBRIGATORIAMENTE um header Origin válido
+  // Se a requisição de negócio vier sem Origin (ou Origin vazio), rejeita com HTTP 403 imediato antes de qualquer lógica
+  if (!origin || origin.trim().length === 0) {
+    return new Response(
+      JSON.stringify({ error: "Origin header is required for business requests.", code: "CORS_ORIGIN_FORBIDDEN" }),
+      {
+        status: 403,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Vary": "Origin",
+        },
+      }
+    );
   }
 
   return null;

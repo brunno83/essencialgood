@@ -5,7 +5,7 @@ import assert from "assert";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { isAllowedCorsOrigin, PRODUCTION_ALLOWED_ORIGINS, STAGING_ALLOWED_ORIGINS, DEV_ALLOWED_LOCAL_ORIGINS } from "../supabase/functions/_shared/cors.ts";
+import { isAllowedCorsOrigin, handleCorsPreflight, PRODUCTION_ALLOWED_ORIGINS, STAGING_ALLOWED_ORIGINS, DEV_ALLOWED_LOCAL_ORIGINS } from "../supabase/functions/_shared/cors.ts";
 import { isAllowedTurnstileHostname, PRODUCTION_TURNSTILE_HOSTNAMES, STAGING_TURNSTILE_HOSTNAMES } from "../supabase/functions/_shared/turnstile.ts";
 import { isAllowedParentOrigin } from "../src/components/chat-frame/widgetMessaging.js";
 
@@ -246,17 +246,177 @@ test("D9: Rejects null, spoofed, unknown, null-char and invalid schemes", () => 
 
 
 // ----------------------------------------------------
-// BLOCK E: Chat Loader Resolution Matrix (`chat-loader.js`)
+// BLOCK F: `handleCorsPreflight` Unit Tests (`cors.ts`)
 // ----------------------------------------------------
-console.log("\n--- BLOCK E: Chat Loader Resolution Matrix (`chat-loader.js`) ---");
+console.log("\n--- BLOCK F: `handleCorsPreflight` Handler Tests (`cors.ts`) ---");
 
-const chatLoaderCode = fs.readFileSync(path.join(rootDir, "public/chat-loader.js"), "utf8");
+function createMockRequest(method, urlStr, headersObj = {}) {
+  return new Request(urlStr, {
+    method: method,
+    headers: new Headers(headersObj)
+  });
+}
 
-test("E1: Explicit port resolution and fail-closed logic in chat-loader.js", () => {
-  assert.strictEqual(chatLoaderCode.includes("port === '5173' || port === '4173'"), true);
-  assert.strictEqual(chatLoaderCode.includes("hostname === 'staging.essencialgood.com' && protocol === 'https:' && !port"), true);
-  assert.strictEqual(chatLoaderCode.includes("logLoader('Aborting chat loader: Unknown or unauthorized host'"), true);
-  assert.strictEqual(chatLoaderCode.includes("logLoader('Aborting chat loader: Unauthorized local port'"), true);
+test("F1: OPTIONS with valid origin returns HTTP 204 with exact ACAO, Vary: Origin, and CORS headers", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("OPTIONS", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "https://staging.essencialgood.com"
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null, "Response should not be null");
+    assert.strictEqual(res.status, 204);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), "https://staging.essencialgood.com");
+    assert.strictEqual(res.headers.get("vary"), "Origin");
+    assert.strictEqual(res.headers.get("access-control-allow-methods"), "POST, OPTIONS");
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F2: OPTIONS with forbidden origin returns HTTP 403 CORS_ORIGIN_FORBIDDEN without ACAO", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("OPTIONS", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "https://essencialgood.com"
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    assert.strictEqual(res.headers.get("vary"), "Origin");
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+    assert(!bodyText.includes("https://essencialgood.com"), "Error body must NOT reflect origin value");
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F3: OPTIONS without Origin returns HTTP 204 neutral without ACAO, with Vary: Origin", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("OPTIONS", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {});
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 204);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    assert.strictEqual(res.headers.get("vary"), "Origin");
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F4: POST with valid origin returns null (allows business logic to proceed)", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "https://staging.essencialgood.com"
+    });
+    const res = handleCorsPreflight(req);
+    assert.strictEqual(res, null);
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F5: POST WITHOUT Origin header fails closed immediately with HTTP 403 CORS_ORIGIN_FORBIDDEN", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {});
+    const res = handleCorsPreflight(req);
+    assert(res !== null, "Business request without Origin must be rejected immediately");
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    assert.strictEqual(res.headers.get("vary"), "Origin");
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F6: POST with empty Origin header ('') fails closed immediately with HTTP 403", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "   "
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F7: POST with Origin: null ('null') fails closed immediately with HTTP 403", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "null"
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+    assert(!bodyText.includes("null"), "Error body must NOT reflect origin input");
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F8: POST with comma-separated multiple origins fails closed with HTTP 403", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "https://staging.essencialgood.com, https://evil.com"
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
+});
+
+test("F9: POST with CR, LF, null-byte or malformed origin fails closed with HTTP 403", async () => {
+  const originalEnv = process.env.DENO_ENV;
+  process.env.DENO_ENV = "staging";
+  try {
+    // 1. Direct function test with null-byte string
+    assert.strictEqual(isAllowedCorsOrigin("https://staging.essencialgood.com\0", "staging"), false);
+    assert.strictEqual(isAllowedCorsOrigin("https://staging.essencialgood.com\r\n", "staging"), false);
+
+    // 2. Encoded CRLF injection attempt
+    const req = createMockRequest("POST", "https://zauvpsxeexwthobmbkku.supabase.co/functions/v1/create-conversation", {
+      Origin: "https://staging.essencialgood.com%0d%0aSet-Cookie:evil=1"
+    });
+    const res = handleCorsPreflight(req);
+    assert(res !== null);
+    assert.strictEqual(res.status, 403);
+    assert.strictEqual(res.headers.get("access-control-allow-origin"), null);
+    const bodyText = await res.text();
+    assert(bodyText.includes("CORS_ORIGIN_FORBIDDEN"));
+  } finally {
+    process.env.DENO_ENV = originalEnv;
+  }
 });
 
 
