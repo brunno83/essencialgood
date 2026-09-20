@@ -346,7 +346,7 @@ export function useVisitorChat(options = {}) {
     try {
       const { data, error: fetchErr } = await activeSupabase
         .from('messages')
-        .select('*')
+        .select('id, conversation_id, sender_id, sender_type, content, read_at, created_at')
         .eq('conversation_id', convId)
         .order('created_at', { ascending: true });
 
@@ -516,21 +516,31 @@ export function useVisitorChat(options = {}) {
       let activeConv = null;
 
       if (cachedConvId) {
-        const { data: cachedData } = await activeSupabase
+        const { data: cachedData, error: cachedErr } = await activeSupabase
           .from('conversations')
-          .select('*')
+          .select('id, visitor_id, status, last_message_at, created_at, updated_at, source_product, archived_at')
           .eq('id', cachedConvId)
           .maybeSingle();
 
-        const cachedConversationIsValid =
-          cachedData &&
-          cachedData.visitor_id === authUser.id &&
-          !cachedData.archived_at &&
-          ['open', 'pending'].includes(cachedData.status);
+        if (cachedErr) {
+          if (typeof window !== 'undefined' && import.meta.env.DEV) {
+            console.warn('[VisitorChat] Erro ao consultar conversa em cache:', cachedErr.message);
+          }
+          // Preserva a referência em localStorage caso haja erro transitório de rede
+        } else if (cachedData) {
+          const cachedConversationIsValid =
+            cachedData.visitor_id === authUser.id &&
+            !cachedData.archived_at &&
+            ['open', 'pending'].includes(cachedData.status);
 
-        if (cachedConversationIsValid) {
-          activeConv = cachedData;
+          if (cachedConversationIsValid) {
+            activeConv = cachedData;
+          } else {
+            // Remove do cache apenas se a conversa for explicitamente inválida, arquivada ou de outro visitante
+            localStorage.removeItem(CONV_STORAGE_KEY);
+          }
         } else {
+          // Consulta retornou nula sem erro (data === null, error === null): a conversa não existe no banco
           localStorage.removeItem(CONV_STORAGE_KEY);
         }
       }
@@ -538,7 +548,7 @@ export function useVisitorChat(options = {}) {
       if (!activeConv) {
         const { data: existing, error: fetchErr } = await activeSupabase
           .from('conversations')
-          .select('*')
+          .select('id, visitor_id, status, last_message_at, created_at, updated_at, source_product, archived_at')
           .eq('visitor_id', authUser.id)
           .is('archived_at', null)
           .in('status', ['open', 'pending'])
@@ -546,12 +556,14 @@ export function useVisitorChat(options = {}) {
           .limit(1)
           .maybeSingle();
 
-        if (fetchErr && typeof window !== 'undefined' && import.meta.env.DEV) {
-          console.warn('[VisitorChat] Erro ao buscar conversa ativa:', fetchErr.message);
-        }
-
-        if (existing) {
-          activeConv = existing;
+        if (fetchErr) {
+          if (typeof window !== 'undefined' && import.meta.env.DEV) {
+            console.warn('[VisitorChat] Erro ao buscar conversa ativa:', fetchErr.message);
+          }
+        } else if (existing) {
+          if (existing.id && existing.visitor_id === authUser.id && ['open', 'pending'].includes(existing.status)) {
+            activeConv = existing;
+          }
         }
       }
 
