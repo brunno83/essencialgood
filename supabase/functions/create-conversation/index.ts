@@ -1,5 +1,5 @@
 // Supabase Edge Function: create-conversation
-// Finalidade: Criação segura e idempotente de conversas para visitantes autenticados.
+// Finalidade: Criação e atualização segura de conversas para visitantes autenticados.
 
 import { createClient } from "npm:@supabase/supabase-js@2.48.1";
 import { handleCorsPreflight } from "../_shared/cors.ts";
@@ -11,12 +11,93 @@ import { generateOpaqueBucketKey, extractClientIp } from "../_shared/crypto.ts";
 import { evaluateDualWindowRateLimits } from "../_shared/rate_limit.ts";
 import { logWarn } from "../_shared/logger.ts";
 
+export const ALLOWED_CREATE_CONVERSATION_FIELDS = new Set([
+  "turnstileToken",
+  "visitor_name",
+  "visitor_email",
+  "visitor_phone",
+  "visitor_country_code",
+  "visitor_dial_code",
+  "source_url",
+  "source_path",
+  "source_title",
+  "source_product",
+]);
+
 export interface CreateConversationBody {
-  turnstileToken: string;
-  productName?: string;
-  sourceUrl?: string;
-  pageTitle?: string;
-  pageType?: string;
+  turnstileToken?: string;
+  visitor_name?: string;
+  visitor_email?: string;
+  visitor_phone?: string;
+  visitor_country_code?: string;
+  visitor_dial_code?: string;
+  source_url?: string;
+  source_path?: string;
+  source_title?: string;
+  source_product?: string;
+  [key: string]: unknown;
+}
+
+export function validateAndDeriveSourceUrl(
+  urlStr: unknown
+): { safeSourceUrl: string | null; derivedSourceHost: string | null } {
+  if (!urlStr || typeof urlStr !== "string" || urlStr.trim().length === 0) {
+    return { safeSourceUrl: null, derivedSourceHost: null };
+  }
+
+  const trimmed = urlStr.trim();
+  if (trimmed.length > 2048) {
+    throw new Error("Field 'source_url' exceeds maximum length of 2048 characters.");
+  }
+
+  const lower = trimmed.toLowerCase();
+  if (lower.startsWith("javascript:") || lower.startsWith("data:") || lower.startsWith("file:") || lower.startsWith("vbscript:")) {
+    throw new Error("Unsafe protocol in field 'source_url'.");
+  }
+
+  let parsed: URL;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new Error("Malformed URL in field 'source_url'.");
+  }
+
+  if (parsed.username || parsed.password) {
+    throw new Error("Credentials (userinfo) not allowed in field 'source_url'.");
+  }
+
+  const hostname = parsed.hostname.toLowerCase().trim();
+  if (!hostname || hostname.length === 0) {
+    throw new Error("Empty host in field 'source_url'.");
+  }
+
+  const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
+  const isDev = environment === "development" || environment === "test";
+
+  // Domínios oficiais estritos
+  const isOfficialDomain = hostname === "essencialgood.com" || hostname === "www.essencialgood.com";
+
+  // Localhost permitido apenas em desenvolvimento/testes
+  const isDevLocalhost = isDev && (hostname === "localhost" || hostname === "127.0.0.1");
+
+  if (!isOfficialDomain && !isDevLocalhost) {
+    throw new Error("Unauthorized hostname in field 'source_url'.");
+  }
+
+  // Para domínios oficiais, exige HTTPS estrito
+  if (!isDevLocalhost && parsed.protocol !== "https:") {
+    throw new Error("Field 'source_url' must use HTTPS protocol.");
+  }
+
+  // Para localhost em dev, exige HTTP ou HTTPS
+  if (isDevLocalhost && parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    throw new Error("Field 'source_url' must use HTTP or HTTPS protocol.");
+  }
+
+  return {
+    safeSourceUrl: trimmed,
+    derivedSourceHost: hostname,
+  };
 }
 
 Deno.serve(async (req: Request) => {
@@ -29,11 +110,24 @@ Deno.serve(async (req: Request) => {
     const user = extractUserFromRequest(req);
 
     // 3. Leitura do corpo com trava estrita de 16 KB
-    const body = await readJsonBody<CreateConversationBody>(req, 16384);
+    const rawBody = await readJsonBody<CreateConversationBody>(req, 16384);
 
-    // 4. Validação do Cloudflare Turnstile (action = 'create_conversation')
+    // 4. Rejeição estrita de campos não permitidos (Allowlist)
+    for (const key of Object.keys(rawBody)) {
+      if (!ALLOWED_CREATE_CONVERSATION_FIELDS.has(key)) {
+        return errorResponse(
+          "Unknown field is not allowed in payload.",
+          "UNKNOWN_PAYLOAD_FIELD",
+          400,
+          req
+        );
+      }
+    }
+
+    // 5. Validação do Cloudflare Turnstile (action = 'create_conversation')
+    const turnstileToken = typeof rawBody.turnstileToken === "string" ? rawBody.turnstileToken : "";
     const turnstileResult = await validateTurnstileToken({
-      token: body.turnstileToken || "",
+      token: turnstileToken,
       expectedAction: "create_conversation",
     });
 
@@ -57,7 +151,98 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // 5. Avaliação de Rate Limit (Chaves 100% Opacas)
+    // 6. Validação dos Campos de Contato e Origem
+    const nameStr = typeof rawBody.visitor_name === "string" ? rawBody.visitor_name.trim() : "";
+    if (nameStr.length < 2 || nameStr.length > 120 || /[\x00-\x1F\x7F<>]/.test(nameStr)) {
+      return errorResponse(
+        "Field 'visitor_name' is required and must be 2-120 valid characters.",
+        "INVALID_VISITOR_NAME",
+        400,
+        req
+      );
+    }
+
+    let validEmail: string | null = null;
+    if (typeof rawBody.visitor_email === "string" && rawBody.visitor_email.trim().length > 0) {
+      const emailTrim = rawBody.visitor_email.trim().toLowerCase();
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (emailTrim.length > 150 || !emailRegex.test(emailTrim)) {
+        return errorResponse("Field 'visitor_email' is invalid.", "INVALID_VISITOR_EMAIL", 400, req);
+      }
+      validEmail = emailTrim;
+    }
+
+    let validPhone: string | null = null;
+    if (typeof rawBody.visitor_phone === "string" && rawBody.visitor_phone.trim().length > 0) {
+      const phoneTrim = rawBody.visitor_phone.trim();
+      const phoneRegex = /^\+[1-9]\d{7,14}$/;
+      if (phoneTrim.length > 16 || !phoneRegex.test(phoneTrim)) {
+        return errorResponse("Field 'visitor_phone' must be in E.164 format.", "INVALID_VISITOR_PHONE", 400, req);
+      }
+      validPhone = phoneTrim;
+    }
+
+    let validCountryCode: string | null = null;
+    if (typeof rawBody.visitor_country_code === "string" && rawBody.visitor_country_code.trim().length > 0) {
+      const countryTrim = rawBody.visitor_country_code.trim().toUpperCase();
+      if (!/^[A-Z]{2}$/.test(countryTrim)) {
+        return errorResponse("Field 'visitor_country_code' must be 2 uppercase ISO letters.", "INVALID_COUNTRY_CODE", 400, req);
+      }
+      validCountryCode = countryTrim;
+    }
+
+    let validDialCode: string | null = null;
+    if (typeof rawBody.visitor_dial_code === "string" && rawBody.visitor_dial_code.trim().length > 0) {
+      const dialTrim = rawBody.visitor_dial_code.trim();
+      if (!/^\+\d{1,4}$/.test(dialTrim)) {
+        return errorResponse("Field 'visitor_dial_code' is invalid.", "INVALID_DIAL_CODE", 400, req);
+      }
+      validDialCode = dialTrim;
+    }
+
+    let safeSourceTitle: string | null = null;
+    if (typeof rawBody.source_title === "string" && rawBody.source_title.trim().length > 0) {
+      const titleTrim = rawBody.source_title.trim();
+      if (titleTrim.length > 200 || /[\x00-\x1F\x7F<>]/.test(titleTrim)) {
+        return errorResponse("Field 'source_title' contains invalid characters or exceeds 200 characters.", "INVALID_SOURCE_TITLE", 400, req);
+      }
+      safeSourceTitle = titleTrim;
+    }
+
+    let safeSourceProduct: string | null = null;
+    if (typeof rawBody.source_product === "string" && rawBody.source_product.trim().length > 0) {
+      const prodTrim = rawBody.source_product.trim();
+      if (prodTrim.length > 100 || /[\x00-\x1F\x7F<>]/.test(prodTrim)) {
+        return errorResponse("Field 'source_product' contains invalid characters or exceeds 100 characters.", "INVALID_SOURCE_PRODUCT", 400, req);
+      }
+      safeSourceProduct = prodTrim;
+    }
+
+    let safeSourcePath: string | null = null;
+    if (typeof rawBody.source_path === "string" && rawBody.source_path.trim().length > 0) {
+      const pathTrim = rawBody.source_path.trim();
+      if (pathTrim.length > 500 || !pathTrim.startsWith("/") || /[\x00-\x1F\x7F<>@]/.test(pathTrim) || pathTrim.includes("://")) {
+        return errorResponse("Field 'source_path' must be a valid path starting with '/'.", "INVALID_SOURCE_PATH", 400, req);
+      }
+      safeSourcePath = pathTrim;
+    }
+
+    let safeSourceUrl: string | null = null;
+    let derivedSourceHost: string | null = null;
+    try {
+      const derived = validateAndDeriveSourceUrl(rawBody.source_url);
+      safeSourceUrl = derived.safeSourceUrl;
+      derivedSourceHost = derived.derivedSourceHost;
+    } catch (urlErr: unknown) {
+      return errorResponse(
+        urlErr instanceof Error ? urlErr.message : "Invalid URL in field 'source_url'.",
+        "INVALID_SOURCE_URL",
+        400,
+        req
+      );
+    }
+
+    // 7. Avaliação de Rate Limit (Chaves 100% Opacas)
     const clientIp = extractClientIp(req);
     const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
@@ -93,9 +278,19 @@ Deno.serve(async (req: Request) => {
       return rateLimitErrorResponse(ipResult.retryAfterSeconds, req);
     }
 
-    // 6. Invocação da RPC protegida usando service_role passando EXCLUSIVAMENTE o UID extraído do JWT
+    // 8. Invocação da RPC protegida usando service_role com UID derivado do JWT e campos validados
     const { data: convData, error: convError } = await adminClient.rpc("p_create_visitor_conversation", {
       p_visitor_id: user.user_id,
+      p_visitor_name: nameStr,
+      p_visitor_email: validEmail,
+      p_visitor_phone: validPhone,
+      p_visitor_country_code: validCountryCode,
+      p_visitor_dial_code: validDialCode,
+      p_source_url: safeSourceUrl,
+      p_source_path: safeSourcePath,
+      p_source_host: derivedSourceHost,
+      p_source_title: safeSourceTitle,
+      p_source_product: safeSourceProduct,
     });
 
     if (convError) {

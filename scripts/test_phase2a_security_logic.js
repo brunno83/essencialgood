@@ -52,8 +52,8 @@ assert(sql010Content.includes('GRANT EXECUTE ON FUNCTION public.cleanup_expired_
 assert(sql010Content.includes('SECURITY DEFINER') && sql010Content.includes("SET search_path = ''"), 'Funções usam SECURITY DEFINER com search_path = \'\'.');
 
 // Auditoria das revogações estritas de RPCs (Zero permissão direta para visitantes)
-assert(sql010Content.includes('REVOKE ALL ON FUNCTION public.p_create_visitor_conversation(UUID) FROM PUBLIC, anon, authenticated;'), 'p_create_visitor_conversation tem EXECUTE revogado de anon e authenticated.');
-assert(sql010Content.includes('GRANT EXECUTE ON FUNCTION public.p_create_visitor_conversation(UUID) TO service_role;'), 'p_create_visitor_conversation concedido EXCLUSIVAMENTE para service_role.');
+assert(sql010Content.includes('REVOKE ALL ON FUNCTION public.p_create_visitor_conversation(UUID, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT) FROM PUBLIC, anon, authenticated;'), 'p_create_visitor_conversation tem EXECUTE revogado de anon e authenticated.');
+assert(sql010Content.includes('GRANT EXECUTE ON FUNCTION public.p_create_visitor_conversation(UUID, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT) TO service_role;'), 'p_create_visitor_conversation concedido EXCLUSIVAMENTE para service_role.');
 
 assert(sql010Content.includes('REVOKE ALL ON FUNCTION public.p_send_visitor_message(UUID, UUID, TEXT) FROM PUBLIC, anon, authenticated;'), 'p_send_visitor_message tem EXECUTE revogado de anon e authenticated.');
 assert(sql010Content.includes('GRANT EXECUTE ON FUNCTION public.p_send_visitor_message(UUID, UUID, TEXT) TO service_role;'), 'p_send_visitor_message concedido EXCLUSIVAMENTE para service_role.');
