@@ -1,9 +1,61 @@
 // Supabase Edge Functions - Shared CORS Module
 
-export const ALLOWED_ORIGINS = [
+export const PRODUCTION_ALLOWED_ORIGINS = [
   "https://essencialgood.com",
   "https://www.essencialgood.com",
 ];
+
+export const STAGING_ALLOWED_ORIGINS = [
+  "https://staging.essencialgood.com",
+];
+
+export const DEV_ALLOWED_LOCAL_ORIGINS = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:4173",
+  "http://127.0.0.1:4173",
+  "https://localhost:5173",
+  "https://127.0.0.1:5173",
+  "https://localhost:4173",
+  "https://127.0.0.1:4173",
+];
+
+export function isAllowedCorsOrigin(origin: string, envString: string): boolean {
+  if (!origin || typeof origin !== "string") return false;
+  const lowerOrigin = origin.toLowerCase().trim();
+  const environment = envString.toLowerCase().trim();
+
+  // Rejeita origens nulas, malformadas ou com caracteres perigosos
+  if (lowerOrigin === "null" || lowerOrigin.includes("\0") || lowerOrigin.includes("\r") || lowerOrigin.includes("\n")) {
+    return false;
+  }
+
+  const isProduction = environment === "production";
+  const isStaging = environment === "staging";
+  const isDev = environment === "development" || environment === "test";
+
+  // Se o ambiente for ausente ou desconhecido, falha fechado (NÃO faz fallback para produção)
+  if (!isProduction && !isStaging && !isDev) {
+    return false;
+  }
+
+  // 1. Em Produção: aceita EXCLUSIVAMENTE domínios de produção
+  if (isProduction) {
+    return PRODUCTION_ALLOWED_ORIGINS.includes(lowerOrigin);
+  }
+
+  // 2. Em Staging: aceita EXCLUSIVAMENTE o subdomínio dedicado de staging
+  if (isStaging) {
+    return STAGING_ALLOWED_ORIGINS.includes(lowerOrigin);
+  }
+
+  // 3. Em Dev/Test: aceita EXCLUSIVAMENTE portas locais autorizadas (5173, 4173)
+  if (isDev) {
+    return DEV_ALLOWED_LOCAL_ORIGINS.includes(lowerOrigin);
+  }
+
+  return false;
+}
 
 export function getCorsHeaders(req?: Request): Record<string, string> {
   const headers: Record<string, string> = {
@@ -23,11 +75,8 @@ export function getCorsHeaders(req?: Request): Record<string, string> {
   }
 
   const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
-  const isDev = environment === "development" || environment === "test";
 
-  if (ALLOWED_ORIGINS.includes(origin)) {
-    headers["Access-Control-Allow-Origin"] = origin;
-  } else if (isDev && (origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:"))) {
+  if (isAllowedCorsOrigin(origin, environment)) {
     headers["Access-Control-Allow-Origin"] = origin;
   }
 
@@ -38,14 +87,10 @@ export function getCorsHeaders(req?: Request): Record<string, string> {
 export function handleCorsPreflight(req: Request): Response | null {
   const origin = req.headers.get("origin");
   const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
-  const isDev = environment === "development" || environment === "test";
 
   // Se a origem estiver presente no cabeçalho, verifica se está na lista permitida
   if (origin) {
-    const isAllowed = ALLOWED_ORIGINS.includes(origin) ||
-      (isDev && (origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:")));
-
-    if (!isAllowed) {
+    if (!isAllowedCorsOrigin(origin, environment)) {
       // Origem não autorizada: HTTP 403 imediato sem Access-Control-Allow-Origin, com Vary: Origin
       return new Response(
         JSON.stringify({ error: "Origin forbidden by CORS policy.", code: "CORS_ORIGIN_FORBIDDEN" }),

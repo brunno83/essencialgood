@@ -2,10 +2,26 @@
  * Gerenciamento de Mensagens e Handshake postMessage para o Widget Iframe
  */
 
-const ALLOWED_ORIGIN_REGEX = /^https:\/\/[a-z0-9-]+\.essencialgood\.com$/i;
+export const PRODUCTION_ALLOWED_PARENT_ORIGINS = [
+  'https://essencialgood.com',
+  'https://www.essencialgood.com',
+];
+
+export const STAGING_ALLOWED_PARENT_ORIGINS = [
+  'https://staging.essencialgood.com',
+];
+
+export const DEV_ALLOWED_LOCAL_ORIGINS = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:4173',
+  'http://127.0.0.1:4173',
+  'https://localhost:5173',
+  'https://127.0.0.1:5173',
+];
 
 /**
- * Valida se a origem pai (parent window) é autorizada na allowlist
+ * Valida se a origem pai (parent window) é autorizada na allowlist estrita do ambiente ativo
  * @param {string} origin
  * @returns {boolean}
  */
@@ -13,26 +29,38 @@ export function isAllowedParentOrigin(origin) {
   if (!origin || typeof origin !== 'string') return false;
   const lower = origin.toLowerCase().trim();
 
-  // Origens exatas de produção
-  if (lower === 'https://essencialgood.com' || lower === 'https://www.essencialgood.com') {
-    return true;
+  // Rejeita esquemas inseguros, caracteres nulos ou injeções
+  if (lower === 'null' || lower.includes('\0') || lower.includes('javascript:') || lower.includes('data:')) {
+    return false;
   }
 
-  // Subdomínios estritos *.essencialgood.com
-  if (ALLOWED_ORIGIN_REGEX.test(lower)) {
-    return true;
+  // Obtenção estrita do ambiente ativo a partir de import.meta.env ou process.env (VITE_APP_ENV)
+  const metaEnv = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {};
+  const appEnv = (metaEnv.VITE_APP_ENV || (typeof process !== 'undefined' && process.env && process.env.VITE_APP_ENV) || '').toLowerCase().trim();
+  const isDevEnv = Boolean(metaEnv.DEV);
+
+  const isProductionEnv = appEnv === 'production';
+  const isStagingEnv = appEnv === 'staging';
+  const isDevelopmentEnv = appEnv === 'development' || appEnv === 'test' || (isDevEnv && !appEnv);
+
+  // Se o ambiente for ausente ou desconhecido, falha fechado (NÃO faz fallback para produção)
+  if (!isProductionEnv && !isStagingEnv && !isDevelopmentEnv) {
+    return false;
   }
 
-  // Origens locais permitidas apenas em ambiente de desenvolvimento
-  if (import.meta.env.DEV) {
-    try {
-      const url = new URL(lower);
-      if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
-        return true;
-      }
-    } catch (e) {
-      // ignore
-    }
+  // 1. Em Produção: aceita EXCLUSIVAMENTE origens de produção oficiais
+  if (isProductionEnv && !isDevEnv) {
+    return PRODUCTION_ALLOWED_PARENT_ORIGINS.includes(lower);
+  }
+
+  // 2. Em Staging: aceita EXCLUSIVAMENTE o subdomínio dedicado de staging
+  if (isStagingEnv && !isDevEnv) {
+    return STAGING_ALLOWED_PARENT_ORIGINS.includes(lower);
+  }
+
+  // 3. Em Desenvolvimento/Testes: aceita EXCLUSIVAMENTE portas locais autorizadas (5173, 4173)
+  if (isDevelopmentEnv) {
+    return DEV_ALLOWED_LOCAL_ORIGINS.includes(lower);
   }
 
   return false;
@@ -58,7 +86,7 @@ export const MSG_TYPES = {
 export function postToParent(type, payload = {}, targetOrigin) {
   if (typeof window === 'undefined' || window.parent === window) return;
   if (!targetOrigin || targetOrigin === '*') {
-    if (import.meta.env.DEV) {
+    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
       console.warn('[widgetMessaging] targetOrigin inválido ou wildcard (*) rejeitado.');
     }
     return;

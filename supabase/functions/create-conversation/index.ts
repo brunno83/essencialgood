@@ -72,21 +72,47 @@ export function validateAndDeriveSourceUrl(
   }
 
   const environment = (Deno.env.get("DENO_ENV") || Deno.env.get("ENVIRONMENT") || "").toLowerCase().trim();
+  const isProduction = environment === "production";
+  const isStaging = environment === "staging";
   const isDev = environment === "development" || environment === "test";
 
-  // Domínios oficiais estritos
+  // Se o ambiente for ausente ou desconhecido, falha fechado
+  if (!isProduction && !isStaging && !isDev) {
+    throw new Error("Unauthorized environment for field 'source_url'.");
+  }
+
+  // Domínios de produção estritos
   const isOfficialDomain = hostname === "essencialgood.com" || hostname === "www.essencialgood.com";
 
-  // Localhost permitido apenas em desenvolvimento/testes
-  const isDevLocalhost = isDev && (hostname === "localhost" || hostname === "127.0.0.1");
+  // Domínio de staging estrito
+  const isStagingDomain = hostname === "staging.essencialgood.com";
 
-  if (!isOfficialDomain && !isDevLocalhost) {
+  // Localhost estrito (apenas portas permitidas: 5173 e 4173)
+  const isDevLocalhost = hostname === "localhost" || hostname === "127.0.0.1";
+  const port = parsed.port;
+  const isAllowedDevPort = !port || port === "5173" || port === "4173";
+
+  // Validação cruzada estrita entre hostname/porta e ambiente
+  if (isProduction && !isOfficialDomain) {
     throw new Error("Unauthorized hostname in field 'source_url'.");
   }
 
-  // Para domínios oficiais, exige HTTPS estrito
-  if (!isDevLocalhost && parsed.protocol !== "https:") {
-    throw new Error("Field 'source_url' must use HTTPS protocol.");
+  if (isStaging && !isStagingDomain) {
+    throw new Error("Unauthorized hostname in field 'source_url'.");
+  }
+
+  if (isDev && (!isDevLocalhost || !isAllowedDevPort)) {
+    throw new Error("Unauthorized hostname or port in field 'source_url'.");
+  }
+
+  // Para domínios não-localhost, exige HTTPS estrito e sem porta explícita
+  if (!isDevLocalhost) {
+    if (parsed.protocol !== "https:") {
+      throw new Error("Field 'source_url' must use HTTPS protocol.");
+    }
+    if (parsed.port) {
+      throw new Error("Field 'source_url' cannot specify explicit port for production/staging.");
+    }
   }
 
   // Para localhost em dev, exige HTTP ou HTTPS

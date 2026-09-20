@@ -21,10 +21,42 @@ export interface TurnstileVerificationResult {
   probeMeta?: TurnstileProbeMeta;
 }
 
-export const ALLOWED_TURNSTILE_HOSTNAMES = [
+export const PRODUCTION_TURNSTILE_HOSTNAMES = [
   "essencialgood.com",
   "www.essencialgood.com",
 ];
+
+export const STAGING_TURNSTILE_HOSTNAMES = [
+  "staging.essencialgood.com",
+];
+
+export function isAllowedTurnstileHostname(hostname: string, environment: string): boolean {
+  if (!hostname || typeof hostname !== "string") return false;
+  const lowerHost = hostname.toLowerCase().trim();
+  const env = environment.toLowerCase().trim();
+
+  const isProduction = env === "production";
+  const isStaging = env === "staging";
+  const isDev = env === "development" || env === "test";
+
+  if (!isProduction && !isStaging && !isDev) {
+    return false;
+  }
+
+  if (isProduction) {
+    return PRODUCTION_TURNSTILE_HOSTNAMES.includes(lowerHost);
+  }
+
+  if (isStaging) {
+    return STAGING_TURNSTILE_HOSTNAMES.includes(lowerHost);
+  }
+
+  if (isDev) {
+    return lowerHost === "localhost" || lowerHost === "127.0.0.1";
+  }
+
+  return false;
+}
 
 export async function validateTurnstileToken(
   options: TurnstileVerificationOptions
@@ -151,8 +183,8 @@ export async function validateTurnstileToken(
   }
 
   // Fora do caminho de chave dummy oficial da Cloudflare:
-  // 1. Validação estrita de Hostname (somente allowlist de produção)
-  if (!ALLOWED_TURNSTILE_HOSTNAMES.includes(lowerHost)) {
+  // 1. Validação estrita de Hostname condicionada ao ambiente
+  if (!isAllowedTurnstileHostname(lowerHost, environment)) {
     return {
       valid: false,
       errorCode: "TURNSTILE_HOSTNAME_MISMATCH",

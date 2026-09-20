@@ -42,13 +42,29 @@
 
   var configuredProduct = scriptTag ? scriptTag.getAttribute('data-product') : null;
 
-  // Determina a origem de produção vs desenvolvimento local
+  // Determinação determinística e isolada da WIDGET_ORIGIN por hostname e porta conhecidos
   var hostname = (window.location.hostname || '').toLowerCase().trim();
-  var isDev = hostname === 'localhost' || hostname === '127.0.0.1';
+  var protocol = (window.location.protocol || '').toLowerCase().trim();
+  var port = window.location.port || '';
 
-  var WIDGET_ORIGIN = isDev
-    ? window.location.origin
-    : 'https://www.essencialgood.com';
+  var WIDGET_ORIGIN;
+  if ((hostname === 'localhost' || hostname === '127.0.0.1') && (protocol === 'http:' || protocol === 'https:')) {
+    if (!port || port === '5173' || port === '4173') {
+      WIDGET_ORIGIN = window.location.origin;
+    } else {
+      logLoader('Aborting chat loader: Unauthorized local port', { hostname: hostname, port: port });
+      return;
+    }
+  } else if (hostname === 'staging.essencialgood.com' && protocol === 'https:' && !port) {
+    WIDGET_ORIGIN = 'https://staging.essencialgood.com';
+  } else if ((hostname === 'essencialgood.com' || hostname === 'www.essencialgood.com') && protocol === 'https:' && !port) {
+    WIDGET_ORIGIN = 'https://www.essencialgood.com';
+  } else {
+    // Host desconhecido, spoofado ou *.vercel.app: FALHA FECHADO imediatamente!
+    // Não inicializa o iframe e não cria o container.
+    logLoader('Aborting chat loader: Unknown or unauthorized host', { hostname: hostname, protocol: protocol, port: port });
+    return;
+  }
 
   // URL exata do iframe limpa (sem UTMs para evitar re-execução de scripts externos)
   var frameUrl = WIDGET_ORIGIN + '/widget-frame';
