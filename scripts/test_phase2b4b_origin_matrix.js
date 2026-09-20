@@ -198,42 +198,50 @@ test("C4: Absent environment FAILS CLOSED", () => {
 // ----------------------------------------------------
 console.log("\n--- BLOCK D: Widget Messaging Parent Origin Matrix (`widgetMessaging.js`) ---");
 
-test("D1: Production Parent Origin accepts official origins only", () => {
-  process.env.VITE_APP_ENV = "production";
-  assert.strictEqual(isAllowedParentOrigin("https://essencialgood.com"), true);
-  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com"), true);
-  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com"), false);
-  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173"), false);
+test("D1: VITE_APP_ENV ausente + DEV=true => REJEITADO (Fail Closed)", () => {
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "", DEV: true }), false);
 });
 
-test("D2: Staging Parent Origin accepts staging origin only", () => {
-  process.env.VITE_APP_ENV = "staging";
-  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com"), true);
-  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com"), false);
-  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173"), false);
+test("D2: VITE_APP_ENV vazio ('') + DEV=true => REJEITADO (Fail Closed)", () => {
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "  ", DEV: true }), false);
 });
 
-test("D3: Dev Parent Origin accepts explicit local ports only (5173, 4173)", () => {
-  process.env.VITE_APP_ENV = "development";
-  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173"), true);
-  assert.strictEqual(isAllowedParentOrigin("http://127.0.0.1:4173"), true);
-  assert.strictEqual(isAllowedParentOrigin("http://localhost:8080"), false); // Porta não-autorizada
+test("D3: VITE_APP_ENV=development + DEV=true => ACEITO para origem local autorizada", () => {
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "development", DEV: true }), true);
+  assert.strictEqual(isAllowedParentOrigin("http://127.0.0.1:4173", { VITE_APP_ENV: "development", DEV: true }), true);
 });
 
-test("D4: Absent VITE_APP_ENV FAILS CLOSED (rejects all)", () => {
-  delete process.env.VITE_APP_ENV;
-  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com"), false);
-  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com"), false);
-  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173"), false);
+test("D4: VITE_APP_ENV=test => ACEITO somente para origem local autorizada", () => {
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "test", DEV: false }), true);
+  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com", { VITE_APP_ENV: "test", DEV: false }), false);
 });
 
-test("D5: Rejects null, spoofed, unknown, null-char and invalid schemes", () => {
-  process.env.VITE_APP_ENV = "production";
-  assert.strictEqual(isAllowedParentOrigin("null"), false);
-  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com.evil"), false);
-  assert.strictEqual(isAllowedParentOrigin("https://unknown.essencialgood.com"), false);
-  assert.strictEqual(isAllowedParentOrigin("javascript:alert(1)"), false);
-  assert.strictEqual(isAllowedParentOrigin("https://essencialgood.com\0.evil.com"), false);
+test("D5: VITE_APP_ENV=qa => REJEITADO (Fail Closed)", () => {
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "qa", DEV: false }), false);
+  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com", { VITE_APP_ENV: "qa", DEV: false }), false);
+});
+
+test("D6: VITE_APP_ENV=production + DEV=true => Conflito detectado => REJEITADO (Fail Closed)", () => {
+  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com", { VITE_APP_ENV: "production", DEV: true }), false);
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "production", DEV: true }), false);
+});
+
+test("D7: VITE_APP_ENV=staging + DEV=true => Conflito detectado => REJEITADO (Fail Closed)", () => {
+  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com", { VITE_APP_ENV: "staging", DEV: true }), false);
+  assert.strictEqual(isAllowedParentOrigin("http://localhost:5173", { VITE_APP_ENV: "staging", DEV: true }), false);
+});
+
+test("D8: Staging sem DEV flag aceita apenas staging origin", () => {
+  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com", { VITE_APP_ENV: "staging", DEV: false }), true);
+  assert.strictEqual(isAllowedParentOrigin("https://www.essencialgood.com", { VITE_APP_ENV: "staging", DEV: false }), false);
+});
+
+test("D9: Rejects null, spoofed, unknown, null-char and invalid schemes", () => {
+  assert.strictEqual(isAllowedParentOrigin("null", { VITE_APP_ENV: "production", DEV: false }), false);
+  assert.strictEqual(isAllowedParentOrigin("https://staging.essencialgood.com.evil", { VITE_APP_ENV: "staging", DEV: false }), false);
+  assert.strictEqual(isAllowedParentOrigin("https://unknown.essencialgood.com", { VITE_APP_ENV: "staging", DEV: false }), false);
+  assert.strictEqual(isAllowedParentOrigin("javascript:alert(1)", { VITE_APP_ENV: "staging", DEV: false }), false);
+  assert.strictEqual(isAllowedParentOrigin("https://essencialgood.com\0.evil.com", { VITE_APP_ENV: "production", DEV: false }), false);
 });
 
 

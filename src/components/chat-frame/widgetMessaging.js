@@ -23,9 +23,10 @@ export const DEV_ALLOWED_LOCAL_ORIGINS = [
 /**
  * Valida se a origem pai (parent window) é autorizada na allowlist estrita do ambiente ativo
  * @param {string} origin
+ * @param {Object} [metaEnvOverride] Optional override for testing
  * @returns {boolean}
  */
-export function isAllowedParentOrigin(origin) {
+export function isAllowedParentOrigin(origin, metaEnvOverride) {
   if (!origin || typeof origin !== 'string') return false;
   const lower = origin.toLowerCase().trim();
 
@@ -34,31 +35,42 @@ export function isAllowedParentOrigin(origin) {
     return false;
   }
 
-  // Obtenção estrita do ambiente ativo a partir de import.meta.env ou process.env (VITE_APP_ENV)
-  const metaEnv = (typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {};
-  const appEnv = (metaEnv.VITE_APP_ENV || (typeof process !== 'undefined' && process.env && process.env.VITE_APP_ENV) || '').toLowerCase().trim();
-  const isDevEnv = Boolean(metaEnv.DEV);
+  // Obtenção estrita do ambiente ativo (VITE_APP_ENV é OBRIGATÓRIO)
+  const metaEnv = metaEnvOverride || ((typeof import.meta !== 'undefined' && import.meta.env) ? import.meta.env : {});
+  const rawAppEnv = metaEnv.VITE_APP_ENV || (typeof process !== 'undefined' && process.env && process.env.VITE_APP_ENV) || '';
+
+  if (!rawAppEnv || typeof rawAppEnv !== 'string' || rawAppEnv.trim().length === 0) {
+    return false; // VITE_APP_ENV ausente/vazio => FALHA FECHADO imediatamente
+  }
+
+  const appEnv = rawAppEnv.toLowerCase().trim();
+  const isDevFlag = Boolean(metaEnv.DEV);
 
   const isProductionEnv = appEnv === 'production';
   const isStagingEnv = appEnv === 'staging';
-  const isDevelopmentEnv = appEnv === 'development' || appEnv === 'test' || (isDevEnv && !appEnv);
+  const isDevelopmentEnv = appEnv === 'development' || appEnv === 'test';
 
-  // Se o ambiente for ausente ou desconhecido, falha fechado (NÃO faz fallback para produção)
+  // Se o ambiente for desconhecido ou inválido (ex: 'qa'), falha fechado
   if (!isProductionEnv && !isStagingEnv && !isDevelopmentEnv) {
     return false;
   }
 
+  // Se houver conflito entre flag DEV e VITE_APP_ENV ('production' ou 'staging' com DEV=true), falha fechado por inconsistência
+  if (isDevFlag && (isProductionEnv || isStagingEnv)) {
+    return false;
+  }
+
   // 1. Em Produção: aceita EXCLUSIVAMENTE origens de produção oficiais
-  if (isProductionEnv && !isDevEnv) {
+  if (isProductionEnv) {
     return PRODUCTION_ALLOWED_PARENT_ORIGINS.includes(lower);
   }
 
   // 2. Em Staging: aceita EXCLUSIVAMENTE o subdomínio dedicado de staging
-  if (isStagingEnv && !isDevEnv) {
+  if (isStagingEnv) {
     return STAGING_ALLOWED_PARENT_ORIGINS.includes(lower);
   }
 
-  // 3. Em Desenvolvimento/Testes: aceita EXCLUSIVAMENTE portas locais autorizadas (5173, 4173)
+  // 3. Em Desenvolvimento/Testes (VITE_APP_ENV === 'development' ou 'test'): aceita EXCLUSIVAMENTE portas locais autorizadas
   if (isDevelopmentEnv) {
     return DEV_ALLOWED_LOCAL_ORIGINS.includes(lower);
   }
