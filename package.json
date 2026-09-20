@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-precheckout-config.js && node scripts/build-pdp-routes.js && node scripts/stamp-admin-sw.js",
+    "build": "node scripts/validate-env-guard.js && vite build && node scripts/generate-precheckout-config.js && node scripts/build-pdp-routes.js && node scripts/stamp-admin-sw.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },

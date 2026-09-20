@@ -1,22 +1,30 @@
+// ESSENCIAL GOOD - SUPABASE CLIENT WITH GLOBAL ENVIRONMENT GUARD
+// Validates environment configuration before instantiating Supabase Client.
+
 import { createClient } from '@supabase/supabase-js';
+import { validateEnvConfig } from './envGuard.js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+let validatedEnv = null;
+let envValidationError = null;
 
-export const isSupabaseConfigured = Boolean(
-  supabaseUrl && 
-  supabaseAnonKey && 
-  !supabaseUrl.includes('your-supabase-project')
-);
-
-if (!isSupabaseConfigured) {
-  console.warn(
-    '[Supabase] Variáveis de ambiente VITE_SUPABASE_URL e/ou VITE_SUPABASE_ANON_KEY não configuradas. As funcionalidades do Supabase aguardarão a inclusão das chaves em .env ou .env.local.'
-  );
+try {
+  const rawConfig = {
+    VITE_APP_ENV: import.meta.env.VITE_APP_ENV,
+    VITE_EXPECTED_SUPABASE_PROJECT_REF: import.meta.env.VITE_EXPECTED_SUPABASE_PROJECT_REF,
+    VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+    VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+    VITE_TURNSTILE_SITE_KEY: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+  };
+  validatedEnv = validateEnvConfig(rawConfig);
+} catch (err) {
+  envValidationError = err instanceof Error ? err.message : String(err);
+  console.error('[Environment Guard] Supabase Client Instantiation BLOCKED:', envValidationError);
 }
 
+export const isSupabaseConfigured = Boolean(validatedEnv && !envValidationError);
+
 export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey, {
+  ? createClient(validatedEnv.supabaseUrl, validatedEnv.anonKey, {
       auth: {
         autoRefreshToken: true,
         persistSession: true,
@@ -24,5 +32,7 @@ export const supabase = isSupabaseConfigured
       },
     })
   : null;
+
+export const validatedEnvConfig = validatedEnv;
 
 export default supabase;

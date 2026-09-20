@@ -1,22 +1,25 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+// ESSENCIAL GOOD - GENERATE PRECHECKOUT STATIC CONFIG WITH ENVIRONMENT GUARD
+// Generates dist/precheckout-config.js for vanilla static pages & widgets after validating environment configuration.
+
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { validateEnvConfig, sanitizeKeyForLog } from "../src/lib/envGuard.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, '..');
-const distDir = path.resolve(rootDir, 'dist');
-const publicDir = path.resolve(rootDir, 'public');
+const rootDir = path.resolve(__dirname, "..");
+const distDir = path.resolve(rootDir, "dist");
 
-// Função auxiliar para carregar arquivos .env locais se não estiverem no process.env
+// Carregar variáveis locais se necessário
 function loadEnvFile(envFileName) {
   const envPath = path.join(rootDir, envFileName);
   if (!fs.existsSync(envPath)) return;
-  const content = fs.readFileSync(envPath, 'utf8');
-  content.split('\n').forEach(line => {
+  const content = fs.readFileSync(envPath, "utf8");
+  content.split("\n").forEach((line) => {
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) return;
-    const eqIdx = trimmed.indexOf('=');
+    if (!trimmed || trimmed.startsWith("#")) return;
+    const eqIdx = trimmed.indexOf("=");
     if (eqIdx !== -1) {
       const key = trimmed.slice(0, eqIdx).trim();
       let value = trimmed.slice(eqIdx + 1).trim();
@@ -30,47 +33,51 @@ function loadEnvFile(envFileName) {
   });
 }
 
-// Carregar variáveis locais na ordem de precedência
-loadEnvFile('.env.local');
-loadEnvFile('.env.production');
-loadEnvFile('.env');
+loadEnvFile(".env.local");
+loadEnvFile(".env.staging");
+loadEnvFile(".env.production");
+loadEnvFile(".env");
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('❌ ERRO CRÍTICO NO BUILD DE PRÉ-CHECKOUT: VITE_SUPABASE_URL ou VITE_SUPABASE_ANON_KEY ausentes no ambiente!');
+let validated;
+try {
+  validated = validateEnvConfig(process.env);
+} catch (err) {
+  console.error("❌ CRITICAL ERROR IN PRECHECKOUT CONFIG GENERATION:");
+  console.error(`   ${err instanceof Error ? err.message : String(err)}`);
   process.exit(1);
 }
 
-// Garantir ausência total de service_role_key
-if (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_SERVICE_ROLE_KEY) {
-  console.warn('⚠️ AVISO SEGURANÇA: Chave service_role detectada no ambiente. Ela NÃO será gravada no arquivo estático.');
-}
-
-const configContent = `// ESSENCIAL GOOD - Configuração Pública do Pré-Checkout (Gerado Automaticamente)
-window.__ESSENCIAL_SUPABASE_URL__ = ${JSON.stringify(supabaseUrl)};
-window.__ESSENCIAL_SUPABASE_ANON_KEY__ = ${JSON.stringify(supabaseAnonKey)};
+// Garantir ausência total de service_role ou secrets
+const configContent = `// ESSENCIAL GOOD - Configuração Pública do Pré-Checkout (Gerado de Forma Segura)
+window.__ESSENCIAL_APP_ENV__ = ${JSON.stringify(validated.appEnv)};
+window.__ESSENCIAL_PROJECT_REF__ = ${JSON.stringify(validated.expectedRef)};
+window.__ESSENCIAL_SUPABASE_URL__ = ${JSON.stringify(validated.supabaseUrl)};
+window.__ESSENCIAL_SUPABASE_ANON_KEY__ = ${JSON.stringify(validated.anonKey)};
+window.__ESSENCIAL_TURNSTILE_SITE_KEY__ = ${JSON.stringify(validated.turnstileSiteKey)};
 `;
 
-// Criar diretório dist se não existir
 if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir, { recursive: true });
 }
 
-const distConfigPath = path.join(distDir, 'precheckout-config.js');
-fs.writeFileSync(distConfigPath, configContent, 'utf8');
+const distConfigPath = path.join(distDir, "precheckout-config.js");
+const distTmpPath = path.join(distDir, "precheckout-config.js.tmp");
 
-// Também salvar na pasta public para desenvolvimento local
-if (fs.existsSync(publicDir)) {
-  const publicConfigPath = path.join(publicDir, 'precheckout-config.js');
-  fs.writeFileSync(publicConfigPath, configContent, 'utf8');
+try {
+  fs.writeFileSync(distTmpPath, configContent, "utf8");
+  fs.renameSync(distTmpPath, distConfigPath);
+} catch (err) {
+  if (fs.existsSync(distTmpPath)) {
+    try {
+      fs.unlinkSync(distTmpPath);
+    } catch (_) {}
+  }
+  console.error("❌ Failed to atomically write dist/precheckout-config.js");
+  process.exit(1);
 }
 
-const maskedKey = supabaseAnonKey.length > 16 
-  ? supabaseAnonKey.slice(0, 8) + '...' + supabaseAnonKey.slice(-6)
-  : '***';
-
 console.log(`✅ [PreCheckout Config] Criado com sucesso em dist/precheckout-config.js`);
-console.log(`   URL: ${supabaseUrl}`);
-console.log(`   ANON_KEY: ${maskedKey}`);
+console.log(`   Env: ${validated.appEnv}`);
+console.log(`   Ref: ${validated.expectedRef}`);
+console.log(`   URL: ${validated.supabaseUrl}`);
+console.log(`   ANON_KEY: ${sanitizeKeyForLog(validated.anonKey)}`);
