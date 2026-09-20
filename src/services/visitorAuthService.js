@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
+import { supabase, isSupabaseConfigured } from '../lib/supabaseClient.js';
 
 let signInPromise = null;
 
@@ -10,7 +10,7 @@ let signInPromise = null;
  */
 export async function checkIsAdminProfile(user, customSupabaseClient) {
   const activeSupabase = customSupabaseClient || supabase;
-  if (!user || user.is_anonymous || !activeSupabase || !isSupabaseConfigured) {
+  if (!user || user.is_anonymous || !activeSupabase || (!customSupabaseClient && !isSupabaseConfigured)) {
     return false;
   }
   try {
@@ -47,12 +47,12 @@ export async function checkIsAdminProfile(user, customSupabaseClient) {
 export async function getOrInitVisitorSession(customSupabaseClient) {
   const activeSupabase = customSupabaseClient || supabase;
 
-  if (!isSupabaseConfigured || !activeSupabase) {
+  if (!activeSupabase || (!customSupabaseClient && !isSupabaseConfigured)) {
     return { user: null, session: null, error: new Error('Supabase não configurado') };
   }
 
   // Evita criar sessão anônima se a rota atual for do painel administrativo
-  const currentPath = window.location.pathname.toLowerCase();
+  const currentPath = (typeof window !== 'undefined' && window.location?.pathname) ? window.location.pathname.toLowerCase() : '';
   if (currentPath.startsWith('/admin')) {
     const { data: { session } } = await activeSupabase.auth.getSession();
     return { user: session?.user ?? null, session: session ?? null, error: null };
@@ -60,7 +60,9 @@ export async function getOrInitVisitorSession(customSupabaseClient) {
 
   try {
     // 1. Verifica se já existe uma sessão ativa (seja anônima ou autenticada)
-    const { data: { session }, error: sessionError } = await activeSupabase.auth.getSession();
+    const sessionRes = (await activeSupabase.auth.getSession()) || {};
+    const session = sessionRes.data?.session || null;
+    const sessionError = sessionRes.error || null;
 
     if (sessionError && typeof window !== 'undefined' && import.meta.env.DEV) {
       console.warn('[VisitorAuth] Erro ao verificar sessão existente:', sessionError.message);
