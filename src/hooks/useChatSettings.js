@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
+import { brandSymbol } from '../assets/brandAssets';
 
 export const DEFAULT_CHAT_SETTINGS = {
   header_title: 'Essencial Good',
@@ -7,7 +8,7 @@ export const DEFAULT_CHAT_SETTINGS = {
   form_title: 'Chat with Essencial Good',
   form_subtitle: 'Fill in the details below to start your live chat with our team.',
   agent_name: 'Essencial Good Team',
-  avatar_url: '/assets/Brand/essencial-good-symbol.png',
+  avatar_url: brandSymbol,
   welcome_message: 'Hello! How can we help you today?',
   is_enabled: true,
   phone_required: true,

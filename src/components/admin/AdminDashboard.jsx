@@ -12,6 +12,7 @@ import {
   User,
 } from 'lucide-react';
 import { LeadSourceDashboard } from './LeadSourceDashboard';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import './AdminStyles.css';
 
 const isDebugMode = typeof window !== 'undefined' && window.location.search.includes('admin_debug=1');
@@ -316,10 +317,11 @@ export function AdminDashboard({ adminProfile, user, onSelectTab }) {
 
             <div className="dash-hero-symbol-bg">
               <img
-                src="/assets/Brand/essencial-good-symbol.png"
+                src={brandSymbol}
                 alt=""
                 aria-hidden="true"
                 className="dash-hero-symbol-img"
+                onError={(e) => handleBrandImageError(e, brandSymbol)}
               />
             </div>
           </div>

@@ -8,6 +8,7 @@ import { AdminCheckoutLeads } from './AdminCheckoutLeads';
 import { AdminChatSettings } from './AdminChatSettings';
 import { useAdminPWA } from '../../hooks/useAdminPWA';
 import { AdminOfflineOverlay, AdminUpdateBanner } from './AdminPWAComponents';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import './AdminStyles.css';
 
 export function AdminContainer() {
@@ -317,9 +318,10 @@ export function AdminContainer() {
       <div className="admin-loading-screen">
         <div className="admin-loading-card">
           <img
-            src="/assets/Brand/essencial-good-symbol.png"
+            src={brandSymbol}
             alt="Essencial Good Logo"
             className="admin-loading-logo"
+            onError={(e) => handleBrandImageError(e, brandSymbol)}
           />
           <h2 className="admin-loading-title">Essencial Good Admin</h2>
           <div className="admin-spinner" />

@@ -4,7 +4,7 @@ import { useConversationMessages } from '../../hooks/useConversationMessages';
 import { ConversationList } from './ConversationList';
 import { ConversationThread } from './ConversationThread';
 import { ConversationDetails } from './ConversationDetails';
-import { MessageSquare } from 'lucide-react';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import './AdminStyles.css';
 
 export function AdminConversations({ adminProfile }) {
@@ -189,9 +189,10 @@ export function AdminConversations({ adminProfile }) {
           ) : (
             <div className="conv-no-selection">
               <img
-                src="/assets/Brand/essencial-good-symbol.png"
+                src={brandSymbol}
                 alt="Essencial Good"
                 className="conv-no-selection-symbol"
+                onError={(e) => handleBrandImageError(e, brandSymbol)}
               />
               <h3 className="conv-no-selection-title">Selecione uma conversa</h3>
               <p className="conv-no-selection-desc">Escolha um atendimento na lista ao lado para visualizar o histórico de mensagens e responder ao visitante.</p>

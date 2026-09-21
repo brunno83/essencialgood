@@ -3,6 +3,7 @@ import { useChatSettings } from '../../hooks/useChatSettings';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { Save, Loader2, CheckCircle2, AlertCircle, Upload, Trash2, ShieldAlert } from 'lucide-react';
 import PhoneInput from '../chat/PhoneInput';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 
 import { AdminInstallWidget } from './AdminPWAComponents';
 
@@ -11,7 +12,7 @@ export function AdminChatSettings({ adminProfile, pwaProps }) {
 
   const { settings, loading, error: fetchError, updateSettings } = useChatSettings();
 
-  const DEFAULT_AVATAR = '/assets/Brand/essencial-good-symbol.png';
+  const DEFAULT_AVATAR = brandSymbol;
 
   const [formState, setFormState] = useState({
     header_title: '',
@@ -597,7 +598,7 @@ export function AdminChatSettings({ adminProfile, pwaProps }) {
 function PureVisualChatWindowPreview({ settings }) {
   const headerTitle = settings?.header_title || 'Essencial Good';
   const headerSubtitle = settings?.header_subtitle || 'Live Support';
-  const avatarUrl = settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png';
+  const avatarUrl = settings?.avatar_url || brandSymbol;
   const formTitle = settings?.form_title || 'Chat with Essencial Good';
   const formSubtitle = settings?.form_subtitle || 'Fill in the details below to start your live chat with our team.';
   const isEmailReq = settings?.email_required ?? false;
@@ -612,10 +613,7 @@ function PureVisualChatWindowPreview({ settings }) {
               src={avatarUrl}
               alt={headerTitle}
               className="chat-header-symbol-img"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/assets/Brand/essencial-good-symbol.png';
-              }}
+              onError={(e) => handleBrandImageError(e, brandSymbol)}
             />
           </div>
           <div>

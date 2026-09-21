@@ -3,6 +3,7 @@ import { LayoutDashboard, MessageSquare, Users, Settings, LogOut, Menu, X, Bell 
 import { AdminInstallWidget } from './AdminPWAComponents';
 import { AdminPushSettings } from './AdminPushSettings';
 import { useAdminPushNotifications } from '../../hooks/useAdminPushNotifications';
+import { brandLogo, handleBrandImageError } from '../../assets/brandAssets';
 import './AdminStyles.css';
 
 export function AdminLayout({
@@ -58,9 +59,10 @@ export function AdminLayout({
           <div className="admin-sidebar-brand">
             <div className="admin-brand-logo">
               <img
-                src="/assets/Brand/essencial-good-logo.png"
+                src={brandLogo}
                 alt="Essencial Good"
                 className="admin-sidebar-logo-img"
+                onError={(e) => handleBrandImageError(e, brandLogo)}
               />
             </div>
             <button

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
+import { brandLogo, handleBrandImageError } from '../../assets/brandAssets';
 import './AdminStyles.css';
 
 export function AdminLogin({ onLoginSuccess }) {
@@ -92,9 +93,10 @@ export function AdminLogin({ onLoginSuccess }) {
       <div className="admin-login-card">
         <div className="admin-login-header">
           <img
-            src="/assets/Brand/essencial-good-logo.png"
+            src={brandLogo}
             alt="Essencial Good"
             className="admin-login-logo"
+            onError={(e) => handleBrandImageError(e, brandLogo)}
           />
           <h1 className="admin-login-title">Painel Administrativo</h1>
           <p className="admin-login-subtitle">Acesse com suas credenciais de atendimento</p>

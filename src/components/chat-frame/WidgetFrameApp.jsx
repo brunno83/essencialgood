@@ -3,6 +3,7 @@ import { getWidgetSupabaseClient, sanitizeProductKey } from './widgetSupabaseCli
 import { isAllowedParentOrigin, MSG_TYPES, postToParent } from './widgetMessaging';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
 import { useChatSettings } from '../../hooks/useChatSettings';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import { ChatWindow } from '../chat/ChatWindow';
 import { debugLog, incrementDebugCount, isChatDebug } from '../../lib/chatDebug';
 import '../chat/ChatStyles.css';
@@ -317,13 +318,10 @@ function WidgetFrameChatInner({ supabaseClient, sourceMetadata, parentOrigin }) 
           >
             <div className="chat-button-symbol-wrapper">
               <img
-                src={settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png'}
+                src={settings?.avatar_url || brandSymbol}
                 alt={settings?.header_title || 'Essencial Good'}
                 className="chat-button-symbol"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/assets/Brand/essencial-good-symbol.png';
-                }}
+                onError={(e) => handleBrandImageError(e, brandSymbol)}
               />
             </div>
             {unreadCount > 0 && (

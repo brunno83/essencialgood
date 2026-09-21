@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Loader2 } from 'lucide-react';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import { ChatWelcomeForm } from './ChatWelcomeForm';
 import { ChatMessageList } from './ChatMessageList';
 import { ChatComposer } from './ChatComposer';
@@ -25,7 +26,7 @@ export function ChatWindow({
 
   const headerTitle = settings?.header_title || 'Essencial Good';
   const headerSubtitle = settings?.header_subtitle || 'Live Support';
-  const avatarUrl = settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png';
+  const avatarUrl = settings?.avatar_url || brandSymbol;
 
   return (
     <div className="chat-window-container" role="dialog" aria-label="Essencial Good Live Support Window">
@@ -37,10 +38,7 @@ export function ChatWindow({
               src={avatarUrl}
               alt={headerTitle}
               className="chat-header-symbol-img"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/assets/Brand/essencial-good-symbol.png';
-              }}
+              onError={(e) => handleBrandImageError(e, brandSymbol)}
             />
           </div>
           <div>

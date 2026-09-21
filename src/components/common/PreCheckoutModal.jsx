@@ -3,6 +3,7 @@ import { ShieldCheck, X, Loader2, Lock, AlertCircle, ArrowRight } from 'lucide-r
 import PhoneInput, { formatToE164 } from '../chat/PhoneInput';
 import { isValidCheckoutUrl, extractCheckoutParams } from '../../lib/checkoutAllowlist';
 import { supabase } from '../../lib/supabaseClient';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import './PreCheckoutStyles.css';
 
 export function PreCheckoutModal({ isOpen, targetCheckoutUrl, metadata, onClose }) {
@@ -194,10 +195,7 @@ export function PreCheckoutModal({ isOpen, targetCheckoutUrl, metadata, onClose 
               src={avatarUrl}
               alt="Essencial Good"
               className="eg-precheckout-logo"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/assets/Brand/essencial-good-symbol.png';
-              }}
+              onError={(e) => handleBrandImageError(e, brandSymbol)}
             />
             <div className="eg-precheckout-title-wrap">
               <h2 id="eg-precheckout-modal-title" className="eg-precheckout-title">
@@ -329,10 +327,10 @@ export function PreCheckoutModal({ isOpen, targetCheckoutUrl, metadata, onClose 
 function settingsAvatarForProduct(product) {
   const p = (product || '').toLowerCase();
   if (p.includes('slimsoda')) return '/assets/pdp/slimsoda/slimsoda-gallery-1.png';
-  if (p.includes('sonnus')) return '/assets/Brand/essencial-good-symbol.png';
-  if (p.includes('crowned')) return '/assets/Brand/essencial-good-symbol.png';
+  if (p.includes('sonnus')) return brandSymbol;
+  if (p.includes('crowned')) return brandSymbol;
   if (p.includes('linfaflow')) return '/linfaflow/images/gallery-hero-cover.jpg';
-  return '/assets/Brand/essencial-good-symbol.png';
+  return brandSymbol;
 }
 
 function getVisitorId() {

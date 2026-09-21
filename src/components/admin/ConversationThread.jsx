@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, ArrowLeft, Check, CheckCheck, Lock, AlertCircle, Loader2, User, Info, Archive, RotateCcw } from 'lucide-react';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 
 export function ConversationThread({
   conversation,
@@ -130,9 +131,10 @@ export function ConversationThread({
         ) : messages.length === 0 ? (
           <div className="conv-thread-empty">
             <img
-              src="/assets/Brand/essencial-good-symbol.png"
+              src={brandSymbol}
               alt="Essencial Good"
               className="conv-no-selection-symbol"
+              onError={(e) => handleBrandImageError(e, brandSymbol)}
             />
             <p className="conv-no-selection-desc">Nenhuma mensagem trocada nesta conversa ainda.</p>
           </div>

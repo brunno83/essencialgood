@@ -1,6 +1,7 @@
 import React from 'react';
 import { useVisitorChat } from '../../hooks/useVisitorChat';
 import { useChatSettings } from '../../hooks/useChatSettings';
+import { brandSymbol, handleBrandImageError } from '../../assets/brandAssets';
 import { ChatWindow } from './ChatWindow';
 import './ChatStyles.css';
 
@@ -74,13 +75,10 @@ export function ChatWidget() {
         >
           <div className="chat-button-symbol-wrapper">
             <img
-              src={settings?.avatar_url || '/assets/Brand/essencial-good-symbol.png'}
+              src={settings?.avatar_url || brandSymbol}
               alt={settings?.header_title || 'Essencial Good'}
               className="chat-button-symbol"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/assets/Brand/essencial-good-symbol.png';
-              }}
+              onError={(e) => handleBrandImageError(e, brandSymbol)}
             />
           </div>
 
