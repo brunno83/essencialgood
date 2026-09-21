@@ -546,23 +546,24 @@ export function useVisitorChat(options = {}) {
       }
 
       if (!activeConv) {
-        const { data: existing, error: fetchErr } = await activeSupabase
+        const { data: existingList, error: fetchErr } = await activeSupabase
           .from('conversations')
           .select('id, visitor_id, status, last_message_at, created_at, updated_at, source_product, archived_at')
           .eq('visitor_id', authUser.id)
           .is('archived_at', null)
           .in('status', ['open', 'pending'])
+          .order('updated_at', { ascending: false })
           .order('created_at', { ascending: false })
-          .limit(1)
-          .maybeSingle();
+          .limit(1);
 
         if (fetchErr) {
           if (typeof window !== 'undefined' && import.meta.env.DEV) {
-            console.warn('[VisitorChat] Erro ao buscar conversa ativa:', fetchErr.message);
+            console.warn('[VisitorChat] Erro ao buscar conversa ativa do visitante:', fetchErr.message);
           }
-        } else if (existing) {
-          if (existing.id && existing.visitor_id === authUser.id && ['open', 'pending'].includes(existing.status)) {
-            activeConv = existing;
+        } else if (existingList && existingList.length > 0) {
+          const candidate = existingList[0];
+          if (candidate && candidate.id && candidate.visitor_id === authUser.id && ['open', 'pending'].includes(candidate.status)) {
+            activeConv = candidate;
           }
         }
       }
@@ -599,7 +600,7 @@ export function useVisitorChat(options = {}) {
       const nextState = !prev;
       debugLog('useVisitorChat', `toggleOpen called: ${prev} -> ${nextState}`, { reason });
       if (nextState) {
-        if (!user || checkingAuth) {
+        if (!conversation?.id || !user || checkingAuth) {
           if (mountedRef.current) setConnecting(true);
           initVisitorChat();
         } else if (conversation?.id) {

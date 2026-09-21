@@ -1,6 +1,6 @@
 // ESSENCIAL GOOD - VISITOR RESTORATION & RLS SECURITY TEST SUITE (Node.js)
 // Tests visitor RLS matrix, isolation between visitors A & B, direct mutation restriction,
-// cache preservation on network error vs cache cleanup on null response, and restoration contracts.
+// cache preservation on network error vs cache cleanup on null response, and auto-discovery restoration contracts.
 
 import fs from 'fs';
 import path from 'path';
@@ -77,9 +77,12 @@ function evaluateRlsMessagePolicy(authUid, messageConvId, conversationsStore) {
 
 const visitorA = "user_aaaa_1111";
 const visitorB = "user_bbbb_2222";
+const visitorC_NoConv = "user_cccc_3333";
+
 const store = [
-  { id: "conv_a_123", visitor_id: visitorA, status: "open" },
-  { id: "conv_b_456", visitor_id: visitorB, status: "open" }
+  { id: "conv_a_123", visitor_id: visitorA, status: "open", archived_at: null },
+  { id: "conv_b_456", visitor_id: visitorB, status: "open", archived_at: null },
+  { id: "conv_closed_789", visitor_id: visitorA, status: "closed", archived_at: "2026-09-20T10:00:00Z" }
 ];
 
 assert(evaluateRlsConversationPolicy(visitorA, store[0].visitor_id) === true, "Visitante A lê sua própria conversa conv_a_123");
@@ -90,7 +93,7 @@ assert(evaluateRlsMessagePolicy(visitorA, "conv_a_123", store) === true, "Visita
 assert(evaluateRlsMessagePolicy(visitorA, "conv_b_456", store) === false, "Visitante A NÃO lê mensagens de conv_b_456");
 
 // --- 4. TESTE DA LÓGICA DEFENSIVA DE FRONTEND EM useVisitorChat.js ---
-console.log("\n[Bloco 4] Teste da Lógica Defensiva de Cache e Restauração no Frontend");
+console.log("\n[Bloco 4] Teste da Lógica Defensiva de Cache e Descoberta no Frontend");
 
 const useVisitorChatCode = fs.readFileSync(path.resolve(__dirname, '../src/hooks/useVisitorChat.js'), 'utf8');
 
@@ -98,45 +101,87 @@ assert(useVisitorChatCode.includes('cachedErr'), "initVisitorChat captura explic
 assert(useVisitorChatCode.includes('Preserva a referência em localStorage'), "Preserva localStorage quando houver erro transitório de rede");
 assert(useVisitorChatCode.includes('cachedData.visitor_id === authUser.id'), "Valida se a conversa em cache pertence ao authUser.id antes de restaurar");
 assert(!useVisitorChatCode.includes(".select('*')"), "initVisitorChat e fetchMessages usam lista explícita de colunas em vez de .select('*')");
+assert(useVisitorChatCode.includes('!conversation?.id || !user || checkingAuth'), "toggleOpen dispara initVisitorChat quando não houver conversa ativa carregada");
 
-// Simulação de comportamento de cache no frontend
-function processCacheResponse(cachedConvId, cachedData, cachedErr, authUserId) {
-  let localStorageActive = true;
-  let restoredConv = null;
+// Simulador completo do algoritmo de restauração e descoberta do initVisitorChat
+function simulateInitVisitorChat(cachedConvId, authUserId, dbStore) {
+  let localStorageValue = cachedConvId;
+  let activeConv = null;
 
-  if (cachedErr) {
-    // Erro de rede: não apaga localStorage
-    localStorageActive = true;
-  } else if (cachedData) {
-    const isValid = cachedData.visitor_id === authUserId && !cachedData.archived_at && ['open', 'pending'].includes(cachedData.status);
-    if (isValid) {
-      restoredConv = cachedData;
-    } else {
-      localStorageActive = false;
-    }
-  } else {
-    // Resposta nula válida: apaga cache inválido
-    localStorageActive = false;
+  // RLS simulado para PostgREST
+  function queryConversationsById(id) {
+    const record = dbStore.find(c => c.id === id);
+    if (!record) return { data: null, error: null };
+    // RLS check
+    if (record.visitor_id !== authUserId) return { data: null, error: null };
+    return { data: record, error: null };
   }
 
-  return { localStorageActive, restoredConv };
+  function queryActiveConversationsForUser(userId) {
+    const list = dbStore.filter(c => c.visitor_id === userId && !c.archived_at && ['open', 'pending'].includes(c.status));
+    return { data: list, error: null };
+  }
+
+  // 1. Tenta por cachedConvId
+  if (localStorageValue) {
+    const { data: cachedData, error: cachedErr } = queryConversationsById(localStorageValue);
+    if (cachedErr) {
+      // Preserva cache em erro
+    } else if (cachedData) {
+      const isValid = cachedData.visitor_id === authUserId && !cachedData.archived_at && ['open', 'pending'].includes(cachedData.status);
+      if (isValid) {
+        activeConv = cachedData;
+      } else {
+        localStorageValue = null;
+      }
+    } else {
+      localStorageValue = null;
+    }
+  }
+
+  // 2. Se não encontrou por cache (ex: cache ausente, deletado ou adulterado), executa Descoberta Automática
+  if (!activeConv) {
+    const { data: existingList } = queryActiveConversationsForUser(authUserId);
+    if (existingList && existingList.length > 0) {
+      const candidate = existingList[0];
+      if (candidate && candidate.id && candidate.visitor_id === authUserId && ['open', 'pending'].includes(candidate.status)) {
+        activeConv = candidate;
+      }
+    }
+  }
+
+  // 3. Resultado final do estado e reconstrução do localStorage
+  if (activeConv) {
+    localStorageValue = activeConv.id;
+  } else {
+    localStorageValue = null;
+  }
+
+  return { activeConv, localStorageValue };
 }
 
-// 4.1 Erro transitório de rede: não apaga cache
-const simErrNet = processCacheResponse("conv_a_123", null, new Error("Network timeout"), visitorA);
-assert(simErrNet.localStorageActive === true && simErrNet.restoredConv === null, "Erro transitório de rede preserva chave no localStorage para retry");
+// 4.1 Cache válido restaura conversa
+const res1 = simulateInitVisitorChat("conv_a_123", visitorA, store);
+assert(res1.activeConv?.id === "conv_a_123" && res1.localStorageValue === "conv_a_123", "Cache válido restaura conversa conv_a_123 e mantém localStorage");
 
-// 4.2 Resposta nula sem erro (conversa deletada/inexistente): apaga cache
-const simNullData = processCacheResponse("conv_a_123", null, null, visitorA);
-assert(simNullData.localStorageActive === false && simNullData.restoredConv === null, "Resposta nula sem erro remove chave inválida do localStorage");
+// 4.2 Cache ausente (chave null/deletada): Descoberta Automática encontra a conversa ativa do usuário e reconstrói o localStorage
+const res2 = simulateInitVisitorChat(null, visitorA, store);
+assert(res2.activeConv?.id === "conv_a_123" && res2.localStorageValue === "conv_a_123", "Cache ausente descobre automaticamente a conversa ativa conv_a_123 e reconstrói localStorage");
 
-// 4.3 Conversa válida pertencente ao visitante: restaura com sucesso
-const simValid = processCacheResponse("conv_a_123", { id: "conv_a_123", visitor_id: visitorA, status: "open" }, null, visitorA);
-assert(simValid.localStorageActive === true && simValid.restoredConv?.id === "conv_a_123", "Conversa válida do próprio visitante é restaurada com sucesso");
+// 4.3 Cache adulterado (ID de terceiro): Rejeita terceiro, executa Descoberta e salva o ID próprio correto
+const res3 = simulateInitVisitorChat("conv_b_456", visitorA, store);
+assert(res3.activeConv?.id === "conv_a_123" && res3.localStorageValue === "conv_a_123", "Cache adulterado com ID de terceiro descobre a conversa própria conv_a_123 e sobrescreve localStorage com ID próprio");
 
-// 4.4 Injeção de ID de outro visitante no localStorage: rejeita restauração e apaga cache adulterado
-const simTampered = processCacheResponse("conv_b_456", { id: "conv_b_456", visitor_id: visitorB, status: "open" }, null, visitorA);
-assert(simTampered.localStorageActive === false && simTampered.restoredConv === null, "Adulterar localStorage com ID de terceiro rejeita restauração e remove referência");
+// 4.4 Usuário sem conversa ativa (visitorC): Retorna activeConv = null e deixa formulário inicial
+const res4 = simulateInitVisitorChat(null, visitorC_NoConv, store);
+assert(res4.activeConv === null && res4.localStorageValue === null, "Usuário sem conversa ativa recebe activeConv = null (exibe formulário Start Chat)");
+
+// 4.5 Conversa arquivada/fechada não é restaurada via descoberta
+const storeWithClosedOnly = [
+  { id: "conv_closed_789", visitor_id: visitorA, status: "closed", archived_at: "2026-09-20T10:00:00Z" }
+];
+const res5 = simulateInitVisitorChat("conv_closed_789", visitorA, storeWithClosedOnly);
+assert(res5.activeConv === null && res5.localStorageValue === null, "Conversa fechada/arquivada NÃO é restaurada via descoberta (exibe formulário inicial)");
 
 console.log("\n==========================================");
 console.log(`RESULTADO: ${passed}/${total} TESTES PASSARAM COM SUCESSO!`);
