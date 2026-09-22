@@ -127,13 +127,33 @@ export function useConversationMessages(conversationId, onMarkedRead) {
     setSendError(null);
 
     try {
-      // Inserção estrita: envia APENAS conversation_id e content.
-      // O trigger normalize_new_message do PostgreSQL define sender_id, sender_type, created_at e read_at.
+      // 1. Obter sessão autenticada ativa do Supabase Auth para capturar o auth.uid() do Admin
+      const { data: sessionData, error: sessionErr } = await supabase.auth.getSession();
+      const authUser = sessionData?.session?.user;
+
+      if (sessionErr || !authUser || !authUser.id) {
+        throw new Error('Sessão administrativa expirada ou não autenticada.');
+      }
+
+      // 2. Consultar o perfil administrativo validado em admin_profiles para obter o role real ('admin' ou 'agent')
+      const { data: adminProfile, error: profileErr } = await supabase
+        .from('admin_profiles')
+        .select('id, role')
+        .eq('id', authUser.id)
+        .single();
+
+      if (profileErr || !adminProfile || !['admin', 'agent'].includes(adminProfile.role)) {
+        throw new Error('Perfil administrativo não autorizado para enviar respostas.');
+      }
+
+      // 3. Inserção estrita com sender_id e sender_type validados exigidos pela policy admin_insert_messages
       const { data, error: insertErr } = await supabase
         .from('messages')
         .insert([
           {
             conversation_id: conversationId,
+            sender_id: authUser.id,
+            sender_type: adminProfile.role,
             content: cleanContent,
           },
         ])
