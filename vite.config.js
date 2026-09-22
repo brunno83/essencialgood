@@ -86,8 +86,13 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const rawAppEnv = env.VITE_APP_ENV || process.env.VITE_APP_ENV || '';
   const appEnv = (typeof rawAppEnv === 'string' ? rawAppEnv : '').toLowerCase().trim();
+  const rawVercelEnv = env.VERCEL_ENV || process.env.VERCEL_ENV || '';
+  const vercelEnv = (typeof rawVercelEnv === 'string' ? rawVercelEnv : '').toLowerCase().trim();
 
   return {
+    define: {
+      'import.meta.env.VERCEL_ENV': JSON.stringify(vercelEnv),
+    },
     server: {
       port: 5180
     },

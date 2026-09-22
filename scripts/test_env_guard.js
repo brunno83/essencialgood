@@ -296,6 +296,14 @@ try {
 }
 assert(err28, "[28] VERCEL_ENV=preview com VITE_APP_ENV=development é REJEITADO.");
 
+// 28b. VERCEL_ENV=preview + VITE_APP_ENV=staging
+try {
+  const res = validateEnvConfig({ ...validStagingConfig, VERCEL_ENV: "preview" });
+  assert(res.isStaging === true, "[28b] VERCEL_ENV=preview com VITE_APP_ENV=staging é ACEITO.");
+} catch (e) {
+  assert(false, `[28b] Staging com VERCEL_ENV=preview falhou: ${e.message}`);
+}
+
 // 29. Erro NUNCA contém nenhuma parte reconhecível da anonKey
 const secretKeySample = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.super_secret_payload_99.signature";
 let errMessage29 = "";
